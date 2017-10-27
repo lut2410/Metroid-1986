@@ -23,8 +23,8 @@ void SceneMenu::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t)
 		D3DTEXF_NONE);
 	//this->_draw();
 	//draw Option Select
-	//_font->render(_menuOption[0], 220, 252);
-	//_font->render(_menuOption[1], 215, 293);
+	_font->render(_menuOption[0], 220, 252);
+	_font->render(_menuOption[1], 215, 293);
 
 
 }
