@@ -1,5 +1,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
+
+#pragma once
 #include <windows.h>
 #include <windowsx.h>
 #include <d3d9.h>
@@ -22,4 +24,4 @@ public:
 	void Render(int x, int y);
 	~Sprite();
 };
-#endif /*SPRITE_H*/
+#endif SPRITE_H

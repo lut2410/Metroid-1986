@@ -1,21 +1,35 @@
 #include "Game.h"
 #include <string>
 #define KEY_DOWN(vk_code) ( (GetAsyncKeyState(vk_code)&0x8000)?1:0 )
-Game::Game(HINSTANCE hInstance, LPWSTR name, int mode, int isFullscreen, int frameRate){
+Game::Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound){
 	_hInstance = hInstance;
+	_name =  name;
+	_mode = mode;
+	_SetScreenDimension();
+	_frameRate = frameRate;
+	_isFullScreen = isFullscreen;
+	_backgroundSound = backgroundSound;
+	_effectSound = effectSound;
+}
+
+Game::Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound){
+	/*_hInstance = hInstance;
 	_name = name;
 	_mode = mode;
-	_SetScreenDimension(_mode);
-	_isFullScreen = isFullscreen;
+	_SetScreenDimension();
 	_frameRate = frameRate;
+	_isFullScreen = isFullscreen;
+	_backgroundSound = backgroundSound;
+	_effectSound = effectSound;*/
 }
+
 Game::~Game(){
 	if (_d3ddv != NULL) _d3ddv->Release();
 	if (_d3d != NULL) _d3d->Release();
 
 }
-void Game::_SetScreenDimension(int mode){
-	switch (mode){
+void Game::_SetScreenDimension(){
+	switch (_mode){
 	case GAME_SCREEN_RESOLUTION_640_480_24:
 		_screenWidth = 640;
 		_screenHeight = 480;
@@ -36,6 +50,7 @@ void Game::_SetScreenDimension(int mode){
 	}
 }
 void Game::_InitWindow(){
+
 	// this struct holds information for the window class
 	WNDCLASSEX wc; // if charater set Property: Unicode ->WNDCLASSEXW
 	// multi-byte -> WNDCLASSEXA ==>lpszClassName = _name Error
@@ -89,7 +104,7 @@ void Game::_InitDirectX(){
 	D3DPRESENT_PARAMETERS d3dpp;
 	if (_d3d == NULL)
 	{
-		MessageBox(_hWnd, L"Error initializing Direct3D", L"Error", MB_OK);
+		MessageBox(_hWnd, "Error initializing Direct3D", "Error", MB_OK);
 		//return 0;
 	}
 
@@ -110,7 +125,7 @@ void Game::_InitDirectX(){
 		&d3dpp,
 		&_d3ddv);
 	if (_d3ddv == NULL) {
-		MessageBox(NULL, L"Failed to create device", L"Error", MB_OK);
+		MessageBox(NULL, "Failed to create device", "Error", MB_OK);
 		//return 0;
 	}
 
@@ -118,9 +133,53 @@ void Game::_InitDirectX(){
 	//_d3ddv->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 255, 255), 1.0f, 0); //clear	backbuffer
 	_d3ddv->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &_backBuffer);
 }
+void Game::_InitKeyboard(){
+	HRESULT
+		hr = DirectInput8Create
+		(
+		GetModuleHandle(NULL),
+		DIRECTINPUT_VERSION,
+		IID_IDirectInput8, (VOID**)&G_DirectInput, NULL
+		);
+
+	// TO-DO: put in exception handling
+	if (FAILED(hr) == true)
+		return;
+
+	hr = G_DirectInput->CreateDevice(GUID_SysKeyboard, &G_KeyBoard, NULL);
+
+	// TO-DO: put in exception handling
+	if (FAILED(hr) == true)
+		return;
+
+	hr = G_KeyBoard->SetDataFormat(&c_dfDIKeyboard);
+	if (FAILED(hr) == true)
+		return;
+
+	hr = G_KeyBoard->SetCooperativeLevel(_hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+	if (FAILED(hr) == true)
+		return;
+
+	DIPROPDWORD dipdw;
+
+	dipdw.diph.dwSize = sizeof(DIPROPDWORD);
+	dipdw.diph.dwHeaderSize = sizeof(DIPROPHEADER);
+	dipdw.diph.dwObj = 0;
+	dipdw.diph.dwHow = DIPH_DEVICE;
+	dipdw.dwData = GL_KEY_BUFFER_SIZE;
+
+	hr = G_KeyBoard->SetProperty(DIPROP_BUFFERSIZE, &dipdw.diph);
+	if (FAILED(hr) == true)
+		return;
+
+	hr = G_KeyBoard->Acquire();
+	if (FAILED(hr) == true)
+		return;
+}
 void Game::Init(){
 	_InitWindow();
 	_InitDirectX();
+	_InitKeyboard();
 	LoadResources(_d3ddv);
 }
 void Game::Run(){

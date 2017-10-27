@@ -1,11 +1,5 @@
 #pragma once
-#include <windows.h>
-#include <windowsx.h>
-#include <d3d9.h>
-#include <d3dx9.h>
-#include <dinput.h>
-#include "Game.h"
-
+#include "SceneMain.h"
 
 #define KEY_DOWN(vk_code) ( (GetAsyncKeyState(vk_code)&0x8000)?1:0)
 
@@ -19,7 +13,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	LPSTR lpCmdLine,
 	int nCmdShow)
 {
-	Game g(hInstance, L"Metroid 1986", GAME_SCREEN_RESOLUTION_800_600_24, 0, 24);
+	SceneMain g(hInstance, "Metroid 1986", GAME_SCREEN_RESOLUTION_800_600_24, 60, false, true, true);
 	g.Init();
 	g.Run();
 	return 0;
