@@ -1,6 +1,8 @@
+#ifndef _SCENEMENU_H
+#define _SCENEMENU_H
+
 #pragma once
 #include "Scene.h"
-#include "Font.h"
 
 #define BACKGROUND_FILE "Resources/Image/black.png"
 #define CHOOSEICON_FILE "Resources/Image/ChooseIcon.png"
@@ -22,3 +24,4 @@ public:
 	~SceneMenu();
 
 };
+#endif _SCENEMENU_H

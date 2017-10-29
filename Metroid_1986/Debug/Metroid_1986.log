@@ -1,18 +1,24 @@
-﻿Build started 10/29/2017 2:40:26 PM.
+﻿Build started 10/29/2017 3:44:25 PM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp SceneMain.cpp WinMain.cpp
-         WinMain.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(7): warning C4005: 'COLOR_MENU' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-         Game.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SceneEnd.cpp SceneGame.cpp SceneMain.cpp SceneMenu.cpp WinMain.cpp
+         SceneGame.cpp
+         SceneEnd.cpp
          Generating Code...
          Compiling...
          SceneMain.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(7): warning C4005: 'COLOR_MENU' : macro redefinition
+     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
+                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
+         Generating Code...
+         Compiling...
+         WinMain.cpp
+         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
+                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
+         SceneMenu.cpp
+         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
                  c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
          Generating Code...
        Link:
@@ -21,6 +27,8 @@
          "Debug\Global Setting.obj"
          Debug\Object.obj
          Debug\Scene.obj
+         Debug\SceneEnd.obj
+         Debug\SceneGame.obj
          Debug\SceneMain.obj
          Debug\SceneMenu.obj
          Debug\Sprite.obj
@@ -30,4 +38,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.08
+Time Elapsed 00:00:02.81
