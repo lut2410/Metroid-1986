@@ -18,8 +18,8 @@
 
 #define GL_KEY_BUFFER_SIZE	1024
 
-extern HINSTANCE				_hInstance;	// Handle of the game instance
-extern HWND						_hWnd;				// Handle of the Game Window
+extern HINSTANCE				G_hInstance;	// Handle of the game instance
+extern HWND						G_hWnd;				// Handle of the Game Window
 //extern LPCSTR					_name;			// Name of game will be used as Window Class Name
 extern char* _name;
 
@@ -27,10 +27,10 @@ extern LPDIRECTINPUT8			G_DirectInput;		// The DirectInput object
 extern LPDIRECTINPUTDEVICE8		G_KeyBoard;			// The keyboard device 
 extern LPD3DXSPRITE				G_SpriteHandler;	// spriteHandler to draw texture
 
-extern LPDIRECT3D9				_d3d;    // the pointer to our Direct3D interface
-extern LPDIRECT3DDEVICE9		_d3ddv;    // the pointer to the device class
-extern LPDIRECT3DSURFACE9		_backBuffer;
-extern D3DFORMAT				_backBufferFormat;
+extern LPDIRECT3D9				G_d3d;    // the pointer to our Direct3D interface
+extern LPDIRECT3DDEVICE9		G_d3ddv;    // the pointer to the device class
+extern LPDIRECT3DSURFACE9		G_backBuffer;
+extern D3DFORMAT				G_backBufferFormat;
 
 //extern int _mode;				// Screen mode
 //extern int _frameRate;

@@ -2,13 +2,16 @@
 #define _GAME_H_
 
 #include "Global Setting.h"
+
+#define KEYBOARD_BUFFER_SIZE	1024
+#define KEY_DOWN(vk_code) ( (GetAsyncKeyState(vk_code)&0x8000)? 1 : 0 )
 class  Game
 {
 protected:
-	//LPDIRECT3D9 _d3d = NULL;    // the pointer to our Direct3D interface
-	//LPDIRECT3DDEVICE9 _d3ddv = NULL;    // the pointer to the device class
-	//LPDIRECT3DSURFACE9 _backBuffer = NULL;
-	//D3DFORMAT _backBufferFormat = D3DFMT_X8R8G8B8;
+	//LPDIRECT3D9 G_d3d = NULL;    // the pointer to our Direct3D interface
+	//LPDIRECT3DDEVICE9 G_d3ddv = NULL;    // the pointer to the device class
+	//LPDIRECT3DSURFACE9 G_backBuffer = NULL;
+	//D3DFORMAT G_backBufferFormat = D3DFMT_X8R8G8B8;
 			
 	int _mode;				// Screen mode
 	int _frameRate;
@@ -36,7 +39,8 @@ protected:
 	// Place holder for sub classes
 	virtual void RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int Delta);
 	virtual void LoadResources(LPDIRECT3DDEVICE9 d3ddv);
-
+	void KeyboardHandling(); //process base Keyboard event
+	virtual void OnKeyDown(int KeyCode);
 public:
 	Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
 	Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
@@ -52,12 +56,12 @@ public:
 
 	// Initialize the game with set parameters
 	void Init();
-
 	// Run game
 	void Run();
+	
 
-	BYTE  _KeyStates[256];
-
+	BYTE  _Keys[256];
+	DIDEVICEOBJECTDATA _KeyEvents[GL_KEY_BUFFER_SIZE]; // Buffered keyboard data
 };
 
 #endif _GAME_H

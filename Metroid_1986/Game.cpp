@@ -1,8 +1,8 @@
 #include "Game.h"
 #include <string>
-#define KEY_DOWN(vk_code) ( (GetAsyncKeyState(vk_code)&0x8000)?1:0 )
+
 Game::Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound){
-	_hInstance = hInstance;
+	G_hInstance = hInstance;
 	_name =  name;
 	_mode = mode;
 	_SetScreenDimension();
@@ -13,7 +13,7 @@ Game::Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFull
 }
 
 Game::Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound){
-	/*_hInstance = hInstance;
+	/*G_hInstance = hInstance;
 	_name = name;
 	_mode = mode;
 	_SetScreenDimension();
@@ -24,8 +24,8 @@ Game::Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFu
 }
 
 Game::~Game(){
-	if (_d3ddv != NULL) _d3ddv->Release();
-	if (_d3d != NULL) _d3d->Release();
+	if (G_d3ddv != NULL) G_d3ddv->Release();
+	if (G_d3d != NULL) G_d3d->Release();
 
 }
 void Game::_SetScreenDimension(){
@@ -61,7 +61,7 @@ void Game::_InitWindow(){
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = _WinProc;
-	wc.hInstance = _hInstance;
+	wc.hInstance = G_hInstance;
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.lpszMenuName = NULL;
 	//wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
@@ -79,7 +79,7 @@ void Game::_InitWindow(){
 
 
 	// create the window and use the result as the handle
-	_hWnd = CreateWindowEx(NULL, _name,    // name of the window class
+	G_hWnd = CreateWindowEx(NULL, _name,    // name of the window class
 		_name,   // title of the window
 		style,    // window style  --- default: WS_OVERLAPPEDWINDOW
 		CW_USEDEFAULT, CW_USEDEFAULT,    // x & y position of the window
@@ -87,55 +87,55 @@ void Game::_InitWindow(){
 		_screenHeight,    // height of the window
 		NULL,    // we have no parent window, NULL
 		NULL,    // we aren't using menus, NULL
-		_hInstance,    // application handle
+		G_hInstance,    // application handle
 		NULL);    // used with multiple windows, NULL
-	if (!_hWnd)
+	if (!G_hWnd)
 	{
 		DWORD ErrCode = GetLastError();
 	}
 
 
 	// display the window on the screen
-	ShowWindow(_hWnd, SW_SHOWNORMAL);
-	UpdateWindow(_hWnd);// need!
+	ShowWindow(G_hWnd, SW_SHOWNORMAL);
+	UpdateWindow(G_hWnd);// need!
 }
 void Game::_InitDirectX(){
-	_d3d = Direct3DCreate9(D3D9b_SDK_VERSION);
+	G_d3d = Direct3DCreate9(D3D9b_SDK_VERSION);
 	D3DPRESENT_PARAMETERS d3dpp;
-	if (_d3d == NULL)
+	if (G_d3d == NULL)
 	{
-		MessageBox(_hWnd, "Error initializing Direct3D", "Error", MB_OK);
+		MessageBox(G_hWnd, "Error initializing Direct3D", "Error", MB_OK);
 		//return 0;
 	}
 
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 	d3dpp.Windowed = _isFullScreen ? FALSE : TRUE;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;// DISCARD OLD FRAMES -- BACKBUFFER
-	d3dpp.BackBufferFormat = _backBufferFormat; // then this is important
+	d3dpp.BackBufferFormat = G_backBufferFormat; // then this is important
 	d3dpp.BackBufferCount = 1;
 	d3dpp.BackBufferWidth = _screenWidth;
 	d3dpp.BackBufferHeight = _screenHeight;
-	d3dpp.hDeviceWindow = _hWnd;
+	d3dpp.hDeviceWindow = G_hWnd;
 
-	_d3d->CreateDevice(
+	G_d3d->CreateDevice(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
-		_hWnd,
+		G_hWnd,
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
 		&d3dpp,
-		&_d3ddv);
-	if (_d3ddv == NULL) {
+		&G_d3ddv);
+	if (G_d3ddv == NULL) {
 		MessageBox(NULL, "Failed to create device", "Error", MB_OK);
 		//return 0;
 	}
 
 
-	//_d3ddv->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 255, 255), 1.0f, 0); //clear	backbuffer
-	_d3ddv->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &_backBuffer);
+	//G_d3ddv->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 255, 255), 1.0f, 0); //clear	backbuffer
+	G_d3ddv->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &G_backBuffer);
 }
 void Game::_InitKeyboard(){
 	HRESULT
-		hr = DirectInput8Create
+		result = DirectInput8Create
 		(
 		GetModuleHandle(NULL),
 		DIRECTINPUT_VERSION,
@@ -143,21 +143,21 @@ void Game::_InitKeyboard(){
 		);
 
 	// TO-DO: put in exception handling
-	if (FAILED(hr) == true)
+	if (result!= DI_OK)
 		return;
 
-	hr = G_DirectInput->CreateDevice(GUID_SysKeyboard, &G_KeyBoard, NULL);
+	result = G_DirectInput->CreateDevice(GUID_SysKeyboard, &G_KeyBoard, NULL);
 
 	// TO-DO: put in exception handling
-	if (FAILED(hr) == true)
+	if (FAILED(result) == true)
 		return;
 
-	hr = G_KeyBoard->SetDataFormat(&c_dfDIKeyboard);
-	if (FAILED(hr) == true)
+	result = G_KeyBoard->SetDataFormat(&c_dfDIKeyboard);
+	if (FAILED(result) == true)
 		return;
 
-	hr = G_KeyBoard->SetCooperativeLevel(_hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
-	if (FAILED(hr) == true)
+	result = G_KeyBoard->SetCooperativeLevel(G_hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+	if (FAILED(result) == true)
 		return;
 
 	DIPROPDWORD dipdw;
@@ -168,19 +168,19 @@ void Game::_InitKeyboard(){
 	dipdw.diph.dwHow = DIPH_DEVICE;
 	dipdw.dwData = GL_KEY_BUFFER_SIZE;
 
-	hr = G_KeyBoard->SetProperty(DIPROP_BUFFERSIZE, &dipdw.diph);
-	if (FAILED(hr) == true)
+	result = G_KeyBoard->SetProperty(DIPROP_BUFFERSIZE, &dipdw.diph);
+	if (FAILED(result) == true)
 		return;
 
-	hr = G_KeyBoard->Acquire();
-	if (FAILED(hr) == true)
+	result = G_KeyBoard->Acquire();
+	if (FAILED(result) == true)
 		return;
 }
 void Game::Init(){
 	_InitWindow();
 	_InitDirectX();
 	_InitKeyboard();
-	LoadResources(_d3ddv);
+	LoadResources(G_d3ddv);
 }
 void Game::Run(){
 	MSG msg;
@@ -202,28 +202,73 @@ void Game::Run(){
 			frame_start = now;
 			_RenderFrame(deltaTime);
 		}
+
+		KeyboardHandling();
+
 		// TO-DO: need to improve in later version
-		if (KEY_DOWN(VK_ESCAPE)) PostMessage(_hWnd, WM_QUIT, 0, 0);
+		if (KEY_DOWN(VK_ESCAPE)) PostMessage(G_hWnd, WM_QUIT, 0, 0);
 	}
 
 }
 void Game::_RenderFrame(DWORD deltaTime){
-	if (_d3ddv->BeginScene()) {
-		RenderFrame(_d3ddv, deltaTime);
-		_d3ddv->EndScene();
+	if (G_d3ddv->BeginScene()) {
+		RenderFrame(G_d3ddv, deltaTime);
+		G_d3ddv->EndScene();
 	}
-	_d3ddv->Present(NULL, NULL, NULL, NULL);
+	G_d3ddv->Present(NULL, NULL, NULL, NULL);
 
 	if (KEY_DOWN(VK_ESCAPE))
-		PostMessage(_hWnd, WM_DESTROY, 0, 0);
+		PostMessage(G_hWnd, WM_DESTROY, 0, 0);
 }
 void Game::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime) //int?DWORD
 {
-	d3ddv->ColorFill(_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
+	d3ddv->ColorFill(G_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
 }
 void Game::LoadResources(LPDIRECT3DDEVICE9 d3ddv){
 
 }
+
+
+void Game::KeyboardHandling(){
+	{
+		//poll the keyboardKEY_DOWN
+		HRESULT hr = G_KeyBoard->GetDeviceState(sizeof(_Keys), (LPVOID)&_Keys);
+		if (hr != S_OK)
+		{
+			hr = G_KeyBoard->Acquire();
+			G_KeyBoard->GetDeviceState(sizeof(_Keys), (LPVOID)&_Keys);
+		}
+		// Collect all key states first
+		G_KeyBoard->GetDeviceState(sizeof(_Keys), _Keys);
+
+		if (KEY_DOWN(DIK_ESCAPE))
+		{
+			PostMessage(G_hWnd, WM_QUIT, 0, 0);
+		}
+
+		// Collect all buffered events
+		DWORD dwElements = GL_KEY_BUFFER_SIZE;
+		hr = G_KeyBoard->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _KeyEvents, &dwElements, 0);
+
+		// Scan through all data, check if the key is pressed or released
+		for (DWORD i = 0; i < dwElements; i++)
+		{
+			int KeyCode = _KeyEvents[i].dwOfs;
+			int KeyState = _KeyEvents[i].dwData;
+			if ((KeyState & 0x80) > 0) // one key is pressed
+				OnKeyDown(KeyCode);
+			else
+				// Key Up event
+				;
+
+		}
+	}
+}
+
+
+void Game::OnKeyDown(int KeyCode){
+};
+
 // this is the main message handler for the program
 LRESULT CALLBACK Game::_WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

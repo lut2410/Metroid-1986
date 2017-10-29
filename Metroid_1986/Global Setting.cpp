@@ -7,8 +7,8 @@
 //bool		Glb_BackgroundSound=true;
 //bool		Glb_EffectSound=	true;
 
-HINSTANCE				_hInstance;
-HWND						_hWnd;
+HINSTANCE				G_hInstance;
+HWND						G_hWnd;
 //LPCSTR					_name;
 CHAR* _name;
 
@@ -16,10 +16,10 @@ LPDIRECTINPUT8			G_DirectInput;
 LPDIRECTINPUTDEVICE8		G_KeyBoard;
 LPD3DXSPRITE				G_SpriteHandler;
 
-LPDIRECT3D9				_d3d = NULL;
-LPDIRECT3DDEVICE9		_d3ddv = NULL;
-LPDIRECT3DSURFACE9		_backBuffer = NULL;
-D3DFORMAT				_backBufferFormat = D3DFMT_X8R8G8B8;
+LPDIRECT3D9				G_d3d = NULL;
+LPDIRECT3DDEVICE9		G_d3ddv = NULL;
+LPDIRECT3DSURFACE9		G_backBuffer = NULL;
+D3DFORMAT				G_backBufferFormat = D3DFMT_X8R8G8B8;
 
 int _screenWidth;
 int _screenHeight;

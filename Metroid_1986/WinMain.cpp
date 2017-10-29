@@ -1,11 +1,6 @@
 #pragma once
 #include "SceneMain.h"
 
-#define KEY_DOWN(vk_code) ( (GetAsyncKeyState(vk_code)&0x8000)?1:0)
-
-#define KEYBOARD_BUFFER_SIZE	1024
-
-
 
 // the entry point for any Windows program
 int WINAPI WinMain(HINSTANCE hInstance,
