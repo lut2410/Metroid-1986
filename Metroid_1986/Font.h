@@ -20,7 +20,7 @@ private:
 
 
 public:
-	Font(LPDIRECT3DDEVICE9 d3ddev, int size);
+	Font(int size);
 	~Font();
 	void render(char* text_, float x_, float y_, D3DCOLOR color_ = D3DCOLOR_ARGB(255, 255, 255, 255));
 	void render(int number_, float x_, float y_, D3DCOLOR color_ = D3DCOLOR_ARGB(255, 255, 255, 255));

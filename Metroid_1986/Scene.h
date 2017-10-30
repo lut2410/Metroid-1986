@@ -2,10 +2,9 @@
 #define _SCENE_H
 
 #pragma once
-#include <time.h>
-#include <d3d9.h>
+#include "Global Setting.h"
 #include "Font.h"
-
+#include "Texture.h"
 static enum ESceneState
 {
 	Scene_Menu,
@@ -27,9 +26,9 @@ protected:
 public:
 	Scene(ESceneState);
 	ESceneState getSceneState();
-	virtual void RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t);
+	virtual void RenderFrame( int t);
 	virtual void ProcessInput(int keyCode);
-	virtual void LoadResources(LPDIRECT3DDEVICE9 d3ddv);
+	virtual void LoadResources();
 	virtual void OnKeyDown(int KeyCode);
 
 	~Scene(void);

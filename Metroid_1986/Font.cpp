@@ -1,7 +1,7 @@
 #include "font.h"
 
 
-Font::Font(LPDIRECT3DDEVICE9 d3ddev, int size)
+Font::Font(int size)
 {
 	_localTime = 0;
 	_frameRate = FRAME_RATE;
@@ -22,7 +22,7 @@ Font::Font(LPDIRECT3DDEVICE9 d3ddev, int size)
 		DEFAULT_PITCH, "Arial" };
 
 	//create font
-	D3DXCreateFontIndirect(d3ddev, &FontDesc, &_font);
+	D3DXCreateFontIndirect(G_d3ddv, &FontDesc, &_font);
 }
 Font::~Font()
 {

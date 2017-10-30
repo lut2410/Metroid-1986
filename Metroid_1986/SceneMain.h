@@ -14,9 +14,9 @@ public:
 	SceneMain(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
 	~SceneMain();
 	//seems don't need virtual
-	virtual void RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t);
-	virtual void ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta);
-	virtual void LoadResources(LPDIRECT3DDEVICE9 d3ddv);
+	virtual void RenderFrame(int t);
+	virtual void ProcessInput(int Delta);
+	virtual void LoadResources();
 
 	virtual void OnKeyDown(int KeyCode);
 	

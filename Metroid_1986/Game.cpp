@@ -132,6 +132,7 @@ void Game::_InitDirectX(){
 
 	//G_d3ddv->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 255, 255), 1.0f, 0); //clear	backbuffer
 	G_d3ddv->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &G_backBuffer);
+	D3DXCreateSprite(G_d3ddv, &G_SpriteHandler);
 }
 void Game::_InitKeyboard(){
 	HRESULT
@@ -166,7 +167,7 @@ void Game::_InitKeyboard(){
 	dipdw.diph.dwHeaderSize = sizeof(DIPROPHEADER);
 	dipdw.diph.dwObj = 0;
 	dipdw.diph.dwHow = DIPH_DEVICE;
-	dipdw.dwData = GL_KEY_BUFFER_SIZE;
+	dipdw.dwData = KEYBOARD_BUFFER_SIZE;
 
 	result = G_KeyBoard->SetProperty(DIPROP_BUFFERSIZE, &dipdw.diph);
 	if (FAILED(result) == true)
@@ -180,7 +181,7 @@ void Game::Init(){
 	_InitWindow();
 	_InitDirectX();
 	_InitKeyboard();
-	LoadResources(G_d3ddv);
+	LoadResources();
 }
 void Game::Run(){
 	MSG msg;
@@ -210,9 +211,9 @@ void Game::Run(){
 	}
 
 }
-void Game::_RenderFrame(DWORD deltaTime){
+void Game::_RenderFrame(int deltaTime){
 	if (G_d3ddv->BeginScene()) {
-		RenderFrame(G_d3ddv, deltaTime);
+		RenderFrame(deltaTime);
 		G_d3ddv->EndScene();
 	}
 	G_d3ddv->Present(NULL, NULL, NULL, NULL);
@@ -220,11 +221,11 @@ void Game::_RenderFrame(DWORD deltaTime){
 	if (KEY_DOWN(VK_ESCAPE))
 		PostMessage(G_hWnd, WM_DESTROY, 0, 0);
 }
-void Game::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime) //int?DWORD
+void Game::RenderFrame(int deltaTime) //int?DWORD
 {
-	d3ddv->ColorFill(G_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
+	G_d3ddv->ColorFill(G_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
 }
-void Game::LoadResources(LPDIRECT3DDEVICE9 d3ddv){
+void Game::LoadResources(){
 
 }
 
@@ -247,7 +248,7 @@ void Game::KeyboardHandling(){
 		}
 
 		// Collect all buffered events
-		DWORD dwElements = GL_KEY_BUFFER_SIZE;
+		DWORD dwElements = KEYBOARD_BUFFER_SIZE;
 		hr = G_KeyBoard->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _KeyEvents, &dwElements, 0);
 
 		// Scan through all data, check if the key is pressed or released

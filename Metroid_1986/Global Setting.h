@@ -6,6 +6,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <dinput.h>
+#include <time.h>
 
 
 #define GAME_SCREEN_RESOLUTION_640_480_24   0
@@ -16,7 +17,7 @@
 #define GAME_SCREEN_RESOLUTION_800_600_32   11
 #define GAME_SCREEN_RESOLUTION_1024_768_32  12
 
-#define GL_KEY_BUFFER_SIZE	1024
+#define KEYBOARD_BUFFER_SIZE	1024
 
 extern HINSTANCE				G_hInstance;	// Handle of the game instance
 extern HWND						G_hWnd;				// Handle of the Game Window

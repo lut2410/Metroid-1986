@@ -13,60 +13,44 @@ SceneMenu::SceneMenu() :Scene(Scene_Menu){
 void SceneMenu::_openChoice(){
 	MessageBox(G_hWnd, "Da Chon", "ThongBao", MB_OK);
 }
-void SceneMenu::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t)
+void SceneMenu::RenderFrame( int t)
 {
-	d3ddv->StretchRect(
+	//Draw Backround & Font
+	G_d3ddv->StretchRect(
 		_background,			// from 
 		NULL,				// which portion?
 		G_backBuffer,		// to 
 		NULL,				// which portion?
 		D3DTEXF_NONE);
-
-	
-	//this->_draw();
-	//draw Option Select
 	_font->render(_menuChoice[0], 380, 280, COLOR_MENU);
 	_font->render(_menuChoice[1], 380, 320, COLOR_MENU);
-	RECT* rct = new RECT;
+
+	//Draw Sprite
+	G_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 	switch (_currentChoice)
 	{
 	case 0:
-		 rct = new RECT{ 360, 280, 380, 300 };
+		_chooseIcon->Draw(350, 280);
 		break;
 	case 1:
-		 rct = new RECT{ 360, 320, 380, 340 };
+		_chooseIcon->Draw(350, 320);
 		break;
 	default:
 		break;
 	}
+	G_SpriteHandler->End();
 
-	// draw chooseIcon
-	d3ddv->StretchRect(
-		_chooseIcon,			// from 
-		NULL,				// which portion?
-		G_backBuffer,		// to 
-		rct,				// which portion?
-		D3DTEXF_NONE);
 }
 
-void SceneMenu::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
+void SceneMenu::LoadResources()
 {
 	srand((unsigned)time(NULL));
 
-	D3DXCreateSprite(d3ddv, &G_SpriteHandler);
+	_background = CreateSurfaceFromFile(G_d3ddv, BACKGROUND_FILE);
 
+	_chooseIcon = new Texture(CHOOSEICON_FILE);
 
-	_background = CreateSurfaceFromFile(d3ddv, BACKGROUND_FILE);
-	HRESULT res = D3DXCreateSprite(d3ddv, &G_SpriteHandler);
-
-	_chooseIcon = CreateSurfaceFromFile(d3ddv, CHOOSEICON_FILE);
-	 //res = D3DXCreateSprite(d3ddv, &G_SpriteHandler);
-
-	//D3DXVECTOR3 position((float)x, (float)y, 0);
-	//G_SpriteHandler->Draw(Texture, &Size, NULL, &position, 0xFFFFFFFF);
-
-	_font = new Font(d3ddv, 22);
-
+	_font = new Font(22);
 
 	/*Sound::GetInst()->RemoveAllBGM();
 	Sound::GetInst()->PlayBGSound(EBGSound::EMenuSound);*/

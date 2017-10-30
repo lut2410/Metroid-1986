@@ -12,7 +12,7 @@ SceneMain::SceneMain(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate,
 
 }
 
-void SceneMain::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t){
+void SceneMain::RenderFrame(int t){
 	if (_sceneNow->getSceneState() != _currentStateScene)
 	{
 		switch (_sceneNow->getSceneState())
@@ -20,7 +20,7 @@ void SceneMain::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t){
 
 		case ESceneState::Scene_Menu:
 			_sceneNow = new SceneMenu();
-			_sceneNow->LoadResources(d3ddv);
+			_sceneNow->LoadResources();
 			break;
 	/*	case ESceneState::Scene_Game:
 			_sceneNow = new SceneGame();
@@ -35,17 +35,17 @@ void SceneMain::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t){
 		//change flag to match with _sceneNow
 		_currentStateScene = _sceneNow->getSceneState();
 	}
-	_sceneNow->RenderFrame(d3ddv, t);
+	_sceneNow->RenderFrame(t);
 }
 
-void SceneMain::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
+void SceneMain::ProcessInput(int Delta)
 {
 	
 }
 
-void SceneMain::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
+void SceneMain::LoadResources()
 {
-	_sceneNow->LoadResources(d3ddv);
+	_sceneNow->LoadResources();
 }
 
 void SceneMain::OnKeyDown(int KeyCode)
