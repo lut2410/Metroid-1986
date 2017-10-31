@@ -69,6 +69,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="hihi.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="WinMain.cpp" />
