@@ -1,41 +1,41 @@
 #include "SceneMain.h"
 SceneMain::SceneMain(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound) : Game( hInstance, name, mode, frameRate, isFullscreen, backgroundSound, effectSound)
 {
-	_sceneNow = new SceneMenu();
+	_currentScene = new SceneMenu();
 	_currentStateScene = ESceneState::Scene_Menu;
 
 }
 SceneMain::SceneMain(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound) : Game(hInstance, name, mode, frameRate, isFullscreen, backgroundSound, effectSound)
 {
-	_sceneNow = new SceneMenu();
+	_currentScene = new SceneMenu();
 	_currentStateScene = ESceneState::Scene_Menu;
 
 }
 
 void SceneMain::RenderFrame(int t){
-	if (_sceneNow->getSceneState() != _currentStateScene)
+	if (_currentScene->getSceneState() != _currentStateScene)
 	{
-		switch (_sceneNow->getSceneState())
+		switch (_currentScene->getSceneState())
 		{
 
 		case ESceneState::Scene_Menu:
-			_sceneNow = new SceneMenu();
-			_sceneNow->LoadResources();
+			_currentScene = new SceneMenu();
+			_currentScene->LoadResources();
 			break;
-	/*	case ESceneState::Scene_Game:
-			_sceneNow = new SceneGame();
-			_sceneNow->LoadResources(d3ddv);
+		case ESceneState::Scene_Game:
+			_currentScene = new SceneGame();
+			_currentScene->LoadResources();
 			break;
-		case ESceneState::Scene_End:
-			_sceneNow = new SceneEndGame();
-			_sceneNow->LoadResources(d3ddv);
+		/*case ESceneState::Scene_End:
+			_currentScene = new SceneEndGame();
+			_currentScene->LoadResources();
 			break;*/
 
 		}
-		//change flag to match with _sceneNow
-		_currentStateScene = _sceneNow->getSceneState();
+		//change flag to match with _currentScene
+		_currentStateScene = _currentScene->getSceneState();
 	}
-	_sceneNow->RenderFrame(t);
+	_currentScene->RenderFrame(t);
 }
 
 void SceneMain::ProcessInput(int Delta)
@@ -45,12 +45,12 @@ void SceneMain::ProcessInput(int Delta)
 
 void SceneMain::LoadResources()
 {
-	_sceneNow->LoadResources();
+	_currentScene->LoadResources();
 }
 
 void SceneMain::OnKeyDown(int KeyCode)
 {
-	_sceneNow->OnKeyDown(KeyCode);
+	_currentScene->OnKeyDown(KeyCode);
 }
 
 SceneMain::~SceneMain(void)

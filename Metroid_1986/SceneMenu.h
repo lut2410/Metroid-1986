@@ -3,7 +3,7 @@
 
 #pragma once
 #include "Scene.h"
-#define BACKGROUND_FILE "Resources/Image/black.png"
+
 #define CHOOSEICON_FILE "Resources/Image/ChooseIcon.png"
 #define COLOR_MENU D3DCOLOR_ARGB(255, 172, 231, 255)
 

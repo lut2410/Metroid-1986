@@ -1,13 +1,19 @@
 #include "Texture.h"
 
-Texture::Texture(){
-
+Texture::Texture(const Texture &texture){
+	_filePath = texture._filePath;
+	_size = texture._size;
+	_cols = texture._cols;
+	_rows = texture._rows;
+	_count = _cols*_rows;
+	LoadTexture();
 }
 Texture::Texture(char* filePath, int cols, int rows)
 {
 	_filePath = filePath;
 	_cols = cols;
 	_rows = rows;
+	_count = _cols*_rows;
 	LoadTexture();
 }
 Texture::~Texture()

@@ -1,45 +1,62 @@
 #include "Sprite.h"
 
-Sprite::Sprite(LPD3DXSPRITE SpriteHandler, char *Path, int Width, int Height,
-	int Count, int SpritePerRow){
-	D3DXIMAGE_INFO info;
-	HRESULT result;
-	_Index = 0;
-	_Image = NULL;
-	_SpriteHandler = SpriteHandler;
-	_Width = Width;
-	_Height = Height;
-	_Count = Count;
-	_SpritePerRow = SpritePerRow;
-	//result = D3DXGetImageInfoFromFile(Path, &info);
-	//LPDIRECT3DDEVICE9 d3ddv;
-	//SpriteHandler->GetDevice(&d3ddv);
-	//result = D3DXCreateTextureFromFileEx(d3ddv, Path,
-	//	info.Width, info.Height,
-	//	1, D3DUSAGE_DYNAMIC,
-	//	D3DFMT_UNKNOWN, D3DPOOL_DEFAULT,
-	//	D3DX_DEFAULT, D3DX_DEFAULT,
-	//	D3DCOLOR_XRGB(0, 0, 0),	//black background
-	//	&info, NULL, &_Image);
+Sprite::Sprite(){
+	_texture = NULL;
+	_startIndex = 0;
+	_endIndex = 0;
+	_timeAnimation = 0;
+	_currentIndex = 0;
+	_timeLocal = 0;
+}
+Sprite::Sprite(Texture* texture, int timeAnimation):_texture(texture){
+	_startIndex = 0;
+	_endIndex = _texture->_count - 1;
+	_currentIndex = 0;
+	_timeAnimation = timeAnimation;
+	_timeLocal = 0;
+}
+Sprite::Sprite(Texture* texture, int timeAnimation, int startIndex, int endIndex):_texture(texture){
+	_texture = texture;
+	_startIndex = startIndex;
+	_endIndex = endIndex;
+	_currentIndex = startIndex;
+	_timeAnimation = timeAnimation;
+	_timeLocal = 0;
+}
+Sprite::~Sprite(){
+	_texture->~Texture();
 }
 void Sprite::Next(){
-	if (_Index < _Count)
-		_Index += 1;
+	if (_currentIndex < _endIndex)
+		_currentIndex++;
 	else
-		_Index = 0;
+		_currentIndex = _startIndex;
 
 }
-void Sprite::Render(int x, int y){
+void Sprite::Update(int t){
+	_timeLocal += t;
+	if (_timeLocal >= _timeAnimation)
+	{
+		_timeLocal = 0;
+		this->Next();
+	}
+}
+void Sprite::Draw(int x, int y){
+
+
 	RECT srect;
-	srect.left = (_Index % _SpritePerRow)*(_Width);
-	srect.top = (_Index / _SpritePerRow)*(_Height);
-	srect.right = srect.left + _Width - 1;
-	srect.bottom = srect.top + _Height - 1;
-	_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	D3DXVECTOR3 postion((float)x, (float)y, 0);//k dung d3dxvector2?
-	_SpriteHandler->Draw(_Image//draw to image
-		, &srect//rect position in source
-		, NULL, &postion//dest position
-		, D3DCOLOR_XRGB(255, 255, 255));
-	_SpriteHandler->End();
+
+	srect.left = (_currentIndex % _texture->_cols)*(_texture->_frameWidth);
+	srect.top = (_currentIndex / _texture->_cols)*(_texture->_frameHeight);
+	srect.right = srect.left + _texture->_frameWidth;
+	srect.bottom = srect.top + _texture->_frameHeight;
+
+	D3DXVECTOR3 position(x - _texture->_frameWidth / 2,y - _texture->_frameHeight / 2, 0);
+	D3DXVECTOR3 center(0, 0, 0);
+	G_SpriteHandler->Draw(
+		_texture->_texture,
+		&srect,
+		&center,
+		&position,
+		0xFFFFFFFF );
 }

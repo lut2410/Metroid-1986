@@ -2,11 +2,12 @@
 #include "Game.h"
 #include "Scene.h"
 #include "SceneMenu.h"
+#include "SceneGame.h"
 class SceneMain : public Game
 {
 protected:
 	
-	Scene* _sceneNow;
+	Scene* _currentScene;
 	ESceneState _currentStateScene;
 
 public:
