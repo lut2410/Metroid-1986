@@ -19,6 +19,7 @@ public:
 	Sprite();
 	Sprite(Texture* texture, int timeAnimation);
 	Sprite(Texture* texture, int timeAnimation, int startIndex, int endIndex);
+	void SelectIndex(int);
 	//next sprite in list
 	void Next();
 	void Update(int t);

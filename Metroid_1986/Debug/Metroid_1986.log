@@ -1,4 +1,4 @@
-﻿Build started 11/4/2017 12:42:59 PM.
+﻿Build started 11/5/2017 12:58:25 AM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Font.cpp Game.cpp "Global Setting.cpp" GameObject.cpp Player.cpp Scene.cpp SceneEnd.cpp SceneGame.cpp SceneMain.cpp SceneMenu.cpp Sprite.cpp Texture.cpp TextureCollection.cpp WinMain.cpp
@@ -12,7 +12,7 @@
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
          Sprite.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\sprite.cpp(54): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\sprite.cpp(57): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
          SceneMenu.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
      1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
@@ -28,6 +28,8 @@
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
          Player.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(6): warning C4101: '_footAction' : unreferenced local variable
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(27): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
          GameObject.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
          Global Setting.cpp
@@ -41,7 +43,7 @@
      1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(59): warning C4018: '>=' : signed/unsigned mismatch
      1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(73): warning C4018: '>=' : signed/unsigned mismatch
          Generating Code...
-     1>d:\lt\game\metroid-1986\metroid_1986\texturecollection.cpp(16): warning C4715: 'TextureCollection::getTexture' : not all control paths return a value
+     1>d:\lt\game\metroid-1986\metroid_1986\texturecollection.cpp(18): warning C4715: 'TextureCollection::getTexture' : not all control paths return a value
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.lib" /MACHINE:X86 Debug\Font.obj
          Debug\Game.obj
@@ -62,4 +64,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:08.65
+Time Elapsed 00:00:08.03

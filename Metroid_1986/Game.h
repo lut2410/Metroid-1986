@@ -32,6 +32,7 @@ protected:
 	virtual void LoadResources();
 	void KeyboardHandling(); //process base Keyboard event
 	virtual void OnKeyDown(int KeyCode);
+	virtual void OnKeyUp(int KeyCode);
 public:
 	Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
 	Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);

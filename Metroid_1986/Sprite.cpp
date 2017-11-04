@@ -26,6 +26,9 @@ Sprite::Sprite(Texture* texture, int timeAnimation, int startIndex, int endIndex
 Sprite::~Sprite(){
 	_texture->~Texture();
 }
+void Sprite::SelectIndex(int index){
+	_currentIndex = index;
+}
 void Sprite::Next(){
 	if (_currentIndex < _endIndex)
 		_currentIndex++;

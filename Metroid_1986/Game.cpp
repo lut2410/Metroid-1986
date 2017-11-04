@@ -260,6 +260,7 @@ void Game::KeyboardHandling(){
 				OnKeyDown(KeyCode);
 			else
 				// Key Up event
+				OnKeyUp(KeyCode);
 				;
 
 		}
@@ -268,6 +269,8 @@ void Game::KeyboardHandling(){
 
 
 void Game::OnKeyDown(int KeyCode){
+};
+void Game::OnKeyUp(int KeyCode){
 };
 
 // this is the main message handler for the program

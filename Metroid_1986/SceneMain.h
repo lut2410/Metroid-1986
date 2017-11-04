@@ -20,5 +20,5 @@ public:
 	virtual void LoadResources();
 
 	virtual void OnKeyDown(int KeyCode);
-	
+	virtual void OnKeyUp(int KeyCode);
 };

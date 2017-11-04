@@ -30,7 +30,7 @@ public:
 	virtual void ProcessInput(int keyCode);
 	virtual void LoadResources();
 	virtual void OnKeyDown(int KeyCode);
-
+	virtual void OnKeyUp(int KeyCode);
 	~Scene(void);
 };
 #endif

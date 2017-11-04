@@ -25,7 +25,9 @@ void Scene::LoadResources()
 void Scene::OnKeyDown(int KeyCode)
 {
 }
-
+void Scene::OnKeyUp(int KeyCode)
+{
+}
 Scene::~Scene(void)
 {
 }

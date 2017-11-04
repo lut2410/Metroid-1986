@@ -1,7 +1,7 @@
 #include "TextureCollection.h"
 TextureCollection* TextureCollection::textureCollection = NULL;
 TextureCollection::TextureCollection(){
-	playerTexture = new Texture("Resources/Image/playerdemo.png", 4, 1);
+	playerTexture = new Texture("Resources/Image/playerdemo.png", 9, 1);
 };
 TextureCollection* TextureCollection::getInstance(){
 	if (textureCollection == NULL)
@@ -9,8 +9,10 @@ TextureCollection* TextureCollection::getInstance(){
 	return textureCollection;
 }
 Texture* TextureCollection::getTexture(ObjectID id){
-	switch (id){
+	switch (id)
+	{
 	case Player_ID:
 		return playerTexture;
+		break;
 	}
 }

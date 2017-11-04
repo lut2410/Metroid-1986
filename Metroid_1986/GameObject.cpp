@@ -14,7 +14,7 @@ void GameObject::CreateSprite()
 	switch (_objectID)
 	{
 	case Player_ID:
-		_sprite = new Sprite(TextureCollection::getInstance()->getTexture(_objectID), 100, 0, 3);
+		//_sprite = new Sprite(TextureCollection::getInstance()->getTexture(_objectID), 100, 0, 3);
 		break;
 	default:
 		break;
