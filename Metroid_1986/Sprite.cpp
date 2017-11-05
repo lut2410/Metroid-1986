@@ -63,3 +63,21 @@ void Sprite::Draw(int x, int y){
 		&position,
 		0xFFFFFFFF );
 }
+void Sprite::DrawFlipHorizontal(int x, int y)
+{
+	D3DXMATRIX oldMt;
+	G_SpriteHandler->GetTransform(&oldMt);
+
+	D3DXMATRIX newMt;
+	D3DXVECTOR2 center = D3DXVECTOR2(x + _texture->_frameWidth / 2, y + _texture->_frameHeight / 2);
+	D3DXVECTOR2 rotate = D3DXVECTOR2(-1, 1);
+
+	D3DXMatrixTransformation2D(&newMt, &center, 0.0f, &rotate, NULL, 0.0f, NULL);
+	D3DXMATRIX finalMt = newMt * oldMt;
+	G_SpriteHandler->SetTransform(&finalMt);
+
+	x += _texture->_frameWidth;
+	this->Draw(x, y);
+
+	G_SpriteHandler->SetTransform(&oldMt);
+}

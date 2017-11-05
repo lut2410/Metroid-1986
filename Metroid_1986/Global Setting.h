@@ -36,6 +36,7 @@ extern D3DFORMAT				G_backBufferFormat;
 extern int _screenWidth;
 extern int _screenHeight;
 extern int _depth;
+extern bool _keyboardWorking;	//allow keyboard? used for intro in each statge
 
 //ID of Game Object
 enum ObjectID{

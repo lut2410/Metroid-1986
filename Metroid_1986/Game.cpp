@@ -1,6 +1,5 @@
 #include "Game.h"
 #include <string>
-
 Game::Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound){
 	G_hInstance = hInstance;
 	_name =  name;
@@ -232,6 +231,8 @@ void Game::LoadResources(){
 
 void Game::KeyboardHandling(){
 	{
+		if (_keyboardWorking == false)
+		return;
 		//poll the keyboardKEY_DOWN
 		HRESULT hr = G_KeyBoard->GetDeviceState(sizeof(_Keys), (LPVOID)&_Keys);
 		if (hr != S_OK)

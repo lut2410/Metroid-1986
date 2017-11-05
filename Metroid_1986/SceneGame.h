@@ -4,9 +4,14 @@
 #pragma once
 #include "Scene.h"
 #include "Player.h"
+#include "Game.h"
+
 class SceneGame : public Scene{
 
 	DWORD _stageStartTime;
+	bool _left;
+	bool _right;
+
 	int _currentLevel;
 	Player* _player;
 	void LoadObject(); //Load all object of current level

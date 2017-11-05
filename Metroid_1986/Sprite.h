@@ -25,6 +25,7 @@ public:
 	void Update(int t);
 	//Render current sprite in location(x,y) at the target surface
 	void Draw(int x, int y);
+	void DrawFlipHorizontal(int x, int y);
 	~Sprite();
 };
 #endif SPRITE_H

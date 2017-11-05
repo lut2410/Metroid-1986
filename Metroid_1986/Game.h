@@ -8,7 +8,7 @@
 class  Game
 {
 protected:
-			
+	
 	int _mode;				// Screen mode
 	int _frameRate;
 	bool _isFullScreen;		// Is running in fullscreen mode?
@@ -39,7 +39,6 @@ public:
 	~Game();
 
 	int frameRate;			// Desired frame rate of game
-
 	// Initialize the game with set parameters
 	void Init();
 	// Run game

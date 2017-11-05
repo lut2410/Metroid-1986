@@ -18,9 +18,9 @@ void SceneGame::LoadResources() {
 	LoadObject();
 	//playerTexture = new Texture("Resources/Image/playerdemo.png", 4, 1);
 	
+
 	//Time in Stage
 	_stageStartTime = GetTickCount();
-
 
 
 }
@@ -32,6 +32,12 @@ void SceneGame::LoadObject(){
 }
 
 void SceneGame::RenderFrame(int time){
+	//after 1 time = 5s then allow player control by keyboard
+	DWORD timeNow = GetTickCount();
+	if (timeNow - _stageStartTime <= 3000)
+		_keyboardWorking = false;
+	else
+		_keyboardWorking = true;
 
 	//draw black background
 	G_d3ddv->StretchRect(
@@ -53,17 +59,17 @@ void SceneGame::RenderFrame(int time){
 }
 
 void SceneGame::OnKeyDown(int KeyCode){
-	DWORD timeNow = GetTickCount();
-	if (timeNow - _stageStartTime <= 3000)//after 1 time = 5s then allow control player
-		return;
+	
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
-		_player->IdentifyDirectionOfMotion(KeyCode);
+		//_keyboardWork = true;
+		_player->IdentifyDirectionOfMotion_KeyPress(KeyCode);
 		//MessageBox(G_hWnd, "Right", "press", MB_OK);
 		break;
 	case DIK_LEFT:
-		_player->IdentifyDirectionOfMotion(KeyCode);
+		//_keyboardWork = true;
+		_player->IdentifyDirectionOfMotion_KeyPress(KeyCode);
 		//MessageBox(G_hWnd, "Left", "press", MB_OK);
 		//_player->Left();
 		break;
@@ -78,13 +84,15 @@ void SceneGame::OnKeyDown(int KeyCode){
 	}
 }
 void SceneGame::OnKeyUp(int KeyCode){
+
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
-		//_player->TurnRight();
+		_player->IdentifyDirectionOfMotion_KeyRelease(KeyCode);
 		//MessageBox(G_hWnd, "Right", "realease", MB_OK);
 		break;
 	case DIK_LEFT:
+		_player->IdentifyDirectionOfMotion_KeyRelease(KeyCode);
 		//MessageBox(G_hWnd, "Right", "realease", MB_OK);
 		//_player->TurnLeft();
 		break;

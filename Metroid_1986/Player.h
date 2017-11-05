@@ -49,7 +49,8 @@ public:
 	void Draw();
 
 	//Action
-	void IdentifyDirectionOfMotion(int KeyCode);//identify direction and  base on key pressed
+	void IdentifyDirectionOfMotion_KeyPress(int KeyCode);//identify direction and  base on key pressed
+	void IdentifyDirectionOfMotion_KeyRelease(int KeyCode);//identify direction and  base on key released
 	void IdentifyFootAction(int KeyCode);
 	void PutHandUp();
 };

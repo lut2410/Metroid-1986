@@ -15,8 +15,6 @@ Player::Player(int x, int y):GameObject(Player_ID,x,y,0,0) {
 	_putHandUpSpr = new Sprite(playerTexture, 300, 5, 5);
 	_runSpr = new Sprite(playerTexture, 50, 6, 8);
 	//_jumpSpr;
-
-
 }
 
 Player::~Player(){
@@ -55,14 +53,15 @@ void Player::Draw(){
 		_sprite->Draw(_posX, _posY);
 		break;
 	case DirectionOfMotion::Left://drawfip
-		//_sprite->Draw(_posX, _posY);
+		_sprite->DrawFlipHorizontal(_posX, _posY);
 		break;
 	}
 }
 
-void Player::IdentifyDirectionOfMotion(int KeyCode){
+void Player::IdentifyDirectionOfMotion_KeyPress(int KeyCode){
 	
-	if (_velX == 0)//stand=>change motion and velX
+
+	if (_velX == 0)	//pressed 0 key -> 1key
 	{
 		if (KeyCode == DIK_LEFT)
 		{
@@ -74,20 +73,44 @@ void Player::IdentifyDirectionOfMotion(int KeyCode){
 			_directionOfMotion = DirectionOfMotion::Right;
 			_velX = SPEED_X;
 		}
+		if (_footAction == FootAction::Stand)//standing=>run
+			_footAction = FootAction::Run;
 	}
-	else if (_velX > 0)//right direction
+	else //(actually press 1-> 2 key: left + right) = >keep direction, change velX = 0
 	{
-		if (KeyCode == DIK_LEFT)//+ left key(actually press 2 key: left+right) =>keep direction, change velX=0
-			_velX = 0;
+			_velX = 0;				// = >keep direction, change velX = 0
+		if (_footAction == FootAction::Run)	//press 2 key left+ right at the same times => change action run-> stand
+			_footAction = FootAction::Stand;//other cases: keep action
 	}
-	else //left direction
-	{
-		if (KeyCode == DIK_RIGHT)//+ right key(actually press 2 key: left+right) =>keep direction, change velX=0
-			_velX = 0;
-	}
-	if (_footAction == FootAction::Stand)//standing=>run
-		_footAction = FootAction::Run;
+
 		
+}
+void Player::IdentifyDirectionOfMotion_KeyRelease(int KeyCode){
+	if (_directionOfMotion == DirectionOfMotion::Neutral)	//if this line is'n exist=> error logic when: press
+		return;												//key in time intro, then release key after intro
+	if (_velX == 0)	//pressed 2 key -> 1key (2 key is pressing, and release 1 key)
+	{
+		if (KeyCode == DIK_LEFT)	//release left key => remain right key is pressing
+		{
+			_directionOfMotion = DirectionOfMotion::Right;
+			_velX = SPEED_X;
+		}
+		else	//release right key=> remain left key is pressing
+		{
+			_directionOfMotion = DirectionOfMotion::Left;
+			_velX = -SPEED_X;
+		}
+		if (_footAction == FootAction::Stand)//press 2 key ->1 key => change action stand-> run
+			_footAction = FootAction::Run;//other cases: keep action
+	}
+	else	//release one key: 1key->0 key pressed => keep direction, change velX=0
+	{
+			_velX = 0;//move horizontally -> don't
+		if (_footAction == FootAction::Run)///change action run-> stand
+			_footAction = FootAction::Stand;//other cases: keep action
+	}
+	
+
 }
 void Player::IdentifyFootAction(int KeyCode){
 
