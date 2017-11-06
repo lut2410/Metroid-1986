@@ -1,4 +1,4 @@
-﻿Build started 11/5/2017 12:29:34 PM.
+﻿Build started 11/6/2017 10:43:10 PM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Font.cpp Game.cpp "Global Setting.cpp" GameObject.cpp Player.cpp Scene.cpp SceneEnd.cpp SceneGame.cpp SceneMain.cpp SceneMenu.cpp Sprite.cpp Texture.cpp TextureCollection.cpp WinMain.cpp
@@ -12,8 +12,8 @@
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
          Sprite.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\sprite.cpp(57): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\sprite.cpp(72): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\sprite.cpp(60): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\sprite.cpp(75): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
          SceneMenu.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
      1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
@@ -30,7 +30,9 @@
          Player.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
      1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(6): warning C4101: '_footAction' : unreferenced local variable
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(25): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(27): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(28): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(97): warning C4554: '&' : check operator precedence for possible error; use parentheses to clarify precedence
          GameObject.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
          Global Setting.cpp
@@ -65,4 +67,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:08.54
+Time Elapsed 00:00:11.45

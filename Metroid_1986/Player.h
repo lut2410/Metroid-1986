@@ -4,9 +4,10 @@
 #include "GameObject.h"
 
 
-#define SPEED_X 0.3f
+#define SPEED_X 0.4f
 #define SPEED_Y 0.4f
 #define MAX_HEIGHT_JUMP 70.0f
+#define MAX_VEL_JUMP -0.7f
 #define ACCELERATION 0.005f
 enum FootAction{
 	Stand,
@@ -35,11 +36,15 @@ class Player :public GameObject {
 	DirectionOfMotion _directionOfMotion;//transform of position X : left or right?
 	bool _putHandUp;//is putting hand up?
 	bool _shoot;//is shooting?
-	Sprite* _standIntroSpr;
-	Sprite* _standSpr;
-	Sprite* _putHandUpSpr;
-	Sprite* _runSpr;
-	//Sprite* _jump;
+
+	//Sprites
+	Sprite* _standIntro_Spr;
+	Sprite* _stand_Spr;
+	Sprite* _standPutHandUp_Spr;
+	Sprite* _run_Spr;
+	Sprite* _jump_Spr;
+	Sprite* _rollingJump_Spr;
+	Sprite* _grovel_Spr;
 
 public:
 	Player();
@@ -51,8 +56,10 @@ public:
 	//Action
 	void IdentifyDirectionOfMotion_KeyPress(int KeyCode);//identify direction and  base on key pressed
 	void IdentifyDirectionOfMotion_KeyRelease(int KeyCode);//identify direction and  base on key released
-	void IdentifyFootAction(int KeyCode);
-	void PutHandUp();
+	void IdentifyFootAction_KeyPress(int KeyCode);
+	void IdentifyFootAction_KeyRelease(int KeyCode);
+	void IdentifyHavingPutHandUp_KeyPress();
+	void IdentifyHavingPutHandUp_KeyRelease();
 };
 #endif
 

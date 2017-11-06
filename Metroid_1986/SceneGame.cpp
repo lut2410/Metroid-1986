@@ -32,9 +32,9 @@ void SceneGame::LoadObject(){
 }
 
 void SceneGame::RenderFrame(int time){
-	//after 1 time = 5s then allow player control by keyboard
+	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
-	if (timeNow - _stageStartTime <= 3000)
+	if (timeNow - _stageStartTime <= 4000)
 		_keyboardWorking = false;
 	else
 		_keyboardWorking = true;
@@ -74,10 +74,14 @@ void SceneGame::OnKeyDown(int KeyCode){
 		//_player->Left();
 		break;
 	case DIK_UP:
-		//_player->IdentifyFootAction(KeyCode);
+		_player->IdentifyHavingPutHandUp_KeyPress();
+		break;
+	case DIK_DOWN:
+		_player->IdentifyFootAction_KeyPress(KeyCode);
 		break;
 	case DIK_F://jump
-		_player->IdentifyFootAction(KeyCode);
+		_player->IdentifyFootAction_KeyPress(KeyCode);
+		break;
 
 
 
@@ -97,7 +101,12 @@ void SceneGame::OnKeyUp(int KeyCode){
 		//_player->TurnLeft();
 		break;
 	case DIK_UP:
-		_player->PutHandUp();
+		_player->IdentifyHavingPutHandUp_KeyRelease();
+		break;
+	case DIK_DOWN:
+		_player->IdentifyFootAction_KeyRelease(KeyCode);
+		break;
+	case DIK_F://jump
 		break;
 	}
 }

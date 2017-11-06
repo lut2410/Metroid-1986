@@ -29,6 +29,9 @@ Sprite::~Sprite(){
 void Sprite::SelectIndex(int index){
 	_currentIndex = index;
 }
+int Sprite::getCurrentIndex(){
+	return _currentIndex;
+}
 void Sprite::Next(){
 	if (_currentIndex < _endIndex)
 		_currentIndex++;
