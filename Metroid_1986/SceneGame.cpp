@@ -34,7 +34,7 @@ void SceneGame::LoadObject(){
 void SceneGame::RenderFrame(int time){
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
-	if (timeNow - _stageStartTime <= 4000)
+	if (timeNow - _stageStartTime <= 1000) //4000
 		_keyboardWorking = false;
 	else
 		_keyboardWorking = true;
@@ -58,20 +58,15 @@ void SceneGame::RenderFrame(int time){
 	G_SpriteHandler->End();
 }
 
-void SceneGame::OnKeyDown(int KeyCode){
+void SceneGame::KeyPress(int KeyCode){
 	
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
-		//_keyboardWork = true;
 		_player->IdentifyDirectionOfMotion_KeyPress(KeyCode);
-		//MessageBox(G_hWnd, "Right", "press", MB_OK);
 		break;
 	case DIK_LEFT:
-		//_keyboardWork = true;
 		_player->IdentifyDirectionOfMotion_KeyPress(KeyCode);
-		//MessageBox(G_hWnd, "Left", "press", MB_OK);
-		//_player->Left();
 		break;
 	case DIK_UP:
 		_player->IdentifyHavingPutHandUp_KeyPress();
@@ -87,18 +82,15 @@ void SceneGame::OnKeyDown(int KeyCode){
 
 	}
 }
-void SceneGame::OnKeyUp(int KeyCode){
+void SceneGame::KeyRelease(int KeyCode){
 
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
 		_player->IdentifyDirectionOfMotion_KeyRelease(KeyCode);
-		//MessageBox(G_hWnd, "Right", "realease", MB_OK);
 		break;
 	case DIK_LEFT:
 		_player->IdentifyDirectionOfMotion_KeyRelease(KeyCode);
-		//MessageBox(G_hWnd, "Right", "realease", MB_OK);
-		//_player->TurnLeft();
 		break;
 	case DIK_UP:
 		_player->IdentifyHavingPutHandUp_KeyRelease();
@@ -107,6 +99,7 @@ void SceneGame::OnKeyUp(int KeyCode){
 		_player->IdentifyFootAction_KeyRelease(KeyCode);
 		break;
 	case DIK_F://jump
+		_player->IdentifyFootAction_KeyRelease(KeyCode);
 		break;
 	}
 }

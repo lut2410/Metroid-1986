@@ -19,7 +19,7 @@ public:
 	SceneMenu();
 	void RenderFrame( int t);
 	void LoadResources();
-	void OnKeyDown(int KeyCode);	//up-down key => change
+	void KeyPress(int KeyCode);	//up-down key => change
 	~SceneMenu();
 };
 #endif _SCENEMENU_H

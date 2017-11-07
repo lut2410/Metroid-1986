@@ -58,7 +58,7 @@ void SceneMenu::LoadResources()
 	Sound::GetInst()->PlayBGSound(EBGSound::EMenuSound);*/
 }
 
-void SceneMenu::OnKeyDown(int KeyCode){
+void SceneMenu::KeyPress(int KeyCode){
 	switch (KeyCode)
 	{
 	case DIK_UP:

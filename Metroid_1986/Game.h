@@ -31,8 +31,8 @@ protected:
 	virtual void RenderFrame(int Delta);
 	virtual void LoadResources();
 	void KeyboardHandling(); //process base Keyboard event
-	virtual void OnKeyDown(int KeyCode);
-	virtual void OnKeyUp(int KeyCode);
+	virtual void KeyPress(int KeyCode);
+	virtual void KeyRelease(int KeyCode);
 public:
 	Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
 	Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);

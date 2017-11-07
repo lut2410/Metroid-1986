@@ -9,9 +9,6 @@
 class SceneGame : public Scene{
 
 	DWORD _stageStartTime;
-	bool _left;
-	bool _right;
-
 	int _currentLevel;
 	Player* _player;
 	void LoadObject(); //Load all object of current level
@@ -20,7 +17,7 @@ public :
 	~SceneGame();
 	void LoadResources();
 	void RenderFrame(int t);
-	void OnKeyDown(int KeyCode);
-	void OnKeyUp(int KeyCode);//stop current action
+	void KeyPress(int KeyCode);
+	void KeyRelease(int KeyCode);//stop current action
 };
 #endif _SCENEGAME_H

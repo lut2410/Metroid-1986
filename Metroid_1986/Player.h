@@ -4,14 +4,13 @@
 #include "GameObject.h"
 
 
-#define SPEED_X 0.4f
+#define SPEED_X 0.2f
 #define SPEED_Y 0.4f
 #define MAX_HEIGHT_JUMP 70.0f
-#define MAX_VEL_JUMP -0.7f
-#define ACCELERATION 0.005f
+#define MAX_VEL_JUMP -0.5f
+#define ACCELERATION 0.0015f
 enum FootAction{
-	Stand,
-	Run,
+	StandOrRun,
 	Jump,
 	RollingJump,
 	Grovel
@@ -32,6 +31,12 @@ enum DirectionOfMotion{
 
 class Player :public GameObject {
 	float _acc;//acceleration of jump
+	//key support
+	bool _upKey;
+	bool _downKey;
+	bool _jumpKey;
+
+
 	FootAction _footAction;
 	DirectionOfMotion _directionOfMotion;//transform of position X : left or right?
 	bool _putHandUp;//is putting hand up?
@@ -40,12 +45,18 @@ class Player :public GameObject {
 	//Sprites
 	Sprite* _standIntro_Spr;
 	Sprite* _stand_Spr;
-	Sprite* _standPutHandUp_Spr;
+	Sprite* _stand_PutHandUp_Spr;
 	Sprite* _run_Spr;
+	Sprite* _run_PutHandUp_Spr;
 	Sprite* _jump_Spr;
+	Sprite* _jump_PutHandUp_Spr;
 	Sprite* _rollingJump_Spr;
 	Sprite* _grovel_Spr;
-
+	//shoot sprite, other action don't have shoot sprite because of non-existing, or because shoot sprite don't different nomal sprite	
+	Sprite* _stand_PutHandUp_Shoot_Spr;
+	Sprite* _run_Shoot_Spr;
+	Sprite* _jump_Shoot_Spr;
+	Sprite* _jump_PutHandUp_Shoot_Spr;
 public:
 	Player();
 	Player(int x, int y);

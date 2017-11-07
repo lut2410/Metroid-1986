@@ -19,6 +19,6 @@ public:
 	virtual void ProcessInput(int Delta);
 	virtual void LoadResources();
 
-	virtual void OnKeyDown(int KeyCode);
-	virtual void OnKeyUp(int KeyCode);
+	virtual void KeyPress(int KeyCode);
+	virtual void KeyRelease(int KeyCode);
 };

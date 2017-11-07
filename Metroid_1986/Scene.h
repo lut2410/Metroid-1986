@@ -29,8 +29,8 @@ public:
 	virtual void RenderFrame( int t);
 	virtual void ProcessInput(int keyCode);
 	virtual void LoadResources();
-	virtual void OnKeyDown(int KeyCode);
-	virtual void OnKeyUp(int KeyCode);
+	virtual void KeyPress(int KeyCode);
+	virtual void KeyRelease(int KeyCode);
 	~Scene(void);
 };
 #endif

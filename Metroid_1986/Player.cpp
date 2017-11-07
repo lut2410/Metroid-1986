@@ -12,11 +12,17 @@ Player::Player(int x, int y):GameObject(Player_ID,x,y,0,0) {
 	Texture* playerTexture = TextureCollection::getInstance()->getTexture(Player_ID);
 	_standIntro_Spr = new Sprite(playerTexture, 600, 0, 3);
 	_stand_Spr = new Sprite(playerTexture, 300, 4, 4);
-	_standPutHandUp_Spr = new Sprite(playerTexture, 300, 5, 5);
+	_stand_PutHandUp_Spr = new Sprite(playerTexture, 300, 5, 5);
 	_run_Spr = new Sprite(playerTexture, 0, 6, 8);
 	_jump_Spr = new Sprite(playerTexture, 300, 9, 9);
 	_rollingJump_Spr = new Sprite(playerTexture, 0, 9, 13);
 	_grovel_Spr = new Sprite(playerTexture, 0, 14, 17);
+	_stand_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 300, 18, 18);
+	_run_Shoot_Spr = new Sprite(playerTexture, 0, 19, 22);
+	_stand_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 0, 23, 23);
+	_run_PutHandUp_Spr = new Sprite(playerTexture, 0, 24, 26);
+	_jump_PutHandUp_Spr = new Sprite(playerTexture, 300, 27, 27);
+	_jump_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 300, 28, 28);
 }
 
 Player::~Player(){
@@ -30,13 +36,14 @@ void Player::Update(int deltaTime){
 	{
 		switch (_footAction)
 		{
-		case FootAction::Stand:
-			if (_directionOfMotion == DirectionOfMotion::Neutral)//intro standing
-				this->_sprite = _standIntro_Spr;
-			else//nomal stand
-				this->_sprite = _stand_Spr;
-			break;
-		case FootAction::Run:
+		case FootAction::StandOrRun:
+			if (_velX == 0){											//stand
+				if (_directionOfMotion == DirectionOfMotion::Neutral)//intro standing
+					this->_sprite = _standIntro_Spr;
+				else//nomal stand
+					this->_sprite = _stand_Spr;
+			}
+			else														//run
 			this->_sprite = _run_Spr;
 			break;
 		case FootAction::Jump:
@@ -58,38 +65,60 @@ void Player::Update(int deltaTime){
 	{
 		switch (_footAction)
 		{
-		case FootAction::Stand:		//include nomal standing + intro standing
-				this->_sprite = _standPutHandUp_Spr;
-			break;
-		case FootAction::Run:
-			this->_sprite = _run_Spr;
+		case FootAction::StandOrRun:		//include nomal standing + intro standing
+			if (_velX==0)
+				this->_sprite = _stand_PutHandUp_Spr;
+			else
+			this->_sprite = _run_PutHandUp_Spr;
 			break;
 		case FootAction::Jump:
-			//posY
-			//this->_putHandUpSpr->Update(t);
+			_velY += ACCELERATION*deltaTime;
+			this->_sprite = _jump_PutHandUp_Spr;
 			break;
-		case FootAction::RollingJump:
-			//posY
+		case FootAction::RollingJump:		//don't exist
 			break;
-		case FootAction::Grovel:
+		case FootAction::Grovel:			//don't exist 
 			break;
 		}
 	}
 
 	//Collision
+	// if(foot_collision_vs_theground||collision_vs_stone)
+	//	locate the play to true location
+	// if(foot_collision_vs_theground)
+	//	if(_downkey && _upkey)
+	//		_putHandUp=false;
+	// if(collision_vs_enemy)
+	//	change "knocked flag" to true (knocked flag is true in 1s)
+	//
+	//
+	//
 	if (_posY > 300)
 	{
 		_posY = 300;
 		_velY = 0;
-		if (_velX == 0)
+		_footAction = FootAction::StandOrRun;
+		if (_putHandUp == false)
 		{
-			_footAction = FootAction::Stand;
-			this->_sprite = _stand_Spr;
+			if (_velX == 0)
+			{
+				this->_sprite = _stand_Spr;
+			}
+			else
+			{
+				this->_sprite = _run_Spr;
+			}
 		}
 		else
 		{
-			_footAction = FootAction::Run;
-			this->_sprite = _run_Spr;
+			if (_velX == 0)
+			{
+				this->_sprite = _stand_PutHandUp_Spr;
+			}
+			else
+			{
+				this->_sprite = _run_PutHandUp_Spr;
+			}
 		}
 	}
 
@@ -128,14 +157,10 @@ void Player::IdentifyDirectionOfMotion_KeyPress(int KeyCode){
 			_directionOfMotion = DirectionOfMotion::Right;
 			_velX = SPEED_X;
 		}
-		if (_footAction == FootAction::Stand)//standing=>run
-			_footAction = FootAction::Run;
 	}
 	else //(actually press 1-> 2 key: left + right) = >keep direction, change velX = 0
 	{
 			_velX = 0;				// = >keep direction, change velX = 0
-		if (_footAction == FootAction::Run)	//press 2 key left+ right at the same times => change action run-> stand
-			_footAction = FootAction::Stand;//other cases: keep action
 	}
 
 		
@@ -155,52 +180,44 @@ void Player::IdentifyDirectionOfMotion_KeyRelease(int KeyCode){
 			_directionOfMotion = DirectionOfMotion::Left;
 			_velX = -SPEED_X;
 		}
-		if (_footAction == FootAction::Stand)//press 2 key ->1 key => change action stand-> run
-			_footAction = FootAction::Run;//other cases: keep action
+		//if (_footAction == FootAction::Stand)//press 2 key ->1 key => change action stand-> run
+		//	_footAction = FootAction::Run;//other cases: keep action
 	}
 	else	//release one key: 1key->0 key pressed => keep direction, change velX=0
 	{
 			_velX = 0;//move horizontally -> don't
-		if (_footAction == FootAction::Run)///change action run-> stand
-			_footAction = FootAction::Stand;//other cases: keep action
+		//if (_footAction == FootAction::Run)///change action run-> stand
+		//	_footAction = FootAction::Stand;//other cases: keep action
 	}
-	
-
 }
 void Player::IdentifyFootAction_KeyPress(int KeyCode){
 
 	//jump, grovel inspect footAction to identify action
 	if (KeyCode == DIK_F)//jump
 	{
+		_jumpKey = true;
 		switch (_footAction){
-		case FootAction::Stand://nomal jump
-			//_acc = -ACCELERATION;
-			//_velY = sqrt(-2 * _acc*MAX_HEIGHT_JUMP);
+		case FootAction::StandOrRun:
 			_velY = MAX_VEL_JUMP;
-			_footAction = FootAction::Jump;
-			break;
-		case FootAction::Run://=>rolling jump
-			//_acc = -ACCELERATION;
-			//_velY = sqrt(-2 * _acc*MAX_HEIGHT_JUMP);
-			_velY = MAX_VEL_JUMP;
-			_footAction = FootAction::RollingJump;
+			if (_velX==0)
+			_footAction = FootAction::Jump;			// jump key
+			else
+			_footAction = FootAction::RollingJump;	// left/right key + jump key
 			break;
 		case FootAction::Jump:
 		case FootAction::RollingJump:
 			break;
-		case FootAction::Grovel://is groveling, press jump=>stand or run (base on velX)
-			if (_velX == 0)
-				_footAction = FootAction::Stand;
-			else
-				_footAction = FootAction::Run;
+		case FootAction::Grovel:
+			if (_downKey == false)
+				_footAction = FootAction::StandOrRun;
 			break;
 		}
 	}
 	else if (KeyCode == DIK_DOWN)//Grovel
 	{
+		_downKey = true;
 		switch (_footAction){
-		case FootAction::Stand:				//standing/running +put hand up => standing/running, don't put hand up
-		case FootAction::Run:
+		case FootAction::StandOrRun:				//standing/running +put hand up => standing/running, don't put hand up
 			if (_putHandUp == true)			
 				_putHandUp = false;
 			else							//standing/running=>grovel
@@ -208,10 +225,6 @@ void Player::IdentifyFootAction_KeyPress(int KeyCode){
 			break;
 		case FootAction::Jump:
 		case FootAction::RollingJump:		//jumping + downkey => standing/running
-			if (_velX == 0)
-				_footAction = FootAction::Stand;
-			else
-				_footAction = FootAction::Run;
 			break;
 		case FootAction::Grovel:
 			break;
@@ -221,72 +234,69 @@ void Player::IdentifyFootAction_KeyPress(int KeyCode){
 void Player::IdentifyFootAction_KeyRelease(int KeyCode){
 	if (KeyCode == DIK_F)// release jump key
 	{
+		_jumpKey = false;
 		switch (_footAction){
-		case FootAction::Stand://nomal jump
-			//_velY = MAX_VEL_JUMP;
-			//_footAction = FootAction::Jump;
-			break;
-		case FootAction::Run://=>rolling jump
-			//_velY = MAX_VEL_JUMP;
-			//_footAction = FootAction::RollingJump;
+		case FootAction::StandOrRun:
 			break;
 		case FootAction::Jump:
 		case FootAction::RollingJump:
+			if (_velY < 0)			//player jump don't reache the top
+			_velY = 0;				//vY = 0 instantly
 			break;
 		case FootAction::Grovel://is groveling, press jump=>stand or run (base on velX)
-			if (_velX == 0)
-				_footAction = FootAction::Stand;
-			else
-				_footAction = FootAction::Run;
+				//if (_velX == 0)
+				//	_footAction = FootAction::Stand;
+				//else
+				//	_footAction = FootAction::Run;
 			break;
 		}
 	}
 	else if(KeyCode == DIK_DOWN)//Grovel
 	{
+		_downKey = false;
 		switch (_footAction){
-		case FootAction::Stand:				
-		case FootAction::Run:			
+		case FootAction::StandOrRun:						
 			if (_velY == 0)					//it's case : standing/running action + up key + down key => now release down key	
 				_putHandUp = true;
-			else							//it's case : jumping + down key => now release down key
-				_footAction = FootAction::Jump;
 			break;
 		case FootAction::Jump:
 		case FootAction::RollingJump:
 			break;
-		case FootAction::Grovel:			//is groveling, press jump=>stand or run (base on velX)
-			if (_velX == 0)
-				_footAction = FootAction::Stand;
-			else
-				_footAction = FootAction::Run;
+		case FootAction::Grovel:	//downkey + upkey -> upkey => stand/run + puthandup
+			if (_upKey == true)
+			{
+				_putHandUp = true;
+				_footAction = FootAction::StandOrRun;
+			}
 			break;
 		}
 	}
 }
 void Player::IdentifyHavingPutHandUp_KeyPress(){
+	_upKey = true;
 	switch (_footAction)
 	{
-	case FootAction::Stand:			//perform concurrently
-	case FootAction::Run:
+	case FootAction::StandOrRun:			//perform concurrently
 	case FootAction::Jump:
 		_putHandUp = true;
 		break;
 	case FootAction::RollingJump:			//can't perform concurrently:
 		break;								//don't put hand up
 	case FootAction::Grovel:				//can't perform concurrently:
-		_putHandUp = false;					//
-		if (_velX == 0)						//stand or run(base on velX)
-			_footAction = FootAction::Stand;
-		else
-			_footAction = FootAction::Run;
+		if (_downKey == false)
+		{
+			_putHandUp = true;
+			_footAction = FootAction::StandOrRun;
+		}										//else downkey-> downkey+upkey => continue grovel
 		break;
+		
 	}
 }
 void Player::IdentifyHavingPutHandUp_KeyRelease(){
+	_upKey = false;
 	switch (_footAction)
 	{
-	case FootAction::Stand:				//standing/running +put hand up => standing/running, don't put hand up
-	case FootAction::Run:
+	case FootAction::StandOrRun:				//standing/running +put hand up => standing/running, don't put hand up
 		if (_putHandUp == true)
 			_putHandUp = false;
 		else							//standing/running=>grovel

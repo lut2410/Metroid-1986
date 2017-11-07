@@ -48,17 +48,17 @@ void SceneMain::LoadResources()
 	_currentScene->LoadResources();
 }
 
-void SceneMain::OnKeyDown(int KeyCode)
+void SceneMain::KeyPress(int KeyCode)
 {
-	_currentScene->OnKeyDown(KeyCode);
+	_currentScene->KeyPress(KeyCode);
 }
-void SceneMain::OnKeyUp(int KeyCode)
+void SceneMain::KeyRelease(int KeyCode)
 {
 	/*std::string key = std::to_string(KeyCode);
 	char const* k = key.c_str();
 	MessageBox(G_hWnd, "Realease", k, MB_OK);*/
 
-	_currentScene->OnKeyUp(KeyCode);
+	_currentScene->KeyRelease(KeyCode);
 }
 
 SceneMain::~SceneMain(void)

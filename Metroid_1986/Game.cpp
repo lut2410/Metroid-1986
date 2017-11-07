@@ -258,10 +258,10 @@ void Game::KeyboardHandling(){
 			int KeyCode = _KeyEvents[i].dwOfs;
 			int KeyState = _KeyEvents[i].dwData;
 			if ((KeyState & 0x80) > 0) // one key is pressed
-				OnKeyDown(KeyCode);
+				KeyPress(KeyCode);
 			else
 				// Key Up event
-				OnKeyUp(KeyCode);
+				KeyRelease(KeyCode);
 				;
 
 		}
@@ -269,9 +269,9 @@ void Game::KeyboardHandling(){
 }
 
 
-void Game::OnKeyDown(int KeyCode){
+void Game::KeyPress(int KeyCode){
 };
-void Game::OnKeyUp(int KeyCode){
+void Game::KeyRelease(int KeyCode){
 };
 
 // this is the main message handler for the program
