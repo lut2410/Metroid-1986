@@ -40,6 +40,8 @@ void Sprite::Next(){
 
 }
 void Sprite::Update(int t){
+	if (_timeAnimation < 0)//no update
+		return;
 	_timeLocal += t;
 	if (_timeLocal >= _timeAnimation)
 	{
@@ -47,9 +49,11 @@ void Sprite::Update(int t){
 		this->Next();
 	}
 }
-void Sprite::Draw(int x, int y){
 
-
+void Sprite::Draw(int x, int y, int index){
+	if (index >= 0)	//index is passed
+		_currentIndex = index;
+	//else draw normally
 	RECT srect;
 
 	srect.left = (_currentIndex % _texture->_cols)*(_texture->_frameWidth);
@@ -57,14 +61,14 @@ void Sprite::Draw(int x, int y){
 	srect.right = srect.left + _texture->_frameWidth;
 	srect.bottom = srect.top + _texture->_frameHeight;
 
-	D3DXVECTOR3 position(x - _texture->_frameWidth / 2,y - _texture->_frameHeight / 2, 0);
+	D3DXVECTOR3 position(x - _texture->_frameWidth / 2, y - _texture->_frameHeight / 2, 0);
 	D3DXVECTOR3 center(0, 0, 0);
 	G_SpriteHandler->Draw(
 		_texture->_texture,
 		&srect,
 		&center,
 		&position,
-		0xFFFFFFFF );
+		0xFFFFFFFF);
 }
 void Sprite::DrawFlipHorizontal(int x, int y)
 {

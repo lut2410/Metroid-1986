@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "Camera.h"
 
-#define SPEED_X 0.2f
+#define SPEED_X 0.16f
 #define SPEED_Y 0.4f
 #define MAX_HEIGHT_JUMP 70.0f
 #define MAX_VEL_JUMP 0.5f

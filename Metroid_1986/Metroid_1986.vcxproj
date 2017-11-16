@@ -68,6 +68,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundMap.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -85,6 +86,7 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundMap.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />

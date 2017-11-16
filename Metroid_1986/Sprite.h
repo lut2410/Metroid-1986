@@ -24,8 +24,9 @@ public:
 	//next sprite in list
 	void Next();
 	void Update(int t);
-	//Render current sprite in location(x,y) at the target surface
-	void Draw(int x, int y);
+	//Render current sprite in location(x,y) at the target surface, otherwise draw one of texture index - if index is actually passed
+	void Draw(int x, int y, int index = -1);				
+	//void DrawOneIndex(int x, int y, int index = -1);		//Draw one of texture indexs
 	void DrawFlipHorizontal(int x, int y);
 	~Sprite();
 };

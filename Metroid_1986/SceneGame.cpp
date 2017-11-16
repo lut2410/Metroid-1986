@@ -14,7 +14,7 @@ void SceneGame::LoadResources() {
 
 
 	//Load maps
-
+	_backgroundMap = new BackgroundMap();
 	//create player + other object
 	LoadObject();
 	//playerTexture = new Texture("Resources/Image/playerdemo.png", 4, 1);
@@ -26,9 +26,9 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	_camera->SetSizeMap(10, 1000);
-	_camera->_viewport.y = 600;
-	_player = new Player(600, 300);
+	_camera->SetSizeMap(0, 1280);
+	_camera->_viewport.y = 240;
+	_player = new Player(640, 16);
 
 	//other object
 
@@ -51,11 +51,11 @@ void SceneGame::RenderFrame(int time){
 		D3DTEXF_NONE);
 
 	G_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+	_camera->UpdateCamera(_player->_posX);
 
 	//draw maps
+	_backgroundMap->Draw(_camera);
 	//draw player
-	//playerTexture->Draw(300, 300);
-	_camera->UpdateCamera(_player->_posX);
 	_player->Update(time);
 	// collision
 	_player->Draw(_camera);

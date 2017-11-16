@@ -44,6 +44,11 @@ void Game::_SetScreenDimension(){
 		_screenHeight = 768;
 		_depth = 24;
 		break;
+	case GAME_SCREEN_RESOLUTION_256_240_24:
+		_screenWidth = 256;
+		_screenHeight = 240;
+		_depth = 24;
+		break;
 	default:
 		break;
 	}
@@ -84,15 +89,14 @@ void Game::_InitWindow(){
 		CW_USEDEFAULT, CW_USEDEFAULT,    // x & y position of the window
 		_screenWidth,    // width of the window
 		_screenHeight,    // height of the window
-		NULL,    // we have no parent window, NULL
-		NULL,    // we aren't using menus, NULL
+		NULL,    // have no parent window, NULL
+		NULL,    // don't using menus, NULL
 		G_hInstance,    // application handle
 		NULL);    // used with multiple windows, NULL
 	if (!G_hWnd)
 	{
 		DWORD ErrCode = GetLastError();
 	}
-
 
 	// display the window on the screen
 	ShowWindow(G_hWnd, SW_SHOWNORMAL);

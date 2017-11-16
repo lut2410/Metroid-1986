@@ -8,7 +8,6 @@ class TextureCollection{
 private:
 	Texture* playerTexture;
 
-
 	static TextureCollection* textureCollection;
 
 

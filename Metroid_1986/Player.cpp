@@ -13,14 +13,14 @@ Player::Player(int x, int y):GameObject(Player_ID,x,y,0,0) {
 	_standIntro_Spr = new Sprite(playerTexture, 600, 0, 3);
 	_stand_Spr = new Sprite(playerTexture, 300, 4, 4);
 	_stand_PutHandUp_Spr = new Sprite(playerTexture, 300, 5, 5);
-	_run_Spr = new Sprite(playerTexture, 0, 6, 8);
+	_run_Spr = new Sprite(playerTexture, 30, 6, 8);
 	_jump_Spr = new Sprite(playerTexture, 300, 9, 9);
 	_rollingJump_Spr = new Sprite(playerTexture, 0, 9, 13);
-	_grovel_Spr = new Sprite(playerTexture, 0, 14, 17);
+	_grovel_Spr = new Sprite(playerTexture, 30, 14, 17);
 	_stand_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 300, 18, 18);
-	_run_Shoot_Spr = new Sprite(playerTexture, 0, 19, 22);
+	_run_Shoot_Spr = new Sprite(playerTexture, 30, 19, 22);
 	_stand_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 0, 23, 23);
-	_run_PutHandUp_Spr = new Sprite(playerTexture, 0, 24, 26);
+	_run_PutHandUp_Spr = new Sprite(playerTexture, 30, 24, 26);
 	_jump_PutHandUp_Spr = new Sprite(playerTexture, 300, 27, 27);
 	_jump_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 300, 28, 28);
 }
@@ -94,9 +94,9 @@ void Player::Update(int deltaTime){
 	//
 	//
 	//
-	if (_posY < 300)
+	if (_posY < 48)
 	{
-		_posY = 300;
+		_posY = 48;
 		_velY = 0;
 		_footAction = FootAction::StandOrRun;
 		if (_putHandUp == false)

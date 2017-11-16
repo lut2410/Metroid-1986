@@ -37,6 +37,9 @@
     <Filter Include="Object\Player">
       <UniqueIdentifier>{cd9decfc-c85f-4c6b-87df-443d0fa267f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{21fcd39a-3e9f-4835-9bc5-70fef60e954d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -84,6 +87,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Control\Support</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -127,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Control\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundMap.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
