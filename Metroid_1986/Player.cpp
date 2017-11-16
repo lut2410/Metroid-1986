@@ -258,7 +258,7 @@ void Player::IdentifyFootAction_KeyRelease(int KeyCode){
 			break;
 		case FootAction::Jump:
 		case FootAction::RollingJump:
-			if (_velY < 0)			//player jump don't reache the top
+			if (_velY > 0)			//player jump don't reache the top
 			_velY = 0;				//vY = 0 instantly
 			break;
 		case FootAction::Grovel://is groveling, press jump=>stand or run (base on velX)
