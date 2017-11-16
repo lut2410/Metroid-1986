@@ -1,41 +1,23 @@
-﻿Build started 10/30/2017 5:48:56 PM.
+﻿Build started 11/15/2017 2:11:14 PM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Font.cpp Game.cpp "Global Setting.cpp" Scene.cpp SceneMain.cpp SceneMenu.cpp Texture.cpp WinMain.cpp
-         Game.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
+         Player.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Generating Code...
-         Compiling...
-         WinMain.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-         Texture.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         SceneMenu.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-         SceneMain.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-         Scene.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Global Setting.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Font.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(40): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(41): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(59): warning C4018: '>=' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(73): warning C4018: '>=' : signed/unsigned mismatch
-         Generating Code...
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(6): warning C4101: '_footAction' : unreferenced local variable
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(36): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(37): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(127): warning C4554: '&' : check operator precedence for possible error; use parentheses to clarify precedence
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(151): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(154): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(157): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.lib" /MACHINE:X86 Debug\Font.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.lib" /MACHINE:X86 Debug\Camera.obj
+         Debug\Font.obj
          Debug\Game.obj
          "Debug\Global Setting.obj"
-         Debug\Object.obj
+         Debug\GameObject.obj
+         Debug\Player.obj
          Debug\Scene.obj
          Debug\SceneEnd.obj
          Debug\SceneGame.obj
@@ -43,10 +25,11 @@
          Debug\SceneMenu.obj
          Debug\Sprite.obj
          Debug\Texture.obj
+         Debug\TextureCollection.obj
          Debug\WinMain.obj
          Metroid_1986.vcxproj -> D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe
      1>Done Building Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:06.40
+Time Elapsed 00:00:00.69

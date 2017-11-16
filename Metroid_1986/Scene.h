@@ -5,10 +5,10 @@
 #include "Global Setting.h"
 #include "Font.h"
 #include "Texture.h"
+#define BACKGROUND_FILE "Resources/Image/black.png"
 static enum ESceneState
 {
 	Scene_Menu,
-	Scene_Intro,
 	Scene_Game,
 	Scene_End
 } EnumSceneState; 
@@ -29,8 +29,8 @@ public:
 	virtual void RenderFrame( int t);
 	virtual void ProcessInput(int keyCode);
 	virtual void LoadResources();
-	virtual void OnKeyDown(int KeyCode);
-
+	virtual void KeyPress(int KeyCode);
+	virtual void KeyRelease(int KeyCode);
 	~Scene(void);
 };
 #endif

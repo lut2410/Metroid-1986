@@ -68,10 +68,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Global Setting.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneEnd.cpp" />
     <ClCompile Include="SceneGame.cpp" />
@@ -79,20 +81,24 @@
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureCollection.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global Setting.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SceneEnd.h" />
     <ClInclude Include="SceneGame.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureCollection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

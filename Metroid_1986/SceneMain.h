@@ -2,11 +2,12 @@
 #include "Game.h"
 #include "Scene.h"
 #include "SceneMenu.h"
+#include "SceneGame.h"
 class SceneMain : public Game
 {
 protected:
 	
-	Scene* _sceneNow;
+	Scene* _currentScene;
 	ESceneState _currentStateScene;
 
 public:
@@ -18,6 +19,6 @@ public:
 	virtual void ProcessInput(int Delta);
 	virtual void LoadResources();
 
-	virtual void OnKeyDown(int KeyCode);
-	
+	virtual void KeyPress(int KeyCode);
+	virtual void KeyRelease(int KeyCode);
 };

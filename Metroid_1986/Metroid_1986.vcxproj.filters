@@ -28,6 +28,15 @@
     <Filter Include="Control\Support">
       <UniqueIdentifier>{ef361cd4-62ae-47b1-8f08-2eec4640ccec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Dynamic">
+      <UniqueIdentifier>{f0b8080f-aa27-4358-9ce3-163f87325a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Static">
+      <UniqueIdentifier>{3ca1ead8-eb9b-4694-befd-d10ac80a7dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{cd9decfc-c85f-4c6b-87df-443d0fa267f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -60,10 +69,19 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Control\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
+    <ClCompile Include="Font.cpp">
+      <Filter>Control\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCollection.cpp">
+      <Filter>Control\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
+    <ClCompile Include="Camera.cpp">
       <Filter>Control\Support</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,10 +113,19 @@
     <ClInclude Include="Sprite.h">
       <Filter>Control\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
+    <ClInclude Include="Font.h">
+      <Filter>Control\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCollection.h">
+      <Filter>Control\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
+    <ClInclude Include="Camera.h">
       <Filter>Control\Support</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,5 @@
 #include "Game.h"
 #include <string>
-
 Game::Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound){
 	G_hInstance = hInstance;
 	_name =  name;
@@ -232,6 +231,8 @@ void Game::LoadResources(){
 
 void Game::KeyboardHandling(){
 	{
+		if (_keyboardWorking == false)
+		return;
 		//poll the keyboardKEY_DOWN
 		HRESULT hr = G_KeyBoard->GetDeviceState(sizeof(_Keys), (LPVOID)&_Keys);
 		if (hr != S_OK)
@@ -257,9 +258,10 @@ void Game::KeyboardHandling(){
 			int KeyCode = _KeyEvents[i].dwOfs;
 			int KeyState = _KeyEvents[i].dwData;
 			if ((KeyState & 0x80) > 0) // one key is pressed
-				OnKeyDown(KeyCode);
+				KeyPress(KeyCode);
 			else
 				// Key Up event
+				KeyRelease(KeyCode);
 				;
 
 		}
@@ -267,7 +269,9 @@ void Game::KeyboardHandling(){
 }
 
 
-void Game::OnKeyDown(int KeyCode){
+void Game::KeyPress(int KeyCode){
+};
+void Game::KeyRelease(int KeyCode){
 };
 
 // this is the main message handler for the program

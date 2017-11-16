@@ -11,7 +11,9 @@ SceneMenu::SceneMenu() :Scene(Scene_Menu){
 }
 
 void SceneMenu::_openChoice(){
-	MessageBox(G_hWnd, "Da Chon", "ThongBao", MB_OK);
+
+	/*MessageBox(G_hWnd, "Da Chon", "ThongBao", MB_OK);*/
+	_sceneState = Scene_Game;
 }
 void SceneMenu::RenderFrame( int t)
 {
@@ -56,7 +58,7 @@ void SceneMenu::LoadResources()
 	Sound::GetInst()->PlayBGSound(EBGSound::EMenuSound);*/
 }
 
-void SceneMenu::OnKeyDown(int KeyCode){
+void SceneMenu::KeyPress(int KeyCode){
 	switch (KeyCode)
 	{
 	case DIK_UP:

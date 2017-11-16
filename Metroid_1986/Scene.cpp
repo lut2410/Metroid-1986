@@ -22,10 +22,12 @@ void Scene::LoadResources()
 {
 }
 
-void Scene::OnKeyDown(int KeyCode)
+void Scene::KeyPress(int KeyCode)
 {
 }
-
+void Scene::KeyRelease(int KeyCode)
+{
+}
 Scene::~Scene(void)
 {
 }

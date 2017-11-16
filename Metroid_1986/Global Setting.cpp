@@ -24,3 +24,4 @@ D3DFORMAT				G_backBufferFormat = D3DFMT_X8R8G8B8;
 int _screenWidth;
 int _screenHeight;
 int _depth;
+bool _keyboardWorking = true;

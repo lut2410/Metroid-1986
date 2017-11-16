@@ -8,7 +8,7 @@
 class  Game
 {
 protected:
-			
+	
 	int _mode;				// Screen mode
 	int _frameRate;
 	bool _isFullScreen;		// Is running in fullscreen mode?
@@ -31,14 +31,14 @@ protected:
 	virtual void RenderFrame(int Delta);
 	virtual void LoadResources();
 	void KeyboardHandling(); //process base Keyboard event
-	virtual void OnKeyDown(int KeyCode);
+	virtual void KeyPress(int KeyCode);
+	virtual void KeyRelease(int KeyCode);
 public:
 	Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
 	Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
 	~Game();
 
 	int frameRate;			// Desired frame rate of game
-
 	// Initialize the game with set parameters
 	void Init();
 	// Run game

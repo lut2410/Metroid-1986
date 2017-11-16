@@ -33,16 +33,15 @@ extern LPDIRECT3DDEVICE9		G_d3ddv;    // the pointer to the device class
 extern LPDIRECT3DSURFACE9		G_backBuffer;
 extern D3DFORMAT				G_backBufferFormat;
 
-//extern int _mode;				// Screen mode
-//extern int _frameRate;
-//extern bool _isFullScreen;		// Is running in fullscreen mode?
-//extern bool _backgroundSound;
-//extern bool _effectSound;
-
 extern int _screenWidth;
 extern int _screenHeight;
 extern int _depth;
+extern bool _keyboardWorking;	//allow keyboard? used for intro in each statge
 
-
+//ID of Game Object
+enum ObjectID{
+	None_ID,
+	Player_ID
+};
 
 #endif _GLOBAL_SETTING_H
