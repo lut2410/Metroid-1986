@@ -10,8 +10,7 @@ protected:
 	ObjectID _objectID;
 	Sprite* _sprite;
 	//Position of Object
-	int _posX;
-	int _posY;
+
 	//Velocity of Object
 	float _velX;
 	float _velY;
@@ -19,6 +18,8 @@ protected:
 	//Other Parameters
 	void CreateSprite();
 public:
+	int _posX;
+	int _posY;
 	GameObject();
 	~GameObject();
 	GameObject(ObjectID objectID, int posX, int posY, float velX, float velY);

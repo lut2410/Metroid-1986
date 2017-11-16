@@ -2,13 +2,13 @@
 #define PLAYER_H_
 
 #include "GameObject.h"
-
+#include "Camera.h"
 
 #define SPEED_X 0.2f
 #define SPEED_Y 0.4f
 #define MAX_HEIGHT_JUMP 70.0f
-#define MAX_VEL_JUMP -0.5f
-#define ACCELERATION 0.0015f
+#define MAX_VEL_JUMP 0.5f
+#define ACCELERATION -0.0015f
 enum FootAction{
 	StandOrRun,
 	Jump,
@@ -30,6 +30,7 @@ enum DirectionOfMotion{
 //};
 
 class Player :public GameObject {
+	//friend class Camera;
 	float _acc;//acceleration of jump
 	//key support
 	bool _upKey;
@@ -61,8 +62,11 @@ public:
 	Player();
 	Player(int x, int y);
 	~Player();
+	DirectionOfMotion getDirectionOfMotion();
+
 	void Update(int time);	//update frame of sprite and position of sprite
 	void Draw();
+	void Draw(Camera* camera);
 
 	//Action
 	void IdentifyDirectionOfMotion_KeyPress(int KeyCode);//identify direction and  base on key pressed

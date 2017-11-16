@@ -1,5 +1,6 @@
 #include "SceneGame.h"
 SceneGame::SceneGame():Scene(Scene_Game){
+	_camera= new Camera();
 	_currentLevel = 1;
 }
 SceneGame::~SceneGame(){}
@@ -25,7 +26,9 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	_player = new Player(300, 300);
+	_camera->SetSizeMap(10, 1000);
+	_camera->_viewport.y = 600;
+	_player = new Player(600, 300);
 
 	//other object
 
@@ -52,9 +55,10 @@ void SceneGame::RenderFrame(int time){
 	//draw maps
 	//draw player
 	//playerTexture->Draw(300, 300);
+	_camera->UpdateCamera(_player->_posX);
 	_player->Update(time);
 	// collision
-	_player->Draw();
+	_player->Draw(_camera);
 	G_SpriteHandler->End();
 }
 

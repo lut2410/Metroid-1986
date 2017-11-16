@@ -81,6 +81,9 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Control\Support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Control\Support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

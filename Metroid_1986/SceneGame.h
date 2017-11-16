@@ -7,9 +7,9 @@
 #include "Game.h"
 
 class SceneGame : public Scene{
-
 	DWORD _stageStartTime;
 	int _currentLevel;
+	Camera* _camera;
 	Player* _player;
 	void LoadObject(); //Load all object of current level
 public :

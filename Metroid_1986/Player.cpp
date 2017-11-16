@@ -27,6 +27,9 @@ Player::Player(int x, int y):GameObject(Player_ID,x,y,0,0) {
 
 Player::~Player(){
 }
+DirectionOfMotion Player::getDirectionOfMotion(){
+	return _directionOfMotion;
+}
 void Player::Update(int deltaTime){
 
 	//Update posX base velX
@@ -47,12 +50,10 @@ void Player::Update(int deltaTime){
 			this->_sprite = _run_Spr;
 			break;
 		case FootAction::Jump:
-			//posY
 			_velY += ACCELERATION*deltaTime;
 			this->_sprite = _jump_Spr;
 			break;
 		case FootAction::RollingJump:
-			//posY
 			_velY += ACCELERATION*deltaTime;
 			this->_sprite = _rollingJump_Spr;
 			break;
@@ -93,7 +94,7 @@ void Player::Update(int deltaTime){
 	//
 	//
 	//
-	if (_posY > 300)
+	if (_posY < 300)
 	{
 		_posY = 300;
 		_velY = 0;
@@ -140,6 +141,23 @@ void Player::Draw(){
 		_sprite->DrawFlipHorizontal(_posX, _posY);
 		break;
 	}
+}
+void Player::Draw(Camera* camera)
+{
+	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
+	switch (_directionOfMotion)
+	{
+	case DirectionOfMotion::Neutral://Intro stage
+		_sprite->Draw(center.x, center.y);
+		break;
+	case DirectionOfMotion::Right:
+		_sprite->Draw(center.x, center.y);
+		break;
+	case DirectionOfMotion::Left://drawfip
+		_sprite->DrawFlipHorizontal(center.x, center.y);
+		break;
+	}
+
 }
 
 void Player::IdentifyDirectionOfMotion_KeyPress(int KeyCode){
