@@ -1,22 +1,23 @@
 #include "Sprite.h"
 
 Sprite::Sprite(){
-	_texture = NULL;
+	_texture2 = NULL;
 	_startIndex = 0;
 	_endIndex = 0;
 	_timeAnimation = 0;
 	_currentIndex = 0;
 	_timeLocal = 0;
 }
-Sprite::Sprite(Texture* texture, int timeAnimation):_texture(texture){
+Sprite::Sprite(Texture2* texture, int timeAnimation):_texture2(texture){
 	_startIndex = 0;
-	_endIndex = _texture->_count - 1;
+	_endIndex = _texture2->_frameCount - 1;
 	_currentIndex = 0;
 	_timeAnimation = timeAnimation;
 	_timeLocal = 0;
 }
-Sprite::Sprite(Texture* texture, int timeAnimation, int startIndex, int endIndex):_texture(texture){
-	_texture = texture;
+
+Sprite::Sprite(Texture2* texture2, int timeAnimation, int startIndex, int endIndex) :_texture2(texture2){
+	_texture2 = texture2;
 	_startIndex = startIndex;
 	_endIndex = endIndex;
 	_currentIndex = startIndex;
@@ -24,7 +25,7 @@ Sprite::Sprite(Texture* texture, int timeAnimation, int startIndex, int endIndex
 	_timeLocal = 0;
 }
 Sprite::~Sprite(){
-	_texture->~Texture();
+	_texture2->~Texture2();
 }
 void Sprite::SelectIndex(int index){
 	_currentIndex = index;
@@ -51,21 +52,30 @@ void Sprite::Update(int t){
 }
 
 void Sprite::Draw(int x, int y, int index){
-	if (index >= 0)	//index is passed
 		_currentIndex = index;
-	//else draw normally
-	RECT srect;
 
-	srect.left = (_currentIndex % _texture->_cols)*(_texture->_frameWidth);
-	srect.top = (_currentIndex / _texture->_cols)*(_texture->_frameHeight);
-	srect.right = srect.left + _texture->_frameWidth;
-	srect.bottom = srect.top + _texture->_frameHeight;
+	Box sBox = _texture2->_framePosition->at(_currentIndex);
+	RECT sRect = sBox.ToRect();
 
-	D3DXVECTOR3 position(x - _texture->_frameWidth / 2, y - _texture->_frameHeight / 2, 0);
+	D3DXVECTOR3 position(x - sBox.width / 2, y - sBox.height / 2, 0);
 	D3DXVECTOR3 center(0, 0, 0);
 	G_SpriteHandler->Draw(
-		_texture->_texture,
-		&srect,
+		_texture2->_texture,
+		&sRect,
+		&center,
+		&position,
+		0xFFFFFFFF);
+}
+void Sprite::Draw(int x, int y){
+	//Get location of frame in texture
+	Box sBox = _texture2->_framePosition->at(_currentIndex);
+	RECT sRect = sBox.ToRect();
+
+	D3DXVECTOR3 position(x - sBox.width / 2, y - sBox.height / 2, 0);
+	D3DXVECTOR3 center(0, 0, 0);
+	G_SpriteHandler->Draw(
+		_texture2->_texture,
+		&sRect,
 		&center,
 		&position,
 		0xFFFFFFFF);
@@ -76,14 +86,15 @@ void Sprite::DrawFlipHorizontal(int x, int y)
 	G_SpriteHandler->GetTransform(&oldMt);
 
 	D3DXMATRIX newMt;
-	D3DXVECTOR2 center = D3DXVECTOR2(x + _texture->_frameWidth / 2, y + _texture->_frameHeight / 2);
+	Box sBox = _texture2->_framePosition->at(_currentIndex);
+	D3DXVECTOR2 center = D3DXVECTOR2(x + sBox.width / 2, y + sBox.height / 2 );
 	D3DXVECTOR2 rotate = D3DXVECTOR2(-1, 1);
 
 	D3DXMatrixTransformation2D(&newMt, &center, 0.0f, &rotate, NULL, 0.0f, NULL);
 	D3DXMATRIX finalMt = newMt * oldMt;
 	G_SpriteHandler->SetTransform(&finalMt);
 
-	x += _texture->_frameWidth;
+	x += sBox.width;
 	this->Draw(x, y);
 
 	G_SpriteHandler->SetTransform(&oldMt);

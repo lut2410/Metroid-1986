@@ -2,9 +2,6 @@
 #define TILE_H
 
 #include "Global Setting.h"
-#include <string>
-#include <sstream>
-#include <fstream>
 using namespace std;
 class Tile{
 	int ID;

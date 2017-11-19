@@ -9,7 +9,8 @@ Player::Player(int x, int y):GameObject(Player_ID,x,y,0,0) {
 	_shoot = false;
 
 	//Load sprite
-	Texture* playerTexture = TextureCollection::getInstance()->getTexture(Player_ID);
+	//Texture* playerTexture = TextureCollection::getInstance()->getTexture(Player_ID);
+	Texture2* playerTexture = TextureCollection::getInstance()->getTexture2(Player_ID);
 	_standIntro_Spr = new Sprite(playerTexture, 600, 0, 3);
 	_stand_Spr = new Sprite(playerTexture, 300, 4, 4);
 	_stand_PutHandUp_Spr = new Sprite(playerTexture, 300, 5, 5);

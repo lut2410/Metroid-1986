@@ -2,10 +2,6 @@
 #define QUADTREE_H
 
 #include "Global Setting.h"
-#include <string>
-#include <sstream>
-#include <fstream>
-#include <vector>
 using namespace std;
 class QuadTree{
 	friend class TileGrid;

@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <string>
 Game::Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound){
 	G_hInstance = hInstance;
 	_name =  name;

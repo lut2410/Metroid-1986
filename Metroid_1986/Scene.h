@@ -4,7 +4,7 @@
 #pragma once
 #include "Global Setting.h"
 #include "Font.h"
-#include "Texture.h"
+#include "Texture2.h"
 #define BACKGROUND_FILE "Resources/Image/black.png"
 static enum ESceneState
 {

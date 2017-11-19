@@ -1,7 +1,8 @@
 #include "BackgroundMap.h"
 BackgroundMap::BackgroundMap(){
 	//Load map sprite
-	Texture* mapTexture = new Texture("Resources/Image/map.png", 3, 5);
+	//Texture* mapTexture = new Texture("Resources/Image/map.png", 3, 5);
+	Texture2* mapTexture = new Texture2("Resources/Image/map/sprite.png", "Resources/Image/map/sprite.txt");
 	_mapSpr = new Sprite(mapTexture, -1, 0, 13);
 
 	//Load map matrix txt

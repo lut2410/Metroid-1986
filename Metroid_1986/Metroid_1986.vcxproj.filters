@@ -102,6 +102,9 @@
     <ClCompile Include="AABB.cpp">
       <Filter>Control\Support</Filter>
     </ClCompile>
+    <ClCompile Include="Texture2.cpp">
+      <Filter>Control\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="AABB.h">
       <Filter>Control\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2.h">
+      <Filter>Control\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
 
 class SceneMenu : public Scene{
 protected:
-	Texture* _chooseIcon;
+	Texture2* _chooseIcon;
 	DWORD _localTime;
 	Font* _font;
 	char** _menuChoice;
