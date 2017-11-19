@@ -24,18 +24,18 @@ void SceneMenu::RenderFrame( int t)
 		G_backBuffer,		// to 
 		NULL,				// which portion?
 		D3DTEXF_NONE);
-	_font->render(_menuChoice[0], 380, 280, COLOR_MENU);
-	_font->render(_menuChoice[1], 380, 320, COLOR_MENU);
+	_font->render(_menuChoice[0], _screenWidth / 2 - 10 , _screenHeight / 2 - 10 , COLOR_MENU);
+	_font->render(_menuChoice[1], _screenWidth / 2 - 10 , _screenHeight / 2  , COLOR_MENU);
 
 	//Draw Sprite
 	G_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 	switch (_currentChoice)
 	{
 	case 0:
-		_chooseIcon->Draw(350, 280);
+		_chooseIcon->Draw(_screenWidth / 2 - 20, _screenHeight / 2 - 9 );
 		break;
 	case 1:
-		_chooseIcon->Draw(350, 320);
+		_chooseIcon->Draw(_screenWidth / 2 - 20, _screenHeight / 2 + 1 );
 		break;
 	default:
 		break;
@@ -52,7 +52,7 @@ void SceneMenu::LoadResources()
 
 	_chooseIcon = new Texture(CHOOSEICON_FILE);
 
-	_font = new Font(22);
+	_font = new Font(10);
 
 	/*Sound::GetInst()->RemoveAllBGM();
 	Sound::GetInst()->PlayBGSound(EBGSound::EMenuSound);*/

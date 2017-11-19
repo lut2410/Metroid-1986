@@ -29,22 +29,22 @@ Game::~Game(){
 }
 void Game::_SetScreenDimension(){
 	switch (_mode){
-	case GAME_SCREEN_RESOLUTION_640_480_24:
+	case Resolution_640_480_24:
 		_screenWidth = 640;
 		_screenHeight = 480;
 		_depth = 24;
 		break;
-	case GAME_SCREEN_RESOLUTION_800_600_24:
+	case Resolution_800_600_24:
 		_screenWidth = 800;
 		_screenHeight = 600;
 		_depth = 24;
 		break;
-	case GAME_SCREEN_RESOLUTION_1024_768_24:
+	case Resolution_1024_768_24:
 		_screenWidth = 1024;
 		_screenHeight = 768;
 		_depth = 24;
 		break;
-	case GAME_SCREEN_RESOLUTION_256_240_24:
+	case Resolution_256_240_24:
 		_screenWidth = 256;
 		_screenHeight = 240;
 		_depth = 24;
@@ -87,8 +87,8 @@ void Game::_InitWindow(){
 		_name,   // title of the window
 		style,    // window style  --- default: WS_OVERLAPPEDWINDOW
 		CW_USEDEFAULT, CW_USEDEFAULT,    // x & y position of the window
-		_screenWidth,    // width of the window
-		_screenHeight,    // height of the window
+		_screenWidth*2,    // width of the window
+		_screenHeight*2,    // height of the window
 		NULL,    // have no parent window, NULL
 		NULL,    // don't using menus, NULL
 		G_hInstance,    // application handle

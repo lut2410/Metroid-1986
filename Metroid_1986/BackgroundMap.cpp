@@ -17,11 +17,11 @@ BackgroundMap::BackgroundMap(){
 	//pretermit 3 first lines
 	string line;
 	getline(file, line);
+	file >> _matrixLevel;
 	getline(file, line);
 	getline(file, line);
 
-	//create matrix 80x80
-	_matrixLevel = 80;
+	//create matrix
 	_mapMatrix = new int*[_matrixLevel];
 	for (int i = 0; i<_matrixLevel; i++)
 	{
@@ -50,8 +50,8 @@ void BackgroundMap::Draw(Camera* camera){
 			//if value is >0 then draw, else is -1 (black) then don't draw
 			if (_mapMatrix[x][y] >= 0)
 			{
-				D3DXVECTOR2 pos = camera->Transform(x * 16, y * 16);	//because every element has value 16x16 pixel
-				_mapSpr->Draw(pos.x, pos.y, _mapMatrix[x][y]);
+				D3DXVECTOR2 pos = camera->Transform(x * 16+8, y * 16+8);	//because every element has value 16x16 pixel
+				_mapSpr->Draw(pos.x, pos.y, _mapMatrix[x][y]);				//+8 because passed parameter to draw is center of image
 			}
 		}
 	}
