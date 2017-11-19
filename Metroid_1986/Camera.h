@@ -13,7 +13,7 @@ public:
 
 	Camera();
 	void UpdateCamera(int x);								//place position of player on screen base on posX of Player
-	D3DXVECTOR2 Transform(int x, int y);					//transform viewport-coordinates to world-coordinates
+	D3DXVECTOR2 Transform(int x, int y);					//transform world-coordinates to viewport-coordinates
 	void SetSizeMap(int leftBound, int rightBound);			//
 };
 

@@ -34,7 +34,7 @@ void Player::Update(int deltaTime){
 
 	//Update posX base velX
 	_posX += _velX * deltaTime;
-	_posY += _velY*deltaTime;
+	_posY += _velY * deltaTime;
 	if (_putHandUp == false)
 	{
 		switch (_footAction)
@@ -160,7 +160,7 @@ void Player::Draw(Camera* camera)
 
 }
 
-void Player::IdentifyDirectionOfMotion_KeyPress(int KeyCode){
+void Player::SpecifyDirectionOfMotion_KeyPress(int KeyCode){
 	
 
 	if (_velX == 0)	//pressed 0 key -> 1key
@@ -183,7 +183,7 @@ void Player::IdentifyDirectionOfMotion_KeyPress(int KeyCode){
 
 		
 }
-void Player::IdentifyDirectionOfMotion_KeyRelease(int KeyCode){
+void Player::SpecifyDirectionOfMotion_KeyRelease(int KeyCode){
 	if (_directionOfMotion == DirectionOfMotion::Neutral)	//if this line is'n exist=> error logic when: press
 		return;												//key in time intro, then release key after intro
 	if (_velX == 0)	//pressed 2 key -> 1key (2 key is pressing, and release 1 key)
@@ -208,16 +208,16 @@ void Player::IdentifyDirectionOfMotion_KeyRelease(int KeyCode){
 		//	_footAction = FootAction::Stand;//other cases: keep action
 	}
 }
-void Player::IdentifyFootAction_KeyPress(int KeyCode){
+void Player::SpecifyFootAction_KeyPress(int KeyCode){
 
-	//jump, grovel inspect footAction to identify action
+	//jump, grovel inspect footAction to Specify action
 	if (KeyCode == DIK_F)//jump
 	{
 		_jumpKey = true;
 		switch (_footAction){
 		case FootAction::StandOrRun:
 			_velY = MAX_VEL_JUMP;
-			if (_velX==0)
+			if (_velX==0||_putHandUp)				//up+left/right key->normal jump
 			_footAction = FootAction::Jump;			// jump key
 			else
 			_footAction = FootAction::RollingJump;	// left/right key + jump key
@@ -249,7 +249,7 @@ void Player::IdentifyFootAction_KeyPress(int KeyCode){
 		}
 	}
 }
-void Player::IdentifyFootAction_KeyRelease(int KeyCode){
+void Player::SpecifyFootAction_KeyRelease(int KeyCode){
 	if (KeyCode == DIK_F)// release jump key
 	{
 		_jumpKey = false;
@@ -290,7 +290,7 @@ void Player::IdentifyFootAction_KeyRelease(int KeyCode){
 		}
 	}
 }
-void Player::IdentifyHavingPutHandUp_KeyPress(){
+void Player::SpecifyHavingPutHandUp_KeyPress(){
 	_upKey = true;
 	switch (_footAction)
 	{
@@ -310,7 +310,7 @@ void Player::IdentifyHavingPutHandUp_KeyPress(){
 		
 	}
 }
-void Player::IdentifyHavingPutHandUp_KeyRelease(){
+void Player::SpecifyHavingPutHandUp_KeyRelease(){
 	_upKey = false;
 	switch (_footAction)
 	{
@@ -329,7 +329,3 @@ void Player::IdentifyHavingPutHandUp_KeyRelease(){
 		break;
 	}
 }
-//có 2 hướng,
-// 1: cho thêm 1 biến vô player đang giữ trạng thái trên không + dùng hình stand/run
-// 2: không cho nhấn phím down lúc đang trên không
-// 3: làm thêm biến bool _downKey float _jumpKey

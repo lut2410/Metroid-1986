@@ -20,6 +20,10 @@
 
 #define KEYBOARD_BUFFER_SIZE	1024
 
+#define FILEPATH_OBJECTTILE "Resources\\Image\\Map\\objects.txt"
+#define FILEPATH_MAPMATRIX "Resources\\Image\\Map\\matrix.txt"
+#define FILEPATH_QUADTREE "Resources\\Image\\Map\\quadtree.txt"
+
 extern HINSTANCE				G_hInstance;	// Handle of the game instance
 extern HWND						G_hWnd;				// Handle of the Game Window
 //extern LPCSTR					_name;			// Name of game will be used as Window Class Name
@@ -38,6 +42,9 @@ extern int _screenWidth;
 extern int _screenHeight;
 extern int _depth;
 extern bool _keyboardWorking;	//allow keyboard? used for intro in each statge
+
+//file path
+
 
 //ID of Game Object
 enum ObjectID{

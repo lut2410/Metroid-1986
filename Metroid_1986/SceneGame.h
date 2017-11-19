@@ -6,11 +6,13 @@
 #include "Player.h"
 #include "Game.h"
 #include "BackgroundMap.h"
+#include "TileGrid.h"
 
 class SceneGame : public Scene{
 	DWORD _stageStartTime;
 	int _currentLevel;
 	BackgroundMap* _backgroundMap;
+	TileGrid* _tileGrid;
 	Camera* _camera;
 	Player* _player;
 	void LoadObject(); //Load all object of current level

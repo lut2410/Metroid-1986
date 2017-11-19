@@ -5,10 +5,10 @@ BackgroundMap::BackgroundMap(){
 	_mapSpr = new Sprite(mapTexture, -1, 0, 13);
 
 	//Load map matrix txt
-	string filePath = "Resources\\Image\\Map\\matrix.txt";
+	string filePath = FILEPATH_MAPMATRIX;
 	ifstream file(filePath);
 	if (!file) {
-		MessageBox(G_hWnd,"Cannot open file!","Error",MB_OK);
+		MessageBox(G_hWnd, strcat("Cannot open file:", filePath.c_str()), "Error", MB_OK);
 		return;
 	}
 
@@ -29,7 +29,7 @@ BackgroundMap::BackgroundMap(){
 	}
 
 	// import to matrix use world-coordinates type
-	for (int y = _matrixLevel; y >= 0 ; y--) {
+	for (int y = _matrixLevel -1 ; y >= 0; y--) {
 		for (int x = 0; x < _matrixLevel; x++) {
 			file >> _mapMatrix[x][y];
 		}
@@ -50,7 +50,7 @@ void BackgroundMap::Draw(Camera* camera){
 			//if value is >0 then draw, else is -1 (black) then don't draw
 			if (_mapMatrix[x][y] >= 0)
 			{
-				D3DXVECTOR2 pos = camera->Transform(x * 16+8, y * 16-8);	//because every element has value 16x16 pixel
+				D3DXVECTOR2 pos = camera->Transform(x * 16, y * 16);	//because every element has value 16x16 pixel
 				_mapSpr->Draw(pos.x, pos.y, _mapMatrix[x][y]);
 			}
 		}

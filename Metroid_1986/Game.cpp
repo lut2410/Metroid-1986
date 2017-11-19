@@ -212,7 +212,6 @@ void Game::Run(){
 		// TO-DO: need to improve in later version
 		if (KEY_DOWN(VK_ESCAPE)) PostMessage(G_hWnd, WM_QUIT, 0, 0);
 	}
-
 }
 void Game::_RenderFrame(int deltaTime){
 	if (G_d3ddv->BeginScene()) {
@@ -231,7 +230,6 @@ void Game::RenderFrame(int deltaTime) //int?DWORD
 void Game::LoadResources(){
 
 }
-
 
 void Game::KeyboardHandling(){
 	{

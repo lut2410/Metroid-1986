@@ -1,5 +1,6 @@
 d:\lt\game\metroid-1986\metroid_1986\debug\vc120.pdb
 d:\lt\game\metroid-1986\metroid_1986\debug\vc120.idb
+d:\lt\game\metroid-1986\metroid_1986\debug\aabb.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\backgroundmap.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\camera.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\font.obj
@@ -7,6 +8,7 @@ d:\lt\game\metroid-1986\metroid_1986\debug\game.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\global setting.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\gameobject.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\player.obj
+d:\lt\game\metroid-1986\metroid_1986\debug\quadtree.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\scene.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\sceneend.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\scenegame.obj
@@ -15,6 +17,8 @@ d:\lt\game\metroid-1986\metroid_1986\debug\scenemenu.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\sprite.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\texture.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\texturecollection.obj
+d:\lt\game\metroid-1986\metroid_1986\debug\tile.obj
+d:\lt\game\metroid-1986\metroid_1986\debug\tilegrid.obj
 d:\lt\game\metroid-1986\metroid_1986\debug\winmain.obj
 d:\lt\game\metroid-1986\debug\metroid_1986.ilk
 d:\lt\game\metroid-1986\debug\metroid_1986.exe

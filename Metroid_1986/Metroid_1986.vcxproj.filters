@@ -90,6 +90,18 @@
     <ClCompile Include="BackgroundMap.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TileGrid.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Control\Support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -136,6 +148,18 @@
     </ClInclude>
     <ClInclude Include="BackgroundMap.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TileGrid.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Control\Support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,6 +15,7 @@ void SceneGame::LoadResources() {
 
 	//Load maps
 	_backgroundMap = new BackgroundMap();
+	_tileGrid = new TileGrid();
 	//create player + other object
 	LoadObject();
 	//playerTexture = new Texture("Resources/Image/playerdemo.png", 4, 1);
@@ -26,9 +27,14 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
+	_player = new Player(600, 16);
+
 	_camera->SetSizeMap(0, 1280);
+	//// player in begin is centered on screen
+	if (_player->getDirectionOfMotion()==DirectionOfMotion::Neutral)//begin, player has direction = neutral
+		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
 	_camera->_viewport.y = 240;
-	_player = new Player(640, 16);
+
 
 	//other object
 
@@ -55,6 +61,9 @@ void SceneGame::RenderFrame(int time){
 
 	//draw maps
 	_backgroundMap->Draw(_camera);
+	//draw object
+	_tileGrid->GetCurrentTileIDs(_camera->_viewport.x, _camera->_viewport.y);
+
 	//draw player
 	_player->Update(time);
 	// collision
@@ -67,19 +76,19 @@ void SceneGame::KeyPress(int KeyCode){
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
-		_player->IdentifyDirectionOfMotion_KeyPress(KeyCode);
+		_player->SpecifyDirectionOfMotion_KeyPress(KeyCode);
 		break;
 	case DIK_LEFT:
-		_player->IdentifyDirectionOfMotion_KeyPress(KeyCode);
+		_player->SpecifyDirectionOfMotion_KeyPress(KeyCode);
 		break;
 	case DIK_UP:
-		_player->IdentifyHavingPutHandUp_KeyPress();
+		_player->SpecifyHavingPutHandUp_KeyPress();
 		break;
 	case DIK_DOWN:
-		_player->IdentifyFootAction_KeyPress(KeyCode);
+		_player->SpecifyFootAction_KeyPress(KeyCode);
 		break;
 	case DIK_F://jump
-		_player->IdentifyFootAction_KeyPress(KeyCode);
+		_player->SpecifyFootAction_KeyPress(KeyCode);
 		break;
 
 
@@ -91,19 +100,19 @@ void SceneGame::KeyRelease(int KeyCode){
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
-		_player->IdentifyDirectionOfMotion_KeyRelease(KeyCode);
+		_player->SpecifyDirectionOfMotion_KeyRelease(KeyCode);
 		break;
 	case DIK_LEFT:
-		_player->IdentifyDirectionOfMotion_KeyRelease(KeyCode);
+		_player->SpecifyDirectionOfMotion_KeyRelease(KeyCode);
 		break;
 	case DIK_UP:
-		_player->IdentifyHavingPutHandUp_KeyRelease();
+		_player->SpecifyHavingPutHandUp_KeyRelease();
 		break;
 	case DIK_DOWN:
-		_player->IdentifyFootAction_KeyRelease(KeyCode);
+		_player->SpecifyFootAction_KeyRelease(KeyCode);
 		break;
 	case DIK_F://jump
-		_player->IdentifyFootAction_KeyRelease(KeyCode);
+		_player->SpecifyFootAction_KeyRelease(KeyCode);
 		break;
 	}
 }

@@ -69,12 +69,12 @@ public:
 	void Draw(Camera* camera);
 
 	//Action
-	void IdentifyDirectionOfMotion_KeyPress(int KeyCode);//identify direction and  base on key pressed
-	void IdentifyDirectionOfMotion_KeyRelease(int KeyCode);//identify direction and  base on key released
-	void IdentifyFootAction_KeyPress(int KeyCode);
-	void IdentifyFootAction_KeyRelease(int KeyCode);
-	void IdentifyHavingPutHandUp_KeyPress();
-	void IdentifyHavingPutHandUp_KeyRelease();
+	void SpecifyDirectionOfMotion_KeyPress(int KeyCode);//Specify direction and  base on key pressed
+	void SpecifyDirectionOfMotion_KeyRelease(int KeyCode);//Specify direction and  base on key released
+	void SpecifyFootAction_KeyPress(int KeyCode);
+	void SpecifyFootAction_KeyRelease(int KeyCode);
+	void SpecifyHavingPutHandUp_KeyPress();
+	void SpecifyHavingPutHandUp_KeyRelease();
 };
 #endif
 
