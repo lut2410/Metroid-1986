@@ -70,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BackgroundMap.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -93,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BackgroundMap.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Font.h" />

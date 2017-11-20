@@ -83,10 +83,10 @@ void Game::_InitWindow(){
 
 	// create the window and use the result as the handle
 	G_hWnd = CreateWindowEx(NULL, _name,    // name of the window class
-		_name,   // title of the window
-		style,    // window style  --- default: WS_OVERLAPPEDWINDOW
+		_name,		// title of the window
+		style,		// window style  --- default: WS_OVERLAPPEDWINDOW
 		CW_USEDEFAULT, CW_USEDEFAULT,    // x & y position of the window
-		_screenWidth*2,    // width of the window
+		_screenWidth*2,		// width of the window
 		_screenHeight*2,    // height of the window
 		NULL,    // have no parent window, NULL
 		NULL,    // don't using menus, NULL

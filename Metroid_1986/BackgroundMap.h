@@ -10,7 +10,7 @@ using namespace std;
 class BackgroundMap{
 	int _matrixLevel;				//matrix level
 	int** _mapMatrix;				//matrix
-	Sprite* _mapSpr;
+	Texture2* _mapTexture;
 public:
 	BackgroundMap();
 	~BackgroundMap();

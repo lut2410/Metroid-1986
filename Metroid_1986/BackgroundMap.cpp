@@ -2,8 +2,8 @@
 BackgroundMap::BackgroundMap(){
 	//Load map sprite
 	//Texture* mapTexture = new Texture("Resources/Image/map.png", 3, 5);
-	Texture2* mapTexture = new Texture2("Resources/Image/map/sprite.png", "Resources/Image/map/sprite.txt");
-	_mapSpr = new Sprite(mapTexture, -1, 0, 13);
+	_mapTexture = new Texture2("Resources/Image/map/sprite.png", "Resources/Image/map/sprite.txt");
+
 
 	//Load map matrix txt
 	string filePath = FILEPATH_MAPMATRIX;
@@ -52,7 +52,7 @@ void BackgroundMap::Draw(Camera* camera){
 			if (_mapMatrix[x][y] >= 0)
 			{
 				D3DXVECTOR2 pos = camera->Transform(x * 16+8, y * 16+8);	//because every element has value 16x16 pixel
-				_mapSpr->Draw(pos.x, pos.y, _mapMatrix[x][y]);				//+8 because passed parameter to draw is center of image
+				_mapTexture->Draw(pos.x, pos.y, _mapMatrix[x][y]);				//+8 because passed parameter to draw is center of image
 			}
 		}
 	}

@@ -2,6 +2,7 @@
 Texture2::Texture2(const Texture2 &texture){
 	_size = texture._size;
 	_texture = texture._texture;
+	_animationList = texture._animationList;
 }
 
 Texture2::Texture2(char* textureFilePath, char* textFilePath){
@@ -65,12 +66,13 @@ void Texture2::_ImportFromTextFile(char* filePath)
 	string line;
 	getline(file, line);
 	int type;		// there are 2 type: each frame are as same as, and otherwise
+	int frameCount;	//amout of frame in texture
 	file >> type;
-	if (type)	//all frame size are equal
+	if (type)	//all frame size are equal : use for tile map
 	{
 		getline(file, line);
 		getline(file, line);
-		file >> _frameCount;
+		file >> frameCount;
 		getline(file, line);
 		getline(file, line);
 		int cols;			//amout of frame in a row
@@ -85,7 +87,7 @@ void Texture2::_ImportFromTextFile(char* filePath)
 		int frameHeight = _size.bottom / rows;
 		//import frame detail to list
 		_framePosition = new vector<Box>();
-		for (int i = 0; i < _frameCount; i++){
+		for (int i = 0; i < frameCount; i++){
 			Box box = Box{ (float) (i % cols)*frameWidth,
 								(float) (i / cols)*frameHeight ,
 									(float) frameWidth,
@@ -94,23 +96,17 @@ void Texture2::_ImportFromTextFile(char* filePath)
 			_framePosition->push_back(box);
 		}
 	}
-	else			//each frame are different
+	else			//each frame are different: use for objects like player,enemy,v.v.
 	{
 		getline(file, line);
 		getline(file, line);
-		file >> _frameCount;
+		file >> frameCount;
 		getline(file, line);
 		getline(file, line);
 
 		//import frame detail to list
 		_framePosition = new vector<Box>();
-		for (int i = 0; i < _frameCount; i++){
-			getline(file, line);
-			getline(file, line);
-			getline(file, line);
-			getline(file, line);
-			getline(file, line);
-			getline(file, line);
+		for (int i = 0; i < frameCount; i++){
 			getline(file, line);
 			getline(file, line);
 			getline(file, line);
@@ -118,12 +114,52 @@ void Texture2::_ImportFromTextFile(char* filePath)
 			file >> box.x >> box.y >> box.width >> box.height;
 			_framePosition->push_back(box);
 			getline(file, line);
+		}
+
+		//import animation detail
+		getline(file, line);
+		getline(file, line);
+		getline(file, line);
+		_animationList = new map<string, vector<int>>();
+		string animationName;				//name
+		//int index[3];					//index: from, to of texture
+
+		while (!file.eof()){
+			//getline(file, line);			//animation name
+			file >> animationName;
+			_animationNames.push_back(animationName);
 			getline(file, line);
+			getline(file, line);		//2 parameter type int: from-to index
+			istringstream istr_line(line);
+			//istr_line >> index[0] >> index[1] >> index[2];
+			vector<int> value;
+			int v;
+			istr_line >> v;
+			value.push_back(v);
+			istr_line >> v;
+			value.push_back(v);
+			istr_line >> v;
+			value.push_back(v);
+			//_animationList->insert(pair<string, int(*)[3]>(animationName,&index));
+			_animationList->insert(pair<string, vector<int>>(animationName, value));
 		}
 	}
-	
 }
+
 void Texture2::Draw(int x, int y){
 	D3DXVECTOR3 position((float)x, (float)y, 0);
 	G_SpriteHandler->Draw(_texture, &_size, NULL, &position, 0xFFFFFFFF);
+}
+void Texture2::Draw(int x, int y, int index){
+	Box sBox = _framePosition->at(index);
+	RECT sRect = sBox.ToRect();
+	
+	D3DXVECTOR3 position(x - sBox.width / 2, y - sBox.height / 2, 0);
+	D3DXVECTOR3 center(0, 0, 0);
+	G_SpriteHandler->Draw(
+		_texture,
+		&sRect,
+		&center,
+		&position,
+		0xFFFFFFFF);
 }
