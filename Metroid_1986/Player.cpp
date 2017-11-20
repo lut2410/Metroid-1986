@@ -8,21 +8,18 @@ Player::Player(int x, int y):GameObject(Player_ID,x,y,0,0) {
 	_putHandUp = false;
 	_shoot = false;
 
-	//Load sprite
-	Texture* playerTexture = TextureCollection::getInstance()->getTexture(Player_ID);
-	_standIntro_Spr = new Sprite(playerTexture, 600, 0, 3);
-	_stand_Spr = new Sprite(playerTexture, 300, 4, 4);
-	_stand_PutHandUp_Spr = new Sprite(playerTexture, 300, 5, 5);
-	_run_Spr = new Sprite(playerTexture, 30, 6, 8);
-	_jump_Spr = new Sprite(playerTexture, 300, 9, 9);
-	_rollingJump_Spr = new Sprite(playerTexture, 0, 9, 13);
-	_grovel_Spr = new Sprite(playerTexture, 30, 14, 17);
-	_stand_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 300, 18, 18);
-	_run_Shoot_Spr = new Sprite(playerTexture, 30, 19, 22);
-	_stand_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 0, 23, 23);
-	_run_PutHandUp_Spr = new Sprite(playerTexture, 30, 24, 26);
-	_jump_PutHandUp_Spr = new Sprite(playerTexture, 300, 27, 27);
-	_jump_PutHandUp_Shoot_Spr = new Sprite(playerTexture, 300, 28, 28);
+	//Load all action-animation
+	Texture2* playerTexture = TextureCollection::getInstance()->getTexture2(Player_ID);
+	//resize = list name
+	_actionAnimation.resize(playerTexture->_animationNames.size());
+	for (int i = 0; i < playerTexture->_animationNames.size() ; i++){
+		_actionAnimation[i] = new Animation(playerTexture, playerTexture->_animationNames.at(i));
+		/*
+		@example 
+		_actionAnimation[ActionAnimation::StandIntro] 
+			= new Animation(playerTexture, playerTexture->_animationNames.at(ActionAnimation::StandIntro_Ani));
+		*/		
+	}
 }
 
 Player::~Player(){
@@ -42,23 +39,23 @@ void Player::Update(int deltaTime){
 		case FootAction::StandOrRun:
 			if (_velX == 0){											//stand
 				if (_directionOfMotion == DirectionOfMotion::Neutral)//intro standing
-					this->_sprite = _standIntro_Spr;
+					this->_currentAnimation = _actionAnimation[ActionAnimation::StandIntro_Ani];
 				else//nomal stand
-					this->_sprite = _stand_Spr;
+					this->_currentAnimation = _actionAnimation[ActionAnimation::Stand_Ani];
 			}
 			else														//run
-			this->_sprite = _run_Spr;
+				this->_currentAnimation = _actionAnimation[ActionAnimation::Run_Ani];
 			break;
 		case FootAction::Jump:
 			_velY += ACCELERATION*deltaTime;
-			this->_sprite = _jump_Spr;
+			this->_currentAnimation = _actionAnimation[ActionAnimation::Jump_Ani];
 			break;
 		case FootAction::RollingJump:
 			_velY += ACCELERATION*deltaTime;
-			this->_sprite = _rollingJump_Spr;
+			this->_currentAnimation = _actionAnimation[ActionAnimation::RollingJump_Ani];
 			break;
 		case FootAction::Grovel:
-			this->_sprite = _grovel_Spr;
+			this->_currentAnimation = _actionAnimation[ActionAnimation::Grovel_Ani];
 			break;
 		}
 	}
@@ -68,13 +65,13 @@ void Player::Update(int deltaTime){
 		{
 		case FootAction::StandOrRun:		//include nomal standing + intro standing
 			if (_velX==0)
-				this->_sprite = _stand_PutHandUp_Spr;
+				this->_currentAnimation = _actionAnimation[ActionAnimation::Stand_PutHandUp_Ani];
 			else
-			this->_sprite = _run_PutHandUp_Spr;
+				this->_currentAnimation = _actionAnimation[ActionAnimation::Run_PutHandUp_Ani];
 			break;
 		case FootAction::Jump:
 			_velY += ACCELERATION*deltaTime;
-			this->_sprite = _jump_PutHandUp_Spr;
+			this->_currentAnimation = _actionAnimation[ActionAnimation::Jump_PutHandUp_Ani];
 			break;
 		case FootAction::RollingJump:		//don't exist
 			break;
@@ -103,42 +100,42 @@ void Player::Update(int deltaTime){
 		{
 			if (_velX == 0)
 			{
-				this->_sprite = _stand_Spr;
+				this->_currentAnimation = _actionAnimation[ActionAnimation::Stand_Ani];
 			}
 			else
 			{
-				this->_sprite = _run_Spr;
+				this->_currentAnimation = _actionAnimation[ActionAnimation::Run_Ani];
 			}
 		}
 		else
 		{
 			if (_velX == 0)
 			{
-				this->_sprite = _stand_PutHandUp_Spr;
+				this->_currentAnimation = _actionAnimation[ActionAnimation::Stand_PutHandUp_Ani];
 			}
 			else
 			{
-				this->_sprite = _run_PutHandUp_Spr;
+				this->_currentAnimation = _actionAnimation[ActionAnimation::Run_PutHandUp_Ani];
 			}
 		}
 	}
 
 	//update sprite to next frame
-	if (_sprite == _standIntro_Spr &(_sprite->getCurrentIndex() == 3))	//but if current frame is ending frame of Intro 
+	if (_currentAnimation == _actionAnimation[ActionAnimation::StandIntro_Ani] & (_currentAnimation->getCurrentIndex() == 3))	//but if current frame is ending frame of Intro 
 		return;															//then keep drawing end frame	
-	_sprite->Update(deltaTime);
+	_currentAnimation->Update(deltaTime);
 }
 void Player::Draw(){
 	switch (_directionOfMotion)
 	{
 	case DirectionOfMotion::Neutral://Intro stage
-		_sprite->Draw(_posX, _posY);
+		_currentAnimation->Draw(_posX, _posY);
 		break;
 	case DirectionOfMotion::Right:
-		_sprite->Draw(_posX, _posY);
+		_currentAnimation->Draw(_posX, _posY);
 		break;
 	case DirectionOfMotion::Left://drawfip
-		_sprite->DrawFlipHorizontal(_posX, _posY);
+		_currentAnimation->DrawFlipHorizontal(_posX, _posY);
 		break;
 	}
 }
@@ -148,13 +145,13 @@ void Player::Draw(Camera* camera)
 	switch (_directionOfMotion)
 	{
 	case DirectionOfMotion::Neutral://Intro stage
-		_sprite->Draw(center.x, center.y);
+		_currentAnimation->Draw(center.x, center.y);
 		break;
 	case DirectionOfMotion::Right:
-		_sprite->Draw(center.x, center.y);
+		_currentAnimation->Draw(center.x, center.y);
 		break;
 	case DirectionOfMotion::Left://drawfip
-		_sprite->DrawFlipHorizontal(center.x, center.y);
+		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
 		break;
 	}
 

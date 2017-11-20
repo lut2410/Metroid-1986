@@ -2,32 +2,21 @@
 #define SPRITE_H
 
 #pragma once
-#include "Texture.h"
-
+#include "Texture2.h"
 class Sprite {
 
 protected:
-	Texture* _texture;
-
-	int _startIndex;		
-	int _endIndex;		
-	int _currentIndex;		
-	int _timeAnimation;	
-	int _timeLocal;	
+	//Texture* _texture;
+	Texture2* _texture2;
+	int _index;
 	
 public:
 	Sprite();
-	Sprite(Texture* texture, int timeAnimation);
-	Sprite(Texture* texture, int timeAnimation, int startIndex, int endIndex);
-	void SelectIndex(int);
-	int getCurrentIndex();
-	//next sprite in list
-	void Next();
-	void Update(int t);
-	//Render current sprite in location(x,y) at the target surface, otherwise draw one of texture index - if index is actually passed
-	void Draw(int x, int y, int index = -1);				
-	//void DrawOneIndex(int x, int y, int index = -1);		//Draw one of texture indexs
-	void DrawFlipHorizontal(int x, int y);
+	Sprite(Texture2* texture, int index);
+	
+	//Render current sprite in location(x,y) at the target surface
+	void Draw(int x, int y);						//Draw sprite
+	void DrawFlipHorizontal(int x, int y);			//Draw sprite flip horizontal
 	~Sprite();
 };
 #endif SPRITE_H

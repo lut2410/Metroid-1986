@@ -50,7 +50,7 @@ void SceneMenu::LoadResources()
 
 	_background = CreateSurfaceFromFile(G_d3ddv, BACKGROUND_FILE);
 
-	_chooseIcon = new Texture(CHOOSEICON_FILE);
+	_chooseIcon = new Texture2(CHOOSEICON_FILE);
 
 	_font = new Font(10);
 

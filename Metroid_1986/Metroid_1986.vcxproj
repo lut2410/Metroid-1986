@@ -70,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BackgroundMap.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -86,12 +87,14 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureCollection.cpp" />
+    <ClCompile Include="Texture2.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileGrid.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BackgroundMap.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Font.h" />
@@ -108,6 +111,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureCollection.h" />
+    <ClInclude Include="Texture2.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileGrid.h" />
   </ItemGroup>

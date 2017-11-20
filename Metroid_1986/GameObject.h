@@ -2,13 +2,12 @@
 #define GAME_OBJECT_H_
 
 #pragma once
-#include "Sprite.h"
 #include "TextureCollection.h"
-
+#include"Animation.h"
 class GameObject{
 protected:
 	ObjectID _objectID;
-	Sprite* _sprite;
+	Animation* _currentAnimation;
 	//Position of Object
 
 	//Velocity of Object

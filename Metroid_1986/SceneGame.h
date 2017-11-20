@@ -7,7 +7,7 @@
 #include "Game.h"
 #include "BackgroundMap.h"
 #include "TileGrid.h"
-
+#include "Texture2.h"
 class SceneGame : public Scene{
 	DWORD _stageStartTime;
 	int _currentLevel;

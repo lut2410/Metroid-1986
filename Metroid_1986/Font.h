@@ -1,9 +1,7 @@
 #ifndef FONT_H
 #define FONT_H
 
-#include <d3dx9.h>
 #include <iostream>
-#include <string>
 #include "Global Setting.h"
 using namespace std;
 

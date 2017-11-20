@@ -7,7 +7,10 @@
 #include <d3dx9.h>
 #include <dinput.h>
 #include <time.h>
-
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <vector>
 
 enum ScreenResolution{
 Resolution_640_480_24,

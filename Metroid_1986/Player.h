@@ -20,14 +20,21 @@ enum DirectionOfMotion{
 	Left,
 	Right
 };
-//enum PutHandUp{
-//	No,
-//	Yes,
-//};
-//enum Shoot{
-//	No,
-//	Yes
-//};
+enum ActionAnimation{
+	StandIntro_Ani,
+	Stand_Ani,
+	Stand_PutHandUp_Ani,
+	Run_Ani,
+	Jump_Ani,
+	RollingJump_Ani,
+	Grovel_Ani,
+	Stand_Shoot_Ani,
+	Run_Shoot_Ani,
+	Stand_PutHandUp_Shoot_Ani,
+	Run_PutHandUp_Ani,
+	Jump_PutHandUp_Ani,
+	Jump_PutHandUp_Shoot_Ani
+};
 
 class Player :public GameObject {
 	//friend class Camera;
@@ -43,21 +50,25 @@ class Player :public GameObject {
 	bool _putHandUp;//is putting hand up?
 	bool _shoot;//is shooting?
 
-	//Sprites
-	Sprite* _standIntro_Spr;
-	Sprite* _stand_Spr;
-	Sprite* _stand_PutHandUp_Spr;
-	Sprite* _run_Spr;
-	Sprite* _run_PutHandUp_Spr;
-	Sprite* _jump_Spr;
-	Sprite* _jump_PutHandUp_Spr;
-	Sprite* _rollingJump_Spr;
-	Sprite* _grovel_Spr;
-	//shoot sprite, other action don't have shoot sprite because of non-existing, or because shoot sprite don't different nomal sprite	
-	Sprite* _stand_PutHandUp_Shoot_Spr;
-	Sprite* _run_Shoot_Spr;
-	Sprite* _jump_Shoot_Spr;
-	Sprite* _jump_PutHandUp_Shoot_Spr;
+	vector<Animation*> _actionAnimation;
+
+	////Sprites
+
+	//Sprite* _standIntro_Spr;
+	//Sprite* _stand_Spr;
+	//Sprite* _stand_PutHandUp_Spr;
+	//Sprite* _run_Spr;
+	//Sprite* _run_PutHandUp_Spr;
+	//Sprite* _jump_Spr;
+	//Sprite* _jump_PutHandUp_Spr;
+	//Sprite* _rollingJump_Spr;
+	//Sprite* _grovel_Spr;
+	////shoot sprite, other action don't have shoot sprite because of non-existing, or because shoot sprite don't different nomal sprite	
+	//Sprite* _stand_Shoot_Spr;
+	//Sprite* _stand_PutHandUp_Shoot_Spr;
+	//Sprite* _run_Shoot_Spr;
+	//Sprite* _jump_Shoot_Spr;
+	//Sprite* _jump_PutHandUp_Shoot_Spr;
 public:
 	Player();
 	Player(int x, int y);
