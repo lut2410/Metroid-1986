@@ -44,9 +44,9 @@ void SceneGame::RenderFrame(int time){
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
 	if (timeNow - _stageStartTime <= 1000) //4000
-		_keyboardWorking = false;
+		_player->_isStop = true;
 	else
-		_keyboardWorking = true;
+		_player->_isStop = false;
 
 	//draw black background
 	G_d3ddv->StretchRect(
@@ -64,6 +64,7 @@ void SceneGame::RenderFrame(int time){
 	//draw object
 	_tileGrid->GetCurrentTileIDs(_camera->_viewport.x, _camera->_viewport.y);
 
+
 	//draw player
 	_player->Update(time);
 	// collision
@@ -73,46 +74,62 @@ void SceneGame::RenderFrame(int time){
 
 void SceneGame::KeyPress(int KeyCode){
 	
+	//if (_player->_isStop)		//don't allow press or release keys
+	//	return;
+
+
+	ActionKey actionKey;
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
-		_player->SpecifyDirectionOfMotion_KeyPress(KeyCode);
+		actionKey = Right_Key;
 		break;
 	case DIK_LEFT:
-		_player->SpecifyDirectionOfMotion_KeyPress(KeyCode);
+		actionKey = Left_Key;
 		break;
 	case DIK_UP:
-		_player->SpecifyHavingPutHandUp_KeyPress();
+		actionKey = Up_Key;
 		break;
 	case DIK_DOWN:
-		_player->SpecifyFootAction_KeyPress(KeyCode);
+		actionKey = Down_Key;
 		break;
-	case DIK_F://jump
-		_player->SpecifyFootAction_KeyPress(KeyCode);
+	case DIK_F:
+		actionKey = Jump_Key;
 		break;
-
-
-
+	case DIK_D:
+		actionKey = Shoot_Key;
+		break;
+	default:
+		return;
 	}
+	_player->_currentKeys = ActionKey(_player->_currentKeys | actionKey);
 }
 void SceneGame::KeyRelease(int KeyCode){
-
+	ActionKey actionKey;
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
-		_player->SpecifyDirectionOfMotion_KeyRelease(KeyCode);
+		actionKey = Right_Key;
 		break;
 	case DIK_LEFT:
-		_player->SpecifyDirectionOfMotion_KeyRelease(KeyCode);
+		actionKey = Left_Key;
 		break;
 	case DIK_UP:
-		_player->SpecifyHavingPutHandUp_KeyRelease();
+		actionKey = Up_Key;
 		break;
 	case DIK_DOWN:
-		_player->SpecifyFootAction_KeyRelease(KeyCode);
+		actionKey = Down_Key;
 		break;
-	case DIK_F://jump
-		_player->SpecifyFootAction_KeyRelease(KeyCode);
+	case DIK_F:
+		actionKey = Jump_Key;
 		break;
+	case DIK_D:
+		actionKey = Shoot_Key;
+		break;
+	default:
+		return;
 	}
+
+	if (_player->isHasKey(actionKey))	//has actionkey
+	_player->_currentKeys = ActionKey(_player->_currentKeys &~actionKey);	//remove
 }

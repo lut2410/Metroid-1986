@@ -6,7 +6,6 @@
 class Sprite {
 
 protected:
-	//Texture* _texture;
 	Texture2* _texture2;
 	int _index;
 	
@@ -17,6 +16,7 @@ public:
 	//Render current sprite in location(x,y) at the target surface
 	void Draw(int x, int y);						//Draw sprite
 	void DrawFlipHorizontal(int x, int y);			//Draw sprite flip horizontal
+	Box	getSpriteSize();
 	~Sprite();
 };
 #endif SPRITE_H

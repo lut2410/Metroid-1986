@@ -17,7 +17,7 @@ void Sprite::Draw(int x, int y){
 	Box sBox = _texture2->_framePosition->at(_index);
 	RECT sRect = sBox.ToRect();
 
-	D3DXVECTOR3 position(x - sBox.width / 2, y - sBox.height / 2, 0);
+	D3DXVECTOR3 position(x - sBox.width / 2, y - sBox.height/2, 0);
 	D3DXVECTOR3 center(0, 0, 0);
 	G_SpriteHandler->Draw(
 		_texture2->_texture,
@@ -40,8 +40,10 @@ void Sprite::DrawFlipHorizontal(int x, int y)
 	D3DXMATRIX finalMt = newMt * oldMt;
 	G_SpriteHandler->SetTransform(&finalMt);
 
-	x += sBox.width;
-	this->Draw(x, y);
+	this->Draw(x + sBox.width , y);
 
 	G_SpriteHandler->SetTransform(&oldMt);
+}
+Box Sprite::getSpriteSize(){
+	return _texture2->_framePosition->at(_index);
 }
