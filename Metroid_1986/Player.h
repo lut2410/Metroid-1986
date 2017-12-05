@@ -1,11 +1,13 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
+#pragma once
 #include "GameObject.h"
 #include "Camera.h"
-
+#include "AABB.h"
+#include "Collision.h"
 #define SPEED_X 0.16f
-#define SPEED_Y 0.4f
+#define SPEED_Y -0.01f
 #define MAX_HEIGHT_JUMP 70.0f
 #define MAX_VEL_JUMP 0.5f
 #define ACCELERATION -0.0015f
@@ -17,10 +19,11 @@ enum Action{
 	Jump = 1 << 2,
 	RollingJump = 1 << 3,
 	Grovel = 1 << 4,
-	Fall = 1 << 5,
+	PrepareGrounding = 1 << 5,
 	Die = 1 << 6,
 	PutHandUp = 1 << 7,
-	Shoot = 1 << 8,
+	Shoot = 1 << 8
+	
 };
 
 enum DirectionOfMotion{
@@ -57,7 +60,7 @@ enum ActionKey{
 
 class Player :public GameObject {
 	//friend class Camera;
-	float _acc;//acceleration of jump
+	float _gravityAcceleration;//acceleration of jump
 
 	Action _action;
 	DirectionOfMotion _directionOfMotion;//transform of position X : left or right?
@@ -70,6 +73,8 @@ public:
 	//Current Key
 	ActionKey _currentKeys;
 	bool _isStop;		//are both player and game stop? => if yes then don't allow press or release key
+	//bool _blockLeft, _blockRight;
+	Block _block;
 	Player();
 	Player(int x, int y);
 	~Player();
@@ -80,11 +85,13 @@ public:
 	void removeAction(Action action);
 	bool isHasAction(Action action);
 	bool isHasKey(ActionKey);
-	RECT getCollisionRect();
+	RECT getCollisionBound();
+	void handleCollision(map<int, GameObject*> objectList,float dt);
 	void UpdatePosition(int );
-	void Update(int time);	//update frame of sprite and position of sprite
+	void Update1(int time);	//update action and position after press key
+	void Update2(int time);	//update frame of sprite and position of sprite
 	void Draw(Camera* camera);
-
+	//int checkCollision();
 	//Action
 	void SpecifyAction();				//specify action base on keys are press
 	void SpecifyDirectionOfMotion();//Specify direction and  base on key pressed

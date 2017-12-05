@@ -58,7 +58,7 @@ extern bool _keyboardWorking;	//allow keyboard? used for intro in each statge
 
 //ID of Game Object
 enum ObjectID{
-	None_ID,
+	Ground_ID,
 	Player_ID
 };
 

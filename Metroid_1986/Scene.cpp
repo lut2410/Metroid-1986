@@ -10,6 +10,10 @@ ESceneState Scene::getSceneState()
 	return _sceneState;
 }
 
+//TileGrid* Scene::getTileGrid(){
+//	return NULL;	//not used
+//};
+
 void Scene::RenderFrame(int t)
 {
 }

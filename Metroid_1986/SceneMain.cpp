@@ -1,17 +1,31 @@
 #include "SceneMain.h"
-SceneMain::SceneMain(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound) : Game( hInstance, name, mode, frameRate, isFullscreen, backgroundSound, effectSound)
-{
-	_currentScene = new SceneMenu();
-	_currentStateScene = ESceneState::Scene_Menu;
+SceneMain* SceneMain::_instance = NULL;
+SceneMain::SceneMain(){
+		_currentScene = new SceneMenu();
+		_currentStateScene = ESceneState::Scene_Menu;
+};
+//SceneMain::SceneMain(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound) : Game( hInstance, name, mode, frameRate, isFullscreen, backgroundSound, effectSound)
+//{
+//	_currentScene = new SceneMenu();
+//	_currentStateScene = ESceneState::Scene_Menu;
+//
+//}
+//SceneMain::SceneMain(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound) : Game(hInstance, name, mode, frameRate, isFullscreen, backgroundSound, effectSound)
+//{
+//	_currentScene = new SceneMenu();
+//	_currentStateScene = ESceneState::Scene_Menu;
+//
+//}
 
-}
-SceneMain::SceneMain(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound) : Game(hInstance, name, mode, frameRate, isFullscreen, backgroundSound, effectSound)
-{
-	_currentScene = new SceneMenu();
-	_currentStateScene = ESceneState::Scene_Menu;
+SceneMain* SceneMain::getInstance(){
+	if (!_instance)
+		_instance = new SceneMain();
 
-}
-
+	return _instance;
+};
+Scene* SceneMain::getCurrentScene(){
+	return _currentScene;
+};
 void SceneMain::RenderFrame(int t){
 	if (_currentScene->getSceneState() != _currentStateScene)
 	{
@@ -38,16 +52,16 @@ void SceneMain::RenderFrame(int t){
 	_currentScene->RenderFrame(t);
 }
 
-void SceneMain::ProcessInput(int Delta)
-{
-	
-}
 
 void SceneMain::LoadResources()
 {
 	_currentScene->LoadResources();
 }
 
+//TileGrid* SceneMain::getTileGrid(){
+//	return _currentScene->getTileGrid();
+//	
+//};
 void SceneMain::KeyPress(int KeyCode)
 {
 	_currentScene->KeyPress(KeyCode);

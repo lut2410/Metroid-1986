@@ -8,7 +8,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	LPSTR lpCmdLine,
 	int nCmdShow)
 {
-	SceneMain g(hInstance, "Metroid 1986", ScreenResolution::Resolution_256_240_24, 60, false, true, true);
+	Game g(hInstance, "Metroid 1986", ScreenResolution::Resolution_256_240_24, 60, false, true, true);
 	g.Init();
 	g.Run();
 	return 0;

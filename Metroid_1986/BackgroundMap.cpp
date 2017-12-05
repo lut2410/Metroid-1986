@@ -30,7 +30,7 @@ BackgroundMap::BackgroundMap(){
 	}
 
 	// import to matrix use world-coordinates type
-	for (int y = _matrixLevel -1 ; y >= 0; y--) {
+	for (int y = 0; y < _matrixLevel; y++) {
 		for (int x = 0; x < _matrixLevel; x++) {
 			file >> _mapMatrix[x][y];
 		}

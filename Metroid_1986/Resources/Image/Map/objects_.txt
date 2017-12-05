@@ -1,0 +1,7 @@
+Objects Number
+4
+Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
+0		352		1072		16		16		0			Ground
+0		624		1072		16		16		0			Ground
+0		640		1072		16		16		0			Ground
+0		656		1072		16		16		0			Ground

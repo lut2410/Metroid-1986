@@ -3,22 +3,25 @@
 #include "Scene.h"
 #include "SceneMenu.h"
 #include "SceneGame.h"
-class SceneMain : public Game
+class SceneMain
 {
 protected:
-	
+	static SceneMain* _instance;
 	Scene* _currentScene;
 	ESceneState _currentStateScene;
 
 public:
-	SceneMain(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
-	SceneMain(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
+	static SceneMain* getInstance();
+	Scene* getCurrentScene();
+	SceneMain();
+	//SceneMain(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
+	//SceneMain(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
 	~SceneMain();
 	//seems don't need virtual
 	virtual void RenderFrame(int t);
-	virtual void ProcessInput(int Delta);
 	virtual void LoadResources();
 
+	//TileGrid* getTileGrid();
 	virtual void KeyPress(int KeyCode);
 	virtual void KeyRelease(int KeyCode);
 };

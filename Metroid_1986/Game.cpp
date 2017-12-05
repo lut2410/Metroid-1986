@@ -8,6 +8,7 @@ Game::Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFull
 	_isFullScreen = isFullscreen;
 	_backgroundSound = backgroundSound;
 	_effectSound = effectSound;
+	//_scene =  SceneMain::getInstance();
 }
 
 Game::Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound){
@@ -224,10 +225,12 @@ void Game::_RenderFrame(int deltaTime){
 }
 void Game::RenderFrame(int deltaTime) //int?DWORD
 {
-	G_d3ddv->ColorFill(G_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
+	//G_d3ddv->ColorFill(G_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
+	SceneMain::getInstance()->RenderFrame(deltaTime);
+
 }
 void Game::LoadResources(){
-
+	SceneMain::getInstance()->LoadResources();
 }
 
 void Game::KeyboardHandling(){
@@ -259,11 +262,13 @@ void Game::KeyboardHandling(){
 			int KeyCode = _KeyEvents[i].dwOfs;
 			int KeyState = _KeyEvents[i].dwData;
 			if ((KeyState & 0x80) > 0) // one key is pressed
-				KeyPress(KeyCode);
+				//KeyPress(KeyCode);
+				SceneMain::getInstance()->KeyPress(KeyCode);
 			else
 				// Key Up event
-				KeyRelease(KeyCode);
-				;
+				//KeyRelease(KeyCode);
+				SceneMain::getInstance()->KeyRelease(KeyCode);
+				
 
 		}
 	}

@@ -27,13 +27,13 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	_player = new Player(600, 16);
+	_player = new Player(640,1100);
 
 	_camera->SetSizeMap(0, 1280);
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfMotion()==DirectionOfMotion::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
-	_camera->_viewport.y = 240;
+	_camera->_viewport.y = 1280;
 
 
 	//other object
@@ -62,16 +62,26 @@ void SceneGame::RenderFrame(int time){
 	//draw maps
 	_backgroundMap->Draw(_camera);
 	//draw object
-	_tileGrid->GetCurrentTileIDs(_camera->_viewport.x, _camera->_viewport.y);
+	_tileGrid->Update(_camera);
+	
 
 
-	//draw player
-	_player->Update(time);
+	_player->Update1(time);
 	// collision
+	handleCollision(time);
+	//update player base on key and collison
+	_player->Update2(time);
+	//draw player
 	_player->Draw(_camera);
 	G_SpriteHandler->End();
 }
 
+void SceneGame::handleCollision(int dt){
+	_player->handleCollision(_tileGrid->getCurrentObjects(),dt);
+};
+//TileGrid* SceneGame::getTileGrid(){
+//	return _tileGrid;
+//}
 void SceneGame::KeyPress(int KeyCode){
 	
 	//if (_player->_isStop)		//don't allow press or release keys

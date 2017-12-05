@@ -21,7 +21,10 @@ Tile::Tile(string line){
 	istringstream istr_line (line);
 	if (!(istr_line >> ID >> X >> Y >> Width >> Height >> Collision >> CollisionName))
 		MessageBox(G_hWnd,"Error import tile from line","Error",MB_OK);
-	//istr_line >> ID >> X >> Y >> Width >> Height >> Collision>>CollisionName;
+	//edit pos X,Y because (X,Y from File) is left-top conrner
+	//edit to center
+	X += Width / 2;
+	Y += Height / 2;
 }
 Tile::~Tile(){
 }

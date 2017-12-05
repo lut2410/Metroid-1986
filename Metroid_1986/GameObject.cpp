@@ -20,3 +20,12 @@ void GameObject::CreateSprite()
 		break;
 	}
 }
+RECT GameObject::getCollisionBound(){
+	return _currentAnimation->getCurrentSpriteSize().ToRect();//dis
+};
+D3DXVECTOR2 GameObject::getVelocity(){
+	return D3DXVECTOR2(_velX, _velY);
+};
+ObjectID GameObject::getObjectID(){
+	return _objectID;
+}

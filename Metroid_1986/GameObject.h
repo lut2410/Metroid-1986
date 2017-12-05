@@ -3,7 +3,7 @@
 
 #pragma once
 #include "TextureCollection.h"
-#include"Animation.h"
+#include "Animation.h"
 class GameObject{
 protected:
 	ObjectID _objectID;
@@ -22,5 +22,8 @@ public:
 	GameObject();
 	~GameObject();
 	GameObject(ObjectID objectID, int posX, int posY, float velX, float velY);
+	virtual RECT getCollisionBound();
+	D3DXVECTOR2 getVelocity();
+	ObjectID getObjectID();
 };
 #endif

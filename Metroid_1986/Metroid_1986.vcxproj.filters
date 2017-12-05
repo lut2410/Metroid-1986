@@ -66,9 +66,6 @@
     <ClCompile Include="Global Setting.cpp">
       <Filter>Control</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Control\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Control\Graphics</Filter>
     </ClCompile>
@@ -108,6 +105,12 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Control\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Object\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Control\Support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -130,9 +133,6 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Control\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Control\Graphics</Filter>
@@ -172,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Control\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Object\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Control\Support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

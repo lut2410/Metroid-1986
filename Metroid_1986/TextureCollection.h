@@ -2,7 +2,6 @@
 #define TEXTURE_COLLECTION_H
 
 #pragma once
-#include "Texture.h"
 #include "Texture2.h"
 class TextureCollection{
 private:

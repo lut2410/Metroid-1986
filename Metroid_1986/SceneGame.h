@@ -27,8 +27,8 @@ public :
 	~SceneGame();
 	void LoadResources();
 	void RenderFrame(int t);
-
-
+	void handleCollision(int t);
+	//TileGrid* getTileGrid();
 	void KeyPress(int KeyCode);
 	void KeyRelease(int KeyCode);//stop current action
 };

@@ -19,7 +19,7 @@ public:
 	
 	void SetIndex(int);
 	int getCurrentFrameIndex();
-	Box	getSpriteSize();				//width and height of current sprite 
+	Box getCurrentSpriteSize();				//get current sprite size
 	void Next();						//next sprite in list
 	void Update(int t);					//update to next sprite base on time
 	//Render current sprite in location(x,y) at the target surface

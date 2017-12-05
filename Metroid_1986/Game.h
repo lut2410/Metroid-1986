@@ -2,7 +2,7 @@
 #define _GAME_H_
 
 #include "Global Setting.h"
-
+#include "SceneMain.h"
 #define KEYBOARD_BUFFER_SIZE	1024
 #define KEY_DOWN(vk_code) ( (_Keys[vk_code] & 0x80)? 1 : 0 )
 class  Game
@@ -19,7 +19,7 @@ protected:
 	void _SetScreenDimension();
 
 	static LRESULT CALLBACK _WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
+	//SceneMain* _scene;
 	void _InitWindow();
 	void _InitKeyboard();
 	void _InitDirectX();

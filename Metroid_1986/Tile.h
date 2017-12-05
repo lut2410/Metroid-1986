@@ -4,6 +4,7 @@
 #include "Global Setting.h"
 using namespace std;
 class Tile{
+	friend class TileGrid;
 	int ID;
 	int X;
 	int Y;

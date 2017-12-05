@@ -3,8 +3,11 @@ vector<Tile>* TileGrid::_objectTiles = new vector<Tile>();
 QuadTree* TileGrid::_rootQuadTree = NULL;
 QuadTree* _quadTree = new QuadTree();
 TileGrid::TileGrid(){
-	CurrentTileIDs = new vector<int>();
+	CurrentTileNumbers = new vector<int>();
+	//CurrentObjects = new map<int,GameObject*>();
+
 	LoadObjectTileFromFile(FILEPATH_OBJECTTILE);
+
 	LoadQuadtreeFromFile(FILEPATH_QUADTREE);
 }
 TileGrid::~TileGrid(){
@@ -85,12 +88,71 @@ QuadTree* TileGrid::specifyQuatreeChilds(map<int, QuadTree*> quadTrees, int id){
 	return quadTree;
 
 }
-void TileGrid::GetCurrentTileIDs(int x, int y){
-	CurrentTileIDs->clear();
+void TileGrid::UpdateCurrentTileNumbers(int x, int y){
+	CurrentTileNumbers->clear();
 
 	//insert tiles exist on screen to CurrentTile
 	GetTileIDInQuadTree(x, y, _rootQuadTree);
 }
+void TileGrid::UpdateCurrentTileNumbers(Camera* camera){
+	CurrentTileNumbers->clear();
+
+	//insert tiles exist on screen to CurrentTile
+	GetTileIDInQuadTree(camera->_viewport.x, camera->_viewport.y, _rootQuadTree);
+}
+
+void TileGrid::UpdateCurrentObjects(Camera* camera){
+
+	//for (auto index = CurrentTileNumbers->begin(); index != CurrentTileNumbers->end(); index++)
+	for (int i = 0; i < CurrentTileNumbers->size();i++)
+	{
+		//if list object don't have object has TileID in listCurrentNumber
+		//create object is corresponding with TileID
+		int TileNumber = CurrentTileNumbers->at(i);
+		//int TileNumber = CurrentTileNumbers->at(*index);
+		if (!CurrentObjects.count(TileNumber))	//don't have
+		{
+			Tile objectTile = _objectTiles->at(TileNumber);
+			GameObject* ob = CreateObject(objectTile.ID, objectTile.X, objectTile.Y);
+
+			CurrentObjects.insert(pair<int, GameObject*>(TileNumber, ob));
+		}
+
+		////except object has number listCurrentNumber don't have
+		//for (auto it = CurrentObjects.begin(); it != CurrentObjects.end(); it++)
+		//{
+		//	int number = it->first;
+		//	//for (auto i = CurrentTileNumbers->begin(); i != CurrentTileNumbers->end();i++)
+		//		auto i = CurrentTileNumbers->begin();
+		//		//i==number
+		//		while (i != CurrentTileNumbers->end() && *i != it->first)
+		//			i++;
+		//		if (*i == number)
+		//			;									//OK
+		//		else									//don't have number is corresponding with object
+		//			CurrentObjects.erase(number);		//delete object, because this object is outside of viewport
+		//}
+
+	}
+	
+}
+void TileGrid::Update(Camera* camera){
+	UpdateCurrentTileNumbers(camera);				//update tiles in viewport
+	UpdateCurrentObjects(camera);
+}
+GameObject* TileGrid::CreateObject(int id, int x, int y){
+	GameObject* object;
+
+	switch (id){
+	case 0:
+		object = new Ground(x, y);
+		return object;
+		break;
+	}
+};
+map<int, GameObject*> TileGrid::getCurrentObjects(){
+	return CurrentObjects;
+};
 void TileGrid::GetTileIDInQuadTree(int x, int y, QuadTree* quadTree){
 	if (quadTree->ChildNodeCout)		//has child tree
 	{
@@ -101,10 +163,10 @@ void TileGrid::GetTileIDInQuadTree(int x, int y, QuadTree* quadTree){
 	}
 	Box cameraBox = Box(x, y, _screenWidth, -_screenHeight);
 	Box quadTreeBox = Box(quadTree->XNode, quadTree->YNode, quadTree->WidthNode, quadTree->HeightNode);
-	if (collide(cameraBox, quadTreeBox))			//has overlap together			
+	if (isCollide(cameraBox, quadTreeBox))			//has overlap together			
 		//import tile
 		for (vector<int>::iterator index = quadTree->ChildIndexs.begin(); index != quadTree->ChildIndexs.end(); index++)
 		{
-			CurrentTileIDs->push_back(*index);
+			CurrentTileNumbers->push_back(*index);
 		}
 }

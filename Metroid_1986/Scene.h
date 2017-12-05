@@ -5,6 +5,7 @@
 #include "Global Setting.h"
 #include "Font.h"
 #include "Texture2.h"
+#include "TileGrid.h"
 #define BACKGROUND_FILE "Resources/Image/black.png"
 static enum ESceneState
 {
@@ -26,6 +27,7 @@ protected:
 public:
 	Scene(ESceneState);
 	ESceneState getSceneState();
+	//virtual TileGrid* getTileGrid();
 	virtual void RenderFrame( int t);
 	virtual void ProcessInput(int keyCode);
 	virtual void LoadResources();

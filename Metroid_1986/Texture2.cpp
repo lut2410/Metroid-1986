@@ -162,4 +162,32 @@ void Texture2::Draw(int x, int y, int index){
 		&center,
 		&position,
 		0xFFFFFFFF);
+
 }
+//void Texture2::Draw(int x, int y, int index){
+//	D3DXVECTOR3 inPosition(x, y, 0);
+//	//if (position != D3DXVECTOR3())
+//	//	inPosition = position;
+//
+//	D3DXVECTOR2 scalingCenter = D3DXVECTOR2(inPosition.x, inPosition.y);
+//	D3DXMATRIX _matrix;
+//	D3DXVECTOR2 _scale = D3DXVECTOR2(1, 1);
+//	D3DXVECTOR2 _rotationCenter = D3DXVECTOR2(inPosition.x, inPosition.y);
+//	D3DXVECTOR2 _translation = D3DXVECTOR2(0, 0);
+//	D3DXMatrixTransformation2D(&_matrix, &scalingCenter, 0, &_scale, &_rotationCenter, 0, &_translation);
+//
+//	D3DXMATRIX oldMatrix;
+//	G_SpriteHandler->GetTransform(&oldMatrix);
+//	G_SpriteHandler->SetTransform(&_matrix);
+//	Box sBox = _framePosition->at(index);
+//	RECT sRect = sBox.ToRect();
+//	D3DXVECTOR3 center = D3DXVECTOR3(sBox.width / 2, sBox.height / 2, 0);
+//
+//	G_SpriteHandler->Draw(_texture,
+//		&sRect,
+//		&center,
+//		&inPosition,
+//		D3DCOLOR_XRGB(255, 255, 255));
+//
+//	G_SpriteHandler->SetTransform(&oldMatrix); // set lai matrix cu~ de Sprite chi ap dung transfrom voi class nay
+//}

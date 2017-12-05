@@ -30,7 +30,7 @@ void Animation::SetIndex(int index){
 int Animation::getCurrentFrameIndex(){
 	return _currentFrameIndex;
 }
-Box	Animation::getSpriteSize(){
+Box Animation::getCurrentSpriteSize(){
 	return _spriteList->at(_currentFrameIndex).getSpriteSize();
 };
 void Animation::Next(){

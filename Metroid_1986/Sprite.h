@@ -16,7 +16,7 @@ public:
 	//Render current sprite in location(x,y) at the target surface
 	void Draw(int x, int y);						//Draw sprite
 	void DrawFlipHorizontal(int x, int y);			//Draw sprite flip horizontal
-	Box	getSpriteSize();
+	Box	getSpriteSize();						//size of sprite
 	~Sprite();
 };
 #endif SPRITE_H
