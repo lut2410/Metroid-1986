@@ -17,11 +17,12 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, SPEED_Y) {
 	_actionAnimation[Grovel_Ani]				= new Animation(playerTexture, playerTexture->_animationNames.at(6));
 	_actionAnimation[Stand_Shoot_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(7));
 	_actionAnimation[Run_Shoot_Ani]				= new Animation(playerTexture, playerTexture->_animationNames.at(8));
-	_actionAnimation[Stand_PutHandUp_Shoot_Ani] = new Animation(playerTexture, playerTexture->_animationNames.at(9));
-	_actionAnimation[Run_PutHandUp_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(10));
-	_actionAnimation[Jump_PutHandUp_Ani]		= new Animation(playerTexture, playerTexture->_animationNames.at(11));
-	_actionAnimation[Jump_PutHandUp_Shoot_Ani]	= new Animation(playerTexture, playerTexture->_animationNames.at(12));
-	_gravityAcceleration = 0;
+	_actionAnimation[Jump_Shoot_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(9));
+	_actionAnimation[Stand_PutHandUp_Shoot_Ani] = new Animation(playerTexture, playerTexture->_animationNames.at(10));
+	_actionAnimation[Run_PutHandUp_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(11));
+	_actionAnimation[Jump_PutHandUp_Ani]		= new Animation(playerTexture, playerTexture->_animationNames.at(12));
+	_actionAnimation[Jump_PutHandUp_Shoot_Ani]	= new Animation(playerTexture, playerTexture->_animationNames.at(13));
+
 
 	//set up parameters
 	_action = Action::Stand;
@@ -109,16 +110,71 @@ RECT Player::getCollisionBound(){
 	playerBound.top--;
 	return playerBound;
 }
+D3DXVECTOR2 Player::getPositionOfHand(){
+	//get bound of player
+	Box playerBox = _currentAnimation->getCurrentSpriteSize(); //get bound of current sprite
+	RECT playerBound = { _posX - playerBox.width / 2,		//left
+		_posY + playerBox.height / 2,						//top
+		_posX + playerBox.width / 2,						//right
+		_posY - playerBox.height / 2 };						//bottom
+
+	D3DXVECTOR2 appearancePlaceOfBullet;
+
+	if (_directionOfMotion == DirectionOfMotion::Right)
+	{
+		if (isHasAction(Action::PutHandUp))
+		{
+			if (isHasAction(Action::Stand))
+				appearancePlaceOfBullet = { (float)playerBound.right - 5, (float)playerBound.top };
+			else if (isHasAction(Action::Run))
+				appearancePlaceOfBullet = { (float)playerBound.right - 4, (float)playerBound.top };
+			else if (isHasAction(Action::Jump))
+				appearancePlaceOfBullet = { (float)playerBound.right - 6, (float)playerBound.top };
+		}
+		else
+		{
+			if (isHasAction(Action::Stand))
+				appearancePlaceOfBullet = { (float)playerBound.right, (float)playerBound.top - 10 };
+			else if (isHasAction(Action::Run))
+				appearancePlaceOfBullet = { (float)playerBound.right, (float)playerBound.top - 9 };
+			else if (isHasAction(Action::Jump))
+				appearancePlaceOfBullet = { (float)playerBound.right, (float)playerBound.top - 9 };
+		}
+	}
+	else
+	{
+		if (isHasAction(Action::PutHandUp))
+		{
+			if (isHasAction(Action::Stand))
+				appearancePlaceOfBullet = { (float)playerBound.left + 5, (float)playerBound.top };
+			else if (isHasAction(Action::Run))
+				appearancePlaceOfBullet = { (float)playerBound.left + 4, (float)playerBound.top };
+			else if (isHasAction(Action::Jump))
+				appearancePlaceOfBullet = { (float)playerBound.left + 6, (float)playerBound.top };
+		}
+		else
+		{
+			if (isHasAction(Action::Stand))
+				appearancePlaceOfBullet = { (float)playerBound.left, (float)playerBound.top - 10 };
+			else if (isHasAction(Action::Run))
+				appearancePlaceOfBullet = { (float)playerBound.left, (float)playerBound.top - 9 };
+			else if (isHasAction(Action::Jump))
+				appearancePlaceOfBullet = { (float)playerBound.left, (float)playerBound.top - 9 };
+		}
+	}
+	return appearancePlaceOfBullet;
+}
+
 void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	RECT playerBound = getCollisionBound();
-	bool isGrounding=false;	//foot has contact with ground
+	//bool isGrounding=false;	//foot has contact with ground
 	_block = Block::None_Block;
 	//bool isCollisionWall = false; //if just a Ground Object collision with player then change flag to true
 	// check each element in list maybe make collision with player
 	for (auto it = objectList.begin(); it != objectList.end(); it++)
 	{
 		GameObject* object = it->second;
-		DirectionOfCollision direction;
+		Direction direction;
 
 		switch (object->getObjectID())
 		{
@@ -127,26 +183,26 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 			{
 				
 				D3DXVECTOR2 considerObjectVel = D3DXVECTOR2(_velX * dt, _velY * dt);
-				if (direction == DirectionOfCollision::Left_DOF)	//width collision
+				if (direction == Direction::Left_Direction)	//width collision
 				{
 					//_posX -= considerObjectVel.x;
 					//isCollisionWall = true;
 					_velX = 0;
 					_block = Block::Left_Block;
 				}
-				else if (direction == DirectionOfCollision::Right_DOF)
+				else if (direction == Direction::Right_Direction)
 				{
 					//_posX -= considerObjectVel.x;
 					//isCollisionWall = true;
 					_velX = 0;
 					_block = Block::Right_Block;
 				}
-				else if (direction == DirectionOfCollision::Top_DOF)
+				else if (direction == Direction::Top_Direction)
 					//head touch with the ground
 				{
 					_velY = 0;
 				}
-				else if (direction == DirectionOfCollision::Bottom_DOF)
+				else if (direction == Direction::Bottom_Direction)
 					// foot on the ground
 				{
 					//_posY -= considerObjectVel.y;
@@ -158,7 +214,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 						else
 							addOrChangeAction(Action::Run);
 				}
-				else if (direction == DirectionOfCollision::Adjacent_DOF) // player and wall is adjust together
+				else if (direction == Direction::Adjacent_Direction) // player and wall is adjust together
 					//prepare collide=> prevent
 				{
 					//isCollisionWall = true;
@@ -166,14 +222,14 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 					
 					//prepare collide
 					direction = isCollidingExtend(this, object);
-					if (direction == DirectionOfCollision::Left_DOF)	//width collision
+					if (direction == Direction::Left_Direction)	//width collision
 					{
 						//_posX -= considerObjectVel.x;
 						//isCollisionWall = true;
 						//_velX = 0;
 						_block = Block::Left_Block;
 					}
-					else if (direction == DirectionOfCollision::Right_DOF)
+					else if (direction == Direction::Right_Direction)
 					{
 						//_posX -= considerObjectVel.x;
 						//isCollisionWall = true;
@@ -204,7 +260,7 @@ void Player::UpdatePosition(int deltaTime){
 	//else
 	//	_velY = SPEED_Y;
 };
-void Player::Update1(int deltaTime){
+void Player::Update(int deltaTime){
 	//update action by key
 	SpecifyAction();
 	//update Postion
@@ -268,6 +324,7 @@ void Player::SpecifyAction(){
 	SpecifyDirectionOfMotion();
 	SpecifyFootAction();
 	SpecifyHavingPutHandUp();
+	SpecifyHavingShoot();
 };
 
 void Player::SpecifyDirectionOfMotion(){
@@ -421,18 +478,64 @@ void Player::SpecifyHavingPutHandUp(){
 	}
 	else //isn't have Up_Key
 	{
-		if (isHasAction(Action::Stand) || isHasAction(Action::Run))
-		{											//standing/running +put hand up => standing/running, don't put hand up
+		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))	
+			//standing/running +put hand up => standing/running, don't put hand up
 			//if (isHasKey(ActionKey::Down_Key))		// meaning the down key is pressing
 			removeAction(Action::PutHandUp);
-			//else							//standing/running=>grovel
-			//	addOrChangeAction(Action::Grovel);
-		}
-		if (isHasAction(Action::Jump))
-			removeAction(Action::PutHandUp);
-		if (isHasAction(Action::RollingJump))			//can't perform concurrently:
-			;								//don't put hand up
+			//else										//standing/running=>grovel
+
+		if (isHasAction(Action::RollingJump))			//the case can't be exist
+			;											
 		if (isHasAction(Action::Grovel))				//the case can't be exist
 			;
 	}
+}
+void Player::SpecifyHavingShoot(){
+	if (isHasKey(ActionKey::Shoot_Key))
+	{
+		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
+			addOrChangeAction(Action::Shoot);
+		if (isHasAction(Action::RollingJump))						//can't perform concurrently:
+			addOrChangeAction(Action::Jump);						
+		if (isHasAction(Action::Grovel))
+			;
+	}
+	else{
+		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
+			removeAction(Action::Shoot);
+		if (isHasAction(Action::RollingJump))						//the case can't be exist
+			;
+		if (isHasAction(Action::Grovel))							//the case can't be exist
+			;
+	}
+
+	//create bullet
+	if (isHasAction(Action::Shoot))
+	{
+		
+		Direction directionOfBullet;//dependent on direction of the player's face and the hand
+		
+		if (isHasAction(PutHandUp) == true)
+			directionOfBullet = Direction::Top_Direction;
+		else
+		{
+			if (_directionOfMotion == DirectionOfMotion::Left) 
+				directionOfBullet = Direction::Left_Direction;
+			else
+				directionOfBullet = Direction::Right_Direction;
+		}
+			
+		//bullet is appear at hand of player
+		Bullet* bullet = new Bullet(getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
+		//Bullet* bullet = new Bullet(660, 1100, Right_Direction);
+		//add to 
+		map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+		int key = 200; //usually object number <200.
+		while (currentObjects->count(key)) // existed
+			key++;
+		//insert object with the key
+		currentObjects->insert(pair<int, GameObject*>(key, bullet));
+
+	}
+		
 }

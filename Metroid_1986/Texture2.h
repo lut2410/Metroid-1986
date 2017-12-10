@@ -11,10 +11,8 @@ class Texture2{
 public:
 	LPDIRECT3DTEXTURE9 _texture;
 	RECT _size;
-	//int _frameCount;
-	vector<Box>* _framePosition;		//position of frame in texture
-	//map<string, int(*)[3]>* _animationList;	//list animation detail: name and 2 parameter type int -> frames of texture
-	map<string, vector<int>>* _animationList;
+	vector<Box>* _framePosition;							//position of frame in texture
+	map<string, vector<int>>* _animationList; 				//list animation detail: name and 2 parameter type int -> frames of texture
 	vector<string> _animationNames;
 	void _LoadTexture(char*);
 	void _ImportFromTextFile(char*);

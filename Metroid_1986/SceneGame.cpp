@@ -15,7 +15,7 @@ void SceneGame::LoadResources() {
 
 	//Load maps
 	_backgroundMap = new BackgroundMap();
-	_tileGrid = new TileGrid();
+	_tileGrid = TileGrid::getInstance();
 	//create player + other object
 	LoadObject();
 	//playerTexture = new Texture("Resources/Image/playerdemo.png", 4, 1);
@@ -61,23 +61,29 @@ void SceneGame::RenderFrame(int time){
 
 	//draw maps
 	_backgroundMap->Draw(_camera);
-	//draw object
-	_tileGrid->Update(_camera);
 	
+	//UPDATE POSITION
+	//other
+	_tileGrid->Update(_camera,time);
+	
+	//player
+	_player->Update(time);
 
-
-	_player->Update1(time);
 	// collision
 	handleCollision(time);
-	//update player base on key and collison
+	//update player base on collison
 	_player->Update2(time);
-	//draw player
+
+	//DRAW
+	//other
+	_tileGrid->Draw(_camera);
+	//player
 	_player->Draw(_camera);
 	G_SpriteHandler->End();
 }
 
 void SceneGame::handleCollision(int dt){
-	_player->handleCollision(_tileGrid->getCurrentObjects(),dt);
+	_player->handleCollision(*_tileGrid->getCurrentObjects(),dt);
 };
 //TileGrid* SceneGame::getTileGrid(){
 //	return _tileGrid;

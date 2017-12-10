@@ -4,17 +4,17 @@
 #include <d3dx9.h>
 
 
-enum DirectionOfCollision{
-	None_DOF,
-	Left_DOF,
-	Right_DOF,
-	Top_DOF,
-	Bottom_DOF,
-	TopLeft_DOF,
-	TopRight_DOF,
-	BottomLeft_DOF,
-	BottomRight_DOF,
-	Adjacent_DOF
+enum Direction{
+	None_Direction,
+	Left_Direction,
+	Right_Direction,
+	Top_Direction,
+	Bottom_Direction,
+	TopLeft_Direction,
+	TopRight_Direction,
+	BottomLeft_Direction,
+	BottomRight_Direction,
+	Adjacent_Direction
 };
 
 struct Box{

@@ -3,9 +3,10 @@
 
 #pragma once
 #include "GameObject.h"
-#include "Camera.h"
+#include "Bullet.h"
 #include "AABB.h"
 #include "Collision.h"
+#include "TileGrid.h"
 #define SPEED_X 0.16f
 #define SPEED_Y -0.01f
 #define MAX_HEIGHT_JUMP 70.0f
@@ -41,6 +42,7 @@ enum ActionAnimation{
 	Grovel_Ani=Grovel,
 	Stand_Shoot_Ani=Stand+Shoot,
 	Run_Shoot_Ani=Run+Shoot,
+	Jump_Shoot_Ani= Jump+Shoot,
 	Stand_PutHandUp_Shoot_Ani=Stand+PutHandUp+Shoot,
 	Run_PutHandUp_Ani = Run + PutHandUp,
 	Jump_PutHandUp_Ani=Jump+PutHandUp,
@@ -59,8 +61,6 @@ enum ActionKey{
 
 
 class Player :public GameObject {
-	//friend class Camera;
-	float _gravityAcceleration;//acceleration of jump
 
 	Action _action;
 	DirectionOfMotion _directionOfMotion;//transform of position X : left or right?
@@ -85,10 +85,11 @@ public:
 	void removeAction(Action action);
 	bool isHasAction(Action action);
 	bool isHasKey(ActionKey);
-	RECT getCollisionBound();
+	RECT getCollisionBound();					//use for check collision
+	D3DXVECTOR2 getPositionOfHand();			//bullet fly-out from hand
 	void handleCollision(map<int, GameObject*> objectList,float dt);
 	void UpdatePosition(int );
-	void Update1(int time);	//update action and position after press key
+	void Update(int time);	//update action and position after press key
 	void Update2(int time);	//update frame of sprite and position of sprite
 	void Draw(Camera* camera);
 	//int checkCollision();
@@ -97,7 +98,7 @@ public:
 	void SpecifyDirectionOfMotion();//Specify direction and  base on key pressed
 	void SpecifyFootAction();
 	void SpecifyHavingPutHandUp();
-	void SpecifyHavingPutHandUp_KeyRelease();
+	void SpecifyHavingShoot();
 };
 #endif
 

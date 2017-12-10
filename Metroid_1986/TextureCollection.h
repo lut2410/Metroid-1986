@@ -7,6 +7,7 @@ class TextureCollection{
 private:
 	//Texture* playerTexture;
 	Texture2* playerTexture2;
+	Texture2* bulletTexture2;
 	static TextureCollection* textureCollection;
 
 

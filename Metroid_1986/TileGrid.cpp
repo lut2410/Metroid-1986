@@ -1,15 +1,20 @@
-#include "TileGrid.h"
-vector<Tile>* TileGrid::_objectTiles = new vector<Tile>();
-QuadTree* TileGrid::_rootQuadTree = NULL;
-QuadTree* _quadTree = new QuadTree();
+﻿#include "TileGrid.h"
+TileGrid* TileGrid::_tileGridInstance = NULL;
 TileGrid::TileGrid(){
 	CurrentTileNumbers = new vector<int>();
-	//CurrentObjects = new map<int,GameObject*>();
-
+	ObjectTiles = new vector<Tile>();
+	RootQuadTree = NULL;
+	QuadTree* _quadTree = new QuadTree();
+	CurrentObjects = new map<int, GameObject*>();
 	LoadObjectTileFromFile(FILEPATH_OBJECTTILE);
 
 	LoadQuadtreeFromFile(FILEPATH_QUADTREE);
 }
+TileGrid* TileGrid::getInstance(){
+	if (_tileGridInstance == NULL)
+		_tileGridInstance = new TileGrid();
+	return _tileGridInstance;
+};
 TileGrid::~TileGrid(){
 }
 void TileGrid::LoadObjectTileFromFile(string filePath){
@@ -34,7 +39,7 @@ void TileGrid::LoadObjectTileFromFile(string filePath){
 		getline(file, line);
 		Tile* tile = new Tile(line);
 		
-		_objectTiles->push_back(*tile);
+		ObjectTiles->push_back(*tile);
 
 	}
 	file.close();
@@ -70,7 +75,7 @@ void TileGrid::LoadQuadtreeFromFile(string filePath){
 	}
 	
 	// specify child quadtree of all quadtree, begin at root quadtree
-	_rootQuadTree = specifyQuatreeChilds(quadTrees,0);
+	RootQuadTree = specifyQuatreeChilds(quadTrees,0);
 	
 	file.close();
 
@@ -92,53 +97,172 @@ void TileGrid::UpdateCurrentTileNumbers(int x, int y){
 	CurrentTileNumbers->clear();
 
 	//insert tiles exist on screen to CurrentTile
-	GetTileIDInQuadTree(x, y, _rootQuadTree);
+	GetTileIDInQuadTree(x, y, RootQuadTree);
 }
 void TileGrid::UpdateCurrentTileNumbers(Camera* camera){
 	CurrentTileNumbers->clear();
 
 	//insert tiles exist on screen to CurrentTile
-	GetTileIDInQuadTree(camera->_viewport.x, camera->_viewport.y, _rootQuadTree);
+	GetTileIDInQuadTree(camera->_viewport.x, camera->_viewport.y, RootQuadTree);
+}
+
+void TileGrid::UpdateCurrentQuadTrees(Camera* camera)
+{
+
+	//save value
+	vector<QuadTree*> OldQuadTrees = CurrentQuadTrees;
+	//update
+	CurrentQuadTrees.clear();
+	CurrentNewInsideQuadTrees.clear();
+	CurrentOutsideQuadTrees.clear();
+	GetCurrentQuadTrees(camera->_viewport.x, camera->_viewport.y, RootQuadTree);
+
+	//compare
+	for (auto it = OldQuadTrees.begin(); it != OldQuadTrees.end(); it++)
+	{
+		//if (OldQuadTrees.size() == 0)
+		//{
+		//	break;
+		//}
+		int i = 0;
+		while (i < CurrentQuadTrees.size() && *it != CurrentQuadTrees.at(i))
+			i++;
+		if (i == CurrentQuadTrees.size()) //no element in OldQuadTrees has value = it
+										//add to outside
+		{
+			QuadTree* a = *it;
+			CurrentOutsideQuadTrees.push_back(a);
+		}
+
+		//auto it2 = CurrentQuadTrees.begin();
+		//while (it2 != CurrentQuadTrees.end()&&*it!=*it2)
+		//	it2++;
+		//if (*it != *it2) //0 value =
+		//	//add to outside
+		//	CurrentOutsideQuadTrees.push_back(*it);	
+	}
+
+	if (OldQuadTrees.size() == 0)
+	{
+		CurrentNewInsideQuadTrees = CurrentQuadTrees;
+		return;
+	}
+		
+
+	for (auto it = CurrentQuadTrees.begin(); it != CurrentQuadTrees.end(); it++)
+	{
+		if (OldQuadTrees.size() == 0)
+		{
+			CurrentNewInsideQuadTrees = CurrentQuadTrees;
+			return;
+		}
+			
+		int i = 0;
+		while (i < OldQuadTrees.size() && *it != OldQuadTrees.at(i))
+			i++;
+		if (i == OldQuadTrees.size())	//no element in OldQuadTrees has value = it
+										//add to new-inside
+		{
+			QuadTree* a= *it;
+			CurrentNewInsideQuadTrees.push_back(a);
+		}
+			
+		//
+		//for (auto it2 = OldQuadTrees.begin(); it2 != OldQuadTrees.end(); it2++)
+		//{
+		//	if (*it == *it2)
+		//		return;
+		//}
+
+		//if (*it != *it2)
+		//	//0 value =
+		//	//add to new-inside
+		//	CurrentNewInsideQuadTrees.push_back(*it);
+	}
 }
 
 void TileGrid::UpdateCurrentObjects(Camera* camera){
 
-	//for (auto index = CurrentTileNumbers->begin(); index != CurrentTileNumbers->end(); index++)
-	for (int i = 0; i < CurrentTileNumbers->size();i++)
+
+	//ELEMENTS IN NEW_INSIDE => ADD
+	//for (vector<QuadTree*>::iterator it = CurrentNewInsideQuadTrees.begin(); it != CurrentNewInsideQuadTrees.end(); it++)
+	for (int i = 0; i < CurrentNewInsideQuadTrees.size();i++)
 	{
-		//if list object don't have object has TileID in listCurrentNumber
-		//create object is corresponding with TileID
-		int TileNumber = CurrentTileNumbers->at(i);
-		//int TileNumber = CurrentTileNumbers->at(*index);
-		if (!CurrentObjects.count(TileNumber))	//don't have
+		QuadTree* qt = CurrentNewInsideQuadTrees.at(i);
+		vector<int> tileIDs= qt->ChildIndexs;
+		for (int i = 0; i < tileIDs.size(); i++)
 		{
-			Tile objectTile = _objectTiles->at(TileNumber);
+			int TileNumber = tileIDs.at(i);
+			Tile objectTile = ObjectTiles->at(TileNumber);
 			GameObject* ob = CreateObject(objectTile.ID, objectTile.X, objectTile.Y);
 
-			CurrentObjects.insert(pair<int, GameObject*>(TileNumber, ob));
+			CurrentObjects->insert(pair<int, GameObject*>(TileNumber, ob));
 		}
-
-		////except object has number listCurrentNumber don't have
-		//for (auto it = CurrentObjects.begin(); it != CurrentObjects.end(); it++)
-		//{
-		//	int number = it->first;
-		//	//for (auto i = CurrentTileNumbers->begin(); i != CurrentTileNumbers->end();i++)
-		//		auto i = CurrentTileNumbers->begin();
-		//		//i==number
-		//		while (i != CurrentTileNumbers->end() && *i != it->first)
-		//			i++;
-		//		if (*i == number)
-		//			;									//OK
-		//		else									//don't have number is corresponding with object
-		//			CurrentObjects.erase(number);		//delete object, because this object is outside of viewport
-		//}
-
 	}
+
+
+	//ELEMENT IS OUTSIDE OR IS DESTROY => DELETE
+
+	//outside->delete
+	//for (vector<QuadTree*>::iterator it = CurrentOutsideQuadTrees.begin(); it != CurrentOutsideQuadTrees.end(); it++)
+	for (int i = 0; i < CurrentOutsideQuadTrees.size(); i++)
+	{
+		QuadTree* qt = CurrentOutsideQuadTrees.at(i);
+		vector<int> tileIDs = qt->ChildIndexs;
+		for (int i = 0; i < tileIDs.size(); i++)
+		{
+			int TileNumber = tileIDs.at(i);
+
+			auto it =CurrentObjects->find(TileNumber);
+			GameObject* object = it->second;
+
+			CurrentObjects->erase(TileNumber);
+			delete object;
+		}
+	}
+
+	//if object status is destroy ->delete
+	/*for (auto it = CurrentObjects->begin(); it != CurrentObjects->end();)
+	{*/
+	//auto it = CurrentObjects->begin();
+	//while (it != CurrentObjects->end())
+	//{
+	//	GameObject* object = it->second;
+	//	//check object is destroy yet?
+	//	if (object->isSurvive() == false)
+	//	{//delete object and erase from CurrentObjects
+	//		it = CurrentObjects->erase(it);
+	//		delete object;
+	//	}
+	//	else
+	//		++it;
+	//}
+		
+	//}
+
 	
 }
-void TileGrid::Update(Camera* camera){
-	UpdateCurrentTileNumbers(camera);				//update tiles in viewport
+void TileGrid::Update(Camera* camera, int time){
+
+	//update outside-quadtree
+	UpdateCurrentQuadTrees(camera);
+
+	//UpdateCurrentTileNumbers(camera);				//update tiles in viewport
 	UpdateCurrentObjects(camera);
+	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
+	{
+		GameObject* object = it->second;
+			object->Update(time);
+	}
+}
+void TileGrid::Draw(Camera* camera)
+{
+	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
+	{
+		GameObject* object = it->second;
+		if (object->isSurvive() == true)
+			object->Draw(camera);
+	}
 }
 GameObject* TileGrid::CreateObject(int id, int x, int y){
 	GameObject* object;
@@ -150,7 +274,7 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		break;
 	}
 };
-map<int, GameObject*> TileGrid::getCurrentObjects(){
+map<int, GameObject*>* TileGrid::getCurrentObjects(){
 	return CurrentObjects;
 };
 void TileGrid::GetTileIDInQuadTree(int x, int y, QuadTree* quadTree){
@@ -170,3 +294,20 @@ void TileGrid::GetTileIDInQuadTree(int x, int y, QuadTree* quadTree){
 			CurrentTileNumbers->push_back(*index);
 		}
 }
+void TileGrid::GetCurrentQuadTrees(int x, int y, QuadTree* quadTree){
+	if (quadTree->ChildNodeCout)		//has child tree
+	{
+		GetCurrentQuadTrees(x, y, quadTree->LeftTop);
+		GetCurrentQuadTrees(x, y, quadTree->RightTop);
+		GetCurrentQuadTrees(x, y, quadTree->LeftBottom);
+		GetCurrentQuadTrees(x, y, quadTree->RightBottom);
+	}
+	else	//child QuadTree
+	{
+		Box cameraBox = Box(x, y, _screenWidth, -_screenHeight);
+		Box quadTreeBox = Box(quadTree->XNode, quadTree->YNode, quadTree->WidthNode, quadTree->HeightNode);
+		if (isCollide(cameraBox, quadTreeBox))			//has overlap together		
+			CurrentQuadTrees.push_back(quadTree);
+	}
+	
+};

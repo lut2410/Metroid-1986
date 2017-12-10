@@ -1,8 +1,8 @@
 ﻿#include"Collision.h"
 
-bool handleObjectCollision(GameObject* considerObject, GameObject* otherObject,DirectionOfCollision& direction, int dt)
+bool handleObjectCollision(GameObject* considerObject, GameObject* otherObject,Direction& direction, int dt)
 {
-	//DirectionOfCollision direction; //direction of collision of considerObject
+	//Direction direction; //direction of collision of considerObject
 	float dxEntry=0, dyEntry=0;
 	float time = AABBCollision(considerObject, otherObject, direction, dxEntry, dyEntry, dt);
 	float moveX=0, moveY=0;
@@ -11,7 +11,7 @@ bool handleObjectCollision(GameObject* considerObject, GameObject* otherObject,D
 		// cản lại
 		//updateTargetPosition(otherObject, direction, true);
 
-		//if (direction==Left_DOF||direction==Right_DOF)	//width-collision //don't neccessary because dxEntry or dyEntry =0 -> + constant
+		//if (direction==Left_Direction||direction==Right_Direction)	//width-collision //don't neccessary because dxEntry or dyEntry =0 -> + constant
 			considerObject->_posX += dxEntry;
 		//else											//height-collision
 			considerObject->_posY += dyEntry;
@@ -24,27 +24,27 @@ bool handleObjectCollision(GameObject* considerObject, GameObject* otherObject,D
 			considerObject->_posX += moveX;
 			considerObject->_posY += moveY;
 			if (moveX > 0)
-				direction = DirectionOfCollision::Left_DOF;
+				direction = Direction::Left_Direction;
 			else if (moveX<0)
-				direction = DirectionOfCollision::Right_DOF;
+				direction = Direction::Right_Direction;
 			else if (moveY>0)
-				direction = DirectionOfCollision::Bottom_DOF;
+				direction = Direction::Bottom_Direction;
 			else if (moveY < 0)
-				direction = DirectionOfCollision::Top_DOF;
+				direction = Direction::Top_Direction;
 			else //moveX=0&moveY=0
-				direction = DirectionOfCollision::Adjacent_DOF; //2 object is adjacent together
+				direction = Direction::Adjacent_Direction; //2 object is adjacent together
 			return true;
 		}
 	else //don't happen collision or a long time to happen
 	{
-		direction = DirectionOfCollision::None_DOF;
+		direction = Direction::None_Direction;
 		return false;
 	}
 	// if direction != left or right => keep direction stable
 
 	//after above statement, 2 object is adjacent together
 }
-float AABBCollision(GameObject* considerObject, GameObject* otherObject, DirectionOfCollision &direction, float& dxEntry, float& dyEntry, int dt){
+float AABBCollision(GameObject* considerObject, GameObject* otherObject, Direction &direction, float& dxEntry, float& dyEntry, int dt){
 
 	RECT considerRect = considerObject->getCollisionBound();
 	RECT otherRect = otherObject->getCollisionBound();
@@ -53,7 +53,7 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 	RECT broadphaseRect = getSweptBroadphaseRect(considerObject, dt);	
 	if (!isColliding(broadphaseRect, otherRect))				
 	{
-		direction = DirectionOfCollision::None_DOF;
+		direction = Direction::None_Direction;
 		return 1.0f;
 	}
 
@@ -124,7 +124,7 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 	// if there was no collision
 	if (entryTime > exitTime || txEntry < 0.0f && tyEntry < 0.0f || txEntry > 1.0f || tyEntry > 1.0f)
 	{
-		direction = DirectionOfCollision::None_DOF;
+		direction = Direction::None_Direction;
 		return 1.0f;
 	}
 
@@ -136,12 +136,12 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 		//if (dxEntry > 0.0f)		//=(velocity.x>0) : right-> collide in right of considerObjcet
 		if (velocity.x<0)
 		{
-			direction = DirectionOfCollision::Left_DOF;
+			direction = Direction::Left_Direction;
 		}
 		//else if (dxEntry < 0.0f)
 		else
 		{
-			direction = DirectionOfCollision::Right_DOF;
+			direction = Direction::Right_Direction;
 		}
 	}
 	else
@@ -150,11 +150,11 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 		//if (dyEntry > 0.0f)		//=(velocity.y>0) : up-> collide in top 
 		if (velocity.y>0)
 		{
-			direction = DirectionOfCollision::Top_DOF; 
+			direction = Direction::Top_Direction; 
 		}
 		else
 		{
-			direction = DirectionOfCollision::Bottom_DOF;
+			direction = Direction::Bottom_Direction;
 		}
 	}
 
@@ -185,7 +185,7 @@ bool isColliding(RECT myRect, RECT otherRect)
 
 	return !(left >= 0 || top <= 0 || right <= 0 || bottom >= 0);
 }
-DirectionOfCollision isCollidingExtend(GameObject* player, GameObject* ground)
+Direction isCollidingExtend(GameObject* player, GameObject* ground)
 {
 	RECT playerRect = player->getCollisionBound();
 	//extend rect to check collision with ground
@@ -195,7 +195,7 @@ DirectionOfCollision isCollidingExtend(GameObject* player, GameObject* ground)
 	RECT groundRect = ground->getCollisionBound();
 
 	if (!isColliding(playerRect, groundRect))
-		return DirectionOfCollision::Bottom_DOF;
+		return Direction::Bottom_Direction;
 
 	float left = groundRect.left - playerRect.right;
 	//float top = otherRect.top - myRect.bottom;
@@ -204,15 +204,15 @@ DirectionOfCollision isCollidingExtend(GameObject* player, GameObject* ground)
 
 	
 	if (left == -1)		//otherrect is on ther right side of myrect
-		return DirectionOfCollision::Right_DOF;
+		return Direction::Right_Direction;
 	if (right == 1)
-		return DirectionOfCollision::Left_DOF;
+		return Direction::Left_Direction;
 	else
-		return DirectionOfCollision::Bottom_DOF;
+		return Direction::Bottom_Direction;
 	//if (top == 1)
-	//	return DirectionOfCollision::Bottom_DOF;
+	//	return Direction::Bottom_Direction;
 	//if (bottom == -1)
-	//	return DirectionOfCollision::Top_DOF;
+	//	return Direction::Top_Direction;
 
 }
 bool isColliding(GameObject* considerObject, GameObject* otherObject, float& moveX, float& moveY, float dt)
@@ -248,6 +248,6 @@ bool isColliding(GameObject* considerObject, GameObject* otherObject, float& mov
 	return true;
 }
 
-int updateCollisionPosition(GameObject otherObject, DirectionOfCollision& direction){
+int updateCollisionPosition(GameObject otherObject, Direction& direction){
 	return 1;
 }

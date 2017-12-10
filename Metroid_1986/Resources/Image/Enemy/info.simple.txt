@@ -1,0 +1,38 @@
+R		G		B
+0		0		0
+Count
+8
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			9				7				16				14
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			27				7				16				14
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			45				5				14				16
+
+Index		Animation Info
+3			LocationX		LocationY		FrameWidth		FrameHeight
+			61				5				14				16
+
+Index		Animation Info
+4			LocationX		LocationY		FrameWidth		FrameHeight
+			77				7				16				14
+
+Index		Animation Info
+5			LocationX		LocationY		FrameWidth		FrameHeight
+			95				7				16				14
+
+Index		Animation Info
+6			LocationX		LocationY		FrameWidth		FrameHeight
+			113				5				14				16
+
+Index		Animation Info
+7			LocationX		LocationY		FrameWidth		FrameHeight
+			129				5				14				16
+

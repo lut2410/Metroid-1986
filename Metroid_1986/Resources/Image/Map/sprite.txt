@@ -1,4 +1,4 @@
-Is All Frames are same ?
+Is All Frames are has a same size?
 1
 Count
 29

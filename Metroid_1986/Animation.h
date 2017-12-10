@@ -6,7 +6,6 @@
 #include "AABB.h"
 class Animation{
 	vector<Sprite>* _spriteList;	//list contain sprites
-	Box _collisionSize;				//every Animation has to have a size for collision
 	//int _numberOfFrame;				//amout frames
 	int _currentFrameIndex;
 	int _timeAnimation;

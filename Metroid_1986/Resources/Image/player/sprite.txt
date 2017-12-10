@@ -1,4 +1,4 @@
-Is All Frames are same ?
+Is All Frames are has a same size?
 0
 Count
 29
@@ -139,7 +139,9 @@ Grovel
 StandShoot
 18	18	-1
 RunShoot
-19	22	30
+19	21	30
+JumpShoot
+22	22	-1
 StandPutHandUp
 23	23	-1
 RunPutHandUp
