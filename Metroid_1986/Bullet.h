@@ -15,8 +15,9 @@ public:
 	Bullet();
 	Bullet(int x, int y, Direction directionFly, DWORD survivalTime = 200);
 	~Bullet();
+	//void IsWounded(int hp);
 	void Update(int deltaTime);
-
+	void Update2(int deltaTime);
 };
 
 #endif

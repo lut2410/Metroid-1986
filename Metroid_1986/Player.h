@@ -45,6 +45,7 @@ enum ActionAnimation{
 	Jump_Shoot_Ani= Jump+Shoot,
 	Stand_PutHandUp_Shoot_Ani=Stand+PutHandUp+Shoot,
 	Run_PutHandUp_Ani = Run + PutHandUp,
+	Run_PutHandUp_Shoot_Ani = Run+PutHandUp+Shoot,
 	Jump_PutHandUp_Ani=Jump+PutHandUp,
 	Jump_PutHandUp_Shoot_Ani=Jump+PutHandUp+Shoot
 };
@@ -99,6 +100,7 @@ public:
 	void SpecifyFootAction();
 	void SpecifyHavingPutHandUp();
 	void SpecifyHavingShoot();
+	void CreateBullet();
 };
 #endif
 

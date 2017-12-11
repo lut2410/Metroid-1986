@@ -222,23 +222,21 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 	}
 
 	//if object status is destroy ->delete
-	/*for (auto it = CurrentObjects->begin(); it != CurrentObjects->end();)
-	{*/
-	//auto it = CurrentObjects->begin();
-	//while (it != CurrentObjects->end())
-	//{
-	//	GameObject* object = it->second;
-	//	//check object is destroy yet?
-	//	if (object->isSurvive() == false)
-	//	{//delete object and erase from CurrentObjects
-	//		it = CurrentObjects->erase(it);
-	//		delete object;
-	//	}
-	//	else
-	//		++it;
-	//}
+
+	auto it = CurrentObjects->begin();
+	while (it != CurrentObjects->end())
+	{
+		GameObject* object = it->second;
+		//check object is destroy yet?
+		if (object->isSurvive() == false)
+		{//delete object and erase from CurrentObjects
+			it = CurrentObjects->erase(it);
+			delete object;
+		}
+		else
+			++it;
+	}
 		
-	//}
 
 	
 }
@@ -249,10 +247,20 @@ void TileGrid::Update(Camera* camera, int time){
 
 	//UpdateCurrentTileNumbers(camera);				//update tiles in viewport
 	UpdateCurrentObjects(camera);
+
+	//update position of all objects
 	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
 	{
 		GameObject* object = it->second;
 			object->Update(time);
+	}
+}
+void TileGrid::Update2(int time)
+{
+	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
+	{
+		GameObject* object = it->second;
+		object->Update2(time);
 	}
 }
 void TileGrid::Draw(Camera* camera)
@@ -260,8 +268,40 @@ void TileGrid::Draw(Camera* camera)
 	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
 	{
 		GameObject* object = it->second;
-		if (object->isSurvive() == true)
+		//if (object->isSurvive() == true)
 			object->Draw(camera);
+	}
+}
+void TileGrid::handleCollision(int deltaTime)
+{
+
+	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
+	{
+		//find bullet object
+		GameObject* bullet = it->second;
+		if (bullet->getObjectID() == ObjectID::Bullet_ID)
+			//check collision vs enemy and ground
+		{
+
+			for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
+			{
+				GameObject* otherObject = it->second;
+				if (otherObject->getObjectID() != ObjectID::Bullet_ID)
+				{
+					Direction direction;
+					if (handleObjectCollision(bullet, otherObject, direction, deltaTime)) //collision 
+					{
+						switch (otherObject->getObjectID())
+						{
+						case ObjectID::Ground_ID:	//bullet collide vs wall
+							//bullet will be broken
+							bullet->IsWounded();
+						}
+					}
+				}
+			}
+		}
+			
 	}
 }
 GameObject* TileGrid::CreateObject(int id, int x, int y){
@@ -274,6 +314,7 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		break;
 	}
 };
+
 map<int, GameObject*>* TileGrid::getCurrentObjects(){
 	return CurrentObjects;
 };

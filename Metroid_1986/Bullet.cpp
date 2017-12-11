@@ -1,6 +1,8 @@
 #include "Bullet.h"
 Bullet::Bullet(){};
 Bullet::Bullet(int x, int y, Direction direction, DWORD survivalTime) :GameObject(Bullet_ID, x, y, 0, 0){
+	_hp = 1;
+	_attack = 1;
 
 	Texture2* bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
 
@@ -55,7 +57,10 @@ Bullet::Bullet(int x, int y, Direction direction, DWORD survivalTime) :GameObjec
 Bullet::~Bullet()
 {
 }
-
+//void Bullet::IsWounded()
+//{
+//	hp--;
+//}
 void Bullet::Update(int deltaTime)
 {
 	//update remaining-time
@@ -68,6 +73,13 @@ void Bullet::Update(int deltaTime)
 		_posX += _velX * deltaTime;
 		_posY += _velY * deltaTime;
 	}
-
-	
+}
+void Bullet::Update2(int deltaTime)
+{
+	if (_hp <= 0)
+	{
+		_survive = false;
+		_currentAnimation = _allAnimation[1];
+	}
+		
 }

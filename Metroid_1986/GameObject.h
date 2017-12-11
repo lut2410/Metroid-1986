@@ -14,6 +14,8 @@ enum ObjectStatus{
 class GameObject{
 protected:
 	bool _survive;	//status: survival
+	int _hp;			//HP
+	int _attack;		//attack enemy,HP enemy will be subtract = attack index
 	ObjectID _objectID;
 	Animation* _currentAnimation;
 	//Position of Object
@@ -34,7 +36,11 @@ public:
 	D3DXVECTOR2 getVelocity();
 	ObjectID getObjectID();
 	bool isSurvive();
-	virtual void Update(int deltaTime);
+	//update action and position
+	virtual void Update(int deltaTime);			
+	//update animation-frame of sprite
+	virtual void Update2(int deltaTime);		
 	virtual void Draw(Camera* camera);
+	virtual void IsWounded(int lossHP=1);		//be wounded 'lossHP' HP
 };
 #endif

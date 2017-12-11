@@ -1,3 +1,4 @@
+#pragma once
 #include <windows.h>		// to parse to RECT
 //#include <d3dx9.h>
 #include "GameObject.h"

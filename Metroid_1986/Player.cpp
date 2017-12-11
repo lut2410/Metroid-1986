@@ -2,6 +2,8 @@
 Player::Player():GameObject(){
 }
 Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, SPEED_Y) {
+	_hp = 30;
+	_attack = 0;//attack by bullet, isn't by body
 
 	//Load all action-animation
 	Texture2* playerTexture = TextureCollection::getInstance()->getTexture2(Player_ID);
@@ -20,6 +22,7 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, SPEED_Y) {
 	_actionAnimation[Jump_Shoot_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(9));
 	_actionAnimation[Stand_PutHandUp_Shoot_Ani] = new Animation(playerTexture, playerTexture->_animationNames.at(10));
 	_actionAnimation[Run_PutHandUp_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(11));
+	_actionAnimation[Run_PutHandUp_Shoot_Ani]	= _actionAnimation[Run_PutHandUp_Ani];
 	_actionAnimation[Jump_PutHandUp_Ani]		= new Animation(playerTexture, playerTexture->_animationNames.at(12));
 	_actionAnimation[Jump_PutHandUp_Shoot_Ani]	= new Animation(playerTexture, playerTexture->_animationNames.at(13));
 
@@ -92,9 +95,7 @@ RECT Player::getCollisionBound(){
 	if (isHasAction(Action::PutHandUp))
 		playerBound.top -= 6;
 	else // don't put hand up
-	if (isHasAction(Action::Stand)								//stand / stand + shoot
-		|| isHasAction(Action::Run) && isHasAction(Shoot)		//run + shoot
-		|| isHasAction(Action::Jump) && isHasAction(Shoot))		//jump + shoot
+	if (isHasAction(Action::Stand)&&!isHasAction(Shoot))							//stand / stand + shoot
 	{
 		if(_directionOfMotion==DirectionOfMotion::Right)
 			playerBound.right -= 6;
@@ -106,7 +107,15 @@ RECT Player::getCollisionBound(){
 			playerBound.left += 6;
 		}
 	}
-
+	else if (isHasAction(Action::Stand) && isHasAction(Shoot) 
+		|| isHasAction(Action::Run) && isHasAction(Shoot)		//run + shoot
+		|| isHasAction(Action::Jump) && isHasAction(Shoot))		//jump + shoot)
+	{
+		if (_directionOfMotion == DirectionOfMotion::Right)
+			playerBound.right -= 5;
+		else //if (_directionOfMotion == DirectionOfMotion::Left)
+			playerBound.left += 5;
+	}
 	playerBound.top--;
 	return playerBound;
 }
@@ -167,9 +176,7 @@ D3DXVECTOR2 Player::getPositionOfHand(){
 
 void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	RECT playerBound = getCollisionBound();
-	//bool isGrounding=false;	//foot has contact with ground
 	_block = Block::None_Block;
-	//bool isCollisionWall = false; //if just a Ground Object collision with player then change flag to true
 	// check each element in list maybe make collision with player
 	for (auto it = objectList.begin(); it != objectList.end(); it++)
 	{
@@ -244,11 +251,6 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 
 	}
 
-	//if just a Ground Object collision with player then keep _block stable else reset _block
-	//if (!isCollisionWall)
-	//_block = Block::None_Block;
-	//if (!isGrounding)		//in mid-air
-	//	addOrChangeAction(Jump);
 	return;
 }
 void Player::UpdatePosition(int deltaTime){
@@ -283,11 +285,12 @@ void Player::Update2(int deltaTime){
 	//update sprite to next frame
 												//then keep drawing end frame	
 	_currentAnimation->Update(deltaTime);
+
+		CreateBullet();
 }
 
 void Player::Draw(Camera* camera)
 {
-
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
 	switch (_directionOfMotion)
 	{
@@ -297,21 +300,25 @@ void Player::Draw(Camera* camera)
 	case DirectionOfMotion::Right:
 		//edit center position because each sprite have size different together
 		if (isHasAction(Action::PutHandUp))
-			center.y -= 3;
-		else if (isHasAction(Action::Stand)								//stand / stand + shoot
-			|| isHasAction(Action::Run) && isHasAction(Shoot)		//run + shoot
-			|| isHasAction(Action::Jump) && isHasAction(Shoot))		//jump + shoot
-			center.x += 3; 
+			center.y ;
+		else if (isHasAction(Action::Stand) && !isHasAction(Shoot)								//stand / stand + shoot
+			|| isHasAction(Action::Run) && isHasAction(Shoot)			//run + shoot
+			|| isHasAction(Action::Jump) && isHasAction(Shoot))			//jump + shoot
+			center.x += 3;
+		else if (isHasAction(Action::Stand) && isHasAction(Shoot))
+			center.x += 2;
 		_currentAnimation->Draw(center.x, center.y);
 
 		break;
 	case DirectionOfMotion::Left://drawfip
 		if (isHasAction(Action::PutHandUp))
 			center.y -= 3;
-		else if (isHasAction(Action::Stand)								//stand / stand + shoot
-			|| isHasAction(Action::Run) && isHasAction(Shoot)		//run + shoot
-			|| isHasAction(Action::Jump) && isHasAction(Shoot))		//jump + shoot
+		else if (isHasAction(Action::Stand) && !isHasAction(Shoot)		//stand / stand + shoot
+			|| isHasAction(Action::Run) && isHasAction(Shoot)			//run + shoot
+			|| isHasAction(Action::Jump) && isHasAction(Shoot))			//jump + shoot
 			center.x -= 3;
+		else if (isHasAction(Action::Stand) && isHasAction(Shoot))
+			center.x -= 2;
 		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
 		break;
 	}
@@ -363,6 +370,9 @@ void Player::SpecifyFootAction(){
 	//jump, grovel inspect Action to Specify action
 	if (isHasKey(Jump_Key))
 	{
+		//if the face is neutral and press the key=> the face direct right
+		if (_directionOfMotion == DirectionOfMotion::Neutral)
+			_directionOfMotion = DirectionOfMotion::Right;
 		//switch (_action){
 		if (isHasAction(Action::Stand) || isHasAction(Action::Run)&&isHasAction(Action::PutHandUp))//run but puthandup then normal jump
 		{
@@ -399,12 +409,20 @@ void Player::SpecifyFootAction(){
 
 	if (isHasKey(Down_Key))
 	{
+		//if the face is neutral and press the key=> the face direct right
+		if (_directionOfMotion == DirectionOfMotion::Neutral)
+			_directionOfMotion = DirectionOfMotion::Right;
+
 		if (isHasAction(Action::Stand) || isHasAction(Action::Run))
 		{									//standing/running +put hand up => standing/running, don't put hand up
 			if (isHasAction(Action::PutHandUp))
 				removeAction(Action::PutHandUp);
 			else							//standing/running=>grovel
+			{
 				addOrChangeAction(Action::Grovel);
+				if (isHasAction(Action::Shoot))
+					removeAction(Action::Shoot);
+			}
 		}
 		//else: don't change
 	}
@@ -425,44 +443,15 @@ void Player::SpecifyFootAction(){
 					addOrChangeAction(Action::Run);
 			}
 	}
-	
-
 }
-//void Player::SpecifyAction_KeyRelease(ActionKey actionKey){
-//	if (KeyCode == DIK_F)// release jump key
-//	{
-//		_jumpKey = false;
-//		if (isHasAction(Action::Jump)||isHasAction(Action::RollingJump))
-//		{
-//			if (_velY > 0)			//player jump don't reache the top, but release the jump key
-//			_velY = 0;				//vY = 0 instantly
-//		}
-//	}
-//	else if(KeyCode == DIK_DOWN)//Grovel
-//	{
-//		_downKey = false;
-//		if (isHasAction(Action::Stand) || isHasAction(Action::Run))
-//		{
-//			if (_upKey==true)					//it's case : standing/running action + up key + down key => now release down key	
-//				addOrChangeAction(Action::PutHandUp);
-//		}
-//		if(isHasAction(Action::Grovel))	//downkey + upkey -> upkey => stand/run + puthandup
-//			if (_upKey == true)
-//			{
-//				addOrChangeAction(Action::PutHandUp);
-//				if (_velX == 0)
-//					addOrChangeAction(Action::Stand);
-//				else
-//					addOrChangeAction(Action::Run);
-//			}
-//
-//		
-//	}
-//}
 
 void Player::SpecifyHavingPutHandUp(){
 	if (isHasKey(Up_Key))
 	{
+		//if the face is neutral and press the key=> the face direct right
+		if (_directionOfMotion == DirectionOfMotion::Neutral)
+			_directionOfMotion = DirectionOfMotion::Right;
+
 		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
 			addOrChangeAction(Action::PutHandUp);
 		if (isHasAction(Action::RollingJump))						//can't perform concurrently:
@@ -493,6 +482,10 @@ void Player::SpecifyHavingPutHandUp(){
 void Player::SpecifyHavingShoot(){
 	if (isHasKey(ActionKey::Shoot_Key))
 	{
+		//if the face is neutral and press the key=> the face direct right
+		if (_directionOfMotion == DirectionOfMotion::Neutral)
+			_directionOfMotion = DirectionOfMotion::Right;
+
 		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
 			addOrChangeAction(Action::Shoot);
 		if (isHasAction(Action::RollingJump))						//can't perform concurrently:
@@ -508,23 +501,25 @@ void Player::SpecifyHavingShoot(){
 		if (isHasAction(Action::Grovel))							//the case can't be exist
 			;
 	}
-
+}
+void Player::CreateBullet()
+{
 	//create bullet
 	if (isHasAction(Action::Shoot))
 	{
-		
+
 		Direction directionOfBullet;//dependent on direction of the player's face and the hand
-		
+
 		if (isHasAction(PutHandUp) == true)
 			directionOfBullet = Direction::Top_Direction;
 		else
 		{
-			if (_directionOfMotion == DirectionOfMotion::Left) 
+			if (_directionOfMotion == DirectionOfMotion::Left)
 				directionOfBullet = Direction::Left_Direction;
 			else
 				directionOfBullet = Direction::Right_Direction;
 		}
-			
+
 		//bullet is appear at hand of player
 		Bullet* bullet = new Bullet(getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
 		//Bullet* bullet = new Bullet(660, 1100, Right_Direction);
@@ -537,5 +532,4 @@ void Player::SpecifyHavingShoot(){
 		currentObjects->insert(pair<int, GameObject*>(key, bullet));
 
 	}
-		
 }

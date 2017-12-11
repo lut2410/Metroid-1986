@@ -59,30 +59,30 @@ void SceneGame::RenderFrame(int time){
 	G_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 	_camera->UpdateCamera(_player->_posX);
 
-	//draw maps
+	//draw background(ground)
 	_backgroundMap->Draw(_camera);
 	
 	//UPDATE POSITION
-	//other
 	_tileGrid->Update(_camera,time);
-	
-	//player
 	_player->Update(time);
 
-	// collision
+	//COLLISION
 	handleCollision(time);
-	//update player base on collison
+
+	//UPDATE STATUS, ACTION AND FRAMES ANIMATION AFTER COLLISION
+	_tileGrid->Update2(time);
 	_player->Update2(time);
 
 	//DRAW
-	//other
 	_tileGrid->Draw(_camera);
-	//player
 	_player->Draw(_camera);
+
 	G_SpriteHandler->End();
 }
 
 void SceneGame::handleCollision(int dt){
+	_tileGrid->handleCollision(dt);
+
 	_player->handleCollision(*_tileGrid->getCurrentObjects(),dt);
 };
 //TileGrid* SceneGame::getTileGrid(){

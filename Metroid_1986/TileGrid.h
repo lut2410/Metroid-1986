@@ -9,7 +9,7 @@
 #include "AABB.h"
 #include "GameObject.h"
 #include "Camera.h"
-
+#include "Collision.h"
 //object
 #include "Ground.h"
 
@@ -36,11 +36,14 @@ public:
 	void LoadObjectTileFromFile(string);
 	void LoadQuadtreeFromFile(string);
 	void UpdateCurrentTileNumbers(int, int);				//Get tile in the specified space
-	void UpdateCurrentTileNumbers(Camera*);				//update tiles in viewport
-	void UpdateCurrentQuadTrees(Camera*);				//update tiles in viewport
-	void UpdateCurrentObjects(Camera*);		//update objects in viewport
+	void UpdateCurrentTileNumbers(Camera*);					//update tiles in viewport
+	void UpdateCurrentQuadTrees(Camera*);					//update tiles in viewport
+	void UpdateCurrentObjects(Camera*);						//update objects in viewport
 	void Update(Camera*,int time);
+	void Update2(int time);
 	void Draw(Camera*);
+	//handle bullet vs other object
+	void handleCollision(int time);							
 	map<int, GameObject*>* getCurrentObjects();
 	GameObject* CreateObject(int id, int x, int y);
 };
