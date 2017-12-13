@@ -41,6 +41,7 @@ public:
 	//update animation-frame of sprite
 	virtual void Update2(int deltaTime);		
 	virtual void Draw(Camera* camera);
+	virtual void handleCollision(map<int, GameObject*> objectList, float dt);
 	virtual void IsWounded(int lossHP=1);		//be wounded 'lossHP' HP
 };
 #endif

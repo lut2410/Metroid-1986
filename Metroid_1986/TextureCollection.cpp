@@ -4,6 +4,7 @@ TextureCollection::TextureCollection(){
 
 	playerTexture2 = new Texture2("Resources/Image/player/sprite.png", "Resources/Image/player/sprite.txt");
 	bulletTexture2 = new Texture2("Resources/Image/player/sprite.png", "Resources/Image/player/bullet.txt");
+	hedgehogTexture2 = new Texture2("Resources/Image/Enemy/sprite.png", "Resources/Image/enemy/hedgehog.txt");
 };
 TextureCollection* TextureCollection::getInstance(){
 	if (textureCollection == NULL)
@@ -19,6 +20,9 @@ Texture2* TextureCollection::getTexture2(ObjectID id){
 		break;
 	case Bullet_ID:
 		return bulletTexture2;
+		break;
+	case Hedgehog_ID:
+		return hedgehogTexture2;
 		break;
 	}
 };

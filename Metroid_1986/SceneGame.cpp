@@ -64,6 +64,14 @@ void SceneGame::RenderFrame(int time){
 	
 	//UPDATE POSITION
 	_tileGrid->Update(_camera,time);
+	//Hedgehog* hedgehog = new Hedgehog(553, 1076);
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	if (!currentObjects->count(300))
+	{
+		Hedgehog* hedgehog = new Hedgehog(578, 1079);
+		currentObjects->insert(pair<int, GameObject*>(300, hedgehog));
+
+	}
 	_player->Update(time);
 
 	//COLLISION

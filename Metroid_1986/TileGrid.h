@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "Collision.h"
+#include "Hedgehog.h"
 //object
 #include "Ground.h"
 

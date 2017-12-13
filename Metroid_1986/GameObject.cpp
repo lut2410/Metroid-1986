@@ -25,6 +25,8 @@ void GameObject::CreateSprite()
 }
 RECT GameObject::getCollisionBound(){
 	Box  objectBox = _currentAnimation->getCurrentSpriteSize();
+	if (_objectID == ObjectID::Hedgehog_ID)
+		objectBox = { 0, 0, 14, 14 };
 	RECT objectBound = { _posX - objectBox.width / 2,		//left
 		_posY + objectBox.height / 2,						//top
 		_posX + objectBox.width / 2,						//right
@@ -58,6 +60,10 @@ void GameObject::Draw(Camera* camera){
 		return;
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
 	_currentAnimation->Draw(center.x, center.y);
+}
+void GameObject::handleCollision(map<int, GameObject*> objectList, float dt)
+{
+
 }
 void GameObject::IsWounded(int lossHP)
 {

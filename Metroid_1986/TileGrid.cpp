@@ -278,10 +278,11 @@ void TileGrid::handleCollision(int deltaTime)
 	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
 	{
 		//find bullet object
-		GameObject* bullet = it->second;
-		if (bullet->getObjectID() == ObjectID::Bullet_ID)
+		GameObject* object = it->second;
+		switch (object->getObjectID())
 			//check collision vs enemy and ground
 		{
+		case (ObjectID::Bullet_ID):
 
 			for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
 			{
@@ -289,17 +290,21 @@ void TileGrid::handleCollision(int deltaTime)
 				if (otherObject->getObjectID() != ObjectID::Bullet_ID)
 				{
 					Direction direction;
-					if (handleObjectCollision(bullet, otherObject, direction, deltaTime)) //collision 
+					if (handleObjectCollision(object, otherObject, direction, deltaTime)) //collision 
 					{
 						switch (otherObject->getObjectID())
 						{
 						case ObjectID::Ground_ID:	//bullet collide vs wall
 							//bullet will be broken
-							bullet->IsWounded();
+							object->IsWounded();
 						}
 					}
 				}
 			}
+			break;
+		case ObjectID::Hedgehog_ID:
+			object->handleCollision(*CurrentObjects,deltaTime);
+			break;
 		}
 			
 	}

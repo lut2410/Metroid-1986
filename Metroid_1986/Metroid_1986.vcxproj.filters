@@ -114,6 +114,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Object\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Hedgehog.cpp">
+      <Filter>Object\Dynamic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Hedgehog.h">
+      <Filter>Object\Dynamic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

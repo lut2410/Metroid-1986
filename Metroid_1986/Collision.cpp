@@ -170,7 +170,7 @@ RECT getSweptBroadphaseRect(GameObject* object, float dt)
 	RECT rect;
 	rect.left = velocity.x > 0 ? myRect.left : myRect.left + velocity.x;
 	rect.top = velocity.y > 0 ? myRect.top + velocity.y : myRect.top;
-	rect.right = velocity.y > 0 ? myRect.right + velocity.x : myRect.right;
+	rect.right = velocity.x > 0 ? myRect.right + velocity.x : myRect.right;
 	rect.bottom = velocity.y > 0 ? myRect.bottom : myRect.bottom + velocity.y;
 
 	return rect;
@@ -184,6 +184,15 @@ bool isColliding(RECT myRect, RECT otherRect)
 	float bottom = otherRect.bottom - myRect.top;
 
 	return !(left >= 0 || top <= 0 || right <= 0 || bottom >= 0);
+}
+bool isCollidingEx(RECT myRect, RECT otherRect)
+{
+	float left = otherRect.left - myRect.right;
+	float top = otherRect.top - myRect.bottom;
+	float right = otherRect.right - myRect.left;
+	float bottom = otherRect.bottom - myRect.top;
+
+	return !(left > 0 || top < 0 || right < 0 || bottom > 0);
 }
 Direction isCollidingExtend(GameObject* player, GameObject* ground)
 {

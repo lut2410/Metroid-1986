@@ -61,6 +61,7 @@ enum ObjectID{
 	Ground_ID,
 	Player_ID,
 	Bullet_ID,
+	Hedgehog_ID
 };
 
 #endif _GLOBAL_SETTING_H

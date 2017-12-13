@@ -13,5 +13,6 @@ int updateCollisionPosition(GameObject considerObject, Direction& direction);
 RECT getSweptBroadphaseRect(GameObject* object, float dt);
 Direction isCollidingExtend(GameObject* player, GameObject* ground); //direction of collsion between player and ground
 bool isColliding(RECT myRect, RECT otherRect);
+bool isCollidingEx(RECT myRect, RECT otherRect);
 bool isColliding(GameObject* considerObject, GameObject* otherObject, float& moveX, float& moveY, float dt);
 bool handleObjectCollision(GameObject* considerObject, GameObject* otherObject, Direction& direction, int dt);
