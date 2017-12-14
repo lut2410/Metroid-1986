@@ -12,7 +12,7 @@
 #define MAX_HEIGHT_JUMP 70.0f
 #define MAX_VEL_JUMP 0.5f
 #define ACCELERATION -0.0015f
-
+#define TIMETOCREATNEWBULLET 5 //frames
 enum Action{
 	None,
 	Stand=1 << 0,
@@ -65,8 +65,7 @@ class Player :public GameObject {
 
 	Action _action;
 	DirectionOfMotion _directionOfMotion;//transform of position X : left or right?
-	//bool _putHandUp;//is putting hand up?
-	//bool _shoot;//is shooting?
+	int _remainningTimeToShoot;
 
 	vector<Animation*> _actionAnimation;
 	

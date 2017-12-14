@@ -286,7 +286,19 @@ void Player::Update2(int deltaTime){
 												//then keep drawing end frame	
 	_currentAnimation->Update(deltaTime);
 
-		CreateBullet();
+
+	////Create bullet
+	//if(_remainningTimeToShoot)
+	//	_remainningTimeToShoot--;		//countdown to create new bullet
+	//else //allow to create bullet
+	//{
+		if (isHasAction(Action::Shoot))
+			CreateBullet();
+
+	//	//reset time : 5 frames later don't allow to create bullet
+	//	_remainningTimeToShoot = TIMETOCREATNEWBULLET;
+	//}
+	//	
 }
 
 void Player::Draw(Camera* camera)
@@ -480,18 +492,27 @@ void Player::SpecifyHavingPutHandUp(){
 	}
 }
 void Player::SpecifyHavingShoot(){
-	if (isHasKey(ActionKey::Shoot_Key))
+	if (_remainningTimeToShoot)
+		_remainningTimeToShoot--;		//countdown to create new bullet
+	else	//allow to shoot
+		;	//==0
+	if (isHasKey(ActionKey::Shoot_Key) && _remainningTimeToShoot==0)
 	{
-		//if the face is neutral and press the key=> the face direct right
-		if (_directionOfMotion == DirectionOfMotion::Neutral)
-			_directionOfMotion = DirectionOfMotion::Right;
+		
+			//if the face is neutral and press the key=> the face direct right
+			if (_directionOfMotion == DirectionOfMotion::Neutral)
+				_directionOfMotion = DirectionOfMotion::Right;
 
-		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
-			addOrChangeAction(Action::Shoot);
-		if (isHasAction(Action::RollingJump))						//can't perform concurrently:
-			addOrChangeAction(Action::Jump);						
-		if (isHasAction(Action::Grovel))
-			;
+			if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
+				addOrChangeAction(Action::Shoot);
+			if (isHasAction(Action::RollingJump))						//can't perform concurrently:
+				addOrChangeAction(Action::Jump);
+			if (isHasAction(Action::Grovel))
+				;
+
+			//reset time : 5 frames later don't allow to create bullet
+			_remainningTimeToShoot = TIMETOCREATNEWBULLET;
+		
 	}
 	else{
 		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
@@ -504,10 +525,6 @@ void Player::SpecifyHavingShoot(){
 }
 void Player::CreateBullet()
 {
-	//create bullet
-	if (isHasAction(Action::Shoot))
-	{
-
 		Direction directionOfBullet;//dependent on direction of the player's face and the hand
 
 		if (isHasAction(PutHandUp) == true)
@@ -520,16 +537,14 @@ void Player::CreateBullet()
 				directionOfBullet = Direction::Right_Direction;
 		}
 
-		//bullet is appear at hand of player
-		Bullet* bullet = new Bullet(getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
-		//Bullet* bullet = new Bullet(660, 1100, Right_Direction);
-		//add to 
-		map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-		int key = 200; //usually object number <200.
-		while (currentObjects->count(key)) // existed
-			key++;
-		//insert object with the key
-		currentObjects->insert(pair<int, GameObject*>(key, bullet));
-
-	}
+			//bullet is appear at hand of player
+			Bullet* bullet = new Bullet(getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
+			//Bullet* bullet = new Bullet(660, 1100, Right_Direction);
+			//add to 
+			map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+			int key = 10000; //usually object number <10000.
+			while (currentObjects->count(key)) // existed
+				key++;
+			//insert object with the key
+			currentObjects->insert(pair<int, GameObject*>(key, bullet));
 }

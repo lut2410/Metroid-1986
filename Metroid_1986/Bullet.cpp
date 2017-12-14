@@ -83,3 +83,28 @@ void Bullet::Update2(int deltaTime)
 	}
 		
 }
+void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
+{
+	for (auto it = objectList.begin(); it != objectList.end(); it++)
+	{
+		GameObject* otherObject = it->second;
+		if (otherObject->getObjectID() != ObjectID::Bullet_ID)
+		{
+			Direction direction;
+			if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
+			{
+				switch (otherObject->getObjectID())
+				{
+				case ObjectID::Ground_ID:	//bullet collide vs wall
+					//bullet will be broken
+					this->IsWounded();
+					break;
+				case ObjectID::Hedgehog_ID:
+					this->IsWounded();
+					otherObject->IsWounded();
+					break;
+				}
+			}
+		}
+	}
+}

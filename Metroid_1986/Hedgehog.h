@@ -10,7 +10,13 @@ enum HedgehogAction{
 	Crawl_Top,
 	Crawl_Right,
 	Crawl_Bottom,
-	Crawl_Left
+	Crawl_Left,
+	Crawl_Top_BeAttacking,
+	Crawl_Right_BeAttacking,
+	Crawl_Bottom_BeAttacking,
+	Crawl_Left_BeAttacking,
+	Explode
+
 };
 class Hedgehog: public GameObject{
 	HedgehogAction _action;
@@ -22,8 +28,9 @@ public:
 	void Update(int deltaTime);
 	void Update2(int deltaTime);
 	void handleCollision(map<int, GameObject*> objectList, float dt);
-	void FixPosition();
 	int IsCollideVsWall(GameObject* considerObject, GameObject* otherObject, Direction& direction, int dt);
+	// foot on the wall => /16 (use to change direction)
+	void FixPosition();
 };
 
 #endif

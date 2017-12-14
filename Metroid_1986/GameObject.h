@@ -5,6 +5,7 @@
 #include "TextureCollection.h"
 #include "Animation.h"
 #include "Camera.h"
+#define WOUNDED_FRAMES 5
 
 enum ObjectStatus{
 	Nomal,
@@ -13,7 +14,9 @@ enum ObjectStatus{
 
 class GameObject{
 protected:
-	bool _survive;	//status: survival
+	bool _survive;		//status: survival
+	int _beAttacking;	// object is be attacking
+	//int _beDestroying;	//object is be destroying
 	int _hp;			//HP
 	int _attack;		//attack enemy,HP enemy will be subtract = attack index
 	ObjectID _objectID;

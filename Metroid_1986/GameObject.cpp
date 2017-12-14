@@ -3,6 +3,8 @@ GameObject::GameObject(void){}
 GameObject::~GameObject(void){}
 GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float velY){
 	_survive = true;
+	_beAttacking = 0;
+	//_beDestroying = 0;
 	_hp = 0;
 	_attack = 0;
 	_objectID = objectID;
@@ -46,6 +48,7 @@ bool GameObject::isSurvive()
 
 void GameObject::Update(int deltaTime)
 {
+
 	if (_objectID == Ground_ID)
 		return;
 	//update position
@@ -56,6 +59,7 @@ void GameObject::Update2(int deltaTime)
 {
 }
 void GameObject::Draw(Camera* camera){
+
 	if (_objectID == Ground_ID)
 		return;
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
@@ -67,5 +71,6 @@ void GameObject::handleCollision(map<int, GameObject*> objectList, float dt)
 }
 void GameObject::IsWounded(int lossHP)
 {
+	_beAttacking = WOUNDED_FRAMES;
 	_hp -= lossHP;
 }

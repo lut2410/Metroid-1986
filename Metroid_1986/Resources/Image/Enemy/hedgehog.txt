@@ -1,7 +1,7 @@
 R		G		B
 0		0		0
 Count
-8
+16
 Sprite Info
 
 Index		Animation Info
@@ -36,6 +36,38 @@ Index		Animation Info
 7			LocationX		LocationY		FrameWidth		FrameHeight
 			129				5				14				16
 
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			145				7				16				14
+
+Index		Animation Info
+9			LocationX		LocationY		FrameWidth		FrameHeight
+			163				7				16				14
+
+Index		Animation Info
+10			LocationX		LocationY		FrameWidth		FrameHeight
+			181				5				14				16
+
+Index		Animation Info
+11			LocationX		LocationY		FrameWidth		FrameHeight
+			197				5				14				16
+
+Index		Animation Info
+12			LocationX		LocationY		FrameWidth		FrameHeight
+			213				7				16				14
+
+Index		Animation Info
+13			LocationX		LocationY		FrameWidth		FrameHeight
+			231				7				16				14
+
+Index		Animation Info
+14			LocationX		LocationY		FrameWidth		FrameHeight
+			249				5				14				16
+
+Index		Animation Info
+15			LocationX		LocationY		FrameWidth		FrameHeight
+			265				5				14				16
+
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
 Top
@@ -46,3 +78,11 @@ Bottom
 4	5	30
 Left
 6	7	30
+Top_Wounded
+8	9	30
+Right_Wounded
+10	11	30
+Bottom_Wounded
+12	13	30
+Left_Wounded
+14	15	30

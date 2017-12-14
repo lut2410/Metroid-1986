@@ -1,0 +1,24 @@
+Is All Frames are has a same size?
+0
+Count
+3
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			8				36				12				13
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			81				121				8				8
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			91				121				8				8
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+GrovelPill
+0	0	-1
+HPPill
+1	2	30

@@ -8,6 +8,7 @@ private:
 	//Texture* playerTexture;
 	Texture2* playerTexture2;
 	Texture2* bulletTexture2;
+	//Texture2* explodeTexture2;
 	Texture2* hedgehogTexture2;
 	static TextureCollection* textureCollection;
 

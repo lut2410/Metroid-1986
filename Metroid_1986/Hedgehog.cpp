@@ -4,12 +4,17 @@ Hedgehog::Hedgehog(int x, int y) :GameObject(Hedgehog_ID, x, y,0,0){
 	_hp = 3;
 	_attack = 8;
 	Texture2* hedgehogTexture = TextureCollection::getInstance()->getTexture2(Hedgehog_ID);
+	Texture2* explodeTexture = new Texture2("Resources/Image/player/image.png", "Resources/Image/player/explode.txt");
 
-	_actionAnimation.resize(4);
-	_actionAnimation[Crawl_Top]		= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Top));
-	_actionAnimation[Crawl_Right]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Right));
-	_actionAnimation[Crawl_Bottom]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Bottom));
-	_actionAnimation[Crawl_Left]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Left));
+	_actionAnimation.resize(9);
+	for (int i = 0; i < 8;i++)
+		_actionAnimation[i] = new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(i));
+	_actionAnimation[HedgehogAction::Explode] = new Animation(explodeTexture, explodeTexture->_animationNames.at(0));
+
+	//_actionAnimation[Crawl_Top]		= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Top));
+	//_actionAnimation[Crawl_Right]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Right));
+	//_actionAnimation[Crawl_Bottom]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Bottom));
+	//_actionAnimation[Crawl_Left]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Left));
 
 	_action = HedgehogAction::Crawl_Top;
 	_currentAnimation = _actionAnimation[_action];
@@ -38,16 +43,44 @@ void Hedgehog::Update(int deltaTime)
 	}
 
 	//update position
-	_posX += _velX * deltaTime;
-	_posY += _velY * deltaTime;
+	if (!_beAttacking)
+	{
+		_posX += _velX * deltaTime;
+		_posY += _velY * deltaTime;
 
+	}
+	else
+		_beAttacking--;
 
 
 }
 
 void Hedgehog::Update2(int deltaTime){
-	_currentAnimation = _actionAnimation[_action];
-	_currentAnimation->Update(deltaTime);
+	if (_hp <= 0)	//draw 3 frames when hedgehog is explde
+	{
+		_currentAnimation = _actionAnimation[Explode];
+		_currentAnimation->Update(deltaTime);
+		if (_hp>-2) 
+			_hp--;
+		else
+			_survive = false;
+		return;
+	}
+
+
+	//update animation
+	//if be attacking then change animation
+	/*int i = (bool)_beAttacking;*/
+	if (!_beAttacking)
+	{
+		_currentAnimation = _actionAnimation[_action];
+		_currentAnimation->Update(deltaTime);
+	}
+	else
+	{
+		_currentAnimation = _actionAnimation[_action + 4];
+	}
+
 }
 Hedgehog::~Hedgehog(){}
 

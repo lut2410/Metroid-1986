@@ -284,23 +284,7 @@ void TileGrid::handleCollision(int deltaTime)
 		{
 		case (ObjectID::Bullet_ID):
 
-			for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
-			{
-				GameObject* otherObject = it->second;
-				if (otherObject->getObjectID() != ObjectID::Bullet_ID)
-				{
-					Direction direction;
-					if (handleObjectCollision(object, otherObject, direction, deltaTime)) //collision 
-					{
-						switch (otherObject->getObjectID())
-						{
-						case ObjectID::Ground_ID:	//bullet collide vs wall
-							//bullet will be broken
-							object->IsWounded();
-						}
-					}
-				}
-			}
+			object->handleCollision(*CurrentObjects, deltaTime);
 			break;
 		case ObjectID::Hedgehog_ID:
 			object->handleCollision(*CurrentObjects,deltaTime);

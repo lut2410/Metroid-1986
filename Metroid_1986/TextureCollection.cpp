@@ -2,9 +2,10 @@
 TextureCollection* TextureCollection::textureCollection = NULL;
 TextureCollection::TextureCollection(){
 
-	playerTexture2 = new Texture2("Resources/Image/player/sprite.png", "Resources/Image/player/sprite.txt");
-	bulletTexture2 = new Texture2("Resources/Image/player/sprite.png", "Resources/Image/player/bullet.txt");
-	hedgehogTexture2 = new Texture2("Resources/Image/Enemy/sprite.png", "Resources/Image/enemy/hedgehog.txt");
+	playerTexture2 = new Texture2("Resources/Image/player/image.png", "Resources/Image/player/player.txt");
+	bulletTexture2 = new Texture2("Resources/Image/player/image.png", "Resources/Image/player/bullet.txt");
+
+	hedgehogTexture2 = new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/hedgehog.txt");
 };
 TextureCollection* TextureCollection::getInstance(){
 	if (textureCollection == NULL)
