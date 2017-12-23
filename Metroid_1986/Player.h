@@ -7,8 +7,8 @@
 #include "AABB.h"
 #include "Collision.h"
 #include "TileGrid.h"
-#define SPEED_WOUND 0.5f
-#define TIMEIMMORTAL_WOUNDED 100
+#define SPEED_WOUND 0.2f
+#define TIMEIMMORTAL_WOUNDED 1000
 #define SPEED_X 0.16f
 #define SPEED_Y -0.01f
 #define MAX_HEIGHT_JUMP 70.0f
@@ -99,7 +99,7 @@ public:
 	//int checkCollision();
 	//Action
 	void SpecifyAction();				//specify action base on keys are press
-	void SpecifyBeWounded();
+	bool SpecifyBeWounded();
 	void SpecifyDirectionOfMotion();//Specify direction and  base on key pressed
 	void SpecifyFootAction();
 	void SpecifyHavingPutHandUp();

@@ -90,72 +90,72 @@ Hedgehog::~Hedgehog(){}
 
 void Hedgehog::handleCollision(map<int, GameObject*> objectList, float dt)
 {
-	//FixPosition();
-	//bool OK = false;
-	//RECT a = this->getCollisionBound();
-	////just collsion vs Wall
-	//for (auto it = objectList.begin(); it != objectList.end(); it++)
-	//{
-	//	GameObject* object = it->second;
+	FixPosition();
+	bool OK = false;
+	RECT a = this->getCollisionBound();
+	//just collsion vs Wall
+	for (auto it = objectList.begin(); it != objectList.end(); it++)
+	{
+		GameObject* object = it->second;
 
-	//	if (object->getObjectID() == ObjectID::Ground_ID)
-	//	{
-	//		
-	//		RECT b = object->getCollisionBound();
-	//		Direction direction;
-	//		//if (int i = IsCollideVsWall(this, object, direction, dt))
-	//		if (int i = handleObjectCollision(this, object, direction, dt,false))
-	//		{
-	//			if (i == 2)
-	//			{
-	//				//change action
-	//				switch (_action)
-	//				{
-	//				case HedgehogAction::Crawl_Top:
-	//					_action = HedgehogAction::Crawl_Left;
-	//					break;
-	//				case HedgehogAction::Crawl_Right:
-	//					_action = HedgehogAction::Crawl_Top;
-	//					break;
-	//				case HedgehogAction::Crawl_Bottom:
-	//					_action = HedgehogAction::Crawl_Right;
-	//					break;
-	//				case HedgehogAction::Crawl_Left:
-	//					_action = HedgehogAction::Crawl_Bottom;
-	//					break;
-	//				}
-	//				OK = true;
-	//			}
-	//			else
-	//				//has collided or is adjacent
-	//			{
-	//				////update
-	//				//this->_posX += moveX;
-	//				//this->_posY += moveY;
-	//				OK = true;
-	//			}
-	//		}
-	//	}
-	//}
-	//if (OK == false)
-	//{
-	//	//change action
-	//	switch (_action)
-	//	{
-	//	case HedgehogAction::Crawl_Top:
-	//		_action = HedgehogAction::Crawl_Right;
-	//		break;
-	//	case HedgehogAction::Crawl_Right:
-	//		_action = HedgehogAction::Crawl_Bottom;
-	//		break;
-	//	case HedgehogAction::Crawl_Bottom:
-	//		_action = HedgehogAction::Crawl_Left;
-	//		break;
-	//	case HedgehogAction::Crawl_Left:
-	//		_action = HedgehogAction::Crawl_Top;
-	//		break;
-	//	}
-	//}
+		if (object->getObjectID() == ObjectID::Ground_ID)
+		{
+			
+			RECT b = object->getCollisionBound();
+			Direction direction;
+			//if (int i = IsCollideVsWall(this, object, direction, dt))
+			if (int i = handleObjectCollision(this, object, direction, dt,false))
+			{
+				if (i == 2)
+				{
+					//change action
+					switch (_action)
+					{
+					case HedgehogAction::Crawl_Top:
+						_action = HedgehogAction::Crawl_Left;
+						break;
+					case HedgehogAction::Crawl_Right:
+						_action = HedgehogAction::Crawl_Top;
+						break;
+					case HedgehogAction::Crawl_Bottom:
+						_action = HedgehogAction::Crawl_Right;
+						break;
+					case HedgehogAction::Crawl_Left:
+						_action = HedgehogAction::Crawl_Bottom;
+						break;
+					}
+					OK = true;
+				}
+				else
+					//has collided or is adjacent
+				{
+					////update
+					//this->_posX += moveX;
+					//this->_posY += moveY;
+					OK = true;
+				}
+			}
+		}
+	}
+	if (OK == false)
+	{
+		//change action
+		switch (_action)
+		{
+		case HedgehogAction::Crawl_Top:
+			_action = HedgehogAction::Crawl_Right;
+			break;
+		case HedgehogAction::Crawl_Right:
+			_action = HedgehogAction::Crawl_Bottom;
+			break;
+		case HedgehogAction::Crawl_Bottom:
+			_action = HedgehogAction::Crawl_Left;
+			break;
+		case HedgehogAction::Crawl_Left:
+			_action = HedgehogAction::Crawl_Top;
+			break;
+		}
+	}
 
 }
 void Hedgehog::FixPosition()

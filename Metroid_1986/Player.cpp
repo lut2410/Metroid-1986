@@ -188,61 +188,60 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	RECT playerBound = getCollisionBound();
 	Direction directionVsWall = Direction::None_Direction;
 	// check each element in list maybe make collision with player
+	//check collision with ground, wall
 	for (auto it = objectList.begin(); it != objectList.end(); it++)
 	{
 		GameObject* object = it->second;
 		Direction direction;
-
-		switch (object->getObjectID())
-		{
-		case ObjectID::Ground_ID:
-			if ( handleObjectCollision(this, object,direction, dt)) //is collison
+		if (object->getObjectID() == ObjectID::Ground_ID)
+			if (handleObjectCollision(this, object, direction, dt)) //is collison
 			{
-				
 				directionVsWall = Direction(directionVsWall | direction);
-				
-				//else if (direction == Direction::Adjacent_Direction) // player and wall is adjust together
-				//	//prepare collide=> prevent
-				//{
-				//	
-				//	//prepare collide
-				//	direction = isCollidingExtend(this, object);
-				//	if (direction == Direction::Left_Direction)	//width collision
-				//	{
-				//		_velX = 0;
-				//	}
-				//	else if (direction == Direction::Right_Direction)
-				//	{
-				//		_velX = 0;
-				//	}
-
-				//}
 			}
-			break;
-		case Hedgehog_ID:
-			if (handleObjectCollision(this, object, direction, dt, false))
-			{
-				addOrChangeAction(Action::BeWounded);
-				beWounded_remainningTime = TIMEIMMORTAL_WOUNDED;
-				this->IsWounded(object->getAttackDame());
-				switch (direction)
-				{
-				case Direction::Left_Direction:
-					_velX =  SPEED_WOUND;
-					_velY = SPEED_WOUND;
-
-					break;
-				case Direction::Right_Direction:
-					_velX = -SPEED_WOUND;
-					_velY = SPEED_WOUND;
-					break;
-				}
-			}
-			break;
-		}
-		
-
 	}
+	//check collision with enemy
+	//if player isn't be wounded
+	// otherwise, wounded => immortal : don't check collision with enemy
+	if (!isHasAction(Action::BeWounded))
+	{
+		for (auto it = objectList.begin(); it != objectList.end(); it++)
+		{
+			GameObject* object = it->second;
+			Direction direction;
+
+			switch (object->getObjectID())
+			{
+			case Hedgehog_ID:
+				if (handleObjectCollision(this, object, direction, dt, false))
+				{
+					addOrChangeAction(Action::BeWounded);
+					beWounded_remainningTime = TIMEIMMORTAL_WOUNDED;
+					this->IsWounded(object->getAttackDame());
+					switch (direction)
+					{
+					case Direction::Left_Direction:
+						_velX = SPEED_WOUND;
+						_velY = SPEED_WOUND;
+
+						break;
+					case Direction::Right_Direction:
+						_velX = -SPEED_WOUND;
+						_velY = SPEED_WOUND;
+						break;
+					case Direction::Top_Direction:
+						_velY = -SPEED_WOUND;
+						break;
+					case Direction::Bottom_Direction:
+						_velY = SPEED_WOUND;
+
+						break;
+					}
+				}
+				break;
+			}
+		}
+	}
+	
 	//handle collision vs wall, after check collision between player with all walls
 	handleVsWall(directionVsWall,dt);
 
@@ -279,11 +278,15 @@ void Player::handleVsWall(Direction directionVsWall, int deltaTime)
 			else			//is going down
 			{
 				_velY = 0;
+				if (isHasAction(Action::BeWounded))
+				{
+					_velX = _velY = 0;
+				}
 				if (isHasAction(Action::Jump) || isHasAction(Action::RollingJump))
-				if (_velX == 0)
-					addOrChangeAction(Action::Stand);
-				else
-					addOrChangeAction(Action::Run);
+					if (_velX == 0)
+						addOrChangeAction(Action::Stand);
+					else
+						addOrChangeAction(Action::Run);
 			}
 			
 		}
@@ -445,27 +448,32 @@ void Player::Draw(Camera* camera)
 
 void Player::SpecifyAction(){
 
-	SpecifyBeWounded();
+	if (SpecifyBeWounded())
+		//be wounded => lose control
+		return;
 	SpecifyDirectionOfMotion();
 	SpecifyFootAction();
 	SpecifyHavingPutHandUp();
 	SpecifyHavingShoot();
 };
 
-void Player::SpecifyBeWounded()
+bool Player::SpecifyBeWounded()
 {
 	if (beWounded_remainningTime <= 0)			//time up player is immortal
+	{
 		removeAction(Action::BeWounded);
-	if (isHasAction(Action::BeWounded))
+		return false;
+	}
+	else
 		//be wounded => don't update from keyboard
 	{
 		if (_velX)			//decrease velocity 
-			_velX -= (bool)_velX * SPEED_WOUND / 10; //decrease 1/10 velocity
+			_velX -= _velX * SPEED_WOUND / 10; //decrease 1/10 velocity
 		//else					//vel ==0 => back to normal status
-		if (_velY)
-			_velY -= (bool)_velY * SPEED_WOUND / 10;
+		//if (_velY)
+		//	_velY -= _velY * SPEED_WOUND / 10;
 
-		return;
+		return true;
 	}
 }
 void Player::SpecifyDirectionOfMotion(){
