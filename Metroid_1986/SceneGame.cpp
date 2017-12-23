@@ -27,7 +27,7 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	_player = new Player(640,1100);
+	_player = new Player(640,1103);
 
 	_camera->SetSizeMap(0, 1280);
 	//// player in begin is centered on screen
@@ -61,14 +61,12 @@ void SceneGame::RenderFrame(int time){
 
 	//draw background(ground)
 	_backgroundMap->Draw(_camera);
-	
 	//UPDATE POSITION
 	_tileGrid->Update(_camera,time);
-	//Hedgehog* hedgehog = new Hedgehog(553, 1076);
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	if (!currentObjects->count(300))
 	{
-		Hedgehog* hedgehog = new Hedgehog(578, 1079);
+		Hedgehog* hedgehog = new Hedgehog(578, 1079,2);
 		currentObjects->insert(pair<int, GameObject*>(300, hedgehog));
 
 	}
@@ -84,7 +82,9 @@ void SceneGame::RenderFrame(int time){
 	//DRAW
 	_tileGrid->Draw(_camera);
 	_player->Draw(_camera);
-
+	//UI: HP of player
+	//UI::draw(_player->getHP());
+	
 	G_SpriteHandler->End();
 }
 

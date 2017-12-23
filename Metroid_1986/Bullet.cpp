@@ -4,15 +4,16 @@ Bullet::Bullet(int x, int y, Direction direction, DWORD survivalTime) :GameObjec
 	_hp = 1;
 	_attack = 1;
 
-	Texture2* bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
+	Texture2* bulletTexture = NULL;
+	bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
 
-	_allAnimation.resize(2);//because bullet has 2 action
+	_actionAnimation.resize(2);//because bullet has 2 action
 	//flying
-	_allAnimation[0] = new Animation(bulletTexture, bulletTexture->_animationNames.at(0)); 
+	_actionAnimation[0] = new Animation(bulletTexture, bulletTexture->_animationNames.at(0)); 
 	//broken
-	_allAnimation[1] = new Animation(bulletTexture, bulletTexture->_animationNames.at(1)); 
+	_actionAnimation[1] = new Animation(bulletTexture, bulletTexture->_animationNames.at(1)); 
 
-	this->_currentAnimation = _allAnimation[0];
+	this->_currentAnimation = _actionAnimation[0];
 	_remainingTime = survivalTime;
 	switch (direction){
 	case Direction::None_Direction:
@@ -79,7 +80,7 @@ void Bullet::Update2(int deltaTime)
 	if (_hp <= 0)
 	{
 		_survive = false;
-		_currentAnimation = _allAnimation[1];
+		_currentAnimation = _actionAnimation[1];
 	}
 		
 }

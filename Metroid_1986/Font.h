@@ -22,8 +22,8 @@ public:
 	~Font();
 	void render(char* text_, float x_, float y_, D3DCOLOR color_ = D3DCOLOR_ARGB(255, 255, 255, 255));
 	void render(int number_, float x_, float y_, D3DCOLOR color_ = D3DCOLOR_ARGB(255, 255, 255, 255));
-	void renderAnimation(char* text_, float x_, float y_, int deltaTime_);
-	void renderAnimation(int number_, float x_, float y_, int deltaTime_);
+	void renderFlicker(char* text_, float x_, float y_, int deltaTime_);
+	void renderFlicker(int number_, float x_, float y_, int deltaTime_);
 	void onLost();
 };
 #endif

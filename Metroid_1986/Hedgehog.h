@@ -14,21 +14,20 @@ enum HedgehogAction{
 	Crawl_Top_BeAttacking,
 	Crawl_Right_BeAttacking,
 	Crawl_Bottom_BeAttacking,
-	Crawl_Left_BeAttacking,
-	Explode
+	Crawl_Left_BeAttacking
+	
 
 };
 class Hedgehog: public GameObject{
 	HedgehogAction _action;
-	vector<Animation*> _actionAnimation;
 public:
 	Hedgehog();
-	Hedgehog(int x, int y);
+	Hedgehog(int x, int y, int type = 1);
 	~Hedgehog();
 	void Update(int deltaTime);
 	void Update2(int deltaTime);
 	void handleCollision(map<int, GameObject*> objectList, float dt);
-	int IsCollideVsWall(GameObject* considerObject, GameObject* otherObject, Direction& direction, int dt);
+	//int IsCollideVsWall(GameObject* considerObject, GameObject* otherObject, Direction& direction, int dt);
 	// foot on the wall => /16 (use to change direction)
 	void FixPosition();
 };

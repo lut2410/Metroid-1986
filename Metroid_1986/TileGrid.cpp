@@ -294,11 +294,20 @@ void TileGrid::handleCollision(int deltaTime)
 	}
 }
 GameObject* TileGrid::CreateObject(int id, int x, int y){
-	GameObject* object;
 
-	switch (id){
-	case 0:
+	ObjectIDFromFile obID = ObjectIDFromFile(id);
+	GameObject* object;
+	switch (obID){
+	case ObjectIDFromFile::Ground_IDFF:
 		object = new Ground(x, y);
+		return object;
+		break;
+	case ObjectIDFromFile::Hedgehog_IDFF:
+		object = new Hedgehog(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::Hedgehog2_IDFF:
+		object = new Hedgehog(x, y, 2);
 		return object;
 		break;
 	}

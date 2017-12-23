@@ -62,19 +62,19 @@ Index		Animation Info
 
 Index		Animation Info
 14			LocationX		LocationY		FrameWidth		FrameHeight
-			271				27				12				13
+			271				26				12				14
 
 Index		Animation Info
 15			LocationX		LocationY		FrameWidth		FrameHeight
-			285				27				12				13
+			285				26				12				14
 
 Index		Animation Info
 16			LocationX		LocationY		FrameWidth		FrameHeight
-			299				27				12				13
+			299				26				12				14
 
 Index		Animation Info
 17			LocationX		LocationY		FrameWidth		FrameHeight
-			313				27				12				13
+			313				26				12				14
 
 Index		Animation Info
 18			LocationX		LocationY		FrameWidth		FrameHeight

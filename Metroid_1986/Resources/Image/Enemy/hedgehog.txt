@@ -1,7 +1,7 @@
-R		G		B
-0		0		0
+Is All Frames are has a same size?
+0
 Count
-16
+32
 Sprite Info
 
 Index		Animation Info
@@ -68,6 +68,70 @@ Index		Animation Info
 15			LocationX		LocationY		FrameWidth		FrameHeight
 			265				5				14				16
 
+Index		Animation Info
+16			LocationX		LocationY		FrameWidth		FrameHeight
+			281				7				16				14
+
+Index		Animation Info
+17			LocationX		LocationY		FrameWidth		FrameHeight
+			299				7				16				14
+
+Index		Animation Info
+18			LocationX		LocationY		FrameWidth		FrameHeight
+			317				5				14				16
+
+Index		Animation Info
+19			LocationX		LocationY		FrameWidth		FrameHeight
+			333				5				14				16
+
+Index		Animation Info
+20			LocationX		LocationY		FrameWidth		FrameHeight
+			349				7				16				14
+
+Index		Animation Info
+21			LocationX		LocationY		FrameWidth		FrameHeight
+			367				7				16				14
+
+Index		Animation Info
+22			LocationX		LocationY		FrameWidth		FrameHeight
+			385				5				14				16
+
+Index		Animation Info
+23			LocationX		LocationY		FrameWidth		FrameHeight
+			401				5				14				16
+
+Index		Animation Info
+24			LocationX		LocationY		FrameWidth		FrameHeight
+			417				8				16				14
+
+Index		Animation Info
+25			LocationX		LocationY		FrameWidth		FrameHeight
+			435				8				16				14
+
+Index		Animation Info
+26			LocationX		LocationY		FrameWidth		FrameHeight
+			453				6				14				16
+
+Index		Animation Info
+27			LocationX		LocationY		FrameWidth		FrameHeight
+			469				6				14				16
+
+Index		Animation Info
+28			LocationX		LocationY		FrameWidth		FrameHeight
+			485				8				16				14
+
+Index		Animation Info
+29			LocationX		LocationY		FrameWidth		FrameHeight
+			503				8				16				14
+
+Index		Animation Info
+30			LocationX		LocationY		FrameWidth		FrameHeight
+			521				6				14				16
+
+Index		Animation Info
+31			LocationX		LocationY		FrameWidth		FrameHeight
+			537				6				14				16
+
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
 Top
@@ -86,3 +150,19 @@ Bottom_Wounded
 12	13	30
 Left_Wounded
 14	15	30
+Type2:Top
+16	17	30
+Type2:Right
+18	19	30
+Type2:Bottom
+20	21	30
+Type2:Left
+22	23	30
+Type2:Top_Wounded
+24	25	30
+Type2:Right_Wounded
+26	27	30
+Type2:Bottom_Wounded
+28	29	30
+Type2:Left_Wounded
+30	31	30

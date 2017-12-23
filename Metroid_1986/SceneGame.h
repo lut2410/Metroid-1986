@@ -8,7 +8,7 @@
 #include "BackgroundMap.h"
 #include "TileGrid.h"
 #include "Texture2.h"
-
+#include "UI.h"
 
 class SceneGame : public Scene{
 	DWORD _stageStartTime;

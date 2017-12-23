@@ -9,7 +9,7 @@
 
 enum ObjectStatus{
 	Nomal,
-	Destroy
+	Explode=99
 };
 
 class GameObject{
@@ -21,6 +21,8 @@ protected:
 	int _attack;		//attack enemy,HP enemy will be subtract = attack index
 	ObjectID _objectID;
 	Animation* _currentAnimation;
+	vector<Animation*> _actionAnimation; 
+	Animation* expoldeAnimation;
 	//Position of Object
 
 	//Velocity of Object
@@ -38,6 +40,7 @@ public:
 	virtual RECT getCollisionBound();
 	D3DXVECTOR2 getVelocity();
 	ObjectID getObjectID();
+	int getAttackDame();
 	bool isSurvive();
 	//update action and position
 	virtual void Update(int deltaTime);			
@@ -46,5 +49,6 @@ public:
 	virtual void Draw(Camera* camera);
 	virtual void handleCollision(map<int, GameObject*> objectList, float dt);
 	virtual void IsWounded(int lossHP=1);		//be wounded 'lossHP' HP
+	bool enemyCheckExplode(int deltaTime);	//be destroying
 };
 #endif

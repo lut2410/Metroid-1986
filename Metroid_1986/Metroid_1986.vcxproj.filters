@@ -117,6 +117,9 @@
     <ClCompile Include="Hedgehog.cpp">
       <Filter>Object\Dynamic</Filter>
     </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="Hedgehog.h">
       <Filter>Object\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Control</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

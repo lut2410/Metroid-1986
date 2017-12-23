@@ -26,4 +26,17 @@ bool isCollideR(RECT a, RECT b){
 		|| b.top < a.bottom
 		|| b.bottom > a.top);
 };
-
+void setDirection(Direction& _direction, Direction direction){
+	if (_direction != direction)
+		_direction = direction;
+};
+void addDirection(Direction& _direction, Direction direction){
+	setDirection(_direction, Direction(_direction | direction));
+};
+void removeDirection(Direction& _direction, Direction direction){
+	if (isHasDirection(_direction, direction))
+		setDirection(_direction, Direction(_direction & ~direction));
+};
+bool isHasDirection(Direction& _direction, Direction direction){
+	return (_direction & direction) == direction;
+};

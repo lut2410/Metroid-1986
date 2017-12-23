@@ -53,7 +53,30 @@ void Animation::Update(int t){
 void Animation::Draw(int x, int y){
 	_spriteList->at(_currentFrameIndex).Draw(x,y);
 }
+void Animation::DrawFlicker(int x, int y){
+	if (flicker == false)
+	{
+		_spriteList->at(_currentFrameIndex).Draw(x, y);
+		flicker = true;
+	}
+	else
+		flicker = false;
+	//_spriteList->at(_currentFrameIndex).Draw(x, y);
+}
 void Animation::DrawFlipHorizontal(int x, int y)
 {
+
 	_spriteList->at(_currentFrameIndex).DrawFlipHorizontal(x, y);
+}
+
+void Animation::DrawFlipHorizontalFlicker(int x, int y)
+{
+	if (flicker == false)
+	{
+		_spriteList->at(_currentFrameIndex).DrawFlipHorizontal(x, y);
+		flicker = true;
+	}
+	else
+		flicker = false;
+	
 }

@@ -5,16 +5,16 @@
 
 
 enum Direction{
-	None_Direction,
-	Left_Direction,
-	Right_Direction,
-	Top_Direction,
-	Bottom_Direction,
-	TopLeft_Direction,
-	TopRight_Direction,
-	BottomLeft_Direction,
-	BottomRight_Direction,
-	Adjacent_Direction
+	None_Direction=0,
+	Left_Direction = 1<<0,
+	Right_Direction = 1<<1,
+	Top_Direction = 1<<2,
+	Bottom_Direction = 1<<3,
+	TopLeft_Direction = 1<<4,
+	TopRight_Direction = 1<<5,
+	BottomLeft_Direction = 1<<6,
+	BottomRight_Direction = 1<<7,
+	Adjacent_Direction = 1<<8
 };
 
 struct Box{
@@ -28,5 +28,9 @@ struct Box{
 
 bool isCollide(Box, Box);
 bool isCollideR(RECT, RECT);
+void setDirection(Direction& _direction, Direction direction);
+void addDirection(Direction& _direction, Direction direction);
+void removeDirection(Direction& _direction, Direction direction);
+bool isHasDirection(Direction& _direction, Direction direction);
 
 #endif

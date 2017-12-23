@@ -7,6 +7,7 @@
 class Animation{
 	vector<Sprite>* _spriteList;	//list contain sprites
 	//int _numberOfFrame;				//amout frames
+	bool flicker;						//supported to flicker
 	int _currentFrameIndex;
 	int _timeAnimation;
 	int _timeLocal;
@@ -24,6 +25,8 @@ public:
 	//Render current sprite in location(x,y) at the target surface
 	void Draw(int x, int y, int index);						//Draw frame has specified index
 	void Draw(int x, int y);
+	void DrawFlicker(int x, int y);
 	void DrawFlipHorizontal(int x, int y);
+	void DrawFlipHorizontalFlicker(int x, int y);
 };
 #endif

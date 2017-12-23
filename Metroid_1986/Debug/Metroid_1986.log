@@ -1,24 +1,41 @@
-﻿Build started 12/14/2017 9:42:13 PM.
+﻿Build started 12/23/2017 4:30:30 PM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
-         Player.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Collision.cpp
+         Collision.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(92): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(128): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(189): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(258): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(259): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(310): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(322): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(334): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(401): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(490): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(492): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(514): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(522): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(524): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(541): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(25): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(26): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(34): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(38): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(39): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(61): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(121): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(122): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(126): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(127): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(132): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(133): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(137): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(138): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(216): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(217): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(218): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(219): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(226): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(227): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(228): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(229): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(235): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(236): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(237): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(238): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(254): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(256): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(278): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(279): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(280): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(281): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.lib" /MACHINE:X86 Debug\AABB.obj
          Debug\Animation.obj
@@ -44,10 +61,11 @@
          Debug\Texture2.obj
          Debug\Tile.obj
          Debug\TileGrid.obj
+         Debug\UI.obj
          Debug\WinMain.obj
          Metroid_1986.vcxproj -> D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe
      1>Done Building Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.43
+Time Elapsed 00:00:01.08

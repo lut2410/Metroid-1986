@@ -7,6 +7,8 @@
 #include "AABB.h"
 #include "Collision.h"
 #include "TileGrid.h"
+#define SPEED_WOUND 0.5f
+#define TIMEIMMORTAL_WOUNDED 100
 #define SPEED_X 0.16f
 #define SPEED_Y -0.01f
 #define MAX_HEIGHT_JUMP 70.0f
@@ -23,7 +25,8 @@ enum Action{
 	PrepareGrounding = 1 << 5,
 	Die = 1 << 6,
 	PutHandUp = 1 << 7,
-	Shoot = 1 << 8
+	Shoot = 1 << 8,
+	BeWounded = 1<<9
 	
 };
 
@@ -64,17 +67,16 @@ enum ActionKey{
 class Player :public GameObject {
 
 	Action _action;
+	bool flicker;						//player is flicker? use for draw
+	int beWounded_remainningTime;
+	Block _block;
 	DirectionOfMotion _directionOfMotion;//transform of position X : left or right?
 	int _remainningTimeToShoot;
-
-	vector<Animation*> _actionAnimation;
 	
 public:
 	//Current Key
 	ActionKey _currentKeys;
 	bool _isStop;		//are both player and game stop? => if yes then don't allow press or release key
-	//bool _blockLeft, _blockRight;
-	Block _block;
 	Player();
 	Player(int x, int y);
 	~Player();
@@ -85,9 +87,11 @@ public:
 	void removeAction(Action action);
 	bool isHasAction(Action action);
 	bool isHasKey(ActionKey);
+	int getHP();
 	RECT getCollisionBound();					//use for check collision
 	D3DXVECTOR2 getPositionOfHand();			//bullet fly-out from hand
 	void handleCollision(map<int, GameObject*> objectList,float dt);
+	void handleVsWall(Direction d, int dt);				
 	void UpdatePosition(int );
 	void Update(int time);	//update action and position after press key
 	void Update2(int time);	//update frame of sprite and position of sprite
@@ -95,11 +99,13 @@ public:
 	//int checkCollision();
 	//Action
 	void SpecifyAction();				//specify action base on keys are press
+	void SpecifyBeWounded();
 	void SpecifyDirectionOfMotion();//Specify direction and  base on key pressed
 	void SpecifyFootAction();
 	void SpecifyHavingPutHandUp();
 	void SpecifyHavingShoot();
 	void CreateBullet();
+	bool checkToStandUpInThisLocation();
 };
 #endif
 

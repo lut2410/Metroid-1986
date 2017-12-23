@@ -10,7 +10,6 @@
 
 class Bullet: public GameObject{
 	int _remainingTime;		// time survival
-	vector<Animation*> _allAnimation;
 public:
 	Bullet();
 	Bullet(int x, int y, Direction directionFly, DWORD survivalTime = 200);

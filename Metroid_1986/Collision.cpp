@@ -1,7 +1,10 @@
 ﻿#include"Collision.h"
 
-bool handleObjectCollision(GameObject* considerObject, GameObject* otherObject,Direction& direction, int dt)
+int handleObjectCollision(GameObject* considerObject, GameObject* otherObject,Direction& direction, int dt, bool isUpdate)
 {
+	RECT c = considerObject->getCollisionBound();
+	if (otherObject->_posX == 632 && otherObject->_posY == 1080)
+		int i = 0;
 	//Direction direction; //direction of collision of considerObject
 	float dxEntry=0, dyEntry=0;
 	float time = AABBCollision(considerObject, otherObject, direction, dxEntry, dyEntry, dt);
@@ -10,35 +13,77 @@ bool handleObjectCollision(GameObject* considerObject, GameObject* otherObject,D
 	{
 		// cản lại
 		//updateTargetPosition(otherObject, direction, true);
-
 		//if (direction==Left_Direction||direction==Right_Direction)	//width-collision //don't neccessary because dxEntry or dyEntry =0 -> + constant
-			considerObject->_posX += dxEntry;
-		//else											//height-collision
-			considerObject->_posY += dyEntry;
-			//direction was valid
-			return true;
-	}	
-	else if (isColliding(considerObject, otherObject, moveX, moveY, dt))
-		//consider the case 2 object is colliding
+		//	considerObject->_posX += dxEntry;
+		//
+		////else											//height-collision
+		//if (direction == Top_Direction || direction == Bottom_Direction)
+		//	considerObject->_posY += dyEntry;
+		//	//direction was valid
+		if (isUpdate)
 		{
-			considerObject->_posX += moveX;
-			considerObject->_posY += moveY;
-			if (moveX > 0)
-				direction = Direction::Left_Direction;
-			else if (moveX<0)
-				direction = Direction::Right_Direction;
-			else if (moveY>0)
-				direction = Direction::Bottom_Direction;
-			else if (moveY < 0)
-				direction = Direction::Top_Direction;
-			else //moveX=0&moveY=0
-				direction = Direction::Adjacent_Direction; //2 object is adjacent together
-			return true;
+			considerObject->_posX += dxEntry;
+			considerObject->_posY += dyEntry;
 		}
-	else //don't happen collision or a long time to happen
+			return 2;
+	}	
+	else
+	{
+		if (isUpdate)
+		{
+			if (isColliding(considerObject, otherObject, direction, moveX, moveY, dt))
+				//consider the case 2 object is colliding
+			{
+
+				considerObject->_posX += moveX;
+				considerObject->_posY += moveY;
+				//if (moveX > 0)
+				//	direction = Direction::Left_Direction;
+				//else if (moveX<0)
+				//	direction = Direction::Right_Direction;
+				//else if (moveY>0)
+				//	direction = Direction::Bottom_Direction;
+				//else if (moveY < 0)
+				//	direction = Direction::Top_Direction;
+				//else //moveX=0&moveY=0
+				//	direction = Direction::Adjacent_Direction; //2 object is adjacent together
+				return 1;
+			}
+
+			
+		}
+		else //don't update
+		{
+			/*if (isCollidingEx(considerObject->getCollisionBound(), otherObject->getCollisionBound()))
+			{
+				return 1;
+			}*/
+			if (isColliding(considerObject, otherObject, direction, moveX, moveY, dt))
+				//consider the case 2 object is colliding
+			{
+
+				//considerObject->_posX += moveX;
+				//considerObject->_posY += moveY;
+					
+				//if (moveX > 0)
+				//	direction = Direction::Left_Direction;
+				//else if (moveX<0)
+				//	direction = Direction::Right_Direction;
+				//else if (moveY>0)
+				//	direction = Direction::Bottom_Direction;
+				//else if (moveY < 0)
+				//	direction = Direction::Top_Direction;
+				//else //moveX=0&moveY=0
+				//	direction = Direction::Adjacent_Direction; //2 object is adjacent together
+				return 1;
+			}
+		}
+		
+	}
+	//don't happen collision or a long time to happen
 	{
 		direction = Direction::None_Direction;
-		return false;
+		return 0;
 	}
 	// if direction != left or right => keep direction stable
 
@@ -46,24 +91,29 @@ bool handleObjectCollision(GameObject* considerObject, GameObject* otherObject,D
 }
 float AABBCollision(GameObject* considerObject, GameObject* otherObject, Direction &direction, float& dxEntry, float& dyEntry, int dt){
 
+	D3DXVECTOR2 considerObjectVel = D3DXVECTOR2(considerObject->getVelocity().x * dt, considerObject->getVelocity().y * dt);
+	D3DXVECTOR2 otherObjectVel = D3DXVECTOR2(otherObject->getVelocity().x * dt, otherObject->getVelocity().y * dt);
+	//D3DXVECTOR2 velocity = - considerObjectVel;
+	//float velX = considerObjectVel.x, velY = considerObjectVel.y;
+
+	D3DXVECTOR2 velocity = considerObjectVel - otherObjectVel;		// consider - other
+
+
 	RECT considerRect = considerObject->getCollisionBound();
 	RECT otherRect = otherObject->getCollisionBound();
 
-
-	RECT broadphaseRect = getSweptBroadphaseRect(considerObject, dt);	
+	if (considerObject->getObjectID() == Player_ID&&otherRect.right == 512 && otherRect.top == 1104 && considerObject->getVelocity().x<0)
+		considerRect = considerObject->getCollisionBound();
+	
+	RECT broadphaseRect = getSweptBroadphaseRect(considerRect, velocity);
 	if (!isColliding(broadphaseRect, otherRect))				
 	{
 		direction = Direction::None_Direction;
 		return 1.0f;
 	}
-
-	D3DXVECTOR2 considerObjectVel = D3DXVECTOR2(considerObject->getVelocity().x * dt , considerObject->getVelocity().y * dt );
-	D3DXVECTOR2 otherObjectVel = D3DXVECTOR2(otherObject->getVelocity().x * dt , otherObject->getVelocity().y * dt );
-	//D3DXVECTOR2 velocity = - considerObjectVel;
-	//float velX = considerObjectVel.x, velY = considerObjectVel.y;
-
-	D3DXVECTOR2 velocity = considerObjectVel - otherObjectVel ;		// consider - other
-
+	if (considerObject->getObjectID() == Player_ID&&otherObject->getObjectID() == Hedgehog_ID)
+		considerRect = considerObject->getCollisionBound();
+	
 	// find the distance between the objects on the near and far sides for both x and y
 	float dxExit, dyExit;
 	if (velocity.x > 0)
@@ -117,10 +167,7 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 	float entryTime = max(txEntry, tyEntry);
 	float exitTime = min(txExit, tyExit);
 
-	// Không xảy ra va chạm khi:
-	// thời gian bắt đầu va chạm lớn hơn thời gian kết thúc va chạm
-	// thời gian va chạm x, y nhỏ hơn 0 (2 object đang đi xa ra nhau)
-	// thời gian va chạm x, y lớn hơn 1 (còn xa quá chưa thể va chạm)
+
 	// if there was no collision
 	if (entryTime > exitTime || txEntry < 0.0f && tyEntry < 0.0f || txEntry > 1.0f || tyEntry > 1.0f)
 	{
@@ -161,19 +208,17 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 	return entryTime;
 };
 
-RECT getSweptBroadphaseRect(GameObject* object, float dt)
+RECT getSweptBroadphaseRect(RECT rect, D3DXVECTOR2 velocity)
 {
-	// Vận tốc mỗi frame (vX, vY)
-	auto velocity = D3DXVECTOR2(object->getVelocity().x * dt, object->getVelocity().y * dt);
-	auto myRect = object->getCollisionBound();
+	//velocity of 2 object
 
-	RECT rect;
-	rect.left = velocity.x > 0 ? myRect.left : myRect.left + velocity.x;
-	rect.top = velocity.y > 0 ? myRect.top + velocity.y : myRect.top;
-	rect.right = velocity.x > 0 ? myRect.right + velocity.x : myRect.right;
-	rect.bottom = velocity.y > 0 ? myRect.bottom : myRect.bottom + velocity.y;
+	RECT rs;
+	rs.left = velocity.x > 0 ? rect.left : rect.left + velocity.x;
+	rs.top = velocity.y > 0 ? rect.top + velocity.y : rect.top;
+	rs.right = velocity.x > 0 ? rect.right + velocity.x : rect.right;
+	rs.bottom = velocity.y > 0 ? rect.bottom : rect.bottom + velocity.y;
 
-	return rect;
+	return rs;
 }
 
 bool isColliding(RECT myRect, RECT otherRect)
@@ -224,7 +269,7 @@ Direction isCollidingExtend(GameObject* player, GameObject* ground)
 	//	return Direction::Top_Direction;
 
 }
-bool isColliding(GameObject* considerObject, GameObject* otherObject, float& moveX, float& moveY, float dt)
+bool isColliding(GameObject* considerObject, GameObject* otherObject,Direction& direction, float& moveX, float& moveY, float dt)
 {
 	moveX = moveY = 0.0f;
 	RECT considerRect = considerObject->getCollisionBound();
@@ -237,22 +282,54 @@ bool isColliding(GameObject* considerObject, GameObject* otherObject, float& mov
 
 	// collide when
 	// left <= 0 && right >= 0 && top >= 0 && bottom <= 0
-	if (left >= 0 || right <= 0 || top <= 0 || bottom >= 0)
+	if (left > 0  || right < 0  || top < 0  || bottom > 0 )
 		return false;
 
 	// if there are collide
 	moveX = abs(left) < right ? left : right;
 	moveY = top < abs(bottom) ? top : bottom;
 
-	D3DXVECTOR2 considerObjectVel = D3DXVECTOR2(considerObject->getVelocity().x * dt, considerObject->getVelocity().y * dt);
-	D3DXVECTOR2 otherObjectVel = D3DXVECTOR2(otherObject->getVelocity().x * dt, otherObject->getVelocity().y * dt);
-	D3DXVECTOR2 velocity = considerObjectVel - otherObjectVel;
+	//D3DXVECTOR2 considerObjectVel = D3DXVECTOR2(considerObject->getVelocity().x * dt, considerObject->getVelocity().y * dt);
+	//D3DXVECTOR2 otherObjectVel = D3DXVECTOR2(otherObject->getVelocity().x * dt, otherObject->getVelocity().y * dt);
+	//D3DXVECTOR2 velocity = considerObjectVel - otherObjectVel;
 
+	//collide at corner of 2 object
+	if (moveX == 0 && moveY == 0)
+		return false;
+	//adjacent at 1 edge
+	if (moveX == 0 || moveY == 0)
+	{
+		if (top == 0)
+			direction = Direction::Bottom_Direction;
+		else if (bottom == 0)
+			direction = Direction::Top_Direction;
+		else if (left == 0)
+			direction = Direction::Right_Direction;
+		else if (right == 0)
+			direction = Direction::Left_Direction;
+
+		moveX = moveY = 0.0f;
+		return true;
+	}
+	//overlap
 	// take smaller 
-	if (abs(moveX/velocity.x) < abs(moveY/velocity.y)||velocity.y==0)
+	if (abs(moveX) < abs(moveY))
+	{
 		moveY = 0.0f;
+		if (moveX > 0)
+			direction = Direction::Left_Direction; 
+		if (moveX < 0)
+			direction = Direction::Right_Direction;	
+	}
 	else
+	{
 		moveX = 0.0f;
+		if (moveY > 0)
+			direction = Direction::Bottom_Direction;
+		if (moveY < 0)
+			direction = Direction::Top_Direction;
+	}
+
 
 	return true;
 }

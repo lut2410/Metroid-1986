@@ -4,7 +4,6 @@ GameObject::~GameObject(void){}
 GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float velY){
 	_survive = true;
 	_beAttacking = 0;
-	//_beDestroying = 0;
 	_hp = 0;
 	_attack = 0;
 	_objectID = objectID;
@@ -13,6 +12,10 @@ GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float 
 	_velX = velX;
 	_velY = velY;
 	CreateSprite();
+
+	Texture2* explode = NULL;
+	explode = TextureCollection::getInstance()->getTexture2(ExplodeObject_ID);
+	expoldeAnimation = new Animation(explode, explode->_animationNames.at(0));
 }
 void GameObject::CreateSprite()
 {
@@ -40,6 +43,10 @@ D3DXVECTOR2 GameObject::getVelocity(){
 };
 ObjectID GameObject::getObjectID(){
 	return _objectID;
+}
+int GameObject::getAttackDame()
+{
+	return _attack;
 }
 bool GameObject::isSurvive()
 {
@@ -73,4 +80,18 @@ void GameObject::IsWounded(int lossHP)
 {
 	_beAttacking = WOUNDED_FRAMES;
 	_hp -= lossHP;
+}
+bool GameObject::enemyCheckExplode(int deltaTime)
+{
+	if (_hp <= 0)	//draw 3 frames when hedgehog is explde
+	{
+		_currentAnimation = expoldeAnimation;
+		_currentAnimation->Update(deltaTime);
+		if (_hp>-2)
+			_hp--;
+		else
+			_survive = false;
+		return true;
+	}
+	return false;
 }

@@ -1,0 +1,28 @@
+Is All Frames are has a same size?
+0
+Count
+4
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			15				30				16				24
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			33				30				8				24
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			43				30				8				24
+
+Index		Animation Info
+3			LocationX		LocationY		FrameWidth		FrameHeight
+			205				47				7				7
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+Flap
+0	2	30
+BulletFromBat
+3	3	-1

@@ -1,0 +1,76 @@
+﻿Build started 12/22/2017 11:32:14 PM.
+     1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /D _MBCS /D _CRT_SECURE_NO_WARNINGS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Collision.cpp
+         Collision.cpp
+         C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>Collision.cpp(15): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>Collision.cpp(19): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>Collision.cpp(27): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Collision.cpp(31): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>Collision.cpp(32): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>Collision.cpp(54): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Collision.cpp(93): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Collision.cpp(111): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(112): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(116): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(117): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(122): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(123): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(127): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(128): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(208): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
+     1>Collision.cpp(209): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
+     1>Collision.cpp(210): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
+     1>Collision.cpp(211): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
+     1>Collision.cpp(218): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(219): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(220): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(221): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(227): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(228): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(229): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(230): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(246): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(248): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(270): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(271): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(272): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Collision.cpp(273): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.exe" /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.lib" /MACHINE:X86 /SAFESEH Release\AABB.obj
+         Release\Animation.obj
+         Release\BackgroundMap.obj
+         Release\Bullet.obj
+         Release\Camera.obj
+         Release\Collision.obj
+         Release\Font.obj
+         Release\Game.obj
+         "Release\Global Setting.obj"
+         Release\GameObject.obj
+         Release\Ground.obj
+         Release\Hedgehog.obj
+         Release\Player.obj
+         Release\QuadTree.obj
+         Release\Scene.obj
+         Release\SceneEnd.obj
+         Release\SceneGame.obj
+         Release\SceneMain.obj
+         Release\SceneMenu.obj
+         Release\Sprite.obj
+         Release\TextureCollection.obj
+         Release\Texture2.obj
+         Release\Tile.obj
+         Release\TileGrid.obj
+         Release\UI.obj
+         Release\WinMain.obj
+         Generating code
+     1>d:\lt\game\metroid-1986\metroid_1986\texturecollection.cpp(31): warning C4715: 'TextureCollection::getTexture2' : not all control paths return a value
+     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(314): warning C4715: 'TileGrid::CreateObject' : not all control paths return a value
+         Finished generating code
+         Metroid_1986.vcxproj -> D:\LT\Game\Metroid-1986\Release\Metroid_1986.exe
+     1>Done Building Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.55

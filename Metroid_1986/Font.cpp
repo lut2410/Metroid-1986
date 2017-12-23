@@ -53,7 +53,7 @@ void Font::render(int number_, float x_, float y_, D3DCOLOR color)
 	render((char*)to_string(number_).c_str(), x_, y_, color);
 }
 
-void Font::renderAnimation(char* text_, float x_, float y_, int deltaTime_)
+void Font::renderFlicker(char* text_, float x_, float y_, int deltaTime_)
 {
 	_localTime += deltaTime_;
 	if (_localTime >= 1000 / _frameRate)
@@ -67,7 +67,7 @@ void Font::renderAnimation(char* text_, float x_, float y_, int deltaTime_)
 		render(text_, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 }
-void Font::renderAnimation(int number_, float x_, float y_, int deltaTime_)
+void Font::renderFlicker(int number_, float x_, float y_, int deltaTime_)
 {
 	_localTime += deltaTime_;
 	if (_localTime >= 1000 / _frameRate)
