@@ -1,6 +1,14 @@
 #include "Camera.h"
+Camera* Camera::_instance = NULL;
+Camera* Camera::getInstance(){
+	if (!_instance)
+		_instance = new Camera();
+
+	return _instance;
+};
 Camera::Camera()
 {
+	_directionOfTheGate = DirectionOfTheGate::None_DOTG;
 	_viewport.x = 1;
 	_viewport.y = _screenHeight;
 }
@@ -17,12 +25,6 @@ void Camera::UpdateCamera(int x)
 	else if (x - _screenWidth * 6 / 10 > _viewport.x)
 		_viewport.x = x - _screenWidth * 6 / 10;
 
-	////but player in intro stage then is centered on screen
-	//if ()
-	////_viewport.x = x - _screenWidth / 2;
-	//// hand- setup in stage begin
-
-
 	//but viewport camera has limit
 	if (_viewport.x < _leftBound)
 		_viewport.x = _leftBound;
@@ -31,6 +33,23 @@ void Camera::UpdateCamera(int x)
 		
 
 	//posite Y
+}
+void Camera::setTheGate(DirectionOfTheGate directionOfTheGate)
+{
+
+	_directionOfTheGate = directionOfTheGate;
+	_remainningFramesToPassTheGate = FRAMESTOPASSTHEGATE;
+	//_leftBound = _rightBound;
+	//_rightBound += 256;
+}
+void Camera::passTheGate()
+{
+	//_remainningTimeToPassTheGate -= time;
+	_viewport.x += 8;
+	if (_remainningFramesToPassTheGate)
+		_remainningFramesToPassTheGate--;
+	else
+		_directionOfTheGate = DirectionOfTheGate::None_DOTG;
 }
 D3DXVECTOR2 Camera::Transform(int x, int y)
 {

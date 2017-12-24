@@ -11,14 +11,6 @@ int handleObjectCollision(GameObject* considerObject, GameObject* otherObject,Di
 	float moveX=0, moveY=0;
 	if (time < 1.0f) // will collision
 	{
-		// cản lại
-		//updateTargetPosition(otherObject, direction, true);
-		//if (direction==Left_Direction||direction==Right_Direction)	//width-collision //don't neccessary because dxEntry or dyEntry =0 -> + constant
-		//	considerObject->_posX += dxEntry;
-		//
-		////else											//height-collision
-		//if (direction == Top_Direction || direction == Bottom_Direction)
-		//	considerObject->_posY += dyEntry;
 		//	//direction was valid
 		if (isUpdate)
 		{
@@ -27,57 +19,15 @@ int handleObjectCollision(GameObject* considerObject, GameObject* otherObject,Di
 		}
 			return 2;
 	}	
-	else
+	if (isColliding(considerObject, otherObject, direction, moveX, moveY, dt))
+				//consider the case 2 object is colliding
 	{
 		if (isUpdate)
 		{
-			if (isColliding(considerObject, otherObject, direction, moveX, moveY, dt))
-				//consider the case 2 object is colliding
-			{
-
-				considerObject->_posX += moveX;
-				considerObject->_posY += moveY;
-				//if (moveX > 0)
-				//	direction = Direction::Left_Direction;
-				//else if (moveX<0)
-				//	direction = Direction::Right_Direction;
-				//else if (moveY>0)
-				//	direction = Direction::Bottom_Direction;
-				//else if (moveY < 0)
-				//	direction = Direction::Top_Direction;
-				//else //moveX=0&moveY=0
-				//	direction = Direction::Adjacent_Direction; //2 object is adjacent together
-				return 1;
-			}
-
-			
+			considerObject->_posX += moveX;
+			considerObject->_posY += moveY;
 		}
-		else //don't update
-		{
-			/*if (isCollidingEx(considerObject->getCollisionBound(), otherObject->getCollisionBound()))
-			{
-				return 1;
-			}*/
-			if (isColliding(considerObject, otherObject, direction, moveX, moveY, dt))
-				//consider the case 2 object is colliding
-			{
-
-				//considerObject->_posX += moveX;
-				//considerObject->_posY += moveY;
-					
-				//if (moveX > 0)
-				//	direction = Direction::Left_Direction;
-				//else if (moveX<0)
-				//	direction = Direction::Right_Direction;
-				//else if (moveY>0)
-				//	direction = Direction::Bottom_Direction;
-				//else if (moveY < 0)
-				//	direction = Direction::Top_Direction;
-				//else //moveX=0&moveY=0
-				//	direction = Direction::Adjacent_Direction; //2 object is adjacent together
-				return 1;
-			}
-		}
+		return 1;
 		
 	}
 	//don't happen collision or a long time to happen

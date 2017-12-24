@@ -227,6 +227,8 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 					case Direction::Right_Direction:
 						_velX = -SPEED_WOUND;
 						_velY = SPEED_WOUND;
+						//_pass = true;
+						Camera::getInstance()->setTheGate(DirectionOfTheGate::Right_DOTG);
 						break;
 					case Direction::Top_Direction:
 						_velY = -SPEED_WOUND;

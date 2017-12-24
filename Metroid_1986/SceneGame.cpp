@@ -1,6 +1,6 @@
 #include "SceneGame.h"
 SceneGame::SceneGame():Scene(Scene_Game){
-	_camera= new Camera();
+	_camera= Camera::getInstance();
 	_currentLevel = 1;
 }
 SceneGame::~SceneGame(){}
@@ -27,13 +27,13 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	_player = new Player(640,1103);
+	_player = new Player(640,2500);
 
 	_camera->SetSizeMap(0, 1280);
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfMotion()==DirectionOfMotion::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
-	_camera->_viewport.y = 1280;
+	_camera->_viewport.y = 2560;
 
 
 	//other object
@@ -57,11 +57,22 @@ void SceneGame::RenderFrame(int time){
 		D3DTEXF_NONE);
 
 	G_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+
+	if (_camera->_directionOfTheGate)
+	{
+		_camera->passTheGate();
+		_backgroundMap->Draw(_camera);
+		_tileGrid->Update(_camera, time);
+		_tileGrid->Draw(_camera);
+		G_SpriteHandler->End();
+		return;
+	}
+		
 	_camera->UpdateCamera(_player->_posX);
 
 	//draw background(ground)
 	_backgroundMap->Draw(_camera);
-	//UPDATE POSITION
+	//UPDATE MAPS
 	_tileGrid->Update(_camera,time);
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	if (!currentObjects->count(300))
@@ -84,7 +95,8 @@ void SceneGame::RenderFrame(int time){
 	_player->Draw(_camera);
 	//UI: HP of player
 	//UI::draw(_player->getHP());
-	
+	//if (_player->_pass)
+	//_camera->setTheGate(DirectionOfTheGate::Right_DOTG);
 	G_SpriteHandler->End();
 }
 

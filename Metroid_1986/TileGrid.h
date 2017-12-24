@@ -16,9 +16,9 @@
 
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
-	Ground_IDFF,
-	Hedgehog_IDFF,
-	Hedgehog2_IDFF
+	Ground_IDFF=0,
+	Hedgehog_IDFF=20,
+	Hedgehog2_IDFF=21,
 };
 
 //contain all object on screeen
