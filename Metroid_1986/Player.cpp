@@ -211,6 +211,12 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 
 			switch (object->getObjectID())
 			{
+			case Gate_ID:
+				if (handleObjectCollision(this, object, direction, dt, false))
+				{
+					Camera::getInstance()->setTheGate(direction);
+				}
+				break;
 			case Hedgehog_ID:
 				if (handleObjectCollision(this, object, direction, dt, false))
 				{
@@ -227,8 +233,6 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 					case Direction::Right_Direction:
 						_velX = -SPEED_WOUND;
 						_velY = SPEED_WOUND;
-						//_pass = true;
-						Camera::getInstance()->setTheGate(DirectionOfTheGate::Right_DOTG);
 						break;
 					case Direction::Top_Direction:
 						_velY = -SPEED_WOUND;
@@ -446,7 +450,15 @@ void Player::Draw(Camera* camera)
 
 }
 
-
+void Player::UpdatePostionToInsideCamera()
+{
+	Camera* camera = Camera::getInstance();
+	//update
+	if (_posX < camera->_bound.left)
+		_posX = camera->_bound.left + 27;
+	if (_posX > camera->_bound.right)
+		_posX = camera->_bound.right - 27;
+}
 
 void Player::SpecifyAction(){
 

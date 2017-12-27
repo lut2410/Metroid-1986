@@ -386,6 +386,10 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new Ground(x, y);
 		return object;
 		break;
+	case ObjectIDFromFile::Gate_IDFF:
+		object = new Gate(x, y);
+		return object;
+		break;
 	case ObjectIDFromFile::Hedgehog_IDFF:
 		object = new Hedgehog(x, y, 1);
 		return object;

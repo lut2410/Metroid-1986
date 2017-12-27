@@ -1,5 +1,5 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef GROUND_H
+#define GROUND_H
 #pragma once
 #include "GameObject.h"
 class Ground:public GameObject{

@@ -123,6 +123,9 @@
     <ClCompile Include="Gate.cpp">
       <Filter>Object\Static</Filter>
     </ClCompile>
+    <ClCompile Include="BubbleDoor.cpp">
+      <Filter>Object\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -201,6 +204,9 @@
       <Filter>Control</Filter>
     </ClInclude>
     <ClInclude Include="Gate.h">
+      <Filter>Object\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleDoor.h">
       <Filter>Object\Static</Filter>
     </ClInclude>
   </ItemGroup>

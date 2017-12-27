@@ -43,8 +43,6 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 
 	D3DXVECTOR2 considerObjectVel = D3DXVECTOR2(considerObject->getVelocity().x * dt, considerObject->getVelocity().y * dt);
 	D3DXVECTOR2 otherObjectVel = D3DXVECTOR2(otherObject->getVelocity().x * dt, otherObject->getVelocity().y * dt);
-	//D3DXVECTOR2 velocity = - considerObjectVel;
-	//float velX = considerObjectVel.x, velY = considerObjectVel.y;
 
 	D3DXVECTOR2 velocity = considerObjectVel - otherObjectVel;		// consider - other
 
@@ -52,8 +50,6 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 	RECT considerRect = considerObject->getCollisionBound();
 	RECT otherRect = otherObject->getCollisionBound();
 
-	if (considerObject->getObjectID() == Player_ID&&otherRect.right == 512 && otherRect.top == 1104 && considerObject->getVelocity().x<0)
-		considerRect = considerObject->getCollisionBound();
 	
 	RECT broadphaseRect = getSweptBroadphaseRect(considerRect, velocity);
 	if (!isColliding(broadphaseRect, otherRect))				
@@ -61,8 +57,6 @@ float AABBCollision(GameObject* considerObject, GameObject* otherObject, Directi
 		direction = Direction::None_Direction;
 		return 1.0f;
 	}
-	if (considerObject->getObjectID() == Player_ID&&otherObject->getObjectID() == Hedgehog_ID)
-		considerRect = considerObject->getCollisionBound();
 	
 	// find the distance between the objects on the near and far sides for both x and y
 	float dxExit, dyExit;
@@ -180,45 +174,46 @@ bool isColliding(RECT myRect, RECT otherRect)
 
 	return !(left >= 0 || top <= 0 || right <= 0 || bottom >= 0);
 }
-bool isCollidingEx(RECT myRect, RECT otherRect)
-{
-	float left = otherRect.left - myRect.right;
-	float top = otherRect.top - myRect.bottom;
-	float right = otherRect.right - myRect.left;
-	float bottom = otherRect.bottom - myRect.top;
 
-	return !(left > 0 || top < 0 || right < 0 || bottom > 0);
-}
-Direction isCollidingExtend(GameObject* player, GameObject* ground)
-{
-	RECT playerRect = player->getCollisionBound();
-	//extend rect to check collision with ground
-	playerRect.left--; playerRect.right++;//extend
-	playerRect.top; playerRect.bottom++;	//narrow bottom to just check left and right
-		
-	RECT groundRect = ground->getCollisionBound();
-
-	if (!isColliding(playerRect, groundRect))
-		return Direction::Bottom_Direction;
-
-	float left = groundRect.left - playerRect.right;
-	//float top = otherRect.top - myRect.bottom;
-	float right = groundRect.right - playerRect.left;
-	//float bottom = otherRect.bottom - myRect.top;
-
-	
-	if (left == -1)		//otherrect is on ther right side of myrect
-		return Direction::Right_Direction;
-	if (right == 1)
-		return Direction::Left_Direction;
-	else
-		return Direction::Bottom_Direction;
-	//if (top == 1)
-	//	return Direction::Bottom_Direction;
-	//if (bottom == -1)
-	//	return Direction::Top_Direction;
-
-}
+//bool isCollidingEx(RECT myRect, RECT otherRect)
+//{
+//	float left = otherRect.left - myRect.right;
+//	float top = otherRect.top - myRect.bottom;
+//	float right = otherRect.right - myRect.left;
+//	float bottom = otherRect.bottom - myRect.top;
+//
+//	return !(left > 0 || top < 0 || right < 0 || bottom > 0);
+//}
+//Direction isCollidingExtend(GameObject* player, GameObject* ground)
+//{
+//	RECT playerRect = player->getCollisionBound();
+//	//extend rect to check collision with ground
+//	playerRect.left--; playerRect.right++;//extend
+//	playerRect.top; playerRect.bottom++;	//narrow bottom to just check left and right
+//		
+//	RECT groundRect = ground->getCollisionBound();
+//
+//	if (!isColliding(playerRect, groundRect))
+//		return Direction::Bottom_Direction;
+//
+//	float left = groundRect.left - playerRect.right;
+//	//float top = otherRect.top - myRect.bottom;
+//	float right = groundRect.right - playerRect.left;
+//	//float bottom = otherRect.bottom - myRect.top;
+//
+//	
+//	if (left == -1)		//otherrect is on ther right side of myrect
+//		return Direction::Right_Direction;
+//	if (right == 1)
+//		return Direction::Left_Direction;
+//	else
+//		return Direction::Bottom_Direction;
+//	//if (top == 1)
+//	//	return Direction::Bottom_Direction;
+//	//if (bottom == -1)
+//	//	return Direction::Top_Direction;
+//
+//}
 bool isColliding(GameObject* considerObject, GameObject* otherObject,Direction& direction, float& moveX, float& moveY, float dt)
 {
 	moveX = moveY = 0.0f;

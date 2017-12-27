@@ -7,27 +7,17 @@ GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float 
 	_hp = 0;
 	_attack = 0;
 	_objectID = objectID;
+	_isRelativeWithGround = false;
 	_posX = posX;
 	_posY = posY;
 	_velX = velX;
 	_velY = velY;
-	CreateSprite();
 
 	Texture2* explode = NULL;
 	explode = TextureCollection::getInstance()->getTexture2(ExplodeObject_ID);
 	expoldeAnimation = new Animation(explode, explode->_animationNames.at(0));
 }
-void GameObject::CreateSprite()
-{
-	switch (_objectID)
-	{
-	case Player_ID:
-		//_sprite = new Sprite(TextureCollection::getInstance()->getTexture(_objectID), 100, 0, 3);
-		break;
-	default:
-		break;
-	}
-}
+
 RECT GameObject::getCollisionBound(){
 	Box  objectBox = _currentAnimation->getCurrentSpriteSize();
 	if (_objectID == ObjectID::Hedgehog_ID)
@@ -56,7 +46,8 @@ bool GameObject::isSurvive()
 void GameObject::Update(int deltaTime)
 {
 
-	if (_objectID == Ground_ID)
+	if (_isRelativeWithGround == true)
+		//ground and its relative can't move
 		return;
 	//update position
 	_posX += _velX * deltaTime;
@@ -66,8 +57,9 @@ void GameObject::Update2(int deltaTime)
 {
 }
 void GameObject::Draw(Camera* camera){
-
-	if (_objectID == Ground_ID)
+	
+	if (_isRelativeWithGround == true)
+		//ground and its relative has drawn in background
 		return;
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
 	_currentAnimation->Draw(center.x, center.y);

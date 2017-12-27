@@ -29,7 +29,6 @@ void SceneGame::LoadResources() {
 void SceneGame::LoadObject(){
 	_player = new Player(640,2500);
 
-	_camera->SetSizeMap(0, 1280);
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfMotion()==DirectionOfMotion::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
@@ -67,7 +66,8 @@ void SceneGame::RenderFrame(int time){
 		G_SpriteHandler->End();
 		return;
 	}
-		
+
+	_player->UpdatePostionToInsideCamera();
 	_camera->UpdateCamera(_player->_posX);
 
 	//draw background(ground)

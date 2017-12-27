@@ -1,6 +1,7 @@
 #ifndef TILE_GRID_H
 #define TILE_GRID_H
 
+#pragma once
 #include "Global Setting.h"
 #include "Tile.h"
 #include "QuadTree.h"
@@ -10,13 +11,15 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "Collision.h"
-#include "Hedgehog.h"
+
 //object
 #include "Ground.h"
-
+#include "Gate.h"
+#include "Hedgehog.h"
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
 	Ground_IDFF=0,
+	Gate_IDFF=1,
 	Hedgehog_IDFF=20,
 	Hedgehog2_IDFF=21,
 };

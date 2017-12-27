@@ -96,6 +96,7 @@ public:
 	void Update(int time);	//update action and position after press key
 	void Update2(int time);	//update frame of sprite and position of sprite
 	void Draw(Camera* camera);
+	void UpdatePostionToInsideCamera();
 	//int checkCollision();
 	//Action
 	void SpecifyAction();				//specify action base on keys are press

@@ -5,13 +5,8 @@
 #include "Sprite.h"
 
 #define FRAMESTOPASSTHEGATE 32
-enum DirectionOfTheGate
-{
-	None_DOTG,
-	Left_DOTG,
-	Right_DOTG
-};
-
+#define MAX 10000
+#define MIN 0
 class Camera
 {
 protected:
@@ -20,17 +15,19 @@ public:
 	
 
 	D3DXVECTOR2 _viewport;							//set coordinates of camera
-	int _leftBound;									//limit place camera can go to
-	int _rightBound;								//limit place camera can go to
-	DirectionOfTheGate _directionOfTheGate;			//use when player passing the gate
+	//int _leftBound;									//limit place camera can go to
+	//int _rightBound;								//limit place camera can go to
+	RECT _bound;									//limit place camera can go to
+	Direction _directionOfTheGate;			//use when player passing the gate
 	int _remainningFramesToPassTheGate;
 
 	static Camera* getInstance();
 	Camera();
+	RECT getRECT();
 	void UpdateCamera(int x);								//place position of player on screen base on posX of Player
 	D3DXVECTOR2 Transform(int x, int y);					//transform world-coordinates to viewport-coordinates
 	void SetSizeMap(int leftBound, int rightBound);			//
-	void setTheGate(DirectionOfTheGate diretionOfTheGate);					//true/fase if to right/left
+	void setTheGate(Direction diretionOfTheGate);					//true/fase if to right/left
 	void passTheGate();
 };
 

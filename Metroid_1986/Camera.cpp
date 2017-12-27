@@ -8,13 +8,21 @@ Camera* Camera::getInstance(){
 };
 Camera::Camera()
 {
-	_directionOfTheGate = DirectionOfTheGate::None_DOTG;
+	_directionOfTheGate = Direction::None_Direction ;
 	_viewport.x = 1;
 	_viewport.y = _screenHeight;
+	_bound = { MIN, MAX, MAX, MIN };
 }
-void Camera::SetSizeMap(int leftBound, int rightBound){
-	_leftBound = leftBound;
-	_rightBound = rightBound;
+
+RECT Camera::getRECT()
+{
+	//width:16x16=256
+	//height:15x16=240
+	RECT cameraRECT = { _viewport.x,			//left
+		_viewport.y,							//top
+		_viewport.x + 256,						//right
+		_viewport.x - 240};						//bottom
+	return cameraRECT;
 }
 void Camera::UpdateCamera(int x)
 {
@@ -26,15 +34,15 @@ void Camera::UpdateCamera(int x)
 		_viewport.x = x - _screenWidth * 6 / 10;
 
 	//but viewport camera has limit
-	if (_viewport.x < _leftBound)
-		_viewport.x = _leftBound;
-	else if (_viewport.x > _rightBound - _screenWidth)
-		_viewport.x = _rightBound - _screenWidth;
+	if (_viewport.x < _bound.left)
+		_viewport.x = _bound.left;
+	else if (_viewport.x > _bound.right - _screenWidth)
+		_viewport.x = _bound.right - _screenWidth;
 		
 
 	//posite Y
 }
-void Camera::setTheGate(DirectionOfTheGate directionOfTheGate)
+void Camera::setTheGate(Direction directionOfTheGate)
 {
 
 	_directionOfTheGate = directionOfTheGate;
@@ -44,12 +52,32 @@ void Camera::setTheGate(DirectionOfTheGate directionOfTheGate)
 }
 void Camera::passTheGate()
 {
-	//_remainningTimeToPassTheGate -= time;
-	_viewport.x += 8;
+	
 	if (_remainningFramesToPassTheGate)
+	{
 		_remainningFramesToPassTheGate--;
-	else
-		_directionOfTheGate = DirectionOfTheGate::None_DOTG;
+		if (_directionOfTheGate == Direction::Right_Direction)	//the gate is on the right
+			_viewport.x += 8;
+		else
+			_viewport.x -= 8;
+	}
+		
+	else					//finish
+	{
+		if (_directionOfTheGate == Direction::Right_Direction)	//the gate is on the right
+		{
+			_bound.left = _bound.right;							//set leftBound = old rightBound
+			_bound.right = MAX;
+		}
+		else
+		{
+			_bound.right = _bound.left;							//set leftBound = old rightBound
+			_bound.left = MIN;
+		}
+			//reset to default
+		_directionOfTheGate = Direction::None_Direction;
+	}
+		
 }
 D3DXVECTOR2 Camera::Transform(int x, int y)
 {

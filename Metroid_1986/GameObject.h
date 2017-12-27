@@ -20,6 +20,7 @@ protected:
 	int _hp;			//HP
 	int _attack;		//attack enemy,HP enemy will be subtract = attack index
 	ObjectID _objectID;
+	bool _isRelativeWithGround;				//can't move, is in background: ground,wall,gate,door,..
 	Animation* _currentAnimation;
 	vector<Animation*> _actionAnimation; 
 	Animation* expoldeAnimation;
@@ -30,7 +31,6 @@ protected:
 	float _velY;
 	
 	//Other Parameters
-	void CreateSprite();
 public:
 	int _posX;
 	int _posY;
