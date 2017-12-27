@@ -15,11 +15,13 @@
 //object
 #include "Ground.h"
 #include "Gate.h"
+#include "BubbleDoor.h"
 #include "Hedgehog.h"
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
 	Ground_IDFF=0,
 	Gate_IDFF=1,
+	BubbleDoor_IDFF = 3,
 	Hedgehog_IDFF=20,
 	Hedgehog2_IDFF=21,
 };
@@ -44,6 +46,7 @@ public:
 	~TileGrid();
 	void LoadObjectTileFromFile(string);
 	void LoadQuadtreeFromFile(string);
+	void DeleteTileNumberInCurrentQuadTrees(int tileNumber);//Delete tileNumber from quadtree
 	void UpdateCurrentTileNumbers(int, int);				//Get tile in the specified space
 	void UpdateCurrentTileNumbers(Camera*);					//update tiles in viewport
 	bool isThisObjectIsOnThisQuadTree(GameObject*, QuadTree*);	//check object is being on quadtree base on position

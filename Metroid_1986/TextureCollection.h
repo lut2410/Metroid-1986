@@ -5,6 +5,7 @@
 #include "Texture2.h"
 class TextureCollection{
 private:
+	Texture2* doorTexture2;
 	Texture2* playerTexture2;
 	Texture2* bulletTexture2;
 	Texture2* explodeTexture2;

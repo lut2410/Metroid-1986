@@ -34,6 +34,10 @@ D3DXVECTOR2 GameObject::getVelocity(){
 ObjectID GameObject::getObjectID(){
 	return _objectID;
 }
+bool GameObject::isRelativeWithGround()
+{
+	return _isRelativeWithGround;
+}
 int GameObject::getAttackDame()
 {
 	return _attack;
@@ -55,6 +59,7 @@ void GameObject::Update(int deltaTime)
 }
 void GameObject::Update2(int deltaTime)
 {
+
 }
 void GameObject::Draw(Camera* camera){
 	

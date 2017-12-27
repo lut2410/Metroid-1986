@@ -4,7 +4,6 @@
 #pragma once
 #include "GameObject.h"
 #include "Collision.h"
-#include <math.h>
 #define HEDGEHOG_VEL 0.1f
 enum HedgehogAction{
 	Crawl_Top,

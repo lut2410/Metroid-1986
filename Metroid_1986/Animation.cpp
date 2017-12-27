@@ -18,7 +18,11 @@ Animation::Animation(Texture2* texture, string name){
 	//set timeanimation 
 	_timeAnimation = it->second[2];
 	//import sprite to list
-	for (int index = it->second[0]; index <= it->second[1]; index++)//index increase base index
+	if (it->second[0] <= it->second[1])
+		for (int index = it->second[0]; index <= it->second[1]; index++)//index increase base index
+			_spriteList->push_back(Sprite(texture, index));
+	else //import decrease. ex: 3->1 : sprite[3]->sprite[2]->sprite[1]
+		for (int index = it->second[1]; index >= it->second[0]; index++)	
 		_spriteList->push_back(Sprite(texture, index));
 }
 Animation::~Animation(){}

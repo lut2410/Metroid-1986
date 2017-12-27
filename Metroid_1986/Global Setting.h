@@ -60,6 +60,7 @@ extern bool _keyboardWorking;	//allow keyboard? used for intro in each statge
 enum ObjectID{
 	Ground_ID,
 	Gate_ID,
+	BubbleDoor_ID,
 	Player_ID,
 	Bullet_ID,
 	Hedgehog_ID,

@@ -93,6 +93,23 @@ QuadTree* TileGrid::specifyQuatreeChilds(map<int, QuadTree*> quadTrees, int id){
 	return quadTree;
 
 }
+void TileGrid::DeleteTileNumberInCurrentQuadTrees(int number){
+	for (int i = 0; i < CurrentQuadTrees.size(); i++)
+	{
+		QuadTree* qt = CurrentQuadTrees.at(i);
+		vector<int>& tileIDs = qt->ChildIndexs;
+		auto it = tileIDs.begin();
+		while (it != tileIDs.end())
+		{
+			if (*it == number)
+			{
+				it = tileIDs.erase(it);
+			}
+			else
+				++it;
+		}
+	}
+}
 void TileGrid::UpdateCurrentTileNumbers(int x, int y){
 	CurrentTileNumbers->clear();
 
@@ -300,8 +317,11 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 			auto it =CurrentObjects->find(TileNumber);
 			GameObject* object = it->second;
 
+			
+			DeleteTileNumberInCurrentQuadTrees(it->first);
 			CurrentObjects->erase(TileNumber);
 			delete object;
+			
 		}
 	}
 	//if object status is destroy ->delete
@@ -312,8 +332,11 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 		//check object is destroy yet?
 		if (object->isSurvive() == false)
 		{//delete object and erase from CurrentObjects
+			
+			DeleteTileNumberInCurrentQuadTrees(it->first);
 			it = CurrentObjects->erase(it);
 			delete object;
+			
 		}
 		else
 			++it;
@@ -388,6 +411,10 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		break;
 	case ObjectIDFromFile::Gate_IDFF:
 		object = new Gate(x, y);
+		return object;
+		break;
+	case ObjectIDFromFile::BubbleDoor_IDFF:
+		object = new BubbleDoor(x, y);
 		return object;
 		break;
 	case ObjectIDFromFile::Hedgehog_IDFF:

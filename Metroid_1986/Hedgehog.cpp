@@ -7,7 +7,7 @@ Hedgehog::Hedgehog(int x, int y, int type) :GameObject(Hedgehog_ID, x, y, 0, 0){
 
 	if (type == 1)
 	{
-		_hp = 3;
+		_hp = 1;
 		_attack = 8;
 		_actionAnimation.resize(8);
 		for (int i = 0; i < 8; i++)
@@ -21,12 +21,6 @@ Hedgehog::Hedgehog(int x, int y, int type) :GameObject(Hedgehog_ID, x, y, 0, 0){
 		for (int i = 0; i < 8; i++)
 			_actionAnimation[i] = new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(i+8));
 	}
-	
-
-	//_actionAnimation[Crawl_Top]		= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Top));
-	//_actionAnimation[Crawl_Right]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Right));
-	//_actionAnimation[Crawl_Bottom]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Bottom));
-	//_actionAnimation[Crawl_Left]	= new Animation(hedgehogTexture, hedgehogTexture->_animationNames.at(Crawl_Left));
 
 	_action = HedgehogAction::Crawl_Top;
 	_currentAnimation = _actionAnimation[_action];
@@ -98,7 +92,7 @@ void Hedgehog::handleCollision(map<int, GameObject*> objectList, float dt)
 	{
 		GameObject* object = it->second;
 
-		if (object->getObjectID() == ObjectID::Ground_ID)
+		if (object->isRelativeWithGround()==true)
 		{
 			
 			RECT b = object->getCollisionBound();

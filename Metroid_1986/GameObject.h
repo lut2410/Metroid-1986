@@ -5,6 +5,7 @@
 #include "TextureCollection.h"
 #include "Animation.h"
 #include "Camera.h"
+#include <math.h>
 #define WOUNDED_FRAMES 5
 
 enum ObjectStatus{
@@ -40,6 +41,7 @@ public:
 	virtual RECT getCollisionBound();
 	D3DXVECTOR2 getVelocity();
 	ObjectID getObjectID();
+	bool isRelativeWithGround();	//use to check collision
 	int getAttackDame();
 	bool isSurvive();
 	//update action and position
