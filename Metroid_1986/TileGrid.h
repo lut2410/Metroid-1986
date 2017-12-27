@@ -43,6 +43,8 @@ public:
 	void LoadQuadtreeFromFile(string);
 	void UpdateCurrentTileNumbers(int, int);				//Get tile in the specified space
 	void UpdateCurrentTileNumbers(Camera*);					//update tiles in viewport
+	bool isThisObjectIsOnThisQuadTree(GameObject*, QuadTree*);	//check object is being on quadtree base on position
+	void UpdateObjectInQuadTreeBaseOnPosition(Camera* );
 	void UpdateCurrentQuadTrees(Camera*);					//update tiles in viewport
 	void UpdateCurrentObjects(Camera*);						//update objects in viewport
 	void Update(Camera*,int time);

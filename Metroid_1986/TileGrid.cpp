@@ -105,10 +105,116 @@ void TileGrid::UpdateCurrentTileNumbers(Camera* camera){
 	//insert tiles exist on screen to CurrentTile
 	GetTileIDInQuadTree(camera->_viewport.x, camera->_viewport.y, RootQuadTree);
 }
+bool TileGrid::isThisObjectIsOnThisQuadTree(GameObject* object, QuadTree* quadtree)
+{
+	RECT quadtreeRECT = { quadtree->XNode,										//left
+							quadtree->YNode + quadtree->HeightNode 	,			//top
+								quadtree->XNode + quadtree->WidthNode,			//right
+									quadtree->YNode };							//bottom
+	if (object->_posX >= quadtreeRECT.left
+		&&object->_posX <= quadtreeRECT.right
+		&&object->_posY <= quadtreeRECT.top
+		&&object->_posY >= quadtreeRECT.bottom)
+		return true;
+	else
+		return false;
 
+}
+void TileGrid::UpdateObjectInQuadTreeBaseOnPosition(Camera* camera)
+{
+	for (int i = 0; i < CurrentQuadTrees.size(); i++)
+	{
+
+		QuadTree* qt = CurrentQuadTrees.at(i);
+		vector<int>& tileIDs = qt->ChildIndexs;
+		for (int i = 0; i < tileIDs.size(); i++)
+		{
+			int TileNumber = tileIDs.at(i);
+
+			auto it = CurrentObjects->find(TileNumber);
+			GameObject* object = it->second;
+			//check position
+			if (object->getObjectID() != ObjectID::Ground_ID)
+				//ground can't moving => don't need to check
+			{
+				
+				if (!isThisObjectIsOnThisQuadTree(object, qt))
+					//consider what quadtree is really containing this object
+					// choose 1 in all current quadtrees, otherwise delete object, because this object move too far
+				{
+					//delete in this quadtree
+					auto it = tileIDs.begin();
+					while (it != tileIDs.end())
+					{
+						
+						if (*it == TileNumber)
+						{
+							it = tileIDs.erase(it);
+						}
+						else
+							++it;
+					}
+
+
+					//add to quadtree really containing
+					bool hascontain;		//1ofall current quadtree has contain this object
+					for (int i = 0; i < CurrentQuadTrees.size(); i++)
+					{
+
+						QuadTree* otherQTree = CurrentQuadTrees.at(i);
+						if (isThisObjectIsOnThisQuadTree(object, otherQTree))
+						{
+							otherQTree->ChildIndexs.push_back(TileNumber);			//push back or push orderly?
+							hascontain = true;
+						}	
+					}
+					if (hascontain = false)
+						//delete;
+						;
+				}
+				
+			}
+		}
+	}
+
+	//auto it = CurrentObjects->begin();
+	//while (it != CurrentObjects->end())
+	//{
+	//	int object_first = it->first;
+	//	GameObject* object = it->second;
+	//	//check object is destroy yet?
+	//	if (object->getObjectID() != ObjectID::Ground_ID)
+	//		//ground can't moving => don't need to check
+	//	{
+	//		//consider what quadtree is really containing this object
+	//		
+	//		for (int i = 0; i < CurrentQuadTrees.size(); i++)
+	//		{
+	//			QuadTree* qt = CurrentQuadTrees.at(i);
+	//			vector<int> tileIDs = qt->ChildIndexs;
+	//			if (thisObjectIsOnThisQuadTree(object, qt))
+	//				//quadtree is really containing this object
+	//			{
+	//				//check was contained yet
+	//				int i = 0;
+	//				while (i < tileIDs.size() && object_first != tileIDs.at(i))
+	//				{
+	//					i++;
+	//				}
+	//				if (i == tileIDs.size()) //no element has value =
+	//					//add
+	//				{
+	//					
+	//				}
+	//			}
+	//		}
+	//	}
+	//	else
+	//		++it;
+	//}
+}
 void TileGrid::UpdateCurrentQuadTrees(Camera* camera)
 {
-
 	//save value
 	vector<QuadTree*> OldQuadTrees = CurrentQuadTrees;
 	//update
@@ -134,12 +240,6 @@ void TileGrid::UpdateCurrentQuadTrees(Camera* camera)
 			CurrentOutsideQuadTrees.push_back(a);
 		}
 
-		//auto it2 = CurrentQuadTrees.begin();
-		//while (it2 != CurrentQuadTrees.end()&&*it!=*it2)
-		//	it2++;
-		//if (*it != *it2) //0 value =
-		//	//add to outside
-		//	CurrentOutsideQuadTrees.push_back(*it);	
 	}
 
 	if (OldQuadTrees.size() == 0)
@@ -167,17 +267,6 @@ void TileGrid::UpdateCurrentQuadTrees(Camera* camera)
 			CurrentNewInsideQuadTrees.push_back(a);
 		}
 			
-		//
-		//for (auto it2 = OldQuadTrees.begin(); it2 != OldQuadTrees.end(); it2++)
-		//{
-		//	if (*it == *it2)
-		//		return;
-		//}
-
-		//if (*it != *it2)
-		//	//0 value =
-		//	//add to new-inside
-		//	CurrentNewInsideQuadTrees.push_back(*it);
 	}
 }
 
@@ -185,7 +274,6 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 
 
 	//ELEMENTS IN NEW_INSIDE => ADD
-	//for (vector<QuadTree*>::iterator it = CurrentNewInsideQuadTrees.begin(); it != CurrentNewInsideQuadTrees.end(); it++)
 	for (int i = 0; i < CurrentNewInsideQuadTrees.size();i++)
 	{
 		QuadTree* qt = CurrentNewInsideQuadTrees.at(i);
@@ -199,12 +287,8 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 			CurrentObjects->insert(pair<int, GameObject*>(TileNumber, ob));
 		}
 	}
-
-
 	//ELEMENT IS OUTSIDE OR IS DESTROY => DELETE
-
 	//outside->delete
-	//for (vector<QuadTree*>::iterator it = CurrentOutsideQuadTrees.begin(); it != CurrentOutsideQuadTrees.end(); it++)
 	for (int i = 0; i < CurrentOutsideQuadTrees.size(); i++)
 	{
 		QuadTree* qt = CurrentOutsideQuadTrees.at(i);
@@ -220,9 +304,7 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 			delete object;
 		}
 	}
-
 	//if object status is destroy ->delete
-
 	auto it = CurrentObjects->begin();
 	while (it != CurrentObjects->end())
 	{
@@ -241,8 +323,10 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 	
 }
 void TileGrid::Update(Camera* camera, int time){
+	//Update object to match quadtree it is being on
+	UpdateObjectInQuadTreeBaseOnPosition(camera);
 
-	//update outside-quadtree
+	//update outside and newinside - quadtree
 	UpdateCurrentQuadTrees(camera);
 
 	//UpdateCurrentTileNumbers(camera);				//update tiles in viewport

@@ -1,5 +1,5 @@
 Objects Number
-535
+550
 Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 0		272		2336		16		16		0			Ground
 0		288		2336		16		16		0			Ground
@@ -522,17 +522,32 @@ Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 0		1424		2448		16		16		0			Ground
 0		1440		2448		16		16		0			Ground
 0		1456		2448		16		16		0			Ground
-21		1424		2336		16		16		1			Enemy
-21		1152		2352		16		16		1			Enemy
-21		1648		2352		16		16		1			Enemy
-21		1712		2352		16		16		1			Enemy
-21		2048		2352		16		16		1			Enemy
-21		2208		2352		16		16		1			Enemy
-21		2432		2352		16		16		1			Enemy
-21		320		2368		16		16		1			Enemy
-21		1200		2432		16		16		1			Enemy
-21		2480		2432		16		16		1			Enemy
-21		1376		2464		16		16		1			Enemy
-21		592		2512		16		16		1			Enemy
-21		688		2512		16		16		1			Enemy
-22		1440		2464		16		16		1			Enemy
+20		1424		2336		16		16		1			Enemy
+20		1152		2352		16		16		1			Enemy
+20		1648		2352		16		16		1			Enemy
+20		1712		2352		16		16		1			Enemy
+20		2048		2352		16		16		1			Enemy
+20		2208		2352		16		16		1			Enemy
+20		2432		2352		16		16		1			Enemy
+20		320		2368		16		16		1			Enemy
+20		1200		2432		16		16		1			Enemy
+20		2480		2432		16		16		1			Enemy
+20		1376		2464		16		16		1			Enemy
+20		592		2512		16		16		1			Enemy
+20		688		2512		16		16		1			Enemy
+21		1440		2464		16		16		1			Enemy
+1		1264		2432		16		16		0			Ground
+1		1280		2432		16		16		0			Ground
+1		1520		2432		16		16		0			Ground
+1		1536		2432		16		16		0			Ground
+1		2544		2432		16		16		0			Ground
+1		1264		2448		16		16		0			Ground
+1		1280		2448		16		16		0			Ground
+1		1520		2448		16		16		0			Ground
+1		1536		2448		16		16		0			Ground
+1		2544		2448		16		16		0			Ground
+1		1264		2464		16		16		0			Ground
+1		1280		2464		16		16		0			Ground
+1		1520		2464		16		16		0			Ground
+1		1536		2464		16		16		0			Ground
+1		2544		2464		16		16		0			Ground

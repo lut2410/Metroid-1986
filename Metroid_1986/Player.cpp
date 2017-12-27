@@ -645,7 +645,10 @@ void Player::SpecifyHavingShoot(){
 			if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
 				addOrChangeAction(Action::Shoot);
 			if (isHasAction(Action::RollingJump))						//can't perform concurrently:
+			{
 				addOrChangeAction(Action::Jump);
+				addOrChangeAction(Action::Shoot);
+			}
 			if (isHasAction(Action::Grovel))
 				;
 

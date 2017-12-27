@@ -120,6 +120,9 @@
     <ClCompile Include="UI.cpp">
       <Filter>Control</Filter>
     </ClCompile>
+    <ClCompile Include="Gate.cpp">
+      <Filter>Object\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Gate.h">
+      <Filter>Object\Static</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
