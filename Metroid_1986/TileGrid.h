@@ -21,7 +21,7 @@
 enum ObjectIDFromFile{
 	Ground_IDFF=0,
 	Gate_IDFF=1,
-	BubbleDoor_IDFF = 3,
+	BubbleDoor_IDFF = 2,
 	Hedgehog_IDFF=20,
 	Hedgehog2_IDFF=21,
 };

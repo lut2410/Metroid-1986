@@ -548,6 +548,6 @@ Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 1		1520		2464		16		16		0			Ground
 1		1536		2464		16		16		0			Ground
 1		2544		2464		16		16		0			Ground
-3		1280		2448		48		48		0			Ground
-3		1536		2448		48		48		0			Ground
-3		2560		2448		48		48		0			Ground
+2		1256		2432		48		48		0			Ground
+2		1512		2432		48		48		0			Ground
+2		2536		2432		48		48		0			Ground

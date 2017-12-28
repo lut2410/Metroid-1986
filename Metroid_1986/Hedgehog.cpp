@@ -179,33 +179,3 @@ void Hedgehog::FixPosition()
 		break;
 	}
 }
-
-//int Hedgehog::IsCollideVsWall(GameObject* considerObject, GameObject* otherObject, Direction& direction, int dt)
-//{
-//	//Direction direction; //direction of collision of considerObject
-//	float dxEntry = 0, dyEntry = 0;
-//	float time = AABBCollision(considerObject, otherObject, direction, dxEntry, dyEntry, dt);
-//	float moveX = 0, moveY = 0;
-//	if (time < 1.0f) // will collision
-//	{
-//		// cản lại
-//		considerObject->_posX += dxEntry;
-//		considerObject->_posY += dyEntry;
-//		//direction was valid
-//		return 2;
-//	}
-//	else if (isCollidingEx(considerObject->getCollisionBound(), otherObject->getCollisionBound()))
-//		//consider the case 2 object is colliding
-//	{
-//
-//		return 1;
-//	}
-//	else //don't happen collision or a long time to happen
-//	{
-//		direction = Direction::None_Direction;
-//		return 0;
-//	}
-//	// if direction != left or right => keep direction stable
-//
-//	//after above statement, 2 object is adjacent together
-//}

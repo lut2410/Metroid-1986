@@ -375,7 +375,8 @@ void TileGrid::Draw(Camera* camera)
 	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
 	{
 		GameObject* object = it->second;
-		//if (object->isSurvive() == true)
+		object->Draw(camera);
+		if (object->getObjectID() == ObjectID::BubbleDoor_ID)
 			object->Draw(camera);
 	}
 }

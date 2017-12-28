@@ -100,6 +100,10 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					//bullet will be broken
 					this->IsWounded();
 					break;
+				case ObjectID::BubbleDoor_ID:
+					this->IsWounded();
+					otherObject->IsWounded();
+					break;
 				case ObjectID::Hedgehog_ID:
 					this->IsWounded();
 					otherObject->IsWounded();

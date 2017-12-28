@@ -193,7 +193,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	{
 		GameObject* object = it->second;
 		Direction direction;
-		if (object->getObjectID() == ObjectID::Ground_ID)
+		if (object->isRelativeWithGround()==true)
 			if (handleObjectCollision(this, object, direction, dt)) //is collison
 			{
 				directionVsWall = Direction(directionVsWall | direction);
@@ -211,10 +211,12 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 
 			switch (object->getObjectID())
 			{
-			case Gate_ID:
+			case Gate_ID:	//pass the gate
 				if (handleObjectCollision(this, object, direction, dt, false))
 				{
 					Camera::getInstance()->setTheGate(direction);
+					//reset time to open the gate
+					
 				}
 				break;
 			case Hedgehog_ID:
