@@ -70,8 +70,10 @@ void SceneGame::RenderFrame(int time){
 	_player->UpdatePostionToInsideCamera();
 	_camera->UpdateCamera(_player->_posX);
 
+	
 	//draw background(ground)
 	_backgroundMap->Draw(_camera);
+	//Infor::draw(_player->getHP());
 	//UPDATE MAPS
 	_tileGrid->Update(_camera,time);
 	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
@@ -84,7 +86,7 @@ void SceneGame::RenderFrame(int time){
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	if (!currentObjects->count(1001))
 	{
-		Ripper* ripper = new Ripper(700, 2383, 1);
+		Ripper* ripper = new Ripper(660, 2490, 1);
 		currentObjects->insert(pair<int, GameObject*>(1001, ripper));
 
 	}
@@ -100,10 +102,7 @@ void SceneGame::RenderFrame(int time){
 	//DRAW
 	_tileGrid->Draw(_camera);
 	_player->Draw(_camera);
-	//UI: HP of player
-	//UI::draw(_player->getHP());
-	//if (_player->_pass)
-	//_camera->setTheGate(DirectionOfTheGate::Right_DOTG);
+	//Infor: HP of player
 	G_SpriteHandler->End();
 }
 

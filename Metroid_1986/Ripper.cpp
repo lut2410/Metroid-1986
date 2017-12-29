@@ -86,25 +86,19 @@ void Ripper::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 	for (auto it = objectList.begin(); it != objectList.end(); it++)
 	{
 		GameObject* otherObject = it->second;
-		if (otherObject->getObjectID() != ObjectID::Ripper_ID)
-		{
-			Direction direction;
-			if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
+		Direction direction;
+		if (otherObject->getObjectID() == ObjectID::Ground_ID)
+			if (handleObjectCollision(this, otherObject, direction, deltaTime))
 			{
-				switch (otherObject->getObjectID())
-				{
-				case ObjectID::Ground_ID:	//redirect
-					if (_action == RipperAction::SuftToLeft)			
-						_action = RipperAction::SuftToRight;
-					else
-						_action = RipperAction::SuftToLeft;
-					break;
-				}
-				//exit for loop
-				//except the case Ripper touch 2 object Ground at the same time 
-				//=> SuftToLeft->SuftToRight->SuftToLeft (will be stucked)
+				if (_action == RipperAction::SuftToLeft)			
+					_action = RipperAction::SuftToRight;
+				else
+					_action = RipperAction::SuftToLeft;
 				break;
 			}
-		}
+		//exit for loop
+		//except the case Ripper touch 2 object Ground at the same time 
+		//=> SuftToLeft->SuftToRight->SuftToLeft (will be stucked)
+
 	}
 }

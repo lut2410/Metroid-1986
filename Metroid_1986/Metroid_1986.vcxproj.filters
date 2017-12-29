@@ -117,9 +117,6 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Control</Filter>
-    </ClCompile>
     <ClCompile Include="Gate.cpp">
       <Filter>Object\RelativeOfGround</Filter>
     </ClCompile>
@@ -140,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="Ripper.cpp">
       <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Infor.cpp">
+      <Filter>Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +212,6 @@
     <ClInclude Include="Bullet.h">
       <Filter>Object\Player</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Control</Filter>
-    </ClInclude>
     <ClInclude Include="Gate.h">
       <Filter>Object\RelativeOfGround</Filter>
     </ClInclude>
@@ -235,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Ripper.h">
       <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Infor.h">
+      <Filter>Control</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

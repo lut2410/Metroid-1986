@@ -105,7 +105,7 @@
     <ClCompile Include="Texture2.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileGrid.cpp" />
-    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Infor.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +139,7 @@
     <ClInclude Include="Texture2.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileGrid.h" />
-    <ClInclude Include="UI.h" />
+    <ClInclude Include="Infor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

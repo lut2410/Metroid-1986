@@ -4,7 +4,6 @@
 #include "Global Setting.h"
 #include "Sprite.h"
 #include "Camera.h"
-
 using namespace std;
 //To Draw Background Map - (ground-static object)
 class BackgroundMap{
