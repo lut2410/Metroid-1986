@@ -38,6 +38,7 @@ public:
 	GameObject();
 	~GameObject();
 	GameObject(ObjectID objectID, int posX, int posY, float velX, float velY);
+
 	virtual RECT getCollisionBound();
 	D3DXVECTOR2 getVelocity();
 	ObjectID getObjectID();
@@ -50,8 +51,9 @@ public:
 	//update animation-frame of sprite
 	virtual void Update2(int deltaTime);		
 	virtual void Draw(Camera* camera);
-	virtual void handleCollision(map<int, GameObject*> objectList, float dt);
-	virtual void IsWounded(int lossHP=1);		//be wounded 'lossHP' HP
+	virtual void handleCollision(map<int, GameObject*> objectList, float dt);	//motion base on other object
+	virtual void handleCollision(int playerX, int playerY, float dt);			//motion base on player
+	virtual void BeWounded(int lossHP=1);		//be wounded 'lossHP' HP
 	bool enemyCheckExplode(int deltaTime);	//be destroying
 };
 #endif

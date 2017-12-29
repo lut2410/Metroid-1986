@@ -1,16 +1,32 @@
-﻿Build started 12/29/2017 1:18:58 PM.
+﻿Build started 12/29/2017 4:29:13 PM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Hedgehog.cpp
-         Hedgehog.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
+         Player.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(54): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(55): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(101): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(163): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(168): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(172): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(177): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(109): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(149): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(210): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(224): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(265): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(328): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(329): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(450): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(452): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(466): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(468): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(481): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(483): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(583): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(636): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(680): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(682): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(704): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(710): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(712): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(730): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(760): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(750): warning C4101: 'direction' : unreferenced local variable
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.lib" /MACHINE:X86 Debug\AABB.obj
          Debug\Animation.obj
@@ -25,7 +41,8 @@
          "Debug\Global Setting.obj"
          Debug\GameObject.obj
          Debug\Ground.obj
-         Debug\Hedgehog.obj
+         Debug\Skree.obj
+         Debug\Zoomer.obj
          Debug\Player.obj
          Debug\QuadTree.obj
          Debug\Scene.obj
@@ -46,4 +63,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.13
+Time Elapsed 00:00:01.45

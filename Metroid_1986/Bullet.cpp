@@ -58,7 +58,7 @@ Bullet::Bullet(int x, int y, Direction direction, DWORD survivalTime) :GameObjec
 Bullet::~Bullet()
 {
 }
-//void Bullet::IsWounded()
+//void Bullet::BeWounded()
 //{
 //	hp--;
 //}
@@ -98,15 +98,19 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 				{
 				case ObjectID::Ground_ID:	//bullet collide vs wall
 					//bullet will be broken
-					this->IsWounded();
+					this->BeWounded();
 					break;
 				case ObjectID::BubbleDoor_ID:
-					this->IsWounded();
-					otherObject->IsWounded();
+					this->BeWounded();
+					otherObject->BeWounded();
 					break;
-				case ObjectID::Hedgehog_ID:
-					this->IsWounded();
-					otherObject->IsWounded();
+				case ObjectID::Zoomer_ID:
+					this->BeWounded();
+					otherObject->BeWounded();
+					break;
+				case ObjectID::Skree_ID:
+					this->BeWounded();
+					otherObject->BeWounded();
 					break;
 				}
 			}

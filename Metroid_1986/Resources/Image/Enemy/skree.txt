@@ -1,0 +1,70 @@
+Is All Frames are has a same size?
+0
+Count
+13
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			15				30				16				24
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			33				30				8				24
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			43				30				8				24
+
+Index		Animation Info
+3			LocationX		LocationY		FrameWidth		FrameHeight
+			53				30				16				24
+
+Index		Animation Info
+4			LocationX		LocationY		FrameWidth		FrameHeight
+			71				30				8				24
+
+Index		Animation Info
+5			LocationX		LocationY		FrameWidth		FrameHeight
+			81				30				8				24
+
+Index		Animation Info
+6			LocationX		LocationY		FrameWidth		FrameHeight
+			91				30				16				24
+
+Index		Animation Info
+7			LocationX		LocationY		FrameWidth		FrameHeight
+			109				30				8				24
+
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			119				30				8				24
+
+Index		Animation Info
+9			LocationX		LocationY		FrameWidth		FrameHeight
+			129				30				16				24
+
+Index		Animation Info
+10			LocationX		LocationY		FrameWidth		FrameHeight
+			147				30				8				24
+
+Index		Animation Info
+11			LocationX		LocationY		FrameWidth		FrameHeight
+			157				30				8				24
+
+Index		Animation Info
+12			LocationX		LocationY		FrameWidth		FrameHeight
+			205				47				7				7
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+Type1:NomalOrDive
+0	2	30
+Type1:BeAtacking
+3	5	30
+Type2:NomalOrDive
+6	8	30
+Type2:BeAtacking
+9	11	30
+BulletFromSkee
+12	12	-1

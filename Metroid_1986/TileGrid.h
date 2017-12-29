@@ -16,15 +16,18 @@
 #include "Ground.h"
 #include "Gate.h"
 #include "BubbleDoor.h"
-#include "Hedgehog.h"
+#include "Zoomer.h"
+#include "Skree.h"
 #include "MaruMari.h"
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
 	Ground_IDFF=0,
 	Gate_IDFF=1,
 	BubbleDoor_IDFF = 2,
-	Hedgehog_IDFF=20,
-	Hedgehog2_IDFF=21,
+	Zoomer_IDFF=20,
+	Zoomer2_IDFF=21,
+	Skree_IDFF=22,
+	Skree2_IDFF=23,
 	MaruMari_IDFF=41
 };
 
@@ -59,7 +62,7 @@ public:
 	void Update2(int time);
 	void Draw(Camera*);
 	//handle bullet vs other object
-	void handleCollision(int time);							
+	void handleCollision(int playerX, int playerY, int time);
 	map<int, GameObject*>* getCurrentObjects();
 	GameObject* CreateObject(int id, int x, int y);
 };

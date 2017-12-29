@@ -88,7 +88,8 @@
     <ClCompile Include="Global Setting.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="Hedgehog.cpp" />
+    <ClCompile Include="Skree.cpp" />
+    <ClCompile Include="Zoomer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -119,7 +120,8 @@
     <ClInclude Include="Global Setting.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="MaruMari.h" />
-    <ClInclude Include="Hedgehog.h" />
+    <ClInclude Include="Skree.h" />
+    <ClInclude Include="Zoomer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="SceneEnd.h" />

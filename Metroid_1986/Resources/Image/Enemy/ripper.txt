@@ -1,0 +1,14 @@
+Is All Frames are has a same size?
+0
+Count
+1
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			422				46				16				8
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+Drift
+0	0	-1

@@ -8,8 +8,11 @@ private:
 	Texture2* doorTexture2;
 	Texture2* playerTexture2;
 	Texture2* bulletTexture2;
+	//enemy
 	Texture2* explodeTexture2;
-	Texture2* hedgehogTexture2;
+	Texture2* zoomerTexture2;
+	Texture2* skreeTextture2;
+	//item
 	Texture2* itemTexture2;
 	static TextureCollection* textureCollection;
 

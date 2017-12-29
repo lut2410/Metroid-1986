@@ -196,6 +196,8 @@ D3DXVECTOR2 Player::getPositionOfHand(){
 }
 
 void Player::handleCollision(map<int, GameObject*> objectList, float dt){
+	//map<int, GameObject*> objectList = *TileGrid::getInstance()->getCurrentObjects();
+
 	RECT playerBound = getCollisionBound();
 	Direction directionVsWall = Direction::None_Direction;
 	// check each element in list maybe make collision with player
@@ -219,55 +221,27 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 		{
 			GameObject* object = it->second;
 			Direction direction;
-			
+			if (handleObjectCollision(this, object, direction, dt))
 			{
+				
 				//collide
 				switch (object->getObjectID())
 				{
 					//nelative of ground
 				case Gate_ID:	//pass the gate
-					if (handleObjectCollision(this, object, direction, dt, false))
-					{
-						Camera::getInstance()->setTheGate(direction);
-						//reset time to open the gate
-
-						
-					}
+					Camera::getInstance()->setTheGate(direction);
+					//reset time to open the gate
 					break;
 
 					//enemy
-				case Hedgehog_ID:
-					if (handleObjectCollision(this, object, direction, dt, false))
-					{
-						addOrChangeAction(Action::BeWounded);
-						beWounded_remainningTime = TIMEIMMORTAL_WOUNDED;
-						this->IsWounded(object->getAttackDame());
-						switch (direction)
-						{
-						case Direction::Left_Direction:
-							_velX = SPEED_WOUND;
-							_velY = SPEED_WOUND;
-
-							break;
-						case Direction::Right_Direction:
-							_velX = -SPEED_WOUND;
-							_velY = SPEED_WOUND;
-							break;
-						case Direction::Top_Direction:
-							_velY = -SPEED_WOUND;
-							break;
-						case Direction::Bottom_Direction:
-							_velY = SPEED_WOUND;
-
-							break;
-						}
-						
-
-					}
+				case Zoomer_ID:
+					this->BeWounded(direction,object->getAttackDame());
+					break;
+				case Skree_ID:
+					this->BeWounded(direction, object->getAttackDame());
 					break;
 					//item
 				case MaruMari_ID:
-					if (handleObjectCollision(this, object, direction, dt, true))
 					if (this->isAbilityToGrovel() == false)
 						//first time
 						this->AddAbilityToGrovel();
@@ -278,7 +252,6 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 						Sleep(2000);
 						object->SetDestroy();
 					}
-							
 					break;
 
 				}
@@ -433,6 +406,29 @@ void Player::Update2(int deltaTime){
 		}
 			
 			
+	}
+}
+void Player::BeWounded(Direction direction, int lossHP)
+{
+	addOrChangeAction(Action::BeWounded);
+	beWounded_remainningTime = TIMEIMMORTAL_WOUNDED;
+	_hp -= lossHP;
+	switch (direction)
+	{
+	case Direction::Left_Direction:
+		_velX = SPEED_WOUND;
+		_velY = SPEED_WOUND;
+
+		break;
+	case Direction::Right_Direction:
+		_velX = -SPEED_WOUND;
+		_velY = SPEED_WOUND;
+		break;
+	case Direction::Top_Direction:
+		_velY = -SPEED_WOUND;
+		break;
+	case Direction::Bottom_Direction:
+		_velY = SPEED_WOUND;
 	}
 }
 

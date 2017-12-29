@@ -1,5 +1,5 @@
 Objects Number
-554
+563
 Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 0		272		2336		16		16		0			Ground
 0		288		2336		16		16		0			Ground
@@ -555,3 +555,12 @@ Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 2		1512		2432		48		48		0			Ground
 2		2536		2432		48		48		0			Ground
 41		352		2400		16		16		2			Item
+22		896		2488		16		24		1			Enemy
+22		1696		2488		16		24		1			Enemy
+22		1920		2488		16		24		1			Enemy
+22		992		2504		16		24		1			Enemy
+22		1680		2504		16		24		1			Enemy
+22		2016		2504		16		24		1			Enemy
+22		832		2520		16		24		1			Enemy
+22		1760		2520		16		24		1			Enemy
+22		1856		2520		16		24		1			Enemy

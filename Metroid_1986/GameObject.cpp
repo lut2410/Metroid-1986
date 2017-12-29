@@ -20,7 +20,10 @@ GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float 
 
 RECT GameObject::getCollisionBound(){
 	Box  objectBox = _currentAnimation->getCurrentSpriteSize();
-	if (_objectID == ObjectID::Hedgehog_ID)
+	//objectBox.width -= 2;
+	//objectBox.height -= 2;
+
+	if (_objectID == ObjectID::Zoomer_ID)
 		objectBox = { 0, 0, 14, 14 };
 	if (_objectID == ObjectID::BubbleDoor_ID)
 		int i = 0;
@@ -78,14 +81,18 @@ void GameObject::handleCollision(map<int, GameObject*> objectList, float dt)
 {
 
 }
-void GameObject::IsWounded(int lossHP)
+void GameObject::handleCollision(int playerX, int playerY, float dt)
+{
+
+}
+void GameObject::BeWounded(int lossHP)
 {
 	_beAttacking = WOUNDED_FRAMES;
 	_hp -= lossHP;
 }
 bool GameObject::enemyCheckExplode(int deltaTime)
 {
-	if (_hp <= 0)	//draw 3 frames when hedgehog is explde
+	if (_hp <= 0)	//draw 3 frames when Zoomer is explde
 	{
 		_currentAnimation = expoldeAnimation;
 		_currentAnimation->Update(deltaTime);

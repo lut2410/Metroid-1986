@@ -22,7 +22,7 @@ public:
 	void Update2(int deltaTime);
 	void Draw(Camera* camera);
 	void ChangeAction();
-	void IsWounded(int lossHP = 1);	//openning
+	void BeWounded(int lossHP = 1);	//openning
 	void Open();
 	void Openning();
 	void Closing();

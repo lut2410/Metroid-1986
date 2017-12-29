@@ -58,7 +58,7 @@ void BubbleDoor::ChangeAction()
 		break;
 	}
 }
-void BubbleDoor::IsWounded(int hp)
+void BubbleDoor::BeWounded(int hp)
 {
 	if (_action==BubbleDoorAction::Close)
 	Openning();

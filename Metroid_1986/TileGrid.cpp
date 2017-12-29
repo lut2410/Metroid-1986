@@ -380,7 +380,7 @@ void TileGrid::Draw(Camera* camera)
 			object->Draw(camera);
 	}
 }
-void TileGrid::handleCollision(int deltaTime)
+void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 {
 
 	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
@@ -394,8 +394,14 @@ void TileGrid::handleCollision(int deltaTime)
 
 			object->handleCollision(*CurrentObjects, deltaTime);
 			break;
-		case ObjectID::Hedgehog_ID:
+		case ObjectID::Zoomer_ID:
 			object->handleCollision(*CurrentObjects,deltaTime);
+			break;
+		case ObjectID::Skree_ID:
+			//check collision with ground
+			object->handleCollision(*CurrentObjects, deltaTime);
+			//motion base on player
+			object->handleCollision(playerX, playerY, deltaTime);
 			break;
 		}
 			
@@ -418,12 +424,20 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new BubbleDoor(x, y);
 		return object;
 		break;
-	case ObjectIDFromFile::Hedgehog_IDFF:
-		object = new Hedgehog(x, y, 1);
+	case ObjectIDFromFile::Zoomer_IDFF:
+		object = new Zoomer(x, y, 1);
 		return object;
 		break;
-	case ObjectIDFromFile::Hedgehog2_IDFF:
-		object = new Hedgehog(x, y, 2);
+	case ObjectIDFromFile::Zoomer2_IDFF:
+		object = new Zoomer(x, y, 2);
+		return object;
+		break;
+	case ObjectIDFromFile::Skree_IDFF:
+		object = new Skree(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::Skree2_IDFF:
+		object = new Skree(x, y, 2);
 		return object;
 		break;
 	case ObjectIDFromFile::MaruMari_IDFF:

@@ -77,8 +77,8 @@ void SceneGame::RenderFrame(int time){
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	if (!currentObjects->count(300))
 	{
-		Hedgehog* hedgehog = new Hedgehog(578, 1079,2);
-		currentObjects->insert(pair<int, GameObject*>(300, hedgehog));
+		Zoomer* zoomer = new Zoomer(578, 1079,2);
+		currentObjects->insert(pair<int, GameObject*>(300, zoomer));
 
 	}
 	_player->Update(time);
@@ -101,7 +101,8 @@ void SceneGame::RenderFrame(int time){
 }
 
 void SceneGame::handleCollision(int dt){
-	_tileGrid->handleCollision(dt);
+	//D3DXVECTOR2 playerPosition = D3DXVECTOR2{ _player->_posX, _player->_posY };
+	_tileGrid->handleCollision(_player->_posX, _player->_posY, dt);
 
 	_player->handleCollision(*_tileGrid->getCurrentObjects(),dt);
 };
