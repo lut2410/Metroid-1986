@@ -28,17 +28,20 @@
     <Filter Include="Control\Support">
       <UniqueIdentifier>{ef361cd4-62ae-47b1-8f08-2eec4640ccec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Dynamic">
-      <UniqueIdentifier>{f0b8080f-aa27-4358-9ce3-163f87325a6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Static">
-      <UniqueIdentifier>{3ca1ead8-eb9b-4694-befd-d10ac80a7dad}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Player">
       <UniqueIdentifier>{cd9decfc-c85f-4c6b-87df-443d0fa267f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{21fcd39a-3e9f-4835-9bc5-70fef60e954d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item">
+      <UniqueIdentifier>{fa69497f-1a35-4065-851e-394a7d2d00c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\RelativeOfGround">
+      <UniqueIdentifier>{3ca1ead8-eb9b-4694-befd-d10ac80a7dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy">
+      <UniqueIdentifier>{f0b8080f-aa27-4358-9ce3-163f87325a6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +109,7 @@
       <Filter>Control\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
-      <Filter>Object\Static</Filter>
+      <Filter>Object\RelativeOfGround</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Control\Support</Filter>
@@ -115,16 +118,19 @@
       <Filter>Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Hedgehog.cpp">
-      <Filter>Object\Dynamic</Filter>
+      <Filter>Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Control</Filter>
     </ClCompile>
     <ClCompile Include="Gate.cpp">
-      <Filter>Object\Static</Filter>
+      <Filter>Object\RelativeOfGround</Filter>
     </ClCompile>
     <ClCompile Include="BubbleDoor.cpp">
-      <Filter>Object\Static</Filter>
+      <Filter>Object\RelativeOfGround</Filter>
+    </ClCompile>
+    <ClCompile Include="MaruMari.cpp">
+      <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +195,7 @@
       <Filter>Control\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
-      <Filter>Object\Static</Filter>
+      <Filter>Object\RelativeOfGround</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Control\Support</Filter>
@@ -198,16 +204,19 @@
       <Filter>Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="Hedgehog.h">
-      <Filter>Object\Dynamic</Filter>
+      <Filter>Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Control</Filter>
     </ClInclude>
     <ClInclude Include="Gate.h">
-      <Filter>Object\Static</Filter>
+      <Filter>Object\RelativeOfGround</Filter>
     </ClInclude>
     <ClInclude Include="BubbleDoor.h">
-      <Filter>Object\Static</Filter>
+      <Filter>Object\RelativeOfGround</Filter>
+    </ClInclude>
+    <ClInclude Include="MaruMari.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

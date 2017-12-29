@@ -17,6 +17,7 @@
 #include "Gate.h"
 #include "BubbleDoor.h"
 #include "Hedgehog.h"
+#include "MaruMari.h"
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
 	Ground_IDFF=0,
@@ -24,6 +25,7 @@ enum ObjectIDFromFile{
 	BubbleDoor_IDFF = 2,
 	Hedgehog_IDFF=20,
 	Hedgehog2_IDFF=21,
+	MaruMari_IDFF=41
 };
 
 //contain all object on screeen

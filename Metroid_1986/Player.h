@@ -72,11 +72,13 @@ class Player :public GameObject {
 	Block _block;
 	DirectionOfMotion _directionOfMotion;//transform of position X : left or right?
 	int _remainningTimeToShoot;
+	bool _isAbilityToGrovel;
+
 	
 public:
+	bool _isMotionless;	//unactive
 	//Current Key
 	ActionKey _currentKeys;
-	bool _isStop;		//are both player and game stop? => if yes then don't allow press or release key
 	Player();
 	Player(int x, int y);
 	~Player();
@@ -87,6 +89,10 @@ public:
 	void removeAction(Action action);
 	bool isHasAction(Action action);
 	bool isHasKey(ActionKey);
+
+	//void PauseGame(int time);
+	bool isAbilityToGrovel();
+	void AddAbilityToGrovel();
 	int getHP();
 	RECT getCollisionBound();					//use for check collision
 	D3DXVECTOR2 getPositionOfHand();			//bullet fly-out from hand

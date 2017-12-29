@@ -1,5 +1,5 @@
 Objects Number
-550
+554
 Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 0		272		2336		16		16		0			Ground
 0		288		2336		16		16		0			Ground
@@ -548,6 +548,10 @@ Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 1		1520		2464		16		16		0			Ground
 1		1536		2464		16		16		0			Ground
 1		2544		2464		16		16		0			Ground
+1		1264		2448		16		16		0			Ground
+1		1520		2448		16		16		0			Ground
+1		2544		2448		16		16		0			Ground
 2		1256		2432		48		48		0			Ground
 2		1512		2432		48		48		0			Ground
 2		2536		2432		48		48		0			Ground
+41		352		2400		16		16		2			Item

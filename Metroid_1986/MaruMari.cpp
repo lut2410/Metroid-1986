@@ -1,0 +1,18 @@
+#include "MaruMari.h"
+MaruMari::MaruMari()
+{}
+MaruMari::MaruMari(int x, int y) :GameObject(MaruMari_ID, x, y, 0, 0){
+	Texture2* itemTexture = NULL;
+	itemTexture = TextureCollection::getInstance()->getTexture2(MaruMari_ID);
+
+	//just only have 1 sprite
+	_actionAnimation.push_back(new Animation(itemTexture, "MaruMari"));
+	_currentAnimation = _actionAnimation[0];
+}
+//void MaruMari::Draw(Camera* camera)
+//{
+//	//if (_survive == false)
+//	//	Sleep(2000);
+//	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
+//	_currentAnimation->Draw(center.x, center.y);
+//}

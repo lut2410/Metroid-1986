@@ -96,6 +96,7 @@
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
+    <ClCompile Include="MaruMari.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextureCollection.cpp" />
     <ClCompile Include="Texture2.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="Gate.h" />
     <ClInclude Include="Global Setting.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="MaruMari.h" />
     <ClInclude Include="Hedgehog.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="QuadTree.h" />

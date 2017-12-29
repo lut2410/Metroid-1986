@@ -43,9 +43,9 @@ void SceneGame::RenderFrame(int time){
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
 	if (timeNow - _stageStartTime <= 1000) //4000
-		_player->_isStop = true;
+		_player->_isMotionless = true;
 	else
-		_player->_isStop = false;
+		_player->_isMotionless = false;
 
 	//draw black background
 	G_d3ddv->StretchRect(
@@ -61,12 +61,12 @@ void SceneGame::RenderFrame(int time){
 	{
 		_camera->passTheGate();
 		_backgroundMap->Draw(_camera);
+
 		_tileGrid->Update(_camera, time);
 		_tileGrid->Draw(_camera);
 		G_SpriteHandler->End();
 		return;
 	}
-
 	_player->UpdatePostionToInsideCamera();
 	_camera->UpdateCamera(_player->_posX);
 
@@ -110,8 +110,8 @@ void SceneGame::handleCollision(int dt){
 //}
 void SceneGame::KeyPress(int KeyCode){
 	
-	//if (_player->_isStop)		//don't allow press or release keys
-	//	return;
+	if (_player->_isMotionless)		//don't allow press or release keys
+		return;
 
 
 	ActionKey actionKey;

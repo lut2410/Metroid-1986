@@ -160,21 +160,21 @@ void Hedgehog::FixPosition()
 	{
 	case HedgehogAction::Crawl_Top:		//foot touch wall => bottom always divisibility 16	
 		_posY -= 7;
-		_posY = round((double)_posY / 16) * 16;
+		_posY = round((double)_posY / 8) * 8;
 		_posY += 7;
 		break;
 	case HedgehogAction::Crawl_Right:	
 		_posX -= 7;
-		_posX = round((double)_posX / 16) * 16;
+		_posX = round((double)_posX / 8) * 8;
 		_posX += 7;
 		break;
 	case HedgehogAction::Crawl_Bottom:
-		_posY = round((double)_posY / 16) * 16;
+		_posY = round((double)_posY / 8) * 8;
 		_posY -= 7;
 		break;
 	case HedgehogAction::Crawl_Left:
 		_posX += 7;
-		_posX = round((double)_posX / 16) * 16;
+		_posX = round((double)_posX / 8) * 8;
 		_posX -= 7;
 		break;
 	}

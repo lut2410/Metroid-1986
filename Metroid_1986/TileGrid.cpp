@@ -426,6 +426,10 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new Hedgehog(x, y, 2);
 		return object;
 		break;
+	case ObjectIDFromFile::MaruMari_IDFF:
+		object = new MaruMari(x, y);
+		return object;
+		break;
 	}
 };
 

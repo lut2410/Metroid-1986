@@ -18,7 +18,7 @@ Index		Animation Info
 
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
-GrovelPill
+MaruMari
 0	0	-1
 HPPill
 1	2	30

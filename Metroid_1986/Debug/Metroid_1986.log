@@ -1,10 +1,16 @@
-﻿Build started 12/29/2017 12:00:39 AM.
+﻿Build started 12/29/2017 1:18:58 PM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BubbleDoor.cpp
-         BubbleDoor.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Hedgehog.cpp
+         Hedgehog.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\bubbledoor.cpp(39): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(54): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(55): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(101): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(163): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(168): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(172): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\hedgehog.cpp(177): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.lib" /MACHINE:X86 Debug\AABB.obj
          Debug\Animation.obj
@@ -27,6 +33,7 @@
          Debug\SceneGame.obj
          Debug\SceneMain.obj
          Debug\SceneMenu.obj
+         Debug\MaruMari.obj
          Debug\Sprite.obj
          Debug\TextureCollection.obj
          Debug\Texture2.obj
@@ -39,4 +46,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.17
+Time Elapsed 00:00:01.13

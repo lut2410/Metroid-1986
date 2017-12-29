@@ -51,6 +51,10 @@ void Player::addOrChangeAction(Action action){
 	case Action::Jump:
 	case Action::RollingJump:
 	case Action::Grovel:
+		//check ability to grovel
+		if (action == Action::Grovel&&isAbilityToGrovel() == false)
+			return;
+
 		//remove all foot action because only 1 foot action is performed
 		if (isHasAction(Action::Stand))
 			removeAction(Action::Stand);
@@ -85,7 +89,14 @@ bool Player::isHasAction(Action action){
 bool Player::isHasKey(ActionKey actionKey){
 	return (_currentKeys & actionKey) == actionKey;
 };
-
+bool Player::isAbilityToGrovel()
+{
+	return _isAbilityToGrovel;
+}
+void Player::AddAbilityToGrovel()
+{
+	_isAbilityToGrovel = true;
+}
 int Player::getHP()
 {
 	return _hp;
@@ -208,45 +219,72 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 		{
 			GameObject* object = it->second;
 			Direction direction;
-
-			switch (object->getObjectID())
+			
 			{
-			case Gate_ID:	//pass the gate
-				if (handleObjectCollision(this, object, direction, dt, false))
+				//collide
+				switch (object->getObjectID())
 				{
-					Camera::getInstance()->setTheGate(direction);
-					//reset time to open the gate
-					
-				}
-				break;
-			case Hedgehog_ID:
-				if (handleObjectCollision(this, object, direction, dt, false))
-				{
-					addOrChangeAction(Action::BeWounded);
-					beWounded_remainningTime = TIMEIMMORTAL_WOUNDED;
-					this->IsWounded(object->getAttackDame());
-					switch (direction)
+					//nelative of ground
+				case Gate_ID:	//pass the gate
+					if (handleObjectCollision(this, object, direction, dt, false))
 					{
-					case Direction::Left_Direction:
-						_velX = SPEED_WOUND;
-						_velY = SPEED_WOUND;
+						Camera::getInstance()->setTheGate(direction);
+						//reset time to open the gate
 
-						break;
-					case Direction::Right_Direction:
-						_velX = -SPEED_WOUND;
-						_velY = SPEED_WOUND;
-						break;
-					case Direction::Top_Direction:
-						_velY = -SPEED_WOUND;
-						break;
-					case Direction::Bottom_Direction:
-						_velY = SPEED_WOUND;
-
-						break;
+						
 					}
+					break;
+
+					//enemy
+				case Hedgehog_ID:
+					if (handleObjectCollision(this, object, direction, dt, false))
+					{
+						addOrChangeAction(Action::BeWounded);
+						beWounded_remainningTime = TIMEIMMORTAL_WOUNDED;
+						this->IsWounded(object->getAttackDame());
+						switch (direction)
+						{
+						case Direction::Left_Direction:
+							_velX = SPEED_WOUND;
+							_velY = SPEED_WOUND;
+
+							break;
+						case Direction::Right_Direction:
+							_velX = -SPEED_WOUND;
+							_velY = SPEED_WOUND;
+							break;
+						case Direction::Top_Direction:
+							_velY = -SPEED_WOUND;
+							break;
+						case Direction::Bottom_Direction:
+							_velY = SPEED_WOUND;
+
+							break;
+						}
+						
+
+					}
+					break;
+					//item
+				case MaruMari_ID:
+					if (handleObjectCollision(this, object, direction, dt, true))
+					if (this->isAbilityToGrovel() == false)
+						//first time
+						this->AddAbilityToGrovel();
+					else
+						//2nd time(meaning player has "eaten" this item)
+						//pause game 2s and delete MaruMari
+					{
+						Sleep(2000);
+						object->SetDestroy();
+					}
+							
+					break;
+
 				}
-				break;
+
 			}
+			
 		}
 	}
 	

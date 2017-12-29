@@ -44,6 +44,7 @@ public:
 	bool isRelativeWithGround();	//use to check collision
 	int getAttackDame();
 	bool isSurvive();
+	void SetDestroy();
 	//update action and position
 	virtual void Update(int deltaTime);			
 	//update animation-frame of sprite

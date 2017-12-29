@@ -10,6 +10,7 @@ private:
 	Texture2* bulletTexture2;
 	Texture2* explodeTexture2;
 	Texture2* hedgehogTexture2;
+	Texture2* itemTexture2;
 	static TextureCollection* textureCollection;
 
 
