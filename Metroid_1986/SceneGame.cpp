@@ -74,11 +74,18 @@ void SceneGame::RenderFrame(int time){
 	_backgroundMap->Draw(_camera);
 	//UPDATE MAPS
 	_tileGrid->Update(_camera,time);
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1000))
+	//{
+	//	Zoomer* zoomer = new Zoomer(578, 1079,2);
+	//	currentObjects->insert(pair<int, GameObject*>(300, zoomer));
+
+	//}
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(300))
+	if (!currentObjects->count(1001))
 	{
-		Zoomer* zoomer = new Zoomer(578, 1079,2);
-		currentObjects->insert(pair<int, GameObject*>(300, zoomer));
+		Ripper* ripper = new Ripper(700, 2383, 1);
+		currentObjects->insert(pair<int, GameObject*>(1001, ripper));
 
 	}
 	_player->Update(time);
@@ -106,9 +113,7 @@ void SceneGame::handleCollision(int dt){
 
 	_player->handleCollision(*_tileGrid->getCurrentObjects(),dt);
 };
-//TileGrid* SceneGame::getTileGrid(){
-//	return _tileGrid;
-//}
+
 void SceneGame::KeyPress(int KeyCode){
 	
 	if (_player->_isMotionless)		//don't allow press or release keys

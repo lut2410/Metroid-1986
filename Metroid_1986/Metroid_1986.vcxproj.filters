@@ -138,6 +138,9 @@
     <ClCompile Include="HPTonic.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Ripper.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="HPTonic.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Ripper.h">
+      <Filter>Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -112,6 +112,10 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					this->BeWounded();
 					otherObject->BeWounded();
 					break;
+				case ObjectID::Ripper_ID:
+					this->BeWounded();
+					//otherObject->BeWounded(); - Ripper isn't wounded by bullet
+					break;
 				}
 			}
 		}

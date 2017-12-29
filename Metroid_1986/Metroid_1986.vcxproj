@@ -89,6 +89,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="HPTonic.cpp" />
+    <ClCompile Include="Ripper.cpp" />
     <ClCompile Include="Skree.cpp" />
     <ClCompile Include="Zoomer.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="HPTonic.h" />
     <ClInclude Include="MaruMari.h" />
+    <ClInclude Include="Ripper.h" />
     <ClInclude Include="Skree.h" />
     <ClInclude Include="Zoomer.h" />
     <ClInclude Include="Player.h" />

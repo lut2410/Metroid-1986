@@ -68,6 +68,7 @@ enum ObjectID{
 	//enemy
 	Zoomer_ID,
 	Skree_ID,
+	Ripper_ID,
 	ExplodeObject_ID,
 	//item
 	HPTonic_ID,
