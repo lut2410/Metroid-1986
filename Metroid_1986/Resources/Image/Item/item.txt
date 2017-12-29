@@ -20,5 +20,5 @@ Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
 MaruMari
 0	0	-1
-HPPill
+HPTonic
 1	2	30

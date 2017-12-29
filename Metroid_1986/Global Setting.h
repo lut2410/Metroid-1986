@@ -70,7 +70,8 @@ enum ObjectID{
 	Skree_ID,
 	ExplodeObject_ID,
 	//item
-	MaruMari_ID
+	HPTonic_ID,
+	MaruMari_ID,
 };
 
 #endif _GLOBAL_SETTING_H

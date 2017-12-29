@@ -2,7 +2,6 @@
 BubbleDoor::BubbleDoor()
 {}
 BubbleDoor::BubbleDoor(int x, int y) :GameObject(BubbleDoor_ID, x, y, 0, 0){
-	_isRelativeWithGround = true;
 
 	Texture2* bubbleDoorTexture = NULL;
 	bubbleDoorTexture = TextureCollection::getInstance()->getTexture2(BubbleDoor_ID);

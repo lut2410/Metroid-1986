@@ -135,7 +135,6 @@ RECT Player::getCollisionBound(){
 			else //if (_directionOfMotion == DirectionOfMotion::Left)
 				playerBound.left += 5;
 		}
-		//else if ()
 	}
 	playerBound.top--;
 	return playerBound;
@@ -206,7 +205,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	{
 		GameObject* object = it->second;
 		Direction direction;
-		if (object->isRelativeWithGround()==true)
+		if (object->getObjectType()==ObjectType::RelativesWithWall_OT)
 			if (handleObjectCollision(this, object, direction, dt)) //is collison
 			{
 				directionVsWall = Direction(directionVsWall | direction);
@@ -252,6 +251,10 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 						Sleep(2000);
 						object->SetDestroy();
 					}
+					break;
+				case HPTonic_ID:
+					this->BuffHP(5);
+					object->SetDestroy();
 					break;
 
 				}
@@ -431,7 +434,10 @@ void Player::BeWounded(Direction direction, int lossHP)
 		_velY = SPEED_WOUND;
 	}
 }
-
+void Player::BuffHP(int buffHP)
+{
+	_hp += buffHP;
+}
 void Player::Draw(Camera* camera)
 {
 	flicker;
@@ -728,14 +734,9 @@ void Player::CreateBullet()
 
 			//bullet is appear at hand of player
 			Bullet* bullet = new Bullet(getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
-			//Bullet* bullet = new Bullet(660, 1100, Right_Direction);
-			//add to 
-			map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-			int key = 10000; //usually object number <10000.
-			while (currentObjects->count(key)) // existed
-				key++;
-			//insert object with the key
-			currentObjects->insert(pair<int, GameObject*>(key, bullet));
+			//add to currentObjectList
+			TileGrid::AddObjectToCurrentObjectList(bullet);
+			
 }
 bool Player::checkToStandUpInThisLocation()
 {

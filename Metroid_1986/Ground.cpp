@@ -4,7 +4,6 @@ Ground::Ground(){
 
 }
 Ground::Ground( int x, int y) :GameObject(Ground_ID, x, y, 0, 0){
-	_isRelativeWithGround = true;
 	_currentAnimation = NULL;	//have drawn by backroundmap
 }
 RECT Ground::getCollisionBound(){

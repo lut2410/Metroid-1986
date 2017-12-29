@@ -92,7 +92,7 @@ void Zoomer::handleCollision(map<int, GameObject*> objectList, float dt)
 	{
 		GameObject* object = it->second;
 
-		if (object->isRelativeWithGround()==true)
+		if (object->getObjectType()==ObjectType::RelativesWithWall_OT)
 		{
 			
 			RECT b = object->getCollisionBound();

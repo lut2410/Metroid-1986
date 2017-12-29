@@ -4,7 +4,6 @@ Gate::Gate(){
 
 }
 Gate::Gate(int x, int y) :GameObject(Gate_ID, x, y, 0, 0){
-	_isRelativeWithGround = true;
 	_currentAnimation = NULL;	//have drawn by backroundmap
 }
 RECT Gate::getCollisionBound(){

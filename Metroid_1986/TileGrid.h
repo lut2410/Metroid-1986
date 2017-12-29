@@ -2,6 +2,8 @@
 #define TILE_GRID_H
 
 #pragma once
+#include <stdlib.h>	//support to give out item
+
 #include "Global Setting.h"
 #include "Tile.h"
 #include "QuadTree.h"
@@ -16,8 +18,10 @@
 #include "Ground.h"
 #include "Gate.h"
 #include "BubbleDoor.h"
+
 #include "Zoomer.h"
 #include "Skree.h"
+#include "HPTonic.h"
 #include "MaruMari.h"
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
@@ -65,6 +69,7 @@ public:
 	void handleCollision(int playerX, int playerY, int time);
 	map<int, GameObject*>* getCurrentObjects();
 	GameObject* CreateObject(int id, int x, int y);
+	static void AddObjectToCurrentObjectList(GameObject* object);		//bullet Samus shoot out, and items appear from the enemies
 };
 
 

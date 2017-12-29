@@ -102,6 +102,7 @@ public:
 	void Update(int time);	//update action and position after press key
 	void Update2(int time);	//update frame of sprite and position of sprite
 	void BeWounded(Direction direction,int lossHP);
+	void BuffHP(int buffHP);
 	void Draw(Camera* camera);
 	void UpdatePostionToInsideCamera();
 	//int checkCollision();

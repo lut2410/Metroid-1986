@@ -11,7 +11,6 @@ public:
 	MaruMari();
 	MaruMari(int x, int y);
 	~MaruMari();
-	//void Draw(Camera* camera);
 };
 
 #endif

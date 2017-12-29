@@ -7,7 +7,6 @@ GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float 
 	_hp = 0;
 	_attack = 0;
 	_objectID = objectID;
-	_isRelativeWithGround = false;
 	_posX = posX;
 	_posY = posY;
 	_velX = velX;
@@ -39,9 +38,35 @@ D3DXVECTOR2 GameObject::getVelocity(){
 ObjectID GameObject::getObjectID(){
 	return _objectID;
 }
-bool GameObject::isRelativeWithGround()
+ObjectType GameObject::getObjectType()
 {
-	return _isRelativeWithGround;
+
+	switch (_objectID)
+	{
+		//nelative of wall
+	case Ground_ID:
+	case Gate_ID:
+	case BubbleDoor_ID:
+		return ObjectType::RelativesWithWall_OT;
+		break;
+		//player
+	case Player_ID:
+	case Bullet_ID:
+		return ObjectType::Player_OT;
+		break;
+		//enemy
+	case Zoomer_ID:
+	case Skree_ID:
+	case ExplodeObject_ID:
+		return ObjectType::Enemy_OT;
+		break;
+		//item
+	case HPTonic_ID:
+	case MaruMari_ID:
+		return ObjectType::Item_OT;
+		break;
+
+	}
 }
 int GameObject::getAttackDame()
 {
@@ -58,7 +83,7 @@ void GameObject::SetDestroy()
 void GameObject::Update(int deltaTime)
 {
 
-	if (_isRelativeWithGround == true)
+	if (getObjectType() == ObjectType::RelativesWithWall_OT)
 		//ground and its relative can't move
 		return;
 	//update position
@@ -67,11 +92,14 @@ void GameObject::Update(int deltaTime)
 }
 void GameObject::Update2(int deltaTime)
 {
-
+	if (getObjectType() == ObjectType::RelativesWithWall_OT)
+		//ground and its relative is drawn in background
+		return;
+	_currentAnimation->Update(deltaTime);
 }
 void GameObject::Draw(Camera* camera){
 	
-	if (_isRelativeWithGround == true)
+	if (getObjectType() == ObjectType::RelativesWithWall_OT)
 		//ground and its relative has drawn in background
 		return;
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
@@ -92,14 +120,17 @@ void GameObject::BeWounded(int lossHP)
 }
 bool GameObject::enemyCheckExplode(int deltaTime)
 {
-	if (_hp <= 0)	//draw 3 frames when Zoomer is explde
+	if (_hp <= 0)	//draw 3 frames when Zoomer is explode
 	{
 		_currentAnimation = expoldeAnimation;
 		_currentAnimation->Update(deltaTime);
 		if (_hp>-2)
 			_hp--;
 		else
+		{
 			_survive = false;
+		}
+			
 		return true;
 	}
 	return false;

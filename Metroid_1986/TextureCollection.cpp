@@ -37,8 +37,11 @@ Texture2* TextureCollection::getTexture2(ObjectID id){
 	case ExplodeObject_ID:
 		return explodeTexture2;
 		break;
+		//item
 	case MaruMari_ID:
+	case HPTonic_ID:
 		return itemTexture2;
 		break;
+
 	}
 };

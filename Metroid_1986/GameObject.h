@@ -6,8 +6,15 @@
 #include "Animation.h"
 #include "Camera.h"
 #include <math.h>
+//#include "HPTonic.h"
+//#include "TileGrid.h"
 #define WOUNDED_FRAMES 5
-
+enum ObjectType{
+	RelativesWithWall_OT,	//can't move, is in background: ground,wall,gate,door,..
+	Player_OT,				//Samus
+	Enemy_OT,
+	Item_OT
+};
 enum ObjectStatus{
 	Nomal,
 	Explode=99
@@ -15,13 +22,15 @@ enum ObjectStatus{
 
 class GameObject{
 protected:
+	//ObjectType _objectType;
+	ObjectID _objectID;		
+
 	bool _survive;		//status: survival
-	int _beAttacking;	// object is be attacking
-	//int _beDestroying;	//object is be destroying
 	int _hp;			//HP
 	int _attack;		//attack enemy,HP enemy will be subtract = attack index
-	ObjectID _objectID;
-	bool _isRelativeWithGround;				//can't move, is in background: ground,wall,gate,door,..
+	int _beAttacking;	// object is be attacking
+	
+	
 	Animation* _currentAnimation;
 	vector<Animation*> _actionAnimation; 
 	Animation* expoldeAnimation;
@@ -42,7 +51,7 @@ public:
 	virtual RECT getCollisionBound();
 	D3DXVECTOR2 getVelocity();
 	ObjectID getObjectID();
-	bool isRelativeWithGround();	//use to check collision
+	ObjectType getObjectType();	//use to check collision
 	int getAttackDame();
 	bool isSurvive();
 	void SetDestroy();

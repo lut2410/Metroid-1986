@@ -135,6 +135,9 @@
     <ClCompile Include="Skree.cpp">
       <Filter>Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="HPTonic.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Skree.h">
       <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="HPTonic.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

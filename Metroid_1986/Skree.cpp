@@ -2,7 +2,6 @@
 Skree::Skree()
 {}
 Skree::Skree(int x, int y, int type) :GameObject(Skree_ID, x, y, 0, 0){
-	
 	//take texture
 	Texture2* skreeTexture = NULL;
 	skreeTexture = TextureCollection::getInstance()->getTexture2(Skree_ID);

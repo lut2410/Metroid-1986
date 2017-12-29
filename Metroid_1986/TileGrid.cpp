@@ -333,6 +333,21 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 		if (object->isSurvive() == false)
 		{//delete object and erase from CurrentObjects
 			
+			//if enemy->can give out item
+			if (object->getObjectType() == ObjectType::Enemy_OT)
+			{
+				//probality:30%
+				int random = rand() % 10 - 6;// random (-6->3)
+				if (random>0) //=30%
+					//give out item
+				{
+					HPTonic* hpTonic = new HPTonic(object->_posX, object->_posY);	//appear in position enemy was destroyed
+					//add to currentObjectList
+					TileGrid::AddObjectToCurrentObjectList(hpTonic);
+				}
+			}
+
+			//delte object
 			DeleteTileNumberInCurrentQuadTrees(it->first);
 			it = CurrentObjects->erase(it);
 			delete object;
@@ -447,6 +462,15 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 	}
 };
 
+void TileGrid::AddObjectToCurrentObjectList(GameObject* object)
+{
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	int key = 10000; //usually object number <10000.
+	while (currentObjects->count(key)) // existed
+		key++;
+	//insert object with the key
+	currentObjects->insert(pair<int, GameObject*>(key, object));
+}
 map<int, GameObject*>* TileGrid::getCurrentObjects(){
 	return CurrentObjects;
 };
