@@ -15,25 +15,21 @@ Ripper::Ripper(int x, int y, int type) :GameObject(Ripper_ID, x, y, 0, 0){
 		break;
 	case 2:
 		_attack = 10;
-		_actionAnimation.resize(3);
 		//take animation of its type( type1 in here)
 		_actionAnimation.push_back(new Animation(ripperTexture, "Type2"));
 		break;
 	case 3:
 		_attack = 12;
-		_actionAnimation.resize(3);
 		//take animation of its type( type1 in here)
 		_actionAnimation.push_back(new Animation(ripperTexture, "Type3"));
 		break;
 	case 4:
 		_attack = 14;
-		_actionAnimation.resize(3);
 		//take animation of its type( type1 in here)
 		_actionAnimation.push_back(new Animation(ripperTexture, "Type4"));
 		break;
 	case 5:
 		_attack = 16;
-		_actionAnimation.resize(3);
 		//take animation of its type( type1 in here)
 		_actionAnimation.push_back(new Animation(ripperTexture, "Type5"));
 		break;
@@ -50,7 +46,7 @@ void Ripper::Update(int deltaTime)
 	//specify vel
 	switch (_action)
 	{
-	case RipperAction::SuftToLeft:		//crawl right
+	case RipperAction::SuftToLeft:		
 		_velX = -RIPPER_VEL;
 		_velY = 0;
 		break;

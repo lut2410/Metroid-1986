@@ -67,7 +67,7 @@ void Bullet::Update(int deltaTime)
 	//update remaining-time
 	_remainingTime -= deltaTime;
 	if (_remainingTime <= 0)
-		_survive = false;
+		SetObjectStatus(ObjectStatus::Died_OS);
 	else
 	{
 		//update position
@@ -79,7 +79,7 @@ void Bullet::Update2(int deltaTime)
 {
 	if (_hp <= 0)
 	{
-		_survive = false;
+		SetObjectStatus(ObjectStatus::Died_OS);
 		_currentAnimation = _actionAnimation[1];
 	}
 		
@@ -104,11 +104,11 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					this->BeWounded();
 					otherObject->BeWounded();
 					break;
+
+					//enemy
 				case ObjectID::Zoomer_ID:
-					this->BeWounded();
-					otherObject->BeWounded();
-					break;
 				case ObjectID::Skree_ID:
+				case ObjectID::Zeb_ID:
 					this->BeWounded();
 					otherObject->BeWounded();
 					break;

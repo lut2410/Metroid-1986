@@ -330,7 +330,7 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 	{
 		GameObject* object = it->second;
 		//check object is destroy yet?
-		if (object->isSurvive() == false)
+		if (object->getObjectStatus() == ObjectStatus::Died_OS)
 		{//delete object and erase from CurrentObjects
 			
 			//if enemy->can give out item
@@ -419,6 +419,10 @@ void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 			object->handleCollision(playerX, playerY, deltaTime);
 			break;
 		case ObjectID::Ripper_ID:
+			//check collision with ground
+			object->handleCollision(*CurrentObjects, deltaTime);
+			break;
+		case ObjectID::Zeb_ID:
 			//check collision with ground
 			object->handleCollision(*CurrentObjects, deltaTime);
 			break;

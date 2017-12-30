@@ -6,8 +6,7 @@
 #include "Animation.h"
 #include "Camera.h"
 #include <math.h>
-//#include "HPTonic.h"
-//#include "TileGrid.h"
+#include <stdlib.h>		//support to random
 #define WOUNDED_FRAMES 5
 enum ObjectType{
 	RelativesWithWall_OT,	//can't move, is in background: ground,wall,gate,door,..
@@ -16,16 +15,19 @@ enum ObjectType{
 	Item_OT
 };
 enum ObjectStatus{
-	Nomal,
-	Explode=99
+	Survival_OS,
+	BeWounding_OS,
+	Destroying_OS,
+	Died_OS
+
 };
 
 class GameObject{
 protected:
 	//ObjectType _objectType;
 	ObjectID _objectID;		
-
-	bool _survive;		//status: survival
+	ObjectStatus _objectOS;
+	//bool _survive;		//status: survival
 	int _hp;			//HP
 	int _attack;		//attack enemy,HP enemy will be subtract = attack index
 	int _beAttacking;	// object is be attacking
@@ -53,8 +55,8 @@ public:
 	ObjectID getObjectID();
 	ObjectType getObjectType();	//use to check collision
 	int getAttackDame();
-	bool isSurvive();
-	void SetDestroy();
+	ObjectStatus getObjectStatus();
+	void SetObjectStatus(ObjectStatus);
 	//update action and position
 	virtual void Update(int deltaTime);			
 	//update animation-frame of sprite

@@ -141,6 +141,12 @@
     <ClCompile Include="Infor.cpp">
       <Filter>Control</Filter>
     </ClCompile>
+    <ClCompile Include="Zeb.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Waver.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -235,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="Infor.h">
       <Filter>Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Zeb.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Waver.h">
+      <Filter>Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

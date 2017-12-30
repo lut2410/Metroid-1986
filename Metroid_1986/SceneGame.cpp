@@ -27,7 +27,7 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	_player = new Player(640,2500);
+	_player = new Player(650,2450);
 
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfMotion()==DirectionOfMotion::Neutral)//begin, player has direction = neutral
@@ -42,10 +42,18 @@ void SceneGame::LoadObject(){
 void SceneGame::RenderFrame(int time){
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
-	if (timeNow - _stageStartTime <= 1000) //4000
+	if (timeNow - _stageStartTime <= 4000) //4000
+	{
+		_player->addOrChangeAction(BeWounded);
 		_player->_isMotionless = true;
-	else
+	}
+		
+	else if (timeNow - _stageStartTime <= 4100)
+	{
+		_player->removeAction(BeWounded);
 		_player->_isMotionless = false;
+	}
+
 
 	//draw black background
 	G_d3ddv->StretchRect(
@@ -71,8 +79,6 @@ void SceneGame::RenderFrame(int time){
 	_camera->UpdateCamera(_player->_posX);
 
 	
-	//draw background(ground)
-	_backgroundMap->Draw(_camera);
 	//Infor::draw(_player->getHP());
 	//UPDATE MAPS
 	_tileGrid->Update(_camera,time);
@@ -83,11 +89,18 @@ void SceneGame::RenderFrame(int time){
 	//	currentObjects->insert(pair<int, GameObject*>(300, zoomer));
 
 	//}
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1001))
+	//{
+	//	Ripper* ripper = new Ripper(660, 2490, 1);
+	//	currentObjects->insert(pair<int, GameObject*>(1001, ripper));
+
+	//}
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1001))
+	if (!currentObjects->count(1002))
 	{
-		Ripper* ripper = new Ripper(660, 2490, 1);
-		currentObjects->insert(pair<int, GameObject*>(1001, ripper));
+		Zeb* zeb = new Zeb(660, 2400, 1);
+		currentObjects->insert(pair<int, GameObject*>(1002, zeb));
 
 	}
 	_player->Update(time);
@@ -102,7 +115,10 @@ void SceneGame::RenderFrame(int time){
 	//DRAW
 	_tileGrid->Draw(_camera);
 	_player->Draw(_camera);
+	//draw background(ground)
+	_backgroundMap->Draw(_camera);
 	//Infor: HP of player
+	Infor::draw(_player->getHP());
 	G_SpriteHandler->End();
 }
 

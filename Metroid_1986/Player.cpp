@@ -234,11 +234,12 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 
 					//enemy
 				case Zoomer_ID:
-					this->BeWounded(direction,object->getAttackDame());
-					break;
 				case Skree_ID:
+				case Ripper_ID:
+				case Zeb_ID:
 					this->BeWounded(direction, object->getAttackDame());
 					break;
+					
 					//item
 				case MaruMari_ID:
 					if (this->isAbilityToGrovel() == false)
@@ -249,12 +250,12 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 						//pause game 2s and delete MaruMari
 					{
 						Sleep(2000);
-						object->SetDestroy();
+						object->SetObjectStatus(ObjectStatus::Died_OS);
 					}
 					break;
 				case HPTonic_ID:
 					this->BuffHP(5);
-					object->SetDestroy();
+					object->SetObjectStatus(ObjectStatus::Died_OS);
 					break;
 
 				}

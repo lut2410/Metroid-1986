@@ -62,6 +62,7 @@ enum ObjectID{
 	Ground_ID,
 	Gate_ID,
 	BubbleDoor_ID,
+	ZebProductionPipe,
 	//player
 	Player_ID,
 	Bullet_ID,
@@ -69,6 +70,7 @@ enum ObjectID{
 	Zoomer_ID,
 	Skree_ID,
 	Ripper_ID,
+	Zeb_ID,
 	ExplodeObject_ID,
 	//item
 	HPTonic_ID,

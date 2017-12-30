@@ -2,7 +2,6 @@
 #define TILE_GRID_H
 
 #pragma once
-#include <stdlib.h>	//support to give out item
 
 #include "Global Setting.h"
 #include "Tile.h"
@@ -22,6 +21,8 @@
 #include "Zoomer.h"
 #include "Skree.h"
 #include "Ripper.h"
+#include "Zeb.h"
+
 #include "HPTonic.h"
 #include "MaruMari.h"
 //ID of Game Object (has divided by type)

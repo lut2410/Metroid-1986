@@ -6,8 +6,9 @@ TextureCollection::TextureCollection(){
 	bulletTexture2		= new Texture2("Resources/Image/player/image.png", "Resources/Image/player/bullet.txt");
 	explodeTexture2		= new Texture2("Resources/Image/player/image.png", "Resources/Image/player/explode.txt");
 	zoomerTexture2		= new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/Zoomer.txt");
-	skreeTextture2		= new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/skree.txt");
-	ripperTextture2 = new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/ripper.txt");
+	skreeTexture2		= new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/skree.txt");
+	ripperTexture2		= new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/ripper.txt");
+	zebTexture2		= new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/zeb.txt");
 	itemTexture2		= new Texture2("Resources/Image/item/image.png", "Resources/Image/item/item.txt");
 
 };
@@ -33,10 +34,13 @@ Texture2* TextureCollection::getTexture2(ObjectID id){
 		return zoomerTexture2;
 		break;
 	case Skree_ID:
-		return skreeTextture2;
+		return skreeTexture2;
 		break;
 	case Ripper_ID:
-		return ripperTextture2;
+		return ripperTexture2;
+		break;
+	case Zeb_ID:
+		return zebTexture2;
 		break;
 	case ExplodeObject_ID:
 		return explodeTexture2;

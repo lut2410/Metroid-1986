@@ -16,5 +16,5 @@ void HPTonic::Update(int deltaTime)
 	//update remaining-time
 	_remainingTime -= deltaTime;
 	if (_remainingTime <= 0)
-		_survive = false;
+		SetObjectStatus(ObjectStatus::Died_OS);
 }

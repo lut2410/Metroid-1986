@@ -2,7 +2,7 @@
 GameObject::GameObject(void){}
 GameObject::~GameObject(void){}
 GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float velY){
-	_survive = true;
+	_objectOS = ObjectStatus::Survival_OS;
 	_beAttacking = 0;
 	_hp = 0;
 	_attack = 0;
@@ -47,6 +47,7 @@ ObjectType GameObject::getObjectType()
 	case Ground_ID:
 	case Gate_ID:
 	case BubbleDoor_ID:
+	case ZebProductionPipe:
 		return ObjectType::RelativesWithWall_OT;
 		break;
 		//player
@@ -57,6 +58,8 @@ ObjectType GameObject::getObjectType()
 		//enemy
 	case Zoomer_ID:
 	case Skree_ID:
+	case Ripper_ID:
+	case Zeb_ID:
 	case ExplodeObject_ID:
 		return ObjectType::Enemy_OT;
 		break;
@@ -72,13 +75,13 @@ int GameObject::getAttackDame()
 {
 	return _attack;
 }
-bool GameObject::isSurvive()
+ObjectStatus GameObject::getObjectStatus()
 {
-	return _survive;
+	return _objectOS;
 }
-void GameObject::SetDestroy()
+void GameObject::SetObjectStatus(ObjectStatus objectStatus)
 {
-	_survive = false;
+	_objectOS = objectStatus;
 }
 void GameObject::Update(int deltaTime)
 {
@@ -94,6 +97,8 @@ void GameObject::Update2(int deltaTime)
 {
 	if (getObjectType() == ObjectType::RelativesWithWall_OT)
 		//ground and its relative is drawn in background
+		return;
+	if (enemyCheckExplode(deltaTime))
 		return;
 	_currentAnimation->Update(deltaTime);
 }
@@ -128,7 +133,7 @@ bool GameObject::enemyCheckExplode(int deltaTime)
 			_hp--;
 		else
 		{
-			_survive = false;
+			_objectOS = ObjectStatus::Died_OS;
 		}
 			
 		return true;

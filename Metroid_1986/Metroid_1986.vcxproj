@@ -91,6 +91,8 @@
     <ClCompile Include="HPTonic.cpp" />
     <ClCompile Include="Ripper.cpp" />
     <ClCompile Include="Skree.cpp" />
+    <ClCompile Include="Waver.cpp" />
+    <ClCompile Include="Zeb.cpp" />
     <ClCompile Include="Zoomer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuadTree.cpp" />
@@ -125,6 +127,8 @@
     <ClInclude Include="MaruMari.h" />
     <ClInclude Include="Ripper.h" />
     <ClInclude Include="Skree.h" />
+    <ClInclude Include="Waver.h" />
+    <ClInclude Include="Zeb.h" />
     <ClInclude Include="Zoomer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="QuadTree.h" />

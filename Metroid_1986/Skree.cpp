@@ -13,22 +13,22 @@ Skree::Skree(int x, int y, int type) :GameObject(Skree_ID, x, y, 0, 0){
 		_attack = 8;
 		//take animation of its type( type1 in here)
 		_actionAnimation.resize(3);
-		_actionAnimation[Nomal_SA]			= new Animation(skreeTexture, "Type1:NomalOrDive");
-		_actionAnimation[Dive_SA]			= new Animation(skreeTexture, "Type1:NomalOrDive");
-		_actionAnimation[BeAttacking_SA]	= new Animation(skreeTexture, "Type1:BeAtacking");
+		_actionAnimation[Nomal_SkreeA]			= new Animation(skreeTexture, "Type1:NomalOrDive");
+		_actionAnimation[Dive_SkreeA]			= new Animation(skreeTexture, "Type1:NomalOrDive");
+		_actionAnimation[BeAttacking_SkreeA]	= new Animation(skreeTexture, "Type1:BeAtacking");
 		break;
 	case 2:
 		_hp = 5;
 		_attack = 8;
 		_actionAnimation.resize(3);
-		_actionAnimation[Nomal_SA]			= new Animation(skreeTexture, "Type2:NomalOrDive");
-		_actionAnimation[Dive_SA]			= new Animation(skreeTexture, "Type2:NomalOrDive");
-		_actionAnimation[BeAttacking_SA]	= new Animation(skreeTexture, "Type2:BeAtacking");
+		_actionAnimation[Nomal_SkreeA]			= new Animation(skreeTexture, "Type2:NomalOrDive");
+		_actionAnimation[Dive_SkreeA]			= new Animation(skreeTexture, "Type2:NomalOrDive");
+		_actionAnimation[BeAttacking_SkreeA]	= new Animation(skreeTexture, "Type2:BeAtacking");
 		break;
 	}
 
 	//set default action and animation
-	_action = SkreeAction::Nomal_SA;
+	_action = SkreeAction::Nomal_SkreeA;
 	_currentAnimation = _actionAnimation[_action];	//actually _actionAnimation just have 1 animation 
 }
 void Skree::Update(int deltaTime)
@@ -37,25 +37,25 @@ void Skree::Update(int deltaTime)
 	//specify action
 	if (_beAttacking)
 	{
-		_action = SkreeAction::BeAttacking_SA;
+		_action = SkreeAction::BeAttacking_SkreeA;
 		_beAttacking--;
 		if (_beAttacking == 0)
 			//back to dive
-			_action = SkreeAction::Dive_SA;
+			_action = SkreeAction::Dive_SkreeA;
 	}
 
 	//specify vel
 	switch (_action)
 	{
-	case SkreeAction::Nomal_SA:		//crawl right
+	case SkreeAction::Nomal_SkreeA:		//crawl right
 		_velX = 0;
 		_velY = 0;
 		break;
-	case SkreeAction::Dive_SA:
+	case SkreeAction::Dive_SkreeA:
 		_velX = 0;
 		_velY = -SKREE_VEL;
 		break;
-	case SkreeAction::BeAttacking_SA:
+	case SkreeAction::BeAttacking_SkreeA:
 		_velX = 0;
 		_velY = 0;
 		break;
@@ -77,16 +77,16 @@ void Skree::Update2(int deltaTime)
 }
 void Skree::handleCollision(int playerX, int playerY, float dt)
 {
-	if (_action == SkreeAction::BeAttacking_SA)
+	if (_action == SkreeAction::BeAttacking_SkreeA)
 		//be attacking -> inactive-> must not check collision
 		return;
 	int distance = abs(this->_posX - playerX);
 	if (distance <= 50)
 	{
-		_action = SkreeAction::Dive_SA;
+		_action = SkreeAction::Dive_SkreeA;
 		//dive
 	}
-	if (_action == SkreeAction::Dive_SA)
+	if (_action == SkreeAction::Dive_SkreeA)
 	{
 		if (_posX > playerX)
 			_posX-=2;
@@ -97,7 +97,7 @@ void Skree::handleCollision(int playerX, int playerY, float dt)
 }
 void Skree::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 {
-	if (_action == SkreeAction::BeAttacking_SA)
+	if (_action == SkreeAction::BeAttacking_SkreeA)
 		// inactive-> must not check collision
 		return;
 	RECT a=getCollisionBound();
@@ -112,7 +112,7 @@ void Skree::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 				switch (otherObject->getObjectID())
 				{
 				case ObjectID::Ground_ID:
-					if (_action==Dive_SA)			//except the case Skree is hanging backward on wall
+					if (_action==Dive_SkreeA)			//except the case Skree is hanging backward on wall
 						this->BeWounded(this->_hp);	//dam dau vao da =>cho chet luon
 					break;
 				case ObjectID::Zoomer_ID:

@@ -11,8 +11,9 @@ private:
 	//enemy
 	Texture2* explodeTexture2;
 	Texture2* zoomerTexture2;
-	Texture2* skreeTextture2;
-	Texture2* ripperTextture2;
+	Texture2* skreeTexture2;
+	Texture2* ripperTexture2;
+	Texture2* zebTexture2;
 	//item
 	Texture2* itemTexture2;
 	static TextureCollection* textureCollection;

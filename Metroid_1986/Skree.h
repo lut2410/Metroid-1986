@@ -6,9 +6,9 @@
 #include "Collision.h"
 #define SKREE_VEL 0.2f
 enum SkreeAction{
-	Nomal_SA,
-	Dive_SA,
-	BeAttacking_SA
+	Nomal_SkreeA,
+	Dive_SkreeA,
+	BeAttacking_SkreeA
 
 };
 class Skree : public GameObject{
