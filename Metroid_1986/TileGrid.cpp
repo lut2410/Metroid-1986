@@ -348,7 +348,8 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 			}
 
 			//if skree -> create bullet
-			if (object->getObjectID()== ObjectID::Skree_ID)
+			if (object->getObjectID()== ObjectID::Skree_ID 
+				&&object->getHP()>0)	//die by accident (hurtle into ground)
 			{
 				//create bullet
 				//bullet is appear at location skree was exploded

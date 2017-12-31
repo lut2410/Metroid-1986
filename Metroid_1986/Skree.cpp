@@ -85,24 +85,7 @@ void Skree::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 	for (auto it = objectList.begin(); it != objectList.end(); it++)
 	{
 		GameObject* otherObject = it->second;
-		//if (otherObject->getObjectID() != ObjectID::Skree_ID)
-		//{
-		//	Direction direction;
-		//	if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
-		//	{
-		//		switch (otherObject->getObjectID())
-		//		{
-		//		case ObjectID::Ground_ID:
-		//			if (_action==Dive_SkreeA)			//except the case Skree is hanging backward on wall
-		//				this->BeWounded(this->_hp);	//dam dau vao da =>cho chet luon
-		//			break;
-		//		case ObjectID::Zoomer_ID:
-		//			this->BeWounded(otherObject->getAttackDame());
-		//			otherObject->BeWounded(this->getAttackDame());
-		//			break;
-		//		}
-		//	}
-		//}
+
 		if (otherObject->getObjectType() == ObjectType::RelativesWithWall_OT)
 			{
 				Direction direction;
@@ -110,7 +93,7 @@ void Skree::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 				{
 				
 					if (_action==Dive_SkreeA)			//except the case Skree is hanging backward on wall
-						this->BeWounded(this->_hp);	//dam dau vao da =>cho chet luon
+						this->SetObjectStatus(ObjectStatus::Exploding_OS);	//dam dau vao da =>cho chet luon
 					break;
 				}
 			}

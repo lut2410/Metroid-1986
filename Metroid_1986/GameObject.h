@@ -65,7 +65,8 @@ public:
 	ObjectID getObjectID();
 	ObjectType getObjectType();	//use to check collision
 	int getAttackDame();
-	BulletType getBulletType();
+	int getHP();
+	virtual BulletType getBulletType();
 	ObjectStatus getObjectStatus();
 	void SetObjectStatus(ObjectStatus);
 	//update action and position

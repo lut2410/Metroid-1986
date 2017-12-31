@@ -71,7 +71,6 @@ void Player::addOrChangeAction(Action action){
 		break;
 	case Action::PutHandUp:
 	case Action::Shoot:
-	case Action::BeWounded:
 		setAction(Action(_action | action));
 		break;
 		
@@ -196,8 +195,7 @@ D3DXVECTOR2 Player::getPositionOfHand(){
 
 void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	//map<int, GameObject*> objectList = *TileGrid::getInstance()->getCurrentObjects();
-	if (_objectStatus == ObjectStatus::BeWounding_OS)
-		return;
+	
 
 	RECT playerBound = getCollisionBound();
 	Direction directionVsWall = Direction::None_Direction;
@@ -215,8 +213,8 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	}
 	//check collision with enemy
 	//if player isn't be wounded
-	// otherwise, wounded => immortal : don't check collision with enemy
-	if (!isHasAction(Action::BeWounded))
+	// otherwise, wounded, explode, die => immortal : don't check collision with enemy
+	if (_objectStatus== ObjectStatus::Survival_OS)
 	{
 		for (auto it = objectList.begin(); it != objectList.end(); it++)
 		{
@@ -308,7 +306,7 @@ void Player::handleVsWall(Direction directionVsWall, int deltaTime)
 			else			//is going down
 			{
 				_velY = 0;
-				if (isHasAction(Action::BeWounded))
+				if (_objectStatus==ObjectStatus::BeWounding_OS)
 				{
 					_velX = _velY = 0;
 				}
@@ -338,68 +336,58 @@ void Player::UpdatePosition(int deltaTime){
 	//Update posX base velX
 	_posX += _velX * deltaTime;
 	_posY += _velY * deltaTime;
-	//if (isHasAction(Action::Jump) || isHasAction(Action::RollingJump) || isHasAction(Action::Grovel) || isHasAction(Action::Stand) || isHasAction(Action::Run))
-	//if (!isHasAction(Action::Stand) && !isHasAction(Action::Run))
-	//if (isHasAction(Action::Jump))
-	//	_velY += ACCELERATION*deltaTime;
-	//else
-	//	_velY = SPEED_Y;
 
 		
 };
 void Player::Update(int deltaTime){
-	if (beWounded_remainningTime>0)
-		beWounded_remainningTime -= deltaTime;
+	//if (beWounded_remainningTime>0)
+	//	beWounded_remainningTime -= deltaTime;
 
-	//update action by key
-	SpecifyAction();
-	if (isHasAction(Action::BeWounded))		//be wounded => draw flicker
-		this->_currentAnimation = _actionAnimation[_action - Action::BeWounded];
-	else
-		this->_currentAnimation = _actionAnimation[_action];
+	UpdateStatus();
+	//UPDATE ACTION AND VELOCITY
+	//by key
+	UpdateActionAndVelocity(deltaTime);
 	//update Postion
 	UpdatePosition(deltaTime);
 }
+void Player::UpdateAnimationBaseOnStatus()
+{
+	switch (_objectStatus)
+	{
+	case ObjectStatus::Survival_OS:
+		_currentAnimation = _actionAnimation[_action];
+		flicker = false;
+		break;
+	case ObjectStatus::BeWounding_OS:
+		
+		if (isHasAction(Action::Stand) && _directionOfMotion == DirectionOfMotion::Neutral)
+			_currentAnimation = _actionAnimation[StandIntro_Ani];
+		else
+			_currentAnimation = _actionAnimation[_action];
+		flicker = true;
+		break;
+	case ObjectStatus::Exploding_OS:
+		_currentAnimation = explodingAnimation;
+		break;
+	case ObjectStatus::Died_OS:
+		break;
+	}
+}
+
 void Player::Update2(int deltaTime){
 	
 
 	//update current animation
-
-	
-	if (isHasAction(Action::Stand) && _directionOfMotion == DirectionOfMotion::Neutral)
-	{//Intro
-		this->_currentAnimation = _actionAnimation[StandIntro_Ani];
-		flicker = true;
-		if (_currentAnimation->getCurrentFrameIndex() == 3)	//but if current frame is ending frame of Intro 
-		{
-			flicker = false;
-			return;
-		}
-			
-	}
-	else
-	{
-		if (isHasAction(Action::BeWounded))		//be wounded => draw flicker
-		{
-			this->_currentAnimation = _actionAnimation[_action - Action::BeWounded];
-			flicker = true;
-		}
-			
-		else
-		{
-			this->_currentAnimation = _actionAnimation[_action];
-			flicker = false;
-		}
-			
-	}
-		
-
+	UpdateAnimationBaseOnStatus();
 
 	//update sprite to next frame
-												//then keep drawing end frame	
+	if (isHasAction(Action::Stand) && _directionOfMotion == DirectionOfMotion::Neutral)
+	{//Intro
+		if (_currentAnimation->getCurrentFrameIndex() != 3)	//but if current frame is ending frame of Intro 
+			_currentAnimation->Update(deltaTime);
+		return;
+	}
 	_currentAnimation->Update(deltaTime);
-
-
 
 	//bullets are shooted between 1/3s
 	if (_remainningTimeToShoot)
@@ -415,17 +403,17 @@ void Player::Update2(int deltaTime){
 			//reset time : 5 frames later don't allow to create bullet
 			_remainningTimeToShoot = TIMETOCREATNEWBULLET;
 		}
-			
-			
 	}
 }
 void Player::BeWounded(Direction direction, int lossHP)
 {
-	addOrChangeAction(Action::BeWounded);
-	beWounded_remainningTime = TIMEIMMORTAL_WOUNDED;
+	SetObjectStatus(ObjectStatus::BeWounding_OS);
+	_remainingWoundingTime = 30;		//1s
 	_hp -= lossHP;
 	switch (direction)
 	{
+	case Direction::None_Direction:
+		break;
 	case Direction::Left_Direction:
 		_velX = SPEED_WOUND;
 		_velY = SPEED_WOUND;
@@ -453,13 +441,6 @@ void Player::Draw(Camera* camera)
 	switch (_directionOfMotion)
 	{
 	case DirectionOfMotion::Neutral://Intro stage
-		/*if (flicker == false)
-		{
-			_currentAnimation->Draw(center.x, center.y);
-			flicker = true;
-		}
-		else
-			flicker = false;*/
 		if (flicker)
 			_currentAnimation->DrawFlicker(center.x, center.y);
 		else
@@ -510,36 +491,32 @@ void Player::UpdatePostionToInsideCamera()
 		_posX = camera->_bound.right - 27;
 }
 
-void Player::SpecifyAction(){
+void Player::UpdateActionAndVelocity(int deltaTime){
 
-	if (SpecifyBeWounded())
-		//be wounded => lose control
-		return;
-	SpecifyDirectionOfMotion();
-	SpecifyFootAction();
-	SpecifyHavingPutHandUp();
-	SpecifyHavingShoot();
-};
-
-bool Player::SpecifyBeWounded()
-{
-	if (beWounded_remainningTime <= 0)			//time up player is immortal
+	switch (_objectStatus)
 	{
-		removeAction(Action::BeWounded);
-		return false;
-	}
-	else
-		//be wounded => don't update from keyboard
-	{
+	case ObjectStatus::Survival_OS:
+		SpecifyDirectionOfMotion();
+		SpecifyFootAction();
+		SpecifyHavingPutHandUp();
+		SpecifyHavingShoot();
+		break;
+	case ObjectStatus::BeWounding_OS:
 		if (_velX)			//decrease velocity 
 			_velX -= _velX * SPEED_WOUND / 10; //decrease 1/10 velocity
 		//else					//vel ==0 => back to normal status
 		//if (_velY)
 		//	_velY -= _velY * SPEED_WOUND / 10;
-
-		return true;
+		break;
+	case ObjectStatus::Exploding_OS:
+		break;
+	case ObjectStatus::Died_OS:
+		break;
 	}
-}
+	
+};
+
+
 void Player::SpecifyDirectionOfMotion(){
 
 

@@ -77,6 +77,10 @@ int GameObject::getAttackDame()
 {
 	return _attack;
 }
+int GameObject::getHP()
+{
+	return _hp;
+}
 BulletType GameObject::getBulletType()
 {
 	return BulletType::IsntBullet;
@@ -88,6 +92,18 @@ ObjectStatus GameObject::getObjectStatus()
 void GameObject::SetObjectStatus(ObjectStatus objectStatus)
 {
 	_objectStatus = objectStatus;
+}
+void GameObject::SpecifyStatusWhenHP0()
+{
+	if (_hp <= 0)
+	{
+		//enemy will 1 times to explode
+		if (_objectStatus != ObjectStatus::Exploding_OS)
+		{
+			_objectStatus = ObjectStatus::Exploding_OS;
+			_remainingExplodeTime = EXPLODE_FRAMES;
+		}
+	}
 }
 void GameObject::UpdateStatus()
 {
@@ -107,6 +123,9 @@ void GameObject::UpdateStatus()
 				_remainingExplodeTime--;
 			else
 				_objectStatus = ObjectStatus::Died_OS;
+			break;
+		case ObjectStatus::Died_OS:
+			//scene: gameover
 			break;
 	}
 
@@ -182,16 +201,4 @@ void GameObject::BeWounded(int lossHP)
 	SetObjectStatus(ObjectStatus::BeWounding_OS);
 	_remainingWoundingTime = WOUNDED_FRAMES;
 	_hp -= lossHP;
-}
-void GameObject::SpecifyStatusWhenHP0()
-{
-	if (_hp <= 0)
-	{
-		//enemy will 1 times to explode
-		if (_objectStatus != ObjectStatus::Exploding_OS)
-		{
-			_objectStatus = ObjectStatus::Exploding_OS;
-			_remainingExplodeTime = EXPLODE_FRAMES;
-		}
-	}
 }

@@ -28,11 +28,11 @@ Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
 Type1
 0	0	-1
-Type2
+BeWounding
 1	1	-1
-Type3
+Type2
 2	2	-1
-Type4
+Type3
 3	3	-1
-Type5
+BeFreezing
 4	4	-1

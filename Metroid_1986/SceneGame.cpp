@@ -27,7 +27,7 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	_player = new Player(650,2450);
+	_player = new Player(650,2384);
 
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfMotion()==DirectionOfMotion::Neutral)//begin, player has direction = neutral
@@ -42,17 +42,17 @@ void SceneGame::LoadObject(){
 void SceneGame::RenderFrame(int time){
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
-	if (timeNow - _stageStartTime <= 1000) //4000
+	if (timeNow - _stageStartTime <= 4000) //4000
 	{
-		_player->addOrChangeAction(BeWounded);
-		_player->_isMotionless = true;
+		_player->BeWounded(Direction::None_Direction, 0);
+		//_player->_isMotionless = true;
 	}
 		
-	else if (timeNow - _stageStartTime <= 4100)
-	{
-		_player->removeAction(BeWounded);
-		_player->_isMotionless = false;
-	}
+	//else if (timeNow - _stageStartTime <= 4100)
+	//{
+	//	_player->removeAction(BeWounded);
+	//	_player->_isMotionless = false;
+	//}
 
 
 	//draw black background
@@ -89,13 +89,13 @@ void SceneGame::RenderFrame(int time){
 	//	currentObjects->insert(pair<int, GameObject*>(1000, zoomer));
 	//}
 
-	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	//if (!currentObjects->count(1001))
-	//{
-	//	Ripper* ripper = new Ripper(660, 2490, 1);
-	//	currentObjects->insert(pair<int, GameObject*>(1001, ripper));
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	if (!currentObjects->count(1001))
+	{
+		Ripper* ripper = new Ripper(660, 2460, 1);
+		currentObjects->insert(pair<int, GameObject*>(1001, ripper));
 
-	//}
+	}
 	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	//if (!currentObjects->count(1002))
 	//{
@@ -137,8 +137,8 @@ void SceneGame::handleCollision(int dt){
 
 void SceneGame::KeyPress(int KeyCode){
 	
-	if (_player->_isMotionless)		//don't allow press or release keys
-		return;
+	//if (_player->_isMotionless)		//don't allow press or release keys
+	//	return;
 
 
 	ActionKey actionKey;

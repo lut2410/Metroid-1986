@@ -25,8 +25,7 @@ enum Action{
 	PrepareGrounding = 1 << 5,
 	Die = 1 << 6,
 	PutHandUp = 1 << 7,
-	Shoot = 1 << 8,
-	BeWounded = 1<<9
+	Shoot = 1 << 8
 	
 };
 
@@ -76,7 +75,7 @@ class Player :public GameObject {
 
 	
 public:
-	bool _isMotionless;	//unactive
+	//bool _isMotionless;	//unactive
 	//Current Key
 	ActionKey _currentKeys;
 	Player();
@@ -100,6 +99,7 @@ public:
 	void handleVsWall(Direction d, int dt);				
 	void UpdatePosition(int );
 	void Update(int time);	//update action and position after press key
+	void UpdateAnimationBaseOnStatus();
 	void Update2(int time);	//update frame of sprite and position of sprite
 	void BeWounded(Direction direction,int lossHP);
 	void BuffHP(int buffHP);
@@ -107,8 +107,7 @@ public:
 	void UpdatePostionToInsideCamera();
 	//int checkCollision();
 	//Action
-	void SpecifyAction();				//specify action base on keys are press
-	bool SpecifyBeWounded();
+	void UpdateActionAndVelocity(int deltaTime);				//specify action base on keys are press
 	void SpecifyDirectionOfMotion();//Specify direction and  base on key pressed
 	void SpecifyFootAction();
 	void SpecifyHavingPutHandUp();
