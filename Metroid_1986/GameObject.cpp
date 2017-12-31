@@ -77,6 +77,10 @@ int GameObject::getAttackDame()
 {
 	return _attack;
 }
+BulletType GameObject::getBulletType()
+{
+	return BulletType::IsntBullet;
+}
 ObjectStatus GameObject::getObjectStatus()
 {
 	return _objectStatus;

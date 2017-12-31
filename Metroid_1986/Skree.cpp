@@ -22,7 +22,8 @@ Skree::Skree(int x, int y, int type) :GameObject(Skree_ID, x, y, 0, 0){
 		_actionAnimation.push_back(new Animation(skreeTexture, "Type2"));
 		break;
 	}
-
+	_beWoundingAnimation.push_back(new Animation(skreeTexture, "BeWounding"));
+	_beFreezingAnimation.push_back(new Animation(skreeTexture, "BeFreezing"));
 	//set default action and animation
 	_action = SkreeAction::Nomal_SkreeA;
 	_currentAnimation = _actionAnimation[_action];	//actually _actionAnimation just have 1 animation 
@@ -39,10 +40,6 @@ void Skree::UpdateActionAndVelocity(int deltaTime)
 	case SkreeAction::Dive_SkreeA:
 		_velX = 0;
 		_velY = -OBJECT_VEL;
-		break;
-	case SkreeAction::BeAttacking_SkreeA:
-		_velX = 0;
-		_velY = 0;
 		break;
 	}
 
@@ -61,16 +58,12 @@ void Skree::UpdateAnimationBaseOnStatus()
 		_currentAnimation = explodingAnimation;
 		break;
 	case ObjectStatus::Died_OS:
-		//create bullet
+		//Create bullets
 		break;
 	}
 }
-
 void Skree::handleCollision(int playerX, int playerY, float dt)
 {
-	if (_action == SkreeAction::BeAttacking_SkreeA)
-		//be attacking -> inactive-> must not check collision
-		return;
 	int distance = abs(this->_posX - playerX);
 	if (distance <= 50)
 	{
@@ -88,30 +81,38 @@ void Skree::handleCollision(int playerX, int playerY, float dt)
 }
 void Skree::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 {
-	if (_action == SkreeAction::BeAttacking_SkreeA)
-		// inactive-> must not check collision
-		return;
 	RECT a=getCollisionBound();
 	for (auto it = objectList.begin(); it != objectList.end(); it++)
 	{
 		GameObject* otherObject = it->second;
-		if (otherObject->getObjectID() != ObjectID::Skree_ID)
-		{
-			Direction direction;
-			if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
+		//if (otherObject->getObjectID() != ObjectID::Skree_ID)
+		//{
+		//	Direction direction;
+		//	if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
+		//	{
+		//		switch (otherObject->getObjectID())
+		//		{
+		//		case ObjectID::Ground_ID:
+		//			if (_action==Dive_SkreeA)			//except the case Skree is hanging backward on wall
+		//				this->BeWounded(this->_hp);	//dam dau vao da =>cho chet luon
+		//			break;
+		//		case ObjectID::Zoomer_ID:
+		//			this->BeWounded(otherObject->getAttackDame());
+		//			otherObject->BeWounded(this->getAttackDame());
+		//			break;
+		//		}
+		//	}
+		//}
+		if (otherObject->getObjectType() == ObjectType::RelativesWithWall_OT)
 			{
-				switch (otherObject->getObjectID())
+				Direction direction;
+				if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
 				{
-				case ObjectID::Ground_ID:
+				
 					if (_action==Dive_SkreeA)			//except the case Skree is hanging backward on wall
 						this->BeWounded(this->_hp);	//dam dau vao da =>cho chet luon
 					break;
-				case ObjectID::Zoomer_ID:
-					this->BeWounded(otherObject->getAttackDame());
-					otherObject->BeWounded(this->getAttackDame());
-					break;
 				}
 			}
-		}
 	}
 }

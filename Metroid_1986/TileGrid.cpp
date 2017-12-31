@@ -347,6 +347,24 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 				}
 			}
 
+			//if skree -> create bullet
+			if (object->getObjectID()== ObjectID::Skree_ID)
+			{
+				//create bullet
+				//bullet is appear at location skree was exploded
+				Bullet* bullet = NULL;
+				bullet = new Bullet(BulletType::BulletFromSkree, object->_posX, object->_posY, Direction::Left_Direction);
+				//add to currentObjectList
+				TileGrid::AddObjectToCurrentObjectList(bullet);
+				bullet = new Bullet(BulletType::BulletFromSkree, object->_posX, object->_posY, Direction::TopLeft_Direction);
+				TileGrid::AddObjectToCurrentObjectList(bullet);
+				bullet = new Bullet(BulletType::BulletFromSkree, object->_posX, object->_posY, Direction::Top_Direction);
+				TileGrid::AddObjectToCurrentObjectList(bullet);
+				bullet = new Bullet(BulletType::BulletFromSkree, object->_posX, object->_posY, Direction::TopRight_Direction);
+				TileGrid::AddObjectToCurrentObjectList(bullet);
+				bullet = new Bullet(BulletType::BulletFromSkree, object->_posX, object->_posY, Direction::Right_Direction);
+				TileGrid::AddObjectToCurrentObjectList(bullet);
+			}
 			//delte object
 			DeleteTileNumberInCurrentQuadTrees(it->first);
 			it = CurrentObjects->erase(it);
@@ -453,19 +471,19 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		return object;
 		break;
 	case ObjectIDFromFile::Zoomer_IDFF:
-		object = new Ground(x, y);
+		object = new Zoomer(x, y);
 		return object;
 		break;
 	case ObjectIDFromFile::Zoomer2_IDFF:
-		object = new Ground(x, y);
+		object = new Zoomer(x, y, 2);
 		return object;
 		break;
 	case ObjectIDFromFile::Skree_IDFF:
-		object = new Ground(x, y);
+		object = new Skree(x, y);
 		return object;
 		break;
 	case ObjectIDFromFile::Skree2_IDFF:
-		object = new Ground(x, y);
+		object = new Skree(x, y, 2);
 		return object;
 		break;
 	case ObjectIDFromFile::MaruMari_IDFF:

@@ -241,7 +241,12 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 				case Zeb_ID:
 					this->BeWounded(direction, object->getAttackDame());
 					break;
-					
+				case Bullet_ID:
+					if (object->getBulletType()!=BulletType::BulletFromPlayer_Nomal
+						&&object->getBulletType() != BulletType::BulletFromPlayer_Freeze)
+						//except the bullet player shoot out
+					this->BeWounded(direction, object->getAttackDame());
+					break;
 					//item
 				case MaruMari_ID:
 					if (this->isAbilityToGrovel() == false)

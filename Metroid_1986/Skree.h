@@ -4,11 +4,11 @@
 #pragma once
 #include "GameObject.h"
 #include "Collision.h"
+#include "Bullet.h"
 //#define SKREE_VEL 0.2f
 enum SkreeAction{
 	Nomal_SkreeA,
-	Dive_SkreeA,
-	BeAttacking_SkreeA
+	Dive_SkreeA
 
 };
 class Skree : public GameObject{
@@ -24,15 +24,4 @@ public:
 
 };
 
-class BulletFromSkree : public GameObject{
-	int _remainingTime;		// time survival
-public:
-	BulletFromSkree();
-	BulletFromSkree(int x, int y, Direction directionFly, DWORD survivalTime = 200);
-	~BulletFromSkree();
-	//void BeWounded(int hp);
-	void Update(int deltaTime);
-	void Update2(int deltaTime);
-	void handleCollision(map<int, GameObject*> objectList, float dt);
-};
 #endif

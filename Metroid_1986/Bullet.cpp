@@ -1,6 +1,7 @@
 #include "Bullet.h"
 Bullet::Bullet(){};
 Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD survivalTime) :GameObject(Bullet_ID, x, y, 0, 0){
+	_bulletType = bulletType;
 	_remainingTime = survivalTime;
 	Texture2* bulletTexture = NULL;
 	switch (bulletType)
@@ -9,16 +10,30 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		_hp = 1;
 		_attack = 1;
 
+		bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
+		//flying
+		_actionAnimation.push_back(new Animation(bulletTexture, "Normal:Flying"));
+		//broken
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Normal:Broken"));
+		break;
+	case BulletType::BulletFromPlayer_Freeze:
+		_hp = 1;
+		_attack = 1;
 
 		bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
 		//flying
-		_actionAnimation.push_back(new Animation(bulletTexture, "Flying"));
+		_actionAnimation.push_back(new Animation(bulletTexture, "Freeze:Flying"));
 		//broken
-		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Broken"));
-		break;
-	case BulletType::BulletFromPlayer_Freeze:
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Freeze:Broken"));
 		break;
 	case BulletType::BulletFromSkree:
+		_hp = 1;
+		_attack = 3;
+		bulletTexture = TextureCollection::getInstance()->getTexture2(Skree_ID);
+		//flying
+		_actionAnimation.push_back(new Animation(bulletTexture, "BulletFromSkee"));
+		//broken
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "BulletFromSkee"));
 		break;
 	}
 	
@@ -70,6 +85,10 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 Bullet::~Bullet()
 {
 }
+BulletType Bullet::getBulletType()
+{
+	return _bulletType;
+}
 void Bullet::UpdateActionAndVelocity(int deltaTime)
 {
 	//UPDATE ACTION
@@ -111,38 +130,50 @@ void Bullet::UpdateAnimationBaseOnStatus()
 //}
 void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 {
-	for (auto it = objectList.begin(); it != objectList.end(); it++)
+	switch (_bulletType)
 	{
-		GameObject* otherObject = it->second;
-		if (otherObject->getObjectID() != ObjectID::Bullet_ID)
+	case BulletType::BulletFromPlayer_Nomal:	// -HP enemy
+		for (auto it = objectList.begin(); it != objectList.end(); it++)
 		{
-			Direction direction;
-			if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
+			GameObject* otherObject = it->second;
+			if (otherObject->getObjectID() != ObjectID::Bullet_ID)
 			{
-				switch (otherObject->getObjectID())
+				Direction direction;
+				if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
 				{
-				case ObjectID::Ground_ID:	//bullet collide vs wall
-					//bullet will be broken
-					this->BeWounded();
-					break;
-				case ObjectID::BubbleDoor_ID:
-					this->BeWounded();
-					otherObject->BeWounded();
-					break;
+					switch (otherObject->getObjectID())
+					{
+					case ObjectID::Ground_ID:	//bullet collide vs wall
+						//bullet will be broken
+						this->BeWounded();
+						break;
+					case ObjectID::BubbleDoor_ID:
+						this->BeWounded();
+						otherObject->BeWounded();
+						break;
 
-					//enemy
-				case ObjectID::Zoomer_ID:
-				case ObjectID::Skree_ID:
-				case ObjectID::Zeb_ID:
-					this->BeWounded();
-					otherObject->BeWounded();
-					break;
-				case ObjectID::Ripper_ID:
-					this->BeWounded();
-					//otherObject->BeWounded(); - Ripper isn't wounded by bullet
-					break;
+						//enemy
+					case ObjectID::Zoomer_ID:
+					case ObjectID::Skree_ID:
+					case ObjectID::Zeb_ID:
+						this->BeWounded();
+						otherObject->BeWounded();
+						break;
+					case ObjectID::Ripper_ID:
+						this->BeWounded();
+						//otherObject->BeWounded(); - Ripper isn't wounded by bullet
+						break;
+					}
 				}
 			}
 		}
+		break;
+	case BulletType::BulletFromPlayer_Freeze:	//freezing enemy
+
+		break;
+	case BulletType::BulletFromSkree:			//will check collision in handleCollision function of Player
+		break;
 	}
+	
+	
 }

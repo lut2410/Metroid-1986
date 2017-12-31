@@ -86,7 +86,7 @@ void SceneGame::RenderFrame(int time){
 	//if (!currentObjects->count(1000))
 	//{
 	//	Zoomer* zoomer = new Zoomer(696, 2520,2);
-	//	currentObjects->insert(pair<int, GameObject*>(300, zoomer));
+	//	currentObjects->insert(pair<int, GameObject*>(1000, zoomer));
 	//}
 
 	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
@@ -96,13 +96,19 @@ void SceneGame::RenderFrame(int time){
 	//	currentObjects->insert(pair<int, GameObject*>(1001, ripper));
 
 	//}
-	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1002))
-	{
-		Zeb* zeb = new Zeb(660, 2400, 2);
-		currentObjects->insert(pair<int, GameObject*>(1002, zeb));
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1002))
+	//{
+	//	Zeb* zeb = new Zeb(660, 2400, 2);
+	//	currentObjects->insert(pair<int, GameObject*>(1002, zeb));
 
-	}
+	//}
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1003))
+	//{
+	//	Skree* skree = new Skree(750, 2400,2);
+	//	currentObjects->insert(pair<int, GameObject*>(1003, skree));
+	//}
 	_player->Update(time);
 
 	//COLLISION

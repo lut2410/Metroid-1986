@@ -22,6 +22,14 @@ enum ObjectStatus{
 	Died_OS
 
 };
+enum BulletType
+{
+	IsntBullet,
+	BulletFromPlayer_Nomal,
+	BulletFromPlayer_Freeze,
+	BulletFromSkree
+};
+
 
 class GameObject{
 protected:
@@ -57,6 +65,7 @@ public:
 	ObjectID getObjectID();
 	ObjectType getObjectType();	//use to check collision
 	int getAttackDame();
+	BulletType getBulletType();
 	ObjectStatus getObjectStatus();
 	void SetObjectStatus(ObjectStatus);
 	//update action and position
@@ -71,6 +80,7 @@ public:
 	virtual void handleCollision(int playerX, int playerY, float dt);			//motion base on player
 	virtual void BeWounded(int lossHP=1);		//be wounded 'lossHP' HP
 	void SpecifyStatusWhenHP0();
+
 	//bool enemyCheckExplode(int deltaTime);	//be destroying
 };
 #endif
