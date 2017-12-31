@@ -7,7 +7,8 @@
 #include "Camera.h"
 #include <math.h>
 #include <stdlib.h>		//support to random
-#define WOUNDED_FRAMES 5
+#define WOUNDED_FRAMES 4
+#define EXPLODE_FRAMES 2
 enum ObjectType{
 	RelativesWithWall_OT,	//can't move, is in background: ground,wall,gate,door,..
 	Player_OT,				//Samus
@@ -17,25 +18,26 @@ enum ObjectType{
 enum ObjectStatus{
 	Survival_OS,
 	BeWounding_OS,
-	Destroying_OS,
+	Exploding_OS,
 	Died_OS
 
 };
 
 class GameObject{
 protected:
-	//ObjectType _objectType;
+	float OBJECT_VEL;
 	ObjectID _objectID;		
-	ObjectStatus _objectOS;
-	//bool _survive;		//status: survival
+	ObjectStatus _objectStatus;
 	int _hp;			//HP
 	int _attack;		//attack enemy,HP enemy will be subtract = attack index
-	int _beAttacking;	// object is be attacking
-	
+	int _remainingWoundingTime;		//time to back to normal status
+	int _remainingExplodeTime;
 	
 	Animation* _currentAnimation;
 	vector<Animation*> _actionAnimation; 
-	Animation* expoldeAnimation;
+	Animation* explodingAnimation;
+	vector<Animation*> _beWoundingAnimation;
+	vector<Animation*> _beFreezingAnimation;
 	//Position of Object
 
 	//Velocity of Object
@@ -58,6 +60,9 @@ public:
 	ObjectStatus getObjectStatus();
 	void SetObjectStatus(ObjectStatus);
 	//update action and position
+	void UpdateStatus();
+	virtual void UpdateActionAndVelocity(int deltaTime);
+	virtual void UpdateAnimationBaseOnStatus();
 	virtual void Update(int deltaTime);			
 	//update animation-frame of sprite
 	virtual void Update2(int deltaTime);		
@@ -65,6 +70,7 @@ public:
 	virtual void handleCollision(map<int, GameObject*> objectList, float dt);	//motion base on other object
 	virtual void handleCollision(int playerX, int playerY, float dt);			//motion base on player
 	virtual void BeWounded(int lossHP=1);		//be wounded 'lossHP' HP
-	bool enemyCheckExplode(int deltaTime);	//be destroying
+	void SpecifyStatusWhenHP0();
+	//bool enemyCheckExplode(int deltaTime);	//be destroying
 };
 #endif

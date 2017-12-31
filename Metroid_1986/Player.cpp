@@ -196,6 +196,8 @@ D3DXVECTOR2 Player::getPositionOfHand(){
 
 void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	//map<int, GameObject*> objectList = *TileGrid::getInstance()->getCurrentObjects();
+	if (_objectStatus == ObjectStatus::BeWounding_OS)
+		return;
 
 	RECT playerBound = getCollisionBound();
 	Direction directionVsWall = Direction::None_Direction;
@@ -734,7 +736,7 @@ void Player::CreateBullet()
 		}
 
 			//bullet is appear at hand of player
-			Bullet* bullet = new Bullet(getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
+			Bullet* bullet = new Bullet(BulletType::BulletFromPlayer_Nomal, getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
 			//add to currentObjectList
 			TileGrid::AddObjectToCurrentObjectList(bullet);
 			

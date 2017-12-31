@@ -4,7 +4,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Collision.h"
-#define ZEB_VEL 0.1f
+//#define ZEB_VEL 0.1f
 enum ZebAction{
 	Standstill,
 	Up_ZebA,
@@ -23,7 +23,8 @@ public:
 	Zeb();
 	Zeb(int x, int y, int type = 1);
 	~Zeb();
-	void Update(int deltaTime);
+	void UpdateActionAndVelocity(int deltaTime);
+	void UpdateAnimationBaseOnStatus();
 	void Draw(Camera* camera);
 	void handleCollision(map<int, GameObject*> objectList, float dt);
 	void ChangeAction(Direction collisionDirectionWithWall = Direction::None_Direction);

@@ -134,21 +134,21 @@ Index		Animation Info
 
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
-Top
+Type1:Top
 0	1	30
-Right
+Type1:Right
 2	3	30
-Bottom
+Type1:Bottom
 4	5	30
-Left
+Type1:Left
 6	7	30
-Top_Wounded
+BeWounding:Top
 8	9	30
-Right_Wounded
+BeWounding:Right
 10	11	30
-Bottom_Wounded
+BeWounding:Bottom
 12	13	30
-Left_Wounded
+BeWounding:Left
 14	15	30
 Type2:Top
 16	17	30
@@ -158,11 +158,11 @@ Type2:Bottom
 20	21	30
 Type2:Left
 22	23	30
-Type2:Top_Wounded
+BeFreezing:Top
 24	25	30
-Type2:Right_Wounded
+BeFreezing:Right
 26	27	30
-Type2:Bottom_Wounded
+BeFreezing:Bottom
 28	29	30
-Type2:Left_Wounded
+BeFreezing:Left
 30	31	30

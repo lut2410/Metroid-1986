@@ -402,6 +402,11 @@ void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 	{
 		//find bullet object
 		GameObject* object = it->second;
+
+	
+		if (object->getObjectStatus() != ObjectStatus::Survival_OS)	// then don't check collision
+			continue;
+		//else, check and handle
 		switch (object->getObjectID())
 			//check collision vs enemy and ground
 		{
@@ -448,19 +453,19 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		return object;
 		break;
 	case ObjectIDFromFile::Zoomer_IDFF:
-		object = new Zoomer(x, y, 1);
+		object = new Ground(x, y);
 		return object;
 		break;
 	case ObjectIDFromFile::Zoomer2_IDFF:
-		object = new Zoomer(x, y, 2);
+		object = new Ground(x, y);
 		return object;
 		break;
 	case ObjectIDFromFile::Skree_IDFF:
-		object = new Skree(x, y, 1);
+		object = new Ground(x, y);
 		return object;
 		break;
 	case ObjectIDFromFile::Skree2_IDFF:
-		object = new Skree(x, y, 2);
+		object = new Ground(x, y);
 		return object;
 		break;
 	case ObjectIDFromFile::MaruMari_IDFF:

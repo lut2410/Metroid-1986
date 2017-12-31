@@ -1,7 +1,7 @@
 Is All Frames are has a same size?
 0
 Count
-13
+16
 Sprite Info
 
 Index		Animation Info
@@ -54,17 +54,31 @@ Index		Animation Info
 
 Index		Animation Info
 12			LocationX		LocationY		FrameWidth		FrameHeight
+			167				30				16				24
+
+Index		Animation Info
+13			LocationX		LocationY		FrameWidth		FrameHeight
+			185				30				8				24
+
+Index		Animation Info
+14			LocationX		LocationY		FrameWidth		FrameHeight
+			195				30				8				24
+
+Index		Animation Info
+15			LocationX		LocationY		FrameWidth		FrameHeight
 			205				47				7				7
 
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
-Type1:NomalOrDive
+Type1
 0	2	30
-Type1:BeAtacking
+BeWounding
 3	5	30
-Type2:NomalOrDive
+Type2
 6	8	30
-Type2:BeAtacking
+Type3
 9	11	30
+BeFreezing
+12	14	30
 BulletFromSkee
-12	12	-1
+15	15	-1

@@ -7,78 +7,81 @@ Zoomer::Zoomer(int x, int y, int type) :GameObject(Zoomer_ID, x, y, 0, 0){
 
 	if (type == 1)
 	{
-		_hp = 1;
+		_hp = 3;
 		_attack = 8;
-		_actionAnimation.resize(8);
-		for (int i = 0; i < 8; i++)
-			_actionAnimation[i] = new Animation(ZoomerTexture, ZoomerTexture->_animationNames.at(i));
+		OBJECT_VEL = 0.1f;
+		_actionAnimation.push_back( new Animation(ZoomerTexture,"Type1:Top"));
+		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type1:Right"));
+		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type1:Bottom"));
+		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type1:Left"));
 	}
 	else //type 2
 	{
 		_hp = 5;
 		_attack = 8;
-		_actionAnimation.resize(8);
-		for (int i = 0; i < 8; i++)
-			_actionAnimation[i] = new Animation(ZoomerTexture, ZoomerTexture->_animationNames.at(i+8));
+		OBJECT_VEL = 0.15f;
+		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Top"));
+		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Right"));
+		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Bottom"));
+		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Left"));
 	}
+	//
+	_beWoundingAnimation.push_back(new Animation(ZoomerTexture, "BeWounding:Top"));
+	_beWoundingAnimation.push_back(new Animation(ZoomerTexture, "BeWounding:Right"));
+	_beWoundingAnimation.push_back(new Animation(ZoomerTexture, "BeWounding:Bottom"));
+	_beWoundingAnimation.push_back(new Animation(ZoomerTexture, "BeWounding:Left"));
+	//
+	_beFreezingAnimation.push_back(new Animation(ZoomerTexture, "BeFreezing:Top"));
+	_beFreezingAnimation.push_back(new Animation(ZoomerTexture, "BeFreezing:Right"));
+	_beFreezingAnimation.push_back(new Animation(ZoomerTexture, "BeFreezing:Bottom"));
+	_beFreezingAnimation.push_back(new Animation(ZoomerTexture, "BeFreezing:Left"));
+	//
 
 	_action = ZoomerAction::Crawl_Top;
 	_currentAnimation = _actionAnimation[_action];
-	_velX = ZOOMER_VEL;
+	_velX = OBJECT_VEL;
 }
-void Zoomer::Update(int deltaTime)
+void Zoomer::UpdateActionAndVelocity(int deltaTime)
 {
+	//zoomer update action base on collision (in handleCollision)
+	//not here
 	switch (_action)
 	{
 	case ZoomerAction::Crawl_Top:		//crawl right
-		_velX = ZOOMER_VEL;
+		_velX = OBJECT_VEL;
 		_velY = 0;
 		break;
 	case ZoomerAction::Crawl_Right:	//crawl bottom
 		_velX = 0;
-		_velY = -ZOOMER_VEL;
+		_velY = -OBJECT_VEL;
 		break;
 	case ZoomerAction::Crawl_Bottom:	//crawl left
-		_velX = -ZOOMER_VEL;
+		_velX = -OBJECT_VEL;
 		_velY = 0;
 		break;
 	case ZoomerAction::Crawl_Left:	//crawl top
 		_velX = 0;
-		_velY = ZOOMER_VEL;
+		_velY = OBJECT_VEL;
 		break;
 	}
-
-	//update position
-	if (!_beAttacking)
-	{
-		_posX += _velX * deltaTime;
-		_posY += _velY * deltaTime;
-
-	}
-	else
-		_beAttacking--;
-
-
 }
 
-void Zoomer::Update2(int deltaTime){
-
-	if(enemyCheckExplode(deltaTime))
-		return;
-
-	//update animation
-	//if be attacking then change animation
-	/*int i = (bool)_beAttacking;*/
-	if (!_beAttacking)
+void Zoomer::UpdateAnimationBaseOnStatus()
+{
+	switch (_objectStatus)
 	{
+	case ObjectStatus::Survival_OS:
 		_currentAnimation = _actionAnimation[_action];
-		_currentAnimation->Update(deltaTime);
+		break;
+	case ObjectStatus::BeWounding_OS:
+		_currentAnimation = _beWoundingAnimation[_action];
+		break;
+	case ObjectStatus::Exploding_OS:
+		_currentAnimation = explodingAnimation;
+		break;
+	case ObjectStatus::Died_OS:
+		break;
 	}
-	else
-	{
-		_currentAnimation = _actionAnimation[_action + 4];
-	}
-
 }
 Zoomer::~Zoomer(){}
 

@@ -1,20 +1,32 @@
 #include "Bullet.h"
 Bullet::Bullet(){};
-Bullet::Bullet(int x, int y, Direction direction, DWORD survivalTime) :GameObject(Bullet_ID, x, y, 0, 0){
-	_hp = 1;
-	_attack = 1;
-
+Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD survivalTime) :GameObject(Bullet_ID, x, y, 0, 0){
+	_remainingTime = survivalTime;
 	Texture2* bulletTexture = NULL;
-	bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
+	switch (bulletType)
+	{
+	case BulletType::BulletFromPlayer_Nomal:
+		_hp = 1;
+		_attack = 1;
 
-	_actionAnimation.resize(2);//because bullet has 2 action
-	//flying
-	_actionAnimation[0] = new Animation(bulletTexture, bulletTexture->_animationNames.at(0)); 
-	//broken
-	_actionAnimation[1] = new Animation(bulletTexture, bulletTexture->_animationNames.at(1)); 
+
+		bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
+		//flying
+		_actionAnimation.push_back(new Animation(bulletTexture, "Flying"));
+		//broken
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Broken"));
+		break;
+	case BulletType::BulletFromPlayer_Freeze:
+		break;
+	case BulletType::BulletFromSkree:
+		break;
+	}
+	
+
+
 
 	this->_currentAnimation = _actionAnimation[0];
-	_remainingTime = survivalTime;
+	//VEL base on direction
 	switch (direction){
 	case Direction::None_Direction:
 		_velX = 0;
@@ -58,32 +70,45 @@ Bullet::Bullet(int x, int y, Direction direction, DWORD survivalTime) :GameObjec
 Bullet::~Bullet()
 {
 }
-//void Bullet::BeWounded()
-//{
-//	hp--;
-//}
-void Bullet::Update(int deltaTime)
+void Bullet::UpdateActionAndVelocity(int deltaTime)
 {
+	//UPDATE ACTION
 	//update remaining-time
 	_remainingTime -= deltaTime;
 	if (_remainingTime <= 0)
 		SetObjectStatus(ObjectStatus::Died_OS);
-	else
-	{
-		//update position
-		_posX += _velX * deltaTime;
-		_posY += _velY * deltaTime;
-	}
-}
-void Bullet::Update2(int deltaTime)
-{
+	// specify object when HP = 0. Bewounding was defined before
 	if (_hp <= 0)
-	{
-		SetObjectStatus(ObjectStatus::Died_OS);
-		_currentAnimation = _actionAnimation[1];
-	}
-		
+		_objectStatus = ObjectStatus::Died_OS;
+
 }
+
+void Bullet::UpdateAnimationBaseOnStatus()
+{
+	// virtual void
+	switch (_objectStatus)
+	{
+	case ObjectStatus::Survival_OS:
+		_currentAnimation = _actionAnimation[0];
+		break;
+	case ObjectStatus::BeWounding_OS:
+		_currentAnimation = _beWoundingAnimation[0];
+		break;
+	case ObjectStatus::Exploding_OS:
+		break;
+	case ObjectStatus::Died_OS:
+		break;
+	}
+}
+//void Bullet::Update2(int deltaTime)
+//{
+//	if (_hp <= 0)
+//	{
+//		SetObjectStatus(ObjectStatus::Died_OS);
+//		_currentAnimation = _actionAnimation[1];
+//	}
+//		
+//}
 void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 {
 	for (auto it = objectList.begin(); it != objectList.end(); it++)

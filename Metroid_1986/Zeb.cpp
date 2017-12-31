@@ -11,28 +11,21 @@ Zeb::Zeb(int x, int y, int type) :GameObject(Zeb_ID, x, y, 0, 0){
 	case 1:
 		_hp = 1;
 		_attack = 8;
+		OBJECT_VEL = 0.1f;
 		//take animation of its type( type1 in here)
 		_actionAnimation.push_back(new Animation(zebTexture, "Type1"));
+
 		break;
 	case 2:
 		_hp = 2;
 		_attack = 10;
-		//take animation of its type( type1 in here)
+		OBJECT_VEL = 0.2f;
+		//take animation of its type( type2 in here)
 		_actionAnimation.push_back(new Animation(zebTexture, "Type2"));
 		break;
-	case 3:
-		_hp = 3;
-		_attack = 12;
-		//take animation of its type( type1 in here)
-		_actionAnimation.push_back(new Animation(zebTexture, "Type3"));
-		break;
-	case 4:
-		_hp = 4;
-		_attack = 14;
-		//take animation of its type( type1 in here)
-		_actionAnimation.push_back(new Animation(zebTexture, "Type4"));
-		break;
 	}
+	_beWoundingAnimation.push_back(new Animation(zebTexture, "BeWounding"));
+	_beFreezingAnimation.push_back(new Animation(zebTexture, "BeFreezing"));
 
 	//set default action and animation
 	_action = ZebAction::Up_ZebA;
@@ -46,41 +39,53 @@ Zeb::Zeb(int x, int y, int type) :GameObject(Zeb_ID, x, y, 0, 0){
 		_zedFlyingType = ZebFlyingType::Up_Then_Right_ZFT;
 
 }
-void Zeb::Update(int deltaTime)
+void Zeb::UpdateActionAndVelocity(int deltaTime)
 {
+	//ACTION
 	//3% to redirect
 	if (_action == ZebAction::Up_ZebA)
 	{
-		int random = rand() % 100 - 3;// random (-3->96)
-		if (random < 0) //=3%
+		int random = rand() % 100 - 30 * OBJECT_VEL; // random 3%(type 1), 6%(type2)
+		if (random < 0) 
 			ChangeAction();
 	}
-	
-	//specify vel
+	//VEL
 	switch (_action)
 	{
-	case ZebAction::Standstill:	
+	case ZebAction::Standstill:
 		_velX = 0;
 		_velY = 0;
 		break;
 	case ZebAction::Up_ZebA:
 		_velX = 0;
-		_velY = ZEB_VEL;
+		_velY = OBJECT_VEL;
 		break;
-	case ZebAction::Left_ZebA:	
-		_velX = -ZEB_VEL;
+	case ZebAction::Left_ZebA:
+		_velX = -OBJECT_VEL;
 		_velY = 0;
 		break;
 	case ZebAction::Right_ZebA:
-		_velX = ZEB_VEL;
+		_velX = OBJECT_VEL;
 		_velY = 0;
 		break;
 	}
-
-	//update position
-	_posX += _velX * deltaTime;
-	_posY += _velY * deltaTime;
-
+}
+void Zeb::UpdateAnimationBaseOnStatus()
+{
+	switch (_objectStatus)
+	{
+	case ObjectStatus::Survival_OS:
+		_currentAnimation = _actionAnimation[0];
+		break;
+	case ObjectStatus::BeWounding_OS:
+		_currentAnimation = _beWoundingAnimation[0];
+		break;
+	case ObjectStatus::Exploding_OS:
+		_currentAnimation = explodingAnimation;
+		break;
+	case ObjectStatus::Died_OS:
+		break;
+	}
 }
 void Zeb::Draw(Camera* camera)
 {
@@ -110,10 +115,6 @@ void Zeb::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 		{
 			ChangeAction(direction);
 		}
-		//exit for loop
-		//except the case Ripper touch 2 object Ground at the same time 
-		//=> SuftToLeft->SuftToRight->SuftToLeft (will be stucked)
-
 	}
 }
 void Zeb::ChangeAction(Direction collisionDirectionWithWall)

@@ -42,7 +42,7 @@ void SceneGame::LoadObject(){
 void SceneGame::RenderFrame(int time){
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
-	if (timeNow - _stageStartTime <= 4000) //4000
+	if (timeNow - _stageStartTime <= 1000) //4000
 	{
 		_player->addOrChangeAction(BeWounded);
 		_player->_isMotionless = true;
@@ -85,10 +85,10 @@ void SceneGame::RenderFrame(int time){
 	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	//if (!currentObjects->count(1000))
 	//{
-	//	Zoomer* zoomer = new Zoomer(578, 1079,2);
+	//	Zoomer* zoomer = new Zoomer(696, 2520,2);
 	//	currentObjects->insert(pair<int, GameObject*>(300, zoomer));
-
 	//}
+
 	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	//if (!currentObjects->count(1001))
 	//{
@@ -99,7 +99,7 @@ void SceneGame::RenderFrame(int time){
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	if (!currentObjects->count(1002))
 	{
-		Zeb* zeb = new Zeb(660, 2400, 1);
+		Zeb* zeb = new Zeb(660, 2400, 2);
 		currentObjects->insert(pair<int, GameObject*>(1002, zeb));
 
 	}

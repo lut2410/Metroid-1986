@@ -2,8 +2,9 @@
 GameObject::GameObject(void){}
 GameObject::~GameObject(void){}
 GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float velY){
-	_objectOS = ObjectStatus::Survival_OS;
-	_beAttacking = 0;
+	_objectStatus = ObjectStatus::Survival_OS;
+	_remainingWoundingTime = 0;
+	_remainingExplodeTime = -1;
 	_hp = 0;
 	_attack = 0;
 	_objectID = objectID;
@@ -14,7 +15,8 @@ GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float 
 
 	Texture2* explode = NULL;
 	explode = TextureCollection::getInstance()->getTexture2(ExplodeObject_ID);
-	expoldeAnimation = new Animation(explode, explode->_animationNames.at(0));
+	explodingAnimation = new Animation(explode, explode->_animationNames.at(0));
+
 }
 
 RECT GameObject::getCollisionBound(){
@@ -77,29 +79,82 @@ int GameObject::getAttackDame()
 }
 ObjectStatus GameObject::getObjectStatus()
 {
-	return _objectOS;
+	return _objectStatus;
 }
 void GameObject::SetObjectStatus(ObjectStatus objectStatus)
 {
-	_objectOS = objectStatus;
+	_objectStatus = objectStatus;
+}
+void GameObject::UpdateStatus()
+{
+	// specify object when HP = 0. Bewounding was defined before
+	SpecifyStatusWhenHP0();
+
+	switch (_objectStatus)
+	{
+		case ObjectStatus::BeWounding_OS:
+			if (_remainingWoundingTime > 0)
+				_remainingWoundingTime--;
+			else
+				_objectStatus = ObjectStatus::Survival_OS;
+			break;
+		case ObjectStatus::Exploding_OS:
+			if (_remainingExplodeTime > 0)
+				_remainingExplodeTime--;
+			else
+				_objectStatus = ObjectStatus::Died_OS;
+			break;
+	}
+
+}
+void GameObject::UpdateActionAndVelocity(int deltaTime)
+{
 }
 void GameObject::Update(int deltaTime)
-{
-
-	if (getObjectType() == ObjectType::RelativesWithWall_OT)
+{	
+	if (getObjectType() == ObjectType::RelativesWithWall_OT || getObjectType() == ObjectType::Item_OT)
 		//ground and its relative can't move
 		return;
+
+	//update status
+	if(getObjectType()==ObjectType::Enemy_OT)
+		UpdateStatus();
+	//Update action and velocity
+	UpdateActionAndVelocity(deltaTime);
 	//update position
-	_posX += _velX * deltaTime;
-	_posY += _velY * deltaTime;
+	if (_objectStatus == Survival_OS)
+	{
+		_posX += _velX * deltaTime;
+		_posY += _velY * deltaTime;
+	}
+
+}
+void GameObject::UpdateAnimationBaseOnStatus()
+{
+	// virtual void
+	switch (_objectStatus)
+	{
+	case ObjectStatus::Survival_OS:
+		//_currentAnimation = _actionAnimation[_action];
+		break;
+	case ObjectStatus::BeWounding_OS:
+		//_currentAnimation = _beWoundingAnimation[_action];
+		break;
+	case ObjectStatus::Exploding_OS:
+		//_currentAnimation = explodingAnimation;
+		break;
+	case ObjectStatus::Died_OS:
+		break;
+	}
 }
 void GameObject::Update2(int deltaTime)
 {
 	if (getObjectType() == ObjectType::RelativesWithWall_OT)
 		//ground and its relative is drawn in background
 		return;
-	if (enemyCheckExplode(deltaTime))
-		return;
+
+	//if(getObjectType() == ObjectType::Enemy_OT)
+		UpdateAnimationBaseOnStatus();
 	_currentAnimation->Update(deltaTime);
 }
 void GameObject::Draw(Camera* camera){
@@ -120,23 +175,19 @@ void GameObject::handleCollision(int playerX, int playerY, float dt)
 }
 void GameObject::BeWounded(int lossHP)
 {
-	_beAttacking = WOUNDED_FRAMES;
+	SetObjectStatus(ObjectStatus::BeWounding_OS);
+	_remainingWoundingTime = WOUNDED_FRAMES;
 	_hp -= lossHP;
 }
-bool GameObject::enemyCheckExplode(int deltaTime)
+void GameObject::SpecifyStatusWhenHP0()
 {
-	if (_hp <= 0)	//draw 3 frames when Zoomer is explode
+	if (_hp <= 0)
 	{
-		_currentAnimation = expoldeAnimation;
-		_currentAnimation->Update(deltaTime);
-		if (_hp>-2)
-			_hp--;
-		else
+		//enemy will 1 times to explode
+		if (_objectStatus != ObjectStatus::Exploding_OS)
 		{
-			_objectOS = ObjectStatus::Died_OS;
+			_objectStatus = ObjectStatus::Exploding_OS;
+			_remainingExplodeTime = EXPLODE_FRAMES;
 		}
-			
-		return true;
 	}
-	return false;
 }

@@ -11,19 +11,15 @@ Skree::Skree(int x, int y, int type) :GameObject(Skree_ID, x, y, 0, 0){
 	case 1:
 		_hp = 3;
 		_attack = 8;
+		OBJECT_VEL = 0.15;
 		//take animation of its type( type1 in here)
-		_actionAnimation.resize(3);
-		_actionAnimation[Nomal_SkreeA]			= new Animation(skreeTexture, "Type1:NomalOrDive");
-		_actionAnimation[Dive_SkreeA]			= new Animation(skreeTexture, "Type1:NomalOrDive");
-		_actionAnimation[BeAttacking_SkreeA]	= new Animation(skreeTexture, "Type1:BeAtacking");
+		_actionAnimation.push_back(new Animation(skreeTexture, "Type1"));
 		break;
 	case 2:
 		_hp = 5;
 		_attack = 8;
-		_actionAnimation.resize(3);
-		_actionAnimation[Nomal_SkreeA]			= new Animation(skreeTexture, "Type2:NomalOrDive");
-		_actionAnimation[Dive_SkreeA]			= new Animation(skreeTexture, "Type2:NomalOrDive");
-		_actionAnimation[BeAttacking_SkreeA]	= new Animation(skreeTexture, "Type2:BeAtacking");
+		OBJECT_VEL = 0.25f;
+		_actionAnimation.push_back(new Animation(skreeTexture, "Type2"));
 		break;
 	}
 
@@ -31,20 +27,9 @@ Skree::Skree(int x, int y, int type) :GameObject(Skree_ID, x, y, 0, 0){
 	_action = SkreeAction::Nomal_SkreeA;
 	_currentAnimation = _actionAnimation[_action];	//actually _actionAnimation just have 1 animation 
 }
-void Skree::Update(int deltaTime)
+void Skree::UpdateActionAndVelocity(int deltaTime)
 {
-	
-	//specify action
-	if (_beAttacking)
-	{
-		_action = SkreeAction::BeAttacking_SkreeA;
-		_beAttacking--;
-		if (_beAttacking == 0)
-			//back to dive
-			_action = SkreeAction::Dive_SkreeA;
-	}
-
-	//specify vel
+	//VEL
 	switch (_action)
 	{
 	case SkreeAction::Nomal_SkreeA:		//crawl right
@@ -53,7 +38,7 @@ void Skree::Update(int deltaTime)
 		break;
 	case SkreeAction::Dive_SkreeA:
 		_velX = 0;
-		_velY = -SKREE_VEL;
+		_velY = -OBJECT_VEL;
 		break;
 	case SkreeAction::BeAttacking_SkreeA:
 		_velX = 0;
@@ -61,20 +46,26 @@ void Skree::Update(int deltaTime)
 		break;
 	}
 
-	//update position
-	_posX += _velX * deltaTime;
-	_posY += _velY * deltaTime;
-			
 }
-void Skree::Update2(int deltaTime)
+void Skree::UpdateAnimationBaseOnStatus()
 {
-	if (enemyCheckExplode(deltaTime))
-		return;
-
-	//update animation
-	_currentAnimation = _actionAnimation[_action];
-	_currentAnimation->Update(deltaTime);
+	switch (_objectStatus)
+	{
+	case ObjectStatus::Survival_OS:
+		_currentAnimation = _actionAnimation[0];
+		break;
+	case ObjectStatus::BeWounding_OS:
+		_currentAnimation = _beWoundingAnimation[0];
+		break;
+	case ObjectStatus::Exploding_OS:
+		_currentAnimation = explodingAnimation;
+		break;
+	case ObjectStatus::Died_OS:
+		//create bullet
+		break;
+	}
 }
+
 void Skree::handleCollision(int playerX, int playerY, float dt)
 {
 	if (_action == SkreeAction::BeAttacking_SkreeA)
