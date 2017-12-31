@@ -118,6 +118,12 @@ void GameObject::UpdateStatus()
 			else
 				_objectStatus = ObjectStatus::Survival_OS;
 			break;
+		case ObjectStatus::BeFreezing_OS:
+			if (_remainingFreezingTime > 0)
+				_remainingFreezingTime--;
+			else
+				_objectStatus = ObjectStatus::Survival_OS;
+			break;
 		case ObjectStatus::Exploding_OS:
 			if (_remainingExplodeTime > 0)
 				_remainingExplodeTime--;
@@ -200,5 +206,11 @@ void GameObject::BeWounded(int lossHP)
 {
 	SetObjectStatus(ObjectStatus::BeWounding_OS);
 	_remainingWoundingTime = WOUNDED_FRAMES;
+	_hp -= lossHP;
+}
+void GameObject::BeFreezed(int lossHP)
+{
+	SetObjectStatus(ObjectStatus::BeFreezing_OS);
+	_remainingFreezingTime = FREEZED_FRAMES;
 	_hp -= lossHP;
 }

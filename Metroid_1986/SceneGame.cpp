@@ -42,7 +42,7 @@ void SceneGame::LoadObject(){
 void SceneGame::RenderFrame(int time){
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
-	if (timeNow - _stageStartTime <= 4000) //4000
+	if (timeNow - _stageStartTime <= 0000) //4000
 	{
 		_player->BeWounded(Direction::None_Direction, 0);
 		//_player->_isMotionless = true;
@@ -89,13 +89,13 @@ void SceneGame::RenderFrame(int time){
 	//	currentObjects->insert(pair<int, GameObject*>(1000, zoomer));
 	//}
 
-	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1001))
-	{
-		Ripper* ripper = new Ripper(660, 2460, 1);
-		currentObjects->insert(pair<int, GameObject*>(1001, ripper));
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1001))
+	//{
+	//	Ripper* ripper = new Ripper(660, 2460, 1);
+	//	currentObjects->insert(pair<int, GameObject*>(1001, ripper));
 
-	}
+	//}
 	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	//if (!currentObjects->count(1002))
 	//{
@@ -109,6 +109,15 @@ void SceneGame::RenderFrame(int time){
 	//	Skree* skree = new Skree(750, 2400,2);
 	//	currentObjects->insert(pair<int, GameObject*>(1003, skree));
 	//}
+
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	if (!currentObjects->count(1004))
+	{
+		Waver* waver = new Waver(750, 2400, 1);
+		currentObjects->insert(pair<int, GameObject*>(1004, waver));
+	}
+
+
 	_player->Update(time);
 
 	//COLLISION

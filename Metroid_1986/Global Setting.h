@@ -71,6 +71,7 @@ enum ObjectID{
 	Skree_ID,
 	Ripper_ID,
 	Zeb_ID,
+	Waver_ID,
 	ExplodeObject_ID,
 	//item
 	HPTonic_ID,

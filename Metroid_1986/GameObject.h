@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdlib.h>		//support to random
 #define WOUNDED_FRAMES 4
+#define FREEZED_FRAMES 20
 #define EXPLODE_FRAMES 2
 enum ObjectType{
 	RelativesWithWall_OT,	//can't move, is in background: ground,wall,gate,door,..
@@ -18,6 +19,7 @@ enum ObjectType{
 enum ObjectStatus{
 	Survival_OS,
 	BeWounding_OS,
+	BeFreezing_OS,
 	Exploding_OS,
 	Died_OS
 
@@ -39,7 +41,8 @@ protected:
 	int _hp;			//HP
 	int _attack;		//attack enemy,HP enemy will be subtract = attack index
 	int _remainingWoundingTime;		//time to back to normal status
-	int _remainingExplodeTime;
+	int _remainingFreezingTime;		//time to back to normal status
+	int _remainingExplodeTime;		//time to die status
 	
 	Animation* _currentAnimation;
 	vector<Animation*> _actionAnimation; 
@@ -80,6 +83,7 @@ public:
 	virtual void handleCollision(map<int, GameObject*> objectList, float dt);	//motion base on other object
 	virtual void handleCollision(int playerX, int playerY, float dt);			//motion base on player
 	virtual void BeWounded(int lossHP=1);		//be wounded 'lossHP' HP
+	virtual void BeFreezed(int lossHP = 1);
 	void SpecifyStatusWhenHP0();
 
 	//bool enemyCheckExplode(int deltaTime);	//be destroying

@@ -14,6 +14,7 @@ private:
 	Texture2* skreeTexture2;
 	Texture2* ripperTexture2;
 	Texture2* zebTexture2;
+	Texture2* waverTexture2;
 	//item
 	Texture2* itemTexture2;
 	static TextureCollection* textureCollection;

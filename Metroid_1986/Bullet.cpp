@@ -160,13 +160,48 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 						this->BeWounded();
 						otherObject->BeWounded();
 						break;
+					case ObjectID::Waver_ID:
+						this->BeWounded();
+						break;
 					}
 				}
 			}
 		}
 		break;
 	case BulletType::BulletFromPlayer_Freeze:	//freezing enemy
+		for (auto it = objectList.begin(); it != objectList.end(); it++)
+		{
+			GameObject* otherObject = it->second;
+			if (otherObject->getObjectID() != ObjectID::Bullet_ID)
+			{
+				Direction direction;
+				if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
+				{
+					switch (otherObject->getObjectID())
+					{
+					case ObjectID::Ground_ID:	//bullet collide vs wall
+						//bullet will be broken
+						this->BeWounded();
+						break;
+					case ObjectID::BubbleDoor_ID:
+						this->BeWounded();
+						otherObject->BeWounded();
+						break;
 
+						//enemy
+					case ObjectID::Zoomer_ID:
+					case ObjectID::Skree_ID:
+					case ObjectID::Zeb_ID:
+					case ObjectID::Ripper_ID:
+					case ObjectID::Waver_ID:
+						this->BeWounded();
+						otherObject->BeFreezed();
+						break;
+					}
+				}
+			}
+		}
+		break;
 		break;
 	case BulletType::BulletFromSkree:			//will check collision in handleCollision function of Player
 		break;

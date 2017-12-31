@@ -31,7 +31,7 @@ Ripper::Ripper(int x, int y, int type) :GameObject(Ripper_ID, x, y, 0, 0){
 	_beWoundingAnimation.push_back(new Animation(ripperTexture, "BeWounding"));
 	_beFreezingAnimation.push_back(new Animation(ripperTexture, "BeFreezing"));
 	//set default action and animation
-	_action = RipperAction::SuftToLeft;
+	_action = RipperAction::SuftToLeft_RipperA;
 	_currentAnimation = _actionAnimation[_action];	//actually _actionAnimation just have 1 animation 
 }
 void Ripper::UpdateActionAndVelocity(int deltaTime)
@@ -39,11 +39,11 @@ void Ripper::UpdateActionAndVelocity(int deltaTime)
 	//specify vel
 	switch (_action)
 	{
-	case RipperAction::SuftToLeft:
+	case RipperAction::SuftToLeft_RipperA:
 		_velX = -OBJECT_VEL;
 		_velY = 0;
 		break;
-	case RipperAction::SuftToRight:
+	case RipperAction::SuftToRight_RipperA:
 		_velX = OBJECT_VEL;
 		_velY = 0;
 		break;
@@ -60,6 +60,9 @@ void Ripper::UpdateAnimationBaseOnStatus()
 	case ObjectStatus::BeWounding_OS:
 		_currentAnimation = _beWoundingAnimation[0];
 		break;
+	case ObjectStatus::BeFreezing_OS:
+		_currentAnimation = _beFreezingAnimation[0];
+		break;
 	case ObjectStatus::Exploding_OS:
 		_currentAnimation = explodingAnimation;
 		break;
@@ -73,10 +76,10 @@ void Ripper::Draw(Camera* camera)
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
 	switch (_action)
 	{
-	case RipperAction::SuftToLeft:		
+	case RipperAction::SuftToLeft_RipperA:		
 		_currentAnimation->Draw(center.x, center.y);
 		break;
-	case RipperAction::SuftToRight:
+	case RipperAction::SuftToRight_RipperA:
 		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
 		break;
 	}
@@ -92,10 +95,10 @@ void Ripper::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 		if (otherObject->getObjectID() == ObjectID::Ground_ID)
 			if (handleObjectCollision(this, otherObject, direction, deltaTime))
 			{
-				if (_action == RipperAction::SuftToLeft)			
-					_action = RipperAction::SuftToRight;
+				if (_action == RipperAction::SuftToLeft_RipperA)			
+					_action = RipperAction::SuftToRight_RipperA;
 				else
-					_action = RipperAction::SuftToLeft;
+					_action = RipperAction::SuftToLeft_RipperA;
 				break;
 			}
 		//exit for loop

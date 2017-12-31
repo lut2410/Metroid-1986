@@ -54,6 +54,9 @@ void Skree::UpdateAnimationBaseOnStatus()
 	case ObjectStatus::BeWounding_OS:
 		_currentAnimation = _beWoundingAnimation[0];
 		break;
+	case ObjectStatus::BeFreezing_OS:
+		_currentAnimation = _beFreezingAnimation[0];
+		break;
 	case ObjectStatus::Exploding_OS:
 		_currentAnimation = explodingAnimation;
 		break;

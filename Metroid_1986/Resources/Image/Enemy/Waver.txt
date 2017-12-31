@@ -43,8 +43,8 @@ Index		Animation Info
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
 Type1
-0	2	30
+0	2	200
 Type2
-3	5	30
-Type3
+3	5	300
+BeFreezing
 6	8	30

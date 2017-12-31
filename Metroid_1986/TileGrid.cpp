@@ -450,6 +450,10 @@ void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 			//check collision with ground
 			object->handleCollision(*CurrentObjects, deltaTime);
 			break;
+		case ObjectID::Waver_ID:
+			//check collision with ground
+			object->handleCollision(*CurrentObjects, deltaTime);
+			break;
 		}
 			
 	}

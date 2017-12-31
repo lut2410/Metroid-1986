@@ -5,8 +5,8 @@
 #include "GameObject.h"
 #include "Collision.h"
 enum RipperAction{
-	SuftToLeft,
-	SuftToRight
+	SuftToLeft_RipperA,
+	SuftToRight_RipperA
 
 };
 class Ripper : public GameObject{

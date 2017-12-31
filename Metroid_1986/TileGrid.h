@@ -22,6 +22,7 @@
 #include "Skree.h"
 #include "Ripper.h"
 #include "Zeb.h"
+#include "Waver.h"
 
 #include "HPTonic.h"
 #include "MaruMari.h"
