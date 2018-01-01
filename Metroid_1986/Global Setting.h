@@ -72,6 +72,7 @@ enum ObjectID{
 	Ripper_ID,
 	Zeb_ID,
 	Waver_ID,
+	Rio_ID,
 	ExplodeObject_ID,
 	//item
 	HPTonic_ID,

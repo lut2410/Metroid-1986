@@ -434,25 +434,18 @@ void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 			object->handleCollision(*CurrentObjects, deltaTime);
 			break;
 		case ObjectID::Zoomer_ID:
-			object->handleCollision(*CurrentObjects,deltaTime);
+		case ObjectID::Ripper_ID:
+		case ObjectID::Zeb_ID:
+		case ObjectID::Waver_ID:
+			//check collision with ground
+			object->handleCollision(*CurrentObjects, deltaTime);
 			break;
 		case ObjectID::Skree_ID:
+		case ObjectID::Rio_ID:
 			//check collision with ground
 			object->handleCollision(*CurrentObjects, deltaTime);
 			//motion base on player
 			object->handleCollision(playerX, playerY, deltaTime);
-			break;
-		case ObjectID::Ripper_ID:
-			//check collision with ground
-			object->handleCollision(*CurrentObjects, deltaTime);
-			break;
-		case ObjectID::Zeb_ID:
-			//check collision with ground
-			object->handleCollision(*CurrentObjects, deltaTime);
-			break;
-		case ObjectID::Waver_ID:
-			//check collision with ground
-			object->handleCollision(*CurrentObjects, deltaTime);
 			break;
 		}
 			

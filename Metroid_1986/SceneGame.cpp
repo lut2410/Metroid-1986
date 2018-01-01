@@ -110,11 +110,18 @@ void SceneGame::RenderFrame(int time){
 	//	currentObjects->insert(pair<int, GameObject*>(1003, skree));
 	//}
 
-	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	/*map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	if (!currentObjects->count(1004))
 	{
-		Waver* waver = new Waver(750, 2400, 1);
+		Waver* waver = new Waver(750, 2340, 1);
 		currentObjects->insert(pair<int, GameObject*>(1004, waver));
+	}*/
+
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	if (!currentObjects->count(1005))
+	{
+		Rio* rio = new Rio(800, 2500, 1);
+		currentObjects->insert(pair<int, GameObject*>(1005, rio));
 	}
 
 

@@ -23,6 +23,7 @@
 #include "Ripper.h"
 #include "Zeb.h"
 #include "Waver.h"
+#include "Rio.h"
 
 #include "HPTonic.h"
 #include "MaruMari.h"

@@ -27,8 +27,18 @@ Waver::Waver(int x, int y, int type) :GameObject(Waver_ID, x, y, 0, 0){
 	//_beWoundingAnimation.push_back(new Animation(waverTexture, "BeWounding"));	//normal bullet: isn't wounding
 	_beFreezingAnimation.push_back(new Animation(waverTexture, "BeFreezing"));
 	//set default action and animation
-	_action = WaverAction::SuftToLeft_WaverA;
-	_currentAnimation = _actionAnimation[_action];	//actually _actionAnimation just have 1 animation 
+	_action = WaverAction::WaveToLeft_WaverA;
+	_currentAnimation = _actionAnimation[0];	//actually _actionAnimation just have 1 animation 
+}
+RECT Waver::getCollisionBound()
+{
+	Box objectBox = { 0, 0, 16, 12 };
+
+	RECT objectBound = { _posX - objectBox.width / 2,		//left
+		_posY + objectBox.height / 2,						//top
+		_posX + objectBox.width / 2,						//right
+		_posY - objectBox.height / 2 };						//bottom
+	return objectBound;
 }
 void Waver::Update(int deltaTime)
 {
@@ -49,16 +59,19 @@ void Waver::Update(int deltaTime)
 	//Update velX
 	switch (_action)
 	{
-	case WaverAction::SuftToLeft_WaverA:		//crawl right
+	case WaverAction::WaveToLeft_WaverA:		
 		_velX = -OBJECT_VEL;
 		break;
-	case WaverAction::SuftToRight_WaverA:
+	case WaverAction::WaveToRight_WaverA:
 		_velX = OBJECT_VEL;
 		break;
+
 	}
 	//Update position
 	{
 		_posX += _velX * deltaTime;
+		if (_action == WaverAction::WaveToLeft_WaverA || _action == WaverAction::WaveToRight_WaverA)
+			//suft to left/right -> posY = const;
 		_posY = _originposY + AMPLITUDE* sin(angle);
 	}
 
@@ -91,10 +104,10 @@ void Waver::Draw(Camera* camera)
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
 	switch (_action)
 	{
-	case WaverAction::SuftToLeft_WaverA:
+	case WaverAction::WaveToLeft_WaverA:
 		_currentAnimation->Draw(center.x, center.y);
 		break;
-	case WaverAction::SuftToRight_WaverA:
+	case WaverAction::WaveToRight_WaverA:
 		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
 		break;
 	}
@@ -110,10 +123,24 @@ void Waver::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 		if (otherObject->getObjectID() == ObjectID::Ground_ID)
 		if (handleObjectCollision(this, otherObject, direction, deltaTime))
 		{
-			if (direction==Direction::Left_Direction)
-				_action = WaverAction::SuftToRight_WaverA;
-			else if(direction == Direction::Right_Direction)
-				_action = WaverAction::SuftToLeft_WaverA;
+			switch (direction)
+			{
+			case Direction::Top_Direction:
+			case Direction::Bottom_Direction:
+				//if (_action == WaverAction::WaveToRight_WaverA)
+				//	_action = WaverAction::SuftToRight_WaverA;
+				//	
+				//if (_action == WaverAction::WaveToLeft_WaverA)
+				//	_action = WaverAction::SuftToLeft_WaverA;
+				break;
+			case Direction::Left_Direction:
+				_action = WaverAction::WaveToRight_WaverA;
+				break;
+			case Direction::Right_Direction:
+				_action = WaverAction::WaveToLeft_WaverA;
+				break;
+
+			}
 			break;
 		}
 		//exit for loop

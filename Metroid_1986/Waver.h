@@ -7,8 +7,9 @@
 #define PI 3.14159265
 #define TIME_A_CYCLE 1000//1s
 enum WaverAction{
-	SuftToLeft_WaverA,
-	SuftToRight_WaverA
+	WaveToLeft_WaverA,
+	WaveToRight_WaverA
+
 
 };
 class Waver : public GameObject{
@@ -20,6 +21,7 @@ public:
 	Waver();
 	Waver(int x, int y, int type = 1);
 	~Waver();
+	RECT getCollisionBound();
 	void Update(int deltaTime);
 	void UpdateAnimationBaseOnStatus();
 	void Draw(Camera* camera);

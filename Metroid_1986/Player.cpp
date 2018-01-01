@@ -238,6 +238,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 				case Ripper_ID:
 				case Zeb_ID:
 				case Waver_ID:
+				case Rio_ID:
 					this->BeWounded(direction, object->getAttackDame());
 					break;
 				case Bullet_ID:

@@ -147,6 +147,9 @@
     <ClCompile Include="Waver.cpp">
       <Filter>Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Rio.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -246,6 +249,9 @@
       <Filter>Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Waver.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Rio.h">
       <Filter>Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>

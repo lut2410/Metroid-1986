@@ -7,7 +7,7 @@
 #include "Camera.h"
 #include <math.h>
 #include <stdlib.h>		//support to random
-#define WOUNDED_FRAMES 4
+#define WOUNDED_FRAMES 8
 #define FREEZED_FRAMES 20
 #define EXPLODE_FRAMES 2
 enum ObjectType{

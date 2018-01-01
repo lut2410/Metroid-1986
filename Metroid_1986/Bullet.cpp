@@ -157,6 +157,7 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					case ObjectID::Skree_ID:
 					case ObjectID::Zeb_ID:
 					case ObjectID::Ripper_ID:
+					case ObjectID::Rio_ID:
 						this->BeWounded();
 						otherObject->BeWounded();
 						break;

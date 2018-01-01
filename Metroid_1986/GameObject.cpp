@@ -62,6 +62,8 @@ ObjectType GameObject::getObjectType()
 	case Skree_ID:
 	case Ripper_ID:
 	case Zeb_ID:
+	case Waver_ID:
+	case Rio_ID:
 	case ExplodeObject_ID:
 		return ObjectType::Enemy_OT;
 		break;
