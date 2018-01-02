@@ -83,12 +83,12 @@ void SceneGame::RenderFrame(int time){
 	//UPDATE MAPS
 	_tileGrid->Update(_camera,time);
 
-	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1000))
-	{
-		Zoomer* zoomer = new Zoomer(696, 2520,2);
-		currentObjects->insert(pair<int, GameObject*>(1000, zoomer));
-	}
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1000))
+	//{
+	//	Zoomer* zoomer = new Zoomer(696, 2520,2);
+	//	currentObjects->insert(pair<int, GameObject*>(1000, zoomer));
+	//}
 
 	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	//if (!currentObjects->count(1001))
@@ -124,7 +124,12 @@ void SceneGame::RenderFrame(int time){
 	//	Rio* rio = new Rio(800, 2500, 1);
 	//	currentObjects->insert(pair<int, GameObject*>(1005, rio));
 	//}
-
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	if (!currentObjects->count(1000))
+	{
+		ZebProductionPipe* zebpipe = new ZebProductionPipe(696, 2370, 2);
+		currentObjects->insert(pair<int, GameObject*>(1000, zebpipe));
+	}
 
 	_player->Update(time);
 

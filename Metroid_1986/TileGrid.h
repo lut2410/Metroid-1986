@@ -17,6 +17,7 @@
 #include "Ground.h"
 #include "Gate.h"
 #include "BubbleDoor.h"
+#include "ZebProductionPipe.h"
 
 #include "Zoomer.h"
 #include "Skree.h"

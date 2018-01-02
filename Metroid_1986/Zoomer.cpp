@@ -78,7 +78,7 @@ void Zoomer::UpdateAnimationBaseOnStatus()
 		_currentAnimation->SetIndex(_currentIndexOfAnimation);
 		break;
 	case ObjectStatus::BeFreezing_OS:
-		_currentAnimation = _beFreezingAnimation[0];
+		_currentAnimation = _beFreezingAnimation[_action];
 		_currentAnimation->SetIndex(_currentIndexOfAnimation);
 		break;
 	case ObjectStatus::Exploding_OS:

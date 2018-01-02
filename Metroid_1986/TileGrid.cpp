@@ -393,7 +393,22 @@ void TileGrid::Update(Camera* camera, int time){
 	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
 	{
 		GameObject* object = it->second;
-			object->Update(time);
+		object->Update(time);
+		
+
+		//
+		if (object->getObjectID() == ObjectID::ZebProductionPipe_ID)
+		{
+			if (object->getHP() > 0)
+				//ready
+			{
+				Zeb* zeb = new Zeb(object->_posX, object->_posY+4, object->getAttackDame());	//+4 because if not zed will touch  wall at the bottom of the pipe
+				//add to currentObjectList
+				TileGrid::AddObjectToCurrentObjectList(zeb);
+			}
+		}
+
+
 	}
 }
 void TileGrid::Update2(int time)

@@ -94,6 +94,7 @@
     <ClCompile Include="Skree.cpp" />
     <ClCompile Include="Waver.cpp" />
     <ClCompile Include="Zeb.cpp" />
+    <ClCompile Include="ZebProductionPipe.cpp" />
     <ClCompile Include="Zoomer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuadTree.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Skree.h" />
     <ClInclude Include="Waver.h" />
     <ClInclude Include="Zeb.h" />
+    <ClInclude Include="ZebProductionPipe.h" />
     <ClInclude Include="Zoomer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="QuadTree.h" />

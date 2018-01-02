@@ -62,7 +62,7 @@ enum ObjectID{
 	Ground_ID,
 	Gate_ID,
 	BubbleDoor_ID,
-	ZebProductionPipe,
+	ZebProductionPipe_ID,
 	//player
 	Player_ID,
 	Bullet_ID,

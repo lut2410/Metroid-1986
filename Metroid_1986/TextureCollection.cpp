@@ -1,7 +1,8 @@
 #include "TextureCollection.h"
 TextureCollection* TextureCollection::textureCollection = NULL;
 TextureCollection::TextureCollection(){
-	doorTexture2		= new  Texture2("Resources/Image/door/image.png", "Resources/Image/door/door.txt");
+	doorTexture2		= new Texture2("Resources/Image/Other Object/image.png", "Resources/Image/Other Object/door.txt");
+	zebpipeTexture2		= new Texture2("Resources/Image/Other Object/image.png", "Resources/Image/Other Object/Zeb Production Pipe.txt");
 	playerTexture2		= new Texture2("Resources/Image/player/image.png", "Resources/Image/player/player.txt");
 	bulletTexture2		= new Texture2("Resources/Image/player/image.png", "Resources/Image/player/bullet.txt");
 	explodeTexture2		= new Texture2("Resources/Image/player/image.png", "Resources/Image/player/explode.txt");
@@ -26,6 +27,9 @@ Texture2* TextureCollection::getTexture2(ObjectID id){
 	{
 	case BubbleDoor_ID:
 		return doorTexture2;
+		break;
+	case ZebProductionPipe_ID:
+		return zebpipeTexture2;
 		break;
 	case Player_ID:
 		return playerTexture2;

@@ -150,6 +150,9 @@
     <ClCompile Include="Rio.cpp">
       <Filter>Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="ZebProductionPipe.cpp">
+      <Filter>Object\RelativeOfGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -253,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="Rio.h">
       <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ZebProductionPipe.h">
+      <Filter>Object\RelativeOfGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

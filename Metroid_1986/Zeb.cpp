@@ -115,7 +115,7 @@ void Zeb::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 		GameObject* otherObject = it->second;
 		Direction direction;
 		//check collision with wall, but don't check with "Pipe produce it"
-		if (otherObject->getObjectType() == ObjectType::RelativesWithWall_OT && otherObject->getObjectID() != ObjectID::ZebProductionPipe)
+		if (otherObject->getObjectType() == ObjectType::RelativesWithWall_OT && otherObject->getObjectID() != ObjectID::ZebProductionPipe_ID)
 		if (handleObjectCollision(this, otherObject, direction, deltaTime))
 		{
 			ChangeAction(direction);

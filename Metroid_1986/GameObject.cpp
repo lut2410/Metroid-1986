@@ -49,7 +49,7 @@ ObjectType GameObject::getObjectType()
 	case Ground_ID:
 	case Gate_ID:
 	case BubbleDoor_ID:
-	case ZebProductionPipe:
+	case ZebProductionPipe_ID:
 		return ObjectType::RelativesWithWall_OT;
 		break;
 		//player
@@ -193,7 +193,7 @@ void GameObject::Update2(int deltaTime)
 }
 void GameObject::Draw(Camera* camera){
 	
-	if (getObjectType() == ObjectType::RelativesWithWall_OT)
+	if (getObjectType() == ObjectType::RelativesWithWall_OT )
 		//ground and its relative has drawn in background
 		return;
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
