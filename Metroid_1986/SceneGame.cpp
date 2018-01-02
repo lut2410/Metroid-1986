@@ -82,12 +82,13 @@ void SceneGame::RenderFrame(int time){
 	//Infor::draw(_player->getHP());
 	//UPDATE MAPS
 	_tileGrid->Update(_camera,time);
-	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	//if (!currentObjects->count(1000))
-	//{
-	//	Zoomer* zoomer = new Zoomer(696, 2520,2);
-	//	currentObjects->insert(pair<int, GameObject*>(1000, zoomer));
-	//}
+
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	if (!currentObjects->count(1000))
+	{
+		Zoomer* zoomer = new Zoomer(696, 2520,2);
+		currentObjects->insert(pair<int, GameObject*>(1000, zoomer));
+	}
 
 	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	//if (!currentObjects->count(1001))
@@ -117,12 +118,12 @@ void SceneGame::RenderFrame(int time){
 		currentObjects->insert(pair<int, GameObject*>(1004, waver));
 	}*/
 
-	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1005))
-	{
-		Rio* rio = new Rio(800, 2500, 1);
-		currentObjects->insert(pair<int, GameObject*>(1005, rio));
-	}
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1005))
+	//{
+	//	Rio* rio = new Rio(800, 2500, 1);
+	//	currentObjects->insert(pair<int, GameObject*>(1005, rio));
+	//}
 
 
 	_player->Update(time);

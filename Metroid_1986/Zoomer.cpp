@@ -19,7 +19,7 @@ Zoomer::Zoomer(int x, int y, int type) :GameObject(Zoomer_ID, x, y, 0, 0){
 	{
 		_hp = 5;
 		_attack = 8;
-		OBJECT_VEL = 0.15f;
+		OBJECT_VEL = 0.125f;
 		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Top"));
 		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Right"));
 		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Bottom"));
@@ -77,6 +77,10 @@ void Zoomer::UpdateAnimationBaseOnStatus()
 		_currentAnimation = _beWoundingAnimation[_action];
 		_currentAnimation->SetIndex(_currentIndexOfAnimation);
 		break;
+	case ObjectStatus::BeFreezing_OS:
+		_currentAnimation = _beFreezingAnimation[0];
+		_currentAnimation->SetIndex(_currentIndexOfAnimation);
+		break;
 	case ObjectStatus::Exploding_OS:
 		_currentAnimation = explodingAnimation;
 		break;
@@ -123,6 +127,7 @@ void Zoomer::handleCollision(map<int, GameObject*> objectList, float dt)
 						break;
 					}
 					OK = true;
+					break;
 				}
 				else
 					//has collided or is adjacent
@@ -173,6 +178,7 @@ void Zoomer::FixPosition()
 		_posX += 7;
 		break;
 	case ZoomerAction::Crawl_Bottom:
+		_posY += 7;
 		_posY = round((double)_posY / 8) * 8;
 		_posY -= 7;
 		break;
