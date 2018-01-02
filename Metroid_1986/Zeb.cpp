@@ -79,9 +79,11 @@ void Zeb::UpdateAnimationBaseOnStatus()
 		break;
 	case ObjectStatus::BeWounding_OS:
 		_currentAnimation = _beWoundingAnimation[0];
+		_currentAnimation->SetIndex(_currentIndexOfAnimation);
 		break;
 	case ObjectStatus::BeFreezing_OS:
 		_currentAnimation = _beFreezingAnimation[0];
+		_currentAnimation->SetIndex(_currentIndexOfAnimation);
 		break;
 	case ObjectStatus::Exploding_OS:
 		_currentAnimation = explodingAnimation;

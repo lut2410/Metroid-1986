@@ -1,6 +1,5 @@
 #include "Rio.h"
-Rio::Rio()
-{}
+Rio::Rio(){}
 Rio::Rio(int x, int y, int type) :GameObject(Rio_ID, x, y, 0, 0){
 	//take texture
 	Texture2* rioTexture = NULL;
@@ -29,6 +28,7 @@ Rio::Rio(int x, int y, int type) :GameObject(Rio_ID, x, y, 0, 0){
 	_action = RioAction::Nomal_RioA;
 	_currentAnimation = _actionAnimation[_action];	//actually _actionAnimation just have 1 animation 
 }
+
 void Rio::Update(int deltaTime)
 {
 	//update status
@@ -65,6 +65,7 @@ void Rio::Update(int deltaTime)
 	}
 
 }
+
 void Rio::UpdateAnimationBaseOnStatus()
 {
 	switch (_objectStatus)
@@ -74,9 +75,11 @@ void Rio::UpdateAnimationBaseOnStatus()
 		break;
 	case ObjectStatus::BeWounding_OS:
 		_currentAnimation = _beWoundingAnimation[0];
+		_currentAnimation->SetIndex(_currentIndexOfAnimation);
 		break;
 	case ObjectStatus::BeFreezing_OS:
 		_currentAnimation = _beFreezingAnimation[0];
+		_currentAnimation->SetIndex(_currentIndexOfAnimation);
 		break;
 	case ObjectStatus::Exploding_OS:
 		_currentAnimation = explodingAnimation;
@@ -107,6 +110,7 @@ void Rio::handleCollision(int playerX, int playerY, float dt)
 			
 	}
 }
+
 void Rio::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 {
 	RECT a = getCollisionBound();

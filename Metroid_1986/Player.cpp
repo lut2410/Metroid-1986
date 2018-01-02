@@ -720,7 +720,7 @@ void Player::CreateBullet()
 		}
 
 			//bullet is appear at hand of player
-			Bullet* bullet = new Bullet(BulletType::BulletFromPlayer_Nomal, getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
+			Bullet* bullet = new Bullet(BulletType::BulletFromPlayer_Freeze, getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
 			//add to currentObjectList
 			TileGrid::AddObjectToCurrentObjectList(bullet);
 			

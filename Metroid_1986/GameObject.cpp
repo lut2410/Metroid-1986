@@ -184,9 +184,12 @@ void GameObject::Update2(int deltaTime)
 		//ground and its relative is drawn in background
 		return;
 
-	//if(getObjectType() == ObjectType::Enemy_OT)
-		UpdateAnimationBaseOnStatus();
-	_currentAnimation->Update(deltaTime);
+	UpdateAnimationBaseOnStatus();
+
+	if (_objectStatus==ObjectStatus::Survival_OS||_objectStatus==ObjectStatus::Exploding_OS)
+		_currentAnimation->Update(deltaTime);
+	//update, use for the case object status is changed to BeFreezing
+	_currentIndexOfAnimation = _currentAnimation->getCurrentFrameIndex();
 }
 void GameObject::Draw(Camera* camera){
 	

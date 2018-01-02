@@ -49,6 +49,7 @@ protected:
 	Animation* explodingAnimation;
 	vector<Animation*> _beWoundingAnimation;
 	vector<Animation*> _beFreezingAnimation;
+	int _currentIndexOfAnimation;				//use when change status to be freezing
 	//Position of Object
 
 	//Velocity of Object
