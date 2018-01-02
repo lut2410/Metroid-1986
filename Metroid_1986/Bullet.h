@@ -6,15 +6,16 @@
 #include "GameObject.h"
 #include "Collision.h"
 
-#define BULLET_VEL 0.3f
-
+#define BULLET_VEL 0.2f
+#define BULLET_ACCELERATION -0.01f
 
 class Bullet: public GameObject{
 	BulletType _bulletType;
-	int _remainingTime;		// time survival
+	//int _remainingTime;		// time survival
+
 public:
 	Bullet();
-	Bullet(BulletType bulletType, int x, int y, Direction directionFly, DWORD survivalTime = 200);
+	Bullet(BulletType bulletType, int x, int y, Direction directionFly, DWORD survivalTime = 300);
 	~Bullet();
 	//void BeWounded(int hp);
 	BulletType getBulletType();

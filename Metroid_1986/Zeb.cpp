@@ -135,7 +135,9 @@ void Zeb::ChangeAction(Direction collisionDirectionWithWall)
 	{
 		//left or right => collide with wall => standstill
 		if (collisionDirectionWithWall == Direction::Left_Direction || collisionDirectionWithWall == Direction::Right_Direction) //exception the case collide adjacent top
-		_action = ZebAction::Standstill;
+			//_action = ZebAction::Standstill;
+			//die
+			this->BeWounded(1);
 	}
 		
 	

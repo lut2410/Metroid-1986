@@ -8,12 +8,13 @@
 #include <math.h>
 #include <stdlib.h>		//support to random
 #define WOUNDED_FRAMES 8
-#define FREEZED_FRAMES 20
+#define FREEZED_FRAMES 30
 #define EXPLODE_FRAMES 2
 enum ObjectType{
 	RelativesWithWall_OT,	//can't move, is in background: ground,wall,gate,door,..
 	Player_OT,				//Samus
 	Enemy_OT,
+	Boss_OT,
 	Item_OT
 };
 enum ObjectStatus{
@@ -29,7 +30,10 @@ enum BulletType
 	IsntBullet,
 	BulletFromPlayer_Nomal,
 	BulletFromPlayer_Freeze,
-	BulletFromSkree
+	BulletFromPlayer_Wave,
+	BulletFromPlayer_Rocket,
+	BulletFromSkree,
+	BulletFromRidley
 };
 
 
@@ -43,7 +47,10 @@ protected:
 	int _remainingWoundingTime;		//time to back to normal status
 	int _remainingFreezingTime;		//time to back to normal status
 	int _remainingExplodeTime;		//time to die status
-	
+	bool _activeEnemy;				//some enemy need
+	int _remainingTimeToShoot;
+	int _remainingTime;				// time survival
+
 	Animation* _currentAnimation;
 	vector<Animation*> _actionAnimation; 
 	Animation* explodingAnimation;
@@ -64,12 +71,16 @@ public:
 	~GameObject();
 	GameObject(ObjectID objectID, int posX, int posY, float velX, float velY);
 
+	virtual D3DXVECTOR2 getPositionOfGun();
 	virtual RECT getCollisionBound();
 	D3DXVECTOR2 getVelocity();
 	ObjectID getObjectID();
 	ObjectType getObjectType();	//use to check collision
 	int getAttackDame();
 	int getHP();
+	bool getActiveEnemy();
+	int getRemainingTimeToShoot();
+	void SetRemainingTimeToShoot(int time);
 	virtual BulletType getBulletType();
 	ObjectStatus getObjectStatus();
 	void SetObjectStatus(ObjectStatus);

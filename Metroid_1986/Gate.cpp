@@ -33,3 +33,7 @@ void Gate::Update2(int time)
 	}
 	//this time, the camera is limited by the gate
 }
+void Gate::Draw(Camera* camera)
+{
+
+}

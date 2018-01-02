@@ -12,6 +12,7 @@ TextureCollection::TextureCollection(){
 	zebTexture2			= new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/zeb.txt");
 	waverTexture2		= new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/waver.txt");
 	rioTexture2			= new Texture2("Resources/Image/Enemy/image.png", "Resources/Image/enemy/rio.txt");
+	ridleyTexture2		= new Texture2("Resources/Image/Boss/image.png", "Resources/Image/Boss/Ridley.txt");
 	itemTexture2		= new Texture2("Resources/Image/item/image.png", "Resources/Image/item/item.txt");
 
 
@@ -57,6 +58,10 @@ Texture2* TextureCollection::getTexture2(ObjectID id){
 		break;
 	case ExplodeObject_ID:
 		return explodeTexture2;
+		break;
+		//boss
+	case Ridley_ID:
+		return ridleyTexture2;
 		break;
 		//item
 	case MaruMari_ID:

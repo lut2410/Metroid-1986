@@ -408,6 +408,28 @@ void TileGrid::Update(Camera* camera, int time){
 			}
 		}
 
+		if (object->getObjectID() == ObjectID::Ridley_ID)
+		{
+			if (object->getRemainingTimeToShoot() <= 0)
+				//ready
+			{
+				map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+				int key = 10100;
+				while (currentObjects->count(key) && key<10105) // limit 5 ball
+						key++;
+				if (key<10105)
+				{
+
+				Bullet* ridleyBall = new Bullet(BulletType::BulletFromRidley, (int)object->getPositionOfGun().x,
+					(int)object->getPositionOfGun().y, Direction::TopRight_Direction,2000);	
+					//insert object with the key
+				currentObjects->insert(pair<int, GameObject*>(key, ridleyBall));
+					object->SetRemainingTimeToShoot(RIDLEY_TIME_TO_SHOOT);
+				}
+				
+				
+			}
+		}
 
 	}
 }
@@ -457,6 +479,7 @@ void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 			break;
 		case ObjectID::Skree_ID:
 		case ObjectID::Rio_ID:
+		case ObjectID::Ridley_ID:
 			//check collision with ground
 			object->handleCollision(*CurrentObjects, deltaTime);
 			//motion base on player
@@ -509,11 +532,14 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 void TileGrid::AddObjectToCurrentObjectList(GameObject* object)
 {
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	int key = 10000; //usually object number <10000.
-	while (currentObjects->count(key)) // existed
-		key++;
-	//insert object with the key
-	currentObjects->insert(pair<int, GameObject*>(key, object));
+	
+		int key = 10000; //usually object number <10000.
+		while (currentObjects->count(key)) // existed
+			key++;
+		//insert object with the key
+		currentObjects->insert(pair<int, GameObject*>(key, object));
+
+	
 }
 map<int, GameObject*>* TileGrid::getCurrentObjects(){
 	return CurrentObjects;

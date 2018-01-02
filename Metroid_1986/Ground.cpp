@@ -6,6 +6,11 @@ Ground::Ground(){
 Ground::Ground( int x, int y) :GameObject(Ground_ID, x, y, 0, 0){
 	_currentAnimation = NULL;	//have drawn by backroundmap
 }
+void Ground::Update2(int time)
+{
+}
+void Ground::Draw(Camera* camera)
+{}
 RECT Ground::getCollisionBound(){
 	//size: 16x16 
 	RECT groundBound = { _posX - 8,		//left

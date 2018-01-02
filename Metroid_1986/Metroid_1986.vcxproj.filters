@@ -43,6 +43,9 @@
     <Filter Include="Object\Enemy">
       <UniqueIdentifier>{f0b8080f-aa27-4358-9ce3-163f87325a6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Boss">
+      <UniqueIdentifier>{71b6d8ef-c3de-4548-86e8-0247771234ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -153,6 +156,9 @@
     <ClCompile Include="ZebProductionPipe.cpp">
       <Filter>Object\RelativeOfGround</Filter>
     </ClCompile>
+    <ClCompile Include="Ridley.cpp">
+      <Filter>Object\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -259,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="ZebProductionPipe.h">
       <Filter>Object\RelativeOfGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Ridley.h">
+      <Filter>Object\Boss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

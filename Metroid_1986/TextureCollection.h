@@ -17,6 +17,8 @@ private:
 	Texture2* zebTexture2;
 	Texture2* waverTexture2;
 	Texture2* rioTexture2;
+	//boss
+	Texture2* ridleyTexture2;
 	//item
 	Texture2* itemTexture2;
 	static TextureCollection* textureCollection;

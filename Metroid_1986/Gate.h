@@ -10,5 +10,6 @@ public:
 	Gate(int x, int y);
 	RECT getCollisionBound();
 	void Update2(int);
+	void Draw(Camera* camera);
 };
 #endif

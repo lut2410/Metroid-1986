@@ -1,31 +1,24 @@
-﻿Build started 1/2/2018 7:01:51 PM.
+﻿Build started 1/3/2018 4:01:23 AM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt TileGrid.cpp
-         TileGrid.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bullet.cpp Game.cpp Player.cpp Scene.cpp SceneGame.cpp SceneMain.cpp SceneMenu.cpp Skree.cpp TileGrid.cpp Waver.cpp WinMain.cpp
+         Bullet.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(97): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(123): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(142): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(147): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(178): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(191): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(241): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(251): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(278): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(294): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(298): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(309): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(313): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(449): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(456): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(461): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(463): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(529): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(530): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(548): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(549): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(507): warning C4715: 'TileGrid::CreateObject' : not all control paths return a value
+     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(167): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(209): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(255): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         Waver.cpp
+         WinMain.cpp
+         TileGrid.cpp
+         Skree.cpp
+         SceneMenu.cpp
+         SceneMain.cpp
+         SceneGame.cpp
+         Scene.cpp
+         Player.cpp
+         Game.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.lib" /MACHINE:X86 Debug\AABB.obj
          Debug\Animation.obj
@@ -41,6 +34,7 @@
          Debug\GameObject.obj
          Debug\Ground.obj
          Debug\HPTonic.obj
+         Debug\Ridley.obj
          Debug\Rio.obj
          Debug\Ripper.obj
          Debug\Skree.obj
@@ -68,4 +62,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.47
+Time Elapsed 00:00:01.50

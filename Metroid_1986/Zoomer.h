@@ -18,7 +18,7 @@ public:
 	Zoomer(int x, int y, int type = 1);
 	~Zoomer();
 	void UpdateActionAndVelocity(int deltaTime);			//use for update()
-	void UpdateAnimationBaseOnStatus();		//user for update2()
+	void UpdateAnimationBaseOnStatus();						//user for update2()
 	void handleCollision(map<int, GameObject*> objectList, float dt);
 	//int IsCollideVsWall(GameObject* considerObject, GameObject* otherObject, Direction& direction, int dt);
 	// foot on the wall => /16 (use to change direction)

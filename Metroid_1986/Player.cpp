@@ -138,7 +138,7 @@ RECT Player::getCollisionBound(){
 	playerBound.top--;
 	return playerBound;
 }
-D3DXVECTOR2 Player::getPositionOfHand(){
+D3DXVECTOR2 Player::getPositionOfGun(){
 	//get bound of player
 	Box playerBox = _currentAnimation->getCurrentSpriteSize(); //get bound of current sprite
 	RECT playerBound = { _posX - playerBox.width / 2,		//left
@@ -205,7 +205,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	{
 		GameObject* object = it->second;
 		Direction direction;
-		if (object->getObjectType()==ObjectType::RelativesWithWall_OT)
+		if (object->getObjectType()==ObjectType::RelativesWithWall_OT||object->getObjectStatus()==ObjectStatus::BeFreezing_OS)
 			if (handleObjectCollision(this, object, direction, dt)) //is collison
 			{
 				directionVsWall = Direction(directionVsWall | direction);
@@ -239,13 +239,23 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 				case Zeb_ID:
 				case Waver_ID:
 				case Rio_ID:
+					if (object->getObjectStatus() != ObjectStatus::BeFreezing_OS)
+						this->BeWounded(direction, object->getAttackDame());
+					break;
+					//boss
+				case Ridley_ID:
 					this->BeWounded(direction, object->getAttackDame());
 					break;
+
 				case Bullet_ID:
-					if (object->getBulletType()!=BulletType::BulletFromPlayer_Nomal
-						&&object->getBulletType() != BulletType::BulletFromPlayer_Freeze)
+					if (object->getBulletType() == BulletType::BulletFromSkree
+						&&object->getBulletType() == BulletType::BulletFromRidley)
 						//except the bullet player shoot out
-					this->BeWounded(direction, object->getAttackDame());
+					{
+						if (object->getObjectStatus()!=ObjectStatus::BeFreezing_OS)
+							this->BeWounded(direction, object->getAttackDame());
+					}
+						
 					break;
 					//item
 				case MaruMari_ID:
@@ -720,7 +730,7 @@ void Player::CreateBullet()
 		}
 
 			//bullet is appear at hand of player
-			Bullet* bullet = new Bullet(BulletType::BulletFromPlayer_Freeze, getPositionOfHand().x, getPositionOfHand().y, directionOfBullet);
+		Bullet* bullet = new Bullet(BulletType::BulletFromPlayer_Freeze, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet);
 			//add to currentObjectList
 			TileGrid::AddObjectToCurrentObjectList(bullet);
 			

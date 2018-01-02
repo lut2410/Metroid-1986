@@ -7,6 +7,8 @@ class Ground:public GameObject{
 public:
 	Ground();
 	Ground(int x, int y);
+	void Update2(int);
+	void Draw(Camera* camera);
 	RECT getCollisionBound();
 };
 #endif

@@ -18,7 +18,10 @@ GameObject::GameObject(ObjectID objectID, int posX, int posY, float velX, float 
 	explodingAnimation = new Animation(explode, explode->_animationNames.at(0));
 
 }
-
+D3DXVECTOR2 GameObject::getPositionOfGun()
+{
+	return D3DXVECTOR2{ 0, 0 };
+}
 RECT GameObject::getCollisionBound(){
 	Box  objectBox = _currentAnimation->getCurrentSpriteSize();
 	//objectBox.width -= 2;
@@ -65,7 +68,12 @@ ObjectType GameObject::getObjectType()
 	case Waver_ID:
 	case Rio_ID:
 	case ExplodeObject_ID:
+
 		return ObjectType::Enemy_OT;
+		break;
+		//boss
+	case Ridley_ID:
+		return ObjectType::Boss_OT;
 		break;
 		//item
 	case HPTonic_ID:
@@ -82,6 +90,18 @@ int GameObject::getAttackDame()
 int GameObject::getHP()
 {
 	return _hp;
+}
+bool GameObject::getActiveEnemy()
+{
+	return _activeEnemy;
+}
+int GameObject::getRemainingTimeToShoot()
+{
+	return _remainingTimeToShoot;
+}
+void GameObject::SetRemainingTimeToShoot(int time)
+{
+	_remainingTimeToShoot = time;
 }
 BulletType GameObject::getBulletType()
 {
@@ -143,17 +163,18 @@ void GameObject::UpdateActionAndVelocity(int deltaTime)
 }
 void GameObject::Update(int deltaTime)
 {	
-	if (getObjectType() == ObjectType::RelativesWithWall_OT || getObjectType() == ObjectType::Item_OT)
-		//ground and its relative can't move
-		return;
+	//if (getObjectType() == ObjectType::RelativesWithWall_OT || getObjectType() == ObjectType::Item_OT)
+	//	//ground and its relative can't move
+	//	return;
 
 	//update status
-	if(getObjectType()==ObjectType::Enemy_OT)
+	if (getObjectType() == ObjectType::Enemy_OT || getObjectType() == ObjectType::Boss_OT)
 		UpdateStatus();
 	//Update action and velocity
 	UpdateActionAndVelocity(deltaTime);
 	//update position
-	if (_objectStatus == Survival_OS)
+	if (_objectStatus == Survival_OS
+		|| getObjectType() == ObjectType::Boss_OT)
 	{
 		_posX += _velX * deltaTime;
 		_posY += _velY * deltaTime;
@@ -186,16 +207,17 @@ void GameObject::Update2(int deltaTime)
 
 	UpdateAnimationBaseOnStatus();
 
-	if (_objectStatus==ObjectStatus::Survival_OS||_objectStatus==ObjectStatus::Exploding_OS)
+	if (_objectStatus == ObjectStatus::Survival_OS || _objectStatus == ObjectStatus::Exploding_OS
+		||getObjectType()==ObjectType::Boss_OT)
 		_currentAnimation->Update(deltaTime);
 	//update, use for the case object status is changed to BeFreezing
 	_currentIndexOfAnimation = _currentAnimation->getCurrentFrameIndex();
 }
 void GameObject::Draw(Camera* camera){
 	
-	if (getObjectType() == ObjectType::RelativesWithWall_OT )
-		//ground and its relative has drawn in background
-		return;
+	//if (getObjectType() == ObjectType::RelativesWithWall_OT )
+	//	//ground and its relative has drawn in background
+	//	return;
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
 	_currentAnimation->Draw(center.x, center.y);
 }
@@ -210,7 +232,9 @@ void GameObject::handleCollision(int playerX, int playerY, float dt)
 void GameObject::BeWounded(int lossHP)
 {
 	SetObjectStatus(ObjectStatus::BeWounding_OS);
-	_remainingWoundingTime = WOUNDED_FRAMES;
+	if (getObjectType()!=ObjectType::Boss_OT)
+		//boss: wounding isn't stop
+		_remainingWoundingTime = WOUNDED_FRAMES;
 	_hp -= lossHP;
 }
 void GameObject::BeFreezed(int lossHP)
@@ -218,4 +242,12 @@ void GameObject::BeFreezed(int lossHP)
 	SetObjectStatus(ObjectStatus::BeFreezing_OS);
 	_remainingFreezingTime = FREEZED_FRAMES;
 	_hp -= lossHP;
+	
+	if (getBulletType() != BulletType::IsntBullet)
+	{
+		_remainingFreezingTime = 3 * FREEZED_FRAMES;
+		//update survival time
+		_remainingTime += 30* _remainingFreezingTime;
+	}
+
 }

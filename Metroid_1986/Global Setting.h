@@ -74,6 +74,8 @@ enum ObjectID{
 	Waver_ID,
 	Rio_ID,
 	ExplodeObject_ID,
+	//boss
+	Ridley_ID,
 	//item
 	HPTonic_ID,
 	MaruMari_ID,

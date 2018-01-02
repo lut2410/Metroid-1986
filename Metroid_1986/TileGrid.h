@@ -13,12 +13,14 @@
 #include "Camera.h"
 #include "Collision.h"
 
-//object
+//OBJECT
+//nelative of ground
 #include "Ground.h"
 #include "Gate.h"
 #include "BubbleDoor.h"
 #include "ZebProductionPipe.h"
 
+//enemy
 #include "Zoomer.h"
 #include "Skree.h"
 #include "Ripper.h"
@@ -26,6 +28,10 @@
 #include "Waver.h"
 #include "Rio.h"
 
+//boss
+#include "Ridley.h"
+
+//item
 #include "HPTonic.h"
 #include "MaruMari.h"
 //ID of Game Object (has divided by type)

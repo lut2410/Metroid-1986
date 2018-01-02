@@ -94,7 +94,7 @@ public:
 	void AddAbilityToGrovel();
 	int getHP();
 	RECT getCollisionBound();					//use for check collision
-	D3DXVECTOR2 getPositionOfHand();			//bullet fly-out from hand
+	D3DXVECTOR2 getPositionOfGun();			//bullet fly-out from hand
 	void handleCollision(map<int, GameObject*> objectList,float dt);
 	void handleVsWall(Direction d, int dt);				
 	void UpdatePosition(int );

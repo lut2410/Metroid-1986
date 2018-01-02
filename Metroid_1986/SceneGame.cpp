@@ -124,12 +124,20 @@ void SceneGame::RenderFrame(int time){
 	//	Rio* rio = new Rio(800, 2500, 1);
 	//	currentObjects->insert(pair<int, GameObject*>(1005, rio));
 	//}
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1006))
+	//{
+	//	ZebProductionPipe* zebpipe = new ZebProductionPipe(696, 2370, 2);
+	//	currentObjects->insert(pair<int, GameObject*>(1006, zebpipe));
+	//}
+
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1000))
+	if (!currentObjects->count(1007))
 	{
-		ZebProductionPipe* zebpipe = new ZebProductionPipe(696, 2370, 2);
-		currentObjects->insert(pair<int, GameObject*>(1000, zebpipe));
+		Ridley* ridley = new Ridley(784, 2372);
+		currentObjects->insert(pair<int, GameObject*>(1007, ridley));
 	}
+
 
 	_player->Update(time);
 
