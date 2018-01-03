@@ -453,7 +453,7 @@ void TileGrid::Update(Camera* camera, int time){
 						(int)object->getPositionOfGun2().y, d, 1000);
 					//insert object with the key
 					currentObjects->insert(pair<int, GameObject*>(key, kraidBoomerang));
-					object->SetRemainingTimeToShoot(KRAID_TIME_TO_THROW_BOOMERANG);
+					object->SetRemainingTimeToShoot2(KRAID_TIME_TO_THROW_BOOMERANG);
 				}
 			}
 

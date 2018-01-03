@@ -80,6 +80,11 @@ enum ObjectID{
 	//item
 	HPTonic_ID,
 	MaruMari_ID,
+	LongBeam_ID,
+	IceBeam_ID,
+	Bomb_ID,
+	MissibleRocket_ID,
+	EnergyTank_ID
 };
 
 #endif _GLOBAL_SETTING_H

@@ -4,7 +4,7 @@ Player::Player():GameObject(){
 Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_hp = 30;
 	_attack = 0;//attack by bullet, isn't by body
-
+	_bulletTime = 250;
 	//Load all action-animation
 	Texture2* playerTexture = NULL;
 	playerTexture = TextureCollection::getInstance()->getTexture2(Player_ID);
@@ -95,6 +95,14 @@ bool Player::isAbilityToGrovel()
 void Player::AddAbilityToGrovel()
 {
 	_isAbilityToGrovel = true;
+}
+bool Player::isAbilityToShootLong()
+{
+	return (_bulletTime >= 500);
+}
+void Player::AddAbilityToShootLong()
+{
+	_bulletTime = 1000;
 }
 int Player::getHP()
 {
@@ -276,7 +284,18 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 					this->BuffHP(5);
 					object->SetObjectStatus(ObjectStatus::Died_OS);
 					break;
-
+				case LongBeam_ID:
+					if (this->isAbilityToShootLong() == false)
+						//first time
+						this->AddAbilityToShootLong();
+					else
+						//2nd time(meaning player has "eaten" this item)
+						//pause game 2s and delete MaruMari
+					{
+						Sleep(2000);
+						object->SetObjectStatus(ObjectStatus::Died_OS);
+					}
+					break;
 				}
 
 			}
@@ -732,7 +751,7 @@ void Player::CreateBullet()
 		}
 
 			//bullet is appear at hand of player
-		Bullet* bullet = new Bullet(BulletType::BulletFromPlayer_Freeze, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet);
+		Bullet* bullet = new Bullet(BulletType::BulletFromPlayer_Freeze, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet,_bulletTime);
 			//add to currentObjectList
 			TileGrid::AddObjectToCurrentObjectList(bullet);
 			

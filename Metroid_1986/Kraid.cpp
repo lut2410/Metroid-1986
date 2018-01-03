@@ -2,7 +2,7 @@
 Kraid::Kraid(){}
 Kraid::Kraid(int x, int y,int type) :GameObject(Kraid_ID, x, y, 0, -0.001f){
 	//take texture
-	_remainingTimeToShoot = KRAID_TIME_TO_SHOOT;
+	_remainingTimeToShoot = 3*KRAID_TIME_TO_SHOOT;
 	Texture2* kraidTexture = NULL;
 	kraidTexture = TextureCollection::getInstance()->getTexture2(Kraid_ID);
 
@@ -93,7 +93,7 @@ void Kraid::UpdateActionAndVelocity(int deltaTime)
 {
 	if (_remainingTimeToShoot > 0)
 		_remainingTimeToShoot -= deltaTime;
-	if (_remainingTimeToShoot2 > 0)
+	if (_remainingTimeToShoot2 >= 0)
 		_remainingTimeToShoot2 -= deltaTime;
 
 	//VEL

@@ -67,7 +67,7 @@ class Player :public GameObject {
 	Block _block;
 	int _remainningTimeToShoot;
 	bool _isAbilityToGrovel;
-
+	int _bulletTime;
 	
 public:
 	//bool _isMotionless;	//unactive
@@ -87,6 +87,8 @@ public:
 	//void PauseGame(int time);
 	bool isAbilityToGrovel();
 	void AddAbilityToGrovel();
+	bool isAbilityToShootLong();
+	void AddAbilityToShootLong();
 	int getHP();
 	RECT getCollisionBound();					//use for check collision
 	D3DXVECTOR2 getPositionOfGun();			//bullet fly-out from hand

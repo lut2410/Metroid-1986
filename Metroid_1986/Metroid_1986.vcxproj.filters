@@ -162,6 +162,9 @@
     <ClCompile Include="Kraid.cpp">
       <Filter>Object\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="LongBeam.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="Kraid.h">
       <Filter>Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="LongBeam.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

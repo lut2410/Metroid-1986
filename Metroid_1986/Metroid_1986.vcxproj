@@ -90,6 +90,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="HPTonic.cpp" />
     <ClCompile Include="Kraid.cpp" />
+    <ClCompile Include="LongBeam.cpp" />
     <ClCompile Include="Ridley.cpp" />
     <ClCompile Include="Rio.cpp" />
     <ClCompile Include="Ripper.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="HPTonic.h" />
     <ClInclude Include="Kraid.h" />
+    <ClInclude Include="LongBeam.h" />
     <ClInclude Include="MaruMari.h" />
     <ClInclude Include="Ridley.h" />
     <ClInclude Include="Rio.h" />

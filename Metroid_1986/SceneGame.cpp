@@ -138,11 +138,17 @@ void SceneGame::RenderFrame(int time){
 	//	currentObjects->insert(pair<int, GameObject*>(1007, ridley));
 	//}
 
-	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	/*map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	if (!currentObjects->count(1008))
 	{
 		Kraid* kraid = new Kraid(784, 2450);
 		currentObjects->insert(pair<int, GameObject*>(1008, kraid));
+	}*/
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	if (!currentObjects->count(1009))
+	{
+		LongBeam* longbeam = new LongBeam(784, 2450);
+		currentObjects->insert(pair<int, GameObject*>(1009, longbeam));
 	}
 
 	_player->Update(time);
