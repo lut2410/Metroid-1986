@@ -85,7 +85,8 @@ enum ObjectID{
 	WaveBeam_ID,
 	MissibleRocket_ID,
 	Bomb_ID,
-	EnergyTank_ID
+	EnergyTank_ID,
+	Rocket_ID
 };
 
 #endif _GLOBAL_SETTING_H

@@ -78,6 +78,13 @@ ObjectType GameObject::getObjectType()
 		//item
 	case HPTonic_ID:
 	case MaruMari_ID:
+	case LongBeam_ID:
+	case IceBeam_ID:
+	case WaveBeam_ID:
+	case MissibleRocket_ID:
+	case Bomb_ID:
+	case EnergyTank_ID:
+	case Rocket_ID:
 		return ObjectType::Item_OT;
 		break;
 
@@ -216,7 +223,6 @@ void GameObject::Update2(int deltaTime)
 	if (getObjectType() == ObjectType::RelativesWithWall_OT)
 		//ground and its relative is drawn in background
 		return;
-
 	UpdateAnimationBaseOnStatus();
 
 	if (_objectStatus == ObjectStatus::Survival_OS || _objectStatus == ObjectStatus::Exploding_OS
@@ -230,12 +236,14 @@ void GameObject::Draw(Camera* camera){
 	//if (getObjectType() == ObjectType::RelativesWithWall_OT )
 	//	//ground and its relative has drawn in background
 	//	return;
+
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
 
 	switch (_directionOfFace)
 	{
 	case DirectionOfFace::Neutral:
 	case DirectionOfFace::Right:
+	
 		_currentAnimation->Draw(center.x, center.y);
 		break;
 	case DirectionOfFace::Left:

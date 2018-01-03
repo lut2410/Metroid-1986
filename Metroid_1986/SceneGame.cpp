@@ -18,6 +18,7 @@ void SceneGame::LoadResources() {
 	_tileGrid = TileGrid::getInstance();
 	//create player + other object
 	LoadObject();
+	Infor();
 	//playerTexture = new Texture("Resources/Image/playerdemo.png", 4, 1);
 	
 
@@ -150,15 +151,23 @@ void SceneGame::RenderFrame(int time){
 	//	LongBeam* longbeam = new LongBeam(784, 2450);
 	//	currentObjects->insert(pair<int, GameObject*>(1009, longbeam));
 	//}
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//IceBeam* icebeam = new IceBeam(784, 2400);
+	//currentObjects->insert(pair<int, GameObject*>(1010, icebeam));
+
+	//WaveBeam* waveBeam = new WaveBeam(800, 2400);
+	//currentObjects->insert(pair<int, GameObject*>(1011, waveBeam));
+
+	//MissibleRocket* missibleRocket = new MissibleRocket(820, 2400);
+	//currentObjects->insert(pair<int, GameObject*>(1012, missibleRocket));
+
+
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	IceBeam* icebeam = new IceBeam(784, 2400);
-	currentObjects->insert(pair<int, GameObject*>(1010, icebeam));
-
-	WaveBeam* waveBeam = new WaveBeam(800, 2400);
-	currentObjects->insert(pair<int, GameObject*>(1011, waveBeam));
-
-	MissibleRocket* missibleRocket = new MissibleRocket(820, 2400);
-	currentObjects->insert(pair<int, GameObject*>(1012, missibleRocket));
+	if (!currentObjects->count(1013))
+	{
+		Rocket* rocket = new Rocket(784, 2450);
+		currentObjects->insert(pair<int, GameObject*>(1013, rocket));
+	}
 
 	_player->Update(time);
 
@@ -175,7 +184,7 @@ void SceneGame::RenderFrame(int time){
 	//draw background(ground)
 	_backgroundMap->Draw(_camera);
 	//Infor: HP of player
-	Infor::draw(_player->getHP());
+	Infor::draw(_player->getHP(),_player->getRocketNumber());
 	G_SpriteHandler->End();
 }
 

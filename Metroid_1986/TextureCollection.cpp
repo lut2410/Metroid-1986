@@ -77,6 +77,7 @@ Texture2* TextureCollection::getTexture2(ObjectID id){
 	case MissibleRocket_ID:
 	case Bomb_ID:
 	case EnergyTank_ID:
+	case Rocket_ID:
 		return itemTexture2;
 		break;
 

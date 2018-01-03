@@ -5,7 +5,7 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_hp = 30;
 	_attack = 0;//attack by bullet, isn't by body
 	_currentBulletType = BulletType::BulletFromPlayer_Nomal;
-	//_rocketNumbers = 5;
+	//_rocketNumber = 5;
 
 	//Load all action-animation
 	Texture2* playerTexture = NULL;
@@ -102,6 +102,18 @@ bool Player::isHasKey(ActionKey actionKey){
 int Player::getHP()
 {
 	return _hp;
+}
+void Player::BuffHP(int buffHP)
+{
+	_hp += buffHP;
+}
+int Player::getRocketNumber()
+{
+	return _rocketNumber;
+}
+void Player::BuffRocket(int buffRocketNumber)
+{
+	_rocketNumber += buffRocketNumber;
 }
 RECT Player::getCollisionBound(){
 	Box playerBox = _currentAnimation->getCurrentSpriteSize(); //get bound of current sprite
@@ -388,6 +400,10 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 						object->SetObjectStatus(ObjectStatus::Died_OS);
 					}
 					break;
+					case Rocket_ID:
+						this->BuffRocket(5);
+						object->SetObjectStatus(ObjectStatus::Died_OS);
+						break;
 				}
 
 			}
@@ -554,10 +570,7 @@ void Player::BeWounded(Direction direction, int lossHP)
 		_velY = SPEED_WOUND;
 	}
 }
-void Player::BuffHP(int buffHP)
-{
-	_hp += buffHP;
-}
+
 void Player::Draw(Camera* camera)
 {
 	flicker;
@@ -858,6 +871,8 @@ void Player::SwitchToOtherBulletType()
 		_currentBulletType = BulletType::BulletFromPlayer_Nomal;
 		break;
 	}
+
+	Infor::switchToOtherBulletType(_currentBulletType);
 }
 void Player::CreateBullet()
 {
@@ -878,12 +893,12 @@ void Player::CreateBullet()
 		//bullet is appear at hand of player
 		if (_currentBulletType == BulletType::BulletFromPlayer_Rocket)
 		{
-			if (_rocketNumbers > 0)
+			if (_rocketNumber > 0)
 			{
 				bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 800);
 				//add to currentObjectList
 				TileGrid::AddObjectToCurrentObjectList(bullet);
-				_rocketNumbers--;
+				_rocketNumber--;
 			}
 		}
 		else

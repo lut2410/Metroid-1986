@@ -96,6 +96,7 @@
     <ClCompile Include="Ridley.cpp" />
     <ClCompile Include="Rio.cpp" />
     <ClCompile Include="Ripper.cpp" />
+    <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="Skree.cpp" />
     <ClCompile Include="WaveBeam.cpp" />
     <ClCompile Include="Waver.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Ridley.h" />
     <ClInclude Include="Rio.h" />
     <ClInclude Include="Ripper.h" />
+    <ClInclude Include="Rocket.h" />
     <ClInclude Include="Skree.h" />
     <ClInclude Include="WaveBeam.h" />
     <ClInclude Include="Waver.h" />

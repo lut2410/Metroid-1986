@@ -7,6 +7,7 @@
 #include "AABB.h"
 #include "Collision.h"
 #include "TileGrid.h"
+#include "Infor.h"
 #define SPEED_WOUND 0.2f
 #define TIMEIMMORTAL_WOUNDED 1000
 #define SPEED_X 0.16f
@@ -74,7 +75,7 @@ class Player :public GameObject {
 	Block _block;
 	bool flicker;							//player is flicker? use for draw
 	BulletType _currentBulletType;
-	int _rocketNumbers;
+	int _rocketNumber;
 public:
 	//Current Key
 	ActionKey _currentKeys;
@@ -94,6 +95,9 @@ public:
 
 	//void PauseGame(int time);
 	int getHP();
+	void BuffHP(int buffHP);
+	int getRocketNumber();
+	void BuffRocket(int buffRocketNumber);
 	RECT getCollisionBound();					//use for check collision
 	D3DXVECTOR2 getPositionOfGun();			//bullet fly-out from hand
 	void handleCollision(map<int, GameObject*> objectList,float dt);
@@ -104,7 +108,6 @@ public:
 	void Update2(int time);	//update frame of sprite and position of sprite
 	void Draw(Camera* camera);
 	void BeWounded(Direction direction,int lossHP);
-	void BuffHP(int buffHP);
 	void UpdatePostionToInsideCamera();
 	//int checkCollision();
 	//Action

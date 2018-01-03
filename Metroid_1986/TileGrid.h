@@ -39,6 +39,8 @@
 #include "IceBeam.h"
 #include "WaveBeam.h"
 #include "MissibleRocket.h"
+#include "Rocket.h"
+
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
 	Ground_IDFF=0,

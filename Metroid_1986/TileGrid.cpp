@@ -337,13 +337,20 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 			if (object->getObjectType() == ObjectType::Enemy_OT)
 			{
 				//probality:30%
-				int random = rand() % 10 - 6;// random (-6->3)
-				if (random>0) //=30%
+				int random = rand() % 100 - 60;// random (-60->29)
+				if (random>=0) //=30%
 					//give out item
 				{
-					HPTonic* hpTonic = new HPTonic(object->_posX, object->_posY);	//appear in position enemy was destroyed
+					GameObject* buffItem;
+					if (random < 25)
+						//25% - HP Tonic
+						buffItem = new HPTonic(object->_posX, object->_posY);	//appear in position enemy was destroyed
+					else
+						//5% :rocket
+						buffItem = new Rocket(object->_posX, object->_posY);
+					
 					//add to currentObjectList
-					TileGrid::AddObjectToCurrentObjectList(hpTonic);
+					TileGrid::AddObjectToCurrentObjectList(buffItem);
 				}
 			}
 
