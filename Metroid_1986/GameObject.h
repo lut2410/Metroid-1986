@@ -17,6 +17,12 @@ enum ObjectType{
 	Boss_OT,
 	Item_OT
 };
+enum DirectionOfFace{
+	Neutral,
+	Left,
+	Right
+};
+
 enum ObjectStatus{
 	Survival_OS,
 	BeWounding_OS,
@@ -51,6 +57,7 @@ protected:
 	int _remainingTimeToShoot;
 	int _remainingTime;				// time survival
 
+	DirectionOfFace _directionOfFace;	//transform of position X : left or right?
 	Animation* _currentAnimation;
 	vector<Animation*> _actionAnimation; 
 	Animation* explodingAnimation;
@@ -72,6 +79,7 @@ public:
 	GameObject(ObjectID objectID, int posX, int posY, float velX, float velY);
 
 	virtual D3DXVECTOR2 getPositionOfGun();
+	virtual D3DXVECTOR2 getPositionOfGun2();
 	virtual RECT getCollisionBound();
 	D3DXVECTOR2 getVelocity();
 	ObjectID getObjectID();

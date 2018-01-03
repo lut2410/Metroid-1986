@@ -22,6 +22,10 @@ D3DXVECTOR2 GameObject::getPositionOfGun()
 {
 	return D3DXVECTOR2{ 0, 0 };
 }
+D3DXVECTOR2 GameObject::getPositionOfGun2()
+{
+	return D3DXVECTOR2{ 0, 0 };
+}
 RECT GameObject::getCollisionBound(){
 	Box  objectBox = _currentAnimation->getCurrentSpriteSize();
 	//objectBox.width -= 2;
@@ -68,11 +72,11 @@ ObjectType GameObject::getObjectType()
 	case Waver_ID:
 	case Rio_ID:
 	case ExplodeObject_ID:
-
 		return ObjectType::Enemy_OT;
 		break;
 		//boss
 	case Ridley_ID:
+	case Kraid_ID:
 		return ObjectType::Boss_OT;
 		break;
 		//item
@@ -219,6 +223,17 @@ void GameObject::Draw(Camera* camera){
 	//	//ground and its relative has drawn in background
 	//	return;
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
+
+	switch (_directionOfFace)
+	{
+	case DirectionOfFace::Right:
+		_currentAnimation->Draw(center.x, center.y);
+		break;
+	case DirectionOfFace::Left:
+		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
+		break;
+	}
+
 	_currentAnimation->Draw(center.x, center.y);
 }
 void GameObject::handleCollision(map<int, GameObject*> objectList, float dt)
@@ -240,7 +255,10 @@ void GameObject::BeWounded(int lossHP)
 void GameObject::BeFreezed(int lossHP)
 {
 	SetObjectStatus(ObjectStatus::BeFreezing_OS);
-	_remainingFreezingTime = FREEZED_FRAMES;
+	if (getObjectType()==ObjectType::Boss_OT)
+		_remainingFreezingTime = 1;
+	else
+		_remainingFreezingTime = FREEZED_FRAMES;
 	_hp -= lossHP;
 	
 	if (getBulletType() != BulletType::IsntBullet)

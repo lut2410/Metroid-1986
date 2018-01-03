@@ -4,7 +4,6 @@
 #pragma once
 #include "GameObject.h"
 #include "Collision.h"
-#define PI 3.14159265
 #define RIDLEY_MAX_VEL_JUMP 0.3f
 #define RIDLEY_ACCELERATION -0.01f
 #define RIDLEY_TIME_TO_JUMP 1000//1s

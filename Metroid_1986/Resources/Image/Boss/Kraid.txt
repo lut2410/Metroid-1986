@@ -1,0 +1,86 @@
+Is All Frames are has a same size?
+0
+Count
+16
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			172				9				24				32
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			198				10				24				31
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			224				9				24				32
+
+Index		Animation Info
+3			LocationX		LocationY		FrameWidth		FrameHeight
+			250				10				24				31
+
+Index		Animation Info
+4			LocationX		LocationY		FrameWidth		FrameHeight
+			276				9				24				32
+
+Index		Animation Info
+5			LocationX		LocationY		FrameWidth		FrameHeight
+			302				10				24				31
+
+Index		Animation Info
+6			LocationX		LocationY		FrameWidth		FrameHeight
+			328				34				8				7
+
+Index		Animation Info
+7			LocationX		LocationY		FrameWidth		FrameHeight
+			338				33				7				8
+
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			347				34				8				7
+
+Index		Animation Info
+9			LocationX		LocationY		FrameWidth		FrameHeight
+			357				33				7				8
+
+Index		Animation Info
+10			LocationX		LocationY		FrameWidth		FrameHeight
+			366				34				8				7
+
+Index		Animation Info
+11			LocationX		LocationY		FrameWidth		FrameHeight
+			376				33				7				8
+
+Index		Animation Info
+12			LocationX		LocationY		FrameWidth		FrameHeight
+			385				34				8				7
+
+Index		Animation Info
+13			LocationX		LocationY		FrameWidth		FrameHeight
+			395				33				7				8
+
+Index		Animation Info
+14			LocationX		LocationY		FrameWidth		FrameHeight
+			404				38				8				3
+
+Index		Animation Info
+15			LocationX		LocationY		FrameWidth		FrameHeight
+			414				38				8				3
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+Type1
+0	1	30
+Type2
+2	3	30
+BeFreezing
+4	5	30
+Boomerang:Fly
+6	9	30
+Boomerang:Befreezing
+10	13	30
+Bullet:Fly
+14	14	-1
+Bullet:Freezing
+15	15	-1

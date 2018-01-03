@@ -76,6 +76,7 @@ enum ObjectID{
 	ExplodeObject_ID,
 	//boss
 	Ridley_ID,
+	Kraid_ID,
 	//item
 	HPTonic_ID,
 	MaruMari_ID,

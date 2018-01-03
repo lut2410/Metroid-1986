@@ -30,14 +30,14 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 
 	//set up parameters
 	_action = Action::Stand;
-	_directionOfMotion = DirectionOfMotion::Neutral;
+	_directionOfFace = DirectionOfFace::Neutral;
 	this->_currentAnimation = _actionAnimation[StandIntro_Ani];
 }
 
 Player::~Player(){
 }
-DirectionOfMotion Player::getDirectionOfMotion(){
-	return _directionOfMotion;
+DirectionOfFace Player::getDirectionOfFace(){
+	return _directionOfFace;
 }
 
 void Player::setAction(Action action){
@@ -115,9 +115,9 @@ RECT Player::getCollisionBound(){
 	{
 		if (isHasAction(Action::Stand) && !isHasAction(Shoot))							//stand : 14
 		{
-			if (_directionOfMotion == DirectionOfMotion::Right)
+			if (_directionOfFace == DirectionOfFace::Right)
 				playerBound.right -= 6;
-			else if (_directionOfMotion == DirectionOfMotion::Left)
+			else if (_directionOfFace == DirectionOfFace::Left)
 				playerBound.left += 6;
 			else //neutral
 			{
@@ -129,9 +129,9 @@ RECT Player::getCollisionBound(){
 			|| isHasAction(Action::Run) && isHasAction(Shoot)		//run + shoot
 			|| isHasAction(Action::Jump) && isHasAction(Shoot))		//jump + shoot)
 		{
-			if (_directionOfMotion == DirectionOfMotion::Right)
+			if (_directionOfFace == DirectionOfFace::Right)
 				playerBound.right -= 5;
-			else //if (_directionOfMotion == DirectionOfMotion::Left)
+			else //if (_DirectionOfFace == DirectionOfFace::Left)
 				playerBound.left += 5;
 		}
 	}
@@ -148,7 +148,7 @@ D3DXVECTOR2 Player::getPositionOfGun(){
 
 	D3DXVECTOR2 appearancePlaceOfBullet;
 
-	if (_directionOfMotion == DirectionOfMotion::Right)
+	if (_directionOfFace == DirectionOfFace::Right)
 	{
 		if (isHasAction(Action::PutHandUp))
 		{
@@ -372,7 +372,7 @@ void Player::UpdateAnimationBaseOnStatus()
 		break;
 	case ObjectStatus::BeWounding_OS:
 		
-		if (isHasAction(Action::Stand) && _directionOfMotion == DirectionOfMotion::Neutral)
+		if (isHasAction(Action::Stand) && _directionOfFace == DirectionOfFace::Neutral)
 			_currentAnimation = _actionAnimation[StandIntro_Ani];
 		else
 			_currentAnimation = _actionAnimation[_action];
@@ -393,7 +393,7 @@ void Player::Update2(int deltaTime){
 	UpdateAnimationBaseOnStatus();
 
 	//update sprite to next frame
-	if (isHasAction(Action::Stand) && _directionOfMotion == DirectionOfMotion::Neutral)
+	if (isHasAction(Action::Stand) && _directionOfFace == DirectionOfFace::Neutral)
 	{//Intro
 		if (_currentAnimation->getCurrentFrameIndex() != 3)	//but if current frame is ending frame of Intro 
 			_currentAnimation->Update(deltaTime);
@@ -450,15 +450,15 @@ void Player::Draw(Camera* camera)
 {
 	flicker;
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
-	switch (_directionOfMotion)
+	switch (_directionOfFace)
 	{
-	case DirectionOfMotion::Neutral://Intro stage
+	case DirectionOfFace::Neutral://Intro stage
 		if (flicker)
 			_currentAnimation->DrawFlicker(center.x, center.y);
 		else
 			_currentAnimation->Draw(center.x, center.y);
 		break;
-	case DirectionOfMotion::Right:
+	case DirectionOfFace::Right:
 		//edit center position because each sprite have size different together
 		if (isHasAction(Action::PutHandUp))
 			center.y ;
@@ -475,7 +475,7 @@ void Player::Draw(Camera* camera)
 			_currentAnimation->Draw(center.x, center.y);
 
 		break;
-	case DirectionOfMotion::Left://drawfip
+	case DirectionOfFace::Left://drawfip
 		if (isHasAction(Action::PutHandUp))
 			;//center.y -= 3;
 		else if (isHasAction(Action::Stand) && !isHasAction(Shoot)		//stand / stand + shoot
@@ -508,7 +508,7 @@ void Player::UpdateActionAndVelocity(int deltaTime){
 	switch (_objectStatus)
 	{
 	case ObjectStatus::Survival_OS:
-		SpecifyDirectionOfMotion();
+		SpecifyDirectionOfFace();
 		SpecifyFootAction();
 		SpecifyHavingPutHandUp();
 		SpecifyHavingShoot();
@@ -529,20 +529,20 @@ void Player::UpdateActionAndVelocity(int deltaTime){
 };
 
 
-void Player::SpecifyDirectionOfMotion(){
+void Player::SpecifyDirectionOfFace(){
 
 
 
 	if (isHasKey(Left_Key) && !isHasKey(Right_Key) && _block != Block::Left_Block)
 	{
-		_directionOfMotion = DirectionOfMotion::Left;
+		_directionOfFace = DirectionOfFace::Left;
 		_velX = -SPEED_X;
 		if (isHasAction(Action::Stand))			//stand->run, otherwise jump,grovel,v.v. then is unchanged
 			addOrChangeAction(Action::Run);
 	}
 	else if (isHasKey(Right_Key) && !isHasKey(Left_Key) && _block != Block::Right_Block)
 	{
-		_directionOfMotion = DirectionOfMotion::Right;
+		_directionOfFace = DirectionOfFace::Right;
 		_velX = SPEED_X;
 		if (isHasAction(Action::Stand))			//stand->run, otherwise jump,grovel,v.v. then is unchanged
 			addOrChangeAction(Action::Run);
@@ -568,8 +568,8 @@ void Player::SpecifyFootAction(){
 	if (isHasKey(Jump_Key))
 	{
 		//if the face is neutral and press the key=> the face direct right
-		if (_directionOfMotion == DirectionOfMotion::Neutral)
-			_directionOfMotion = DirectionOfMotion::Right;
+		if (_directionOfFace == DirectionOfFace::Neutral)
+			_directionOfFace = DirectionOfFace::Right;
 		//switch (_action){
 		if (isHasAction(Action::Stand) || isHasAction(Action::Run)&&isHasAction(Action::PutHandUp))//run but puthandup then normal jump
 		{
@@ -611,8 +611,8 @@ void Player::SpecifyFootAction(){
 	if (isHasKey(Down_Key))
 	{
 		//if the face is neutral and press the key=> the face direct right
-		if (_directionOfMotion == DirectionOfMotion::Neutral)
-			_directionOfMotion = DirectionOfMotion::Right;
+		if (_directionOfFace == DirectionOfFace::Neutral)
+			_directionOfFace = DirectionOfFace::Right;
 
 		if (isHasAction(Action::Stand) || isHasAction(Action::Run))
 		{									//standing/running +put hand up => standing/running, don't put hand up
@@ -643,8 +643,8 @@ void Player::SpecifyHavingPutHandUp(){
 	if (isHasKey(Up_Key))
 	{
 		//if the face is neutral and press the key=> the face direct right
-		if (_directionOfMotion == DirectionOfMotion::Neutral)
-			_directionOfMotion = DirectionOfMotion::Right;
+		if (_directionOfFace == DirectionOfFace::Neutral)
+			_directionOfFace = DirectionOfFace::Right;
 
 		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
 		if (!isHasKey(Down_Key))
@@ -690,8 +690,8 @@ void Player::SpecifyHavingShoot(){
 	{
 		
 			//if the face is neutral and press the key=> the face direct right
-			if (_directionOfMotion == DirectionOfMotion::Neutral)
-				_directionOfMotion = DirectionOfMotion::Right;
+			if (_directionOfFace == DirectionOfFace::Neutral)
+				_directionOfFace = DirectionOfFace::Right;
 
 			if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))		//perform concurrently
 				addOrChangeAction(Action::Shoot);
@@ -723,7 +723,7 @@ void Player::CreateBullet()
 			directionOfBullet = Direction::Top_Direction;
 		else
 		{
-			if (_directionOfMotion == DirectionOfMotion::Left)
+			if (_directionOfFace == DirectionOfFace::Left)
 				directionOfBullet = Direction::Left_Direction;
 			else
 				directionOfBullet = Direction::Right_Direction;

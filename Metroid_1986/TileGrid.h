@@ -30,6 +30,7 @@
 
 //boss
 #include "Ridley.h"
+#include "Kraid.h"
 
 //item
 #include "HPTonic.h"

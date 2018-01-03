@@ -159,6 +159,9 @@
     <ClCompile Include="Ridley.cpp">
       <Filter>Object\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Kraid.cpp">
+      <Filter>Object\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -267,6 +270,9 @@
       <Filter>Object\RelativeOfGround</Filter>
     </ClInclude>
     <ClInclude Include="Ridley.h">
+      <Filter>Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Kraid.h">
       <Filter>Object\Boss</Filter>
     </ClInclude>
   </ItemGroup>

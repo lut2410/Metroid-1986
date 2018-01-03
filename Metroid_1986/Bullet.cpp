@@ -233,6 +233,7 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 						break;
 						//boss
 					case ObjectID::Ridley_ID:
+					case ObjectID::Kraid_ID:
 						this->BeWounded();
 						otherObject->BeFreezed();
 						break;

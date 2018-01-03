@@ -480,6 +480,7 @@ void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 		case ObjectID::Skree_ID:
 		case ObjectID::Rio_ID:
 		case ObjectID::Ridley_ID:
+		case ObjectID::Kraid_ID:
 			//check collision with ground
 			object->handleCollision(*CurrentObjects, deltaTime);
 			//motion base on player

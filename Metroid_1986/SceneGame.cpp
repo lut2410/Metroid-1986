@@ -30,7 +30,7 @@ void SceneGame::LoadObject(){
 	_player = new Player(650,2384);
 
 	//// player in begin is centered on screen
-	if (_player->getDirectionOfMotion()==DirectionOfMotion::Neutral)//begin, player has direction = neutral
+	if (_player->getDirectionOfFace()==DirectionOfFace::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
 	_camera->_viewport.y = 2560;
 
@@ -131,13 +131,19 @@ void SceneGame::RenderFrame(int time){
 	//	currentObjects->insert(pair<int, GameObject*>(1006, zebpipe));
 	//}
 
-	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1007))
-	{
-		Ridley* ridley = new Ridley(784, 2372);
-		currentObjects->insert(pair<int, GameObject*>(1007, ridley));
-	}
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1007))
+	//{
+	//	Ridley* ridley = new Ridley(784, 2372);
+	//	currentObjects->insert(pair<int, GameObject*>(1007, ridley));
+	//}
 
+	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	if (!currentObjects->count(1008))
+	{
+		Kraid* kraid = new Kraid(784, 2450);
+		currentObjects->insert(pair<int, GameObject*>(1008, kraid));
+	}
 
 	_player->Update(time);
 

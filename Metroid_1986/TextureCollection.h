@@ -19,6 +19,7 @@ private:
 	Texture2* rioTexture2;
 	//boss
 	Texture2* ridleyTexture2;
+	Texture2* kraidTexture2;
 	//item
 	Texture2* itemTexture2;
 	static TextureCollection* textureCollection;

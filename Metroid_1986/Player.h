@@ -29,11 +29,7 @@ enum Action{
 	
 };
 
-enum DirectionOfMotion{
-	Neutral,
-	Left,
-	Right
-};
+
 enum ActionAnimation{
 	StandIntro_Ani=None,
 	Stand_Ani=Stand,
@@ -69,7 +65,6 @@ class Player :public GameObject {
 	bool flicker;						//player is flicker? use for draw
 	int beWounded_remainningTime;
 	Block _block;
-	DirectionOfMotion _directionOfMotion;//transform of position X : left or right?
 	int _remainningTimeToShoot;
 	bool _isAbilityToGrovel;
 
@@ -81,7 +76,7 @@ public:
 	Player();
 	Player(int x, int y);
 	~Player();
-	DirectionOfMotion getDirectionOfMotion();
+	DirectionOfFace getDirectionOfFace();
 
 	void setAction(Action action);
 	void addOrChangeAction(Action action);		//add if action is hand action, otherwise change action if action is foot action
@@ -101,14 +96,14 @@ public:
 	void Update(int time);	//update action and position after press key
 	void UpdateAnimationBaseOnStatus();
 	void Update2(int time);	//update frame of sprite and position of sprite
+	void Draw(Camera* camera);
 	void BeWounded(Direction direction,int lossHP);
 	void BuffHP(int buffHP);
-	void Draw(Camera* camera);
 	void UpdatePostionToInsideCamera();
 	//int checkCollision();
 	//Action
 	void UpdateActionAndVelocity(int deltaTime);				//specify action base on keys are press
-	void SpecifyDirectionOfMotion();//Specify direction and  base on key pressed
+	void SpecifyDirectionOfFace();//Specify direction and  base on key pressed
 	void SpecifyFootAction();
 	void SpecifyHavingPutHandUp();
 	void SpecifyHavingShoot();
