@@ -1,6 +1,7 @@
 #include "Bullet.h"
 Bullet::Bullet(){};
 Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD survivalTime) :GameObject(Bullet_ID, x, y, 0, 0){
+	BULLET_VEL = 0.2f;	//delfault
 	_bulletType = bulletType;
 	_remainingTime = survivalTime;
 	Texture2* bulletTexture = NULL;
@@ -37,6 +38,7 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		_beWoundingAnimation.push_back(new Animation(bulletTexture, "BulletFromSkee"));
 		break;
 	case BulletType::BulletFromRidley:
+		BULLET_VEL = 0.1f;
 		_hp = 10;
 		_attack = 8;
 		bulletTexture = TextureCollection::getInstance()->getTexture2(Ridley_ID);
@@ -46,6 +48,34 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Ball:Flying"));
 		//freeze
 		_beFreezingAnimation.push_back(new Animation(bulletTexture, "Ball:BeFreezing"));
+		break;
+	case BulletType::BulletFromKraid_Boomerang:
+		BULLET_VEL = 0.1f;
+		_hp = 5;
+		_attack = 8;
+		bulletTexture = TextureCollection::getInstance()->getTexture2(Kraid_ID);
+		//flying
+		_actionAnimation.push_back(new Animation(bulletTexture, "Boomerang:Fly"));
+		//broken
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Boomerang:Fly"));
+		//freeze
+		_beFreezingAnimation.push_back(new Animation(bulletTexture, "Boomerang:Befreezing"));
+		break;
+	case BulletType::BulletFromKraid_Rocket:
+		if (direction == Direction::Left_Direction)
+			_directionOfFace = DirectionOfFace::Left;
+		else 
+			_directionOfFace = DirectionOfFace::Right;
+		BULLET_VEL = 0.1f;
+		_hp = 5;
+		_attack = 8;
+		bulletTexture = TextureCollection::getInstance()->getTexture2(Kraid_ID);
+		//flying
+		_actionAnimation.push_back(new Animation(bulletTexture, "Rocket:Fly"));
+		//broken
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Rocket:Fly"));
+		//freeze
+		_beFreezingAnimation.push_back(new Animation(bulletTexture, "Rocket:Freezing"));
 		break;
 
 	}
@@ -94,8 +124,12 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		break;
 	}
 
-	if (_bulletType == BulletType::BulletFromRidley)
-		_velX /= 2;
+	if (_bulletType == BulletType::BulletFromRidley || _bulletType == BulletType::BulletFromKraid_Boomerang)
+	{
+		//_velX /= 2;
+		_velY = _velY * 3;
+	}
+		
 }
 Bullet::~Bullet()
 {
@@ -118,8 +152,10 @@ void Bullet::UpdateActionAndVelocity(int deltaTime)
 	switch (_bulletType)
 	{
 	case BulletType::BulletFromRidley:
+	case BulletType::BulletFromKraid_Boomerang:
 		_velY += BULLET_ACCELERATION;
 		break;
+
 	}
 }
 
@@ -144,15 +180,21 @@ void Bullet::UpdateAnimationBaseOnStatus()
 		break;
 	}
 }
-//void Bullet::Update2(int deltaTime)
-//{
-//	if (_hp <= 0)
-//	{
-//		SetObjectStatus(ObjectStatus::Died_OS);
-//		_currentAnimation = _actionAnimation[1];
-//	}
-//		
-//}
+void Bullet::Draw(Camera* camera)
+{
+	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
+
+	switch (_directionOfFace)
+	{
+	case DirectionOfFace::Right:
+		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
+		break;
+	case DirectionOfFace::Neutral:
+	case DirectionOfFace::Left:
+		_currentAnimation->Draw(center.x, center.y);
+		break;
+	}
+}
 void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 {
 	switch (_bulletType)
@@ -247,16 +289,42 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 	case BulletType::BulletFromSkree:			//will check collision in handleCollision function of Player
 		break;
 	case BulletType::BulletFromRidley:	//collision with wall
+	case BulletType::BulletFromKraid_Boomerang:
 		for (auto it = objectList.begin(); it != objectList.end(); it++)
 		{
 			GameObject* otherObject = it->second;
 			if (otherObject->getObjectType() == ObjectType::RelativesWithWall_OT)
 			{
 				Direction direction;
+				
 				if (handleObjectCollision(this, otherObject, direction, deltaTime)) 
 				{
+					switch (direction)
+					{
+					case Direction::Left_Direction:
+					case Direction::Right_Direction:
+						_velX = -_velX;
+						break;
+					case Direction::Bottom_Direction:
 						_velY = -_velY * 9 / 10;
 						break;
+						break;
+					}
+				}
+			}
+		}
+		break;
+	case BulletType::BulletFromKraid_Rocket:
+		for (auto it = objectList.begin(); it != objectList.end(); it++)
+		{
+			GameObject* otherObject = it->second;
+			if (otherObject->getObjectType() == ObjectType::RelativesWithWall_OT)
+			{
+				Direction direction;
+
+				if (handleObjectCollision(this, otherObject, direction, deltaTime))
+				{
+					this->BeWounded(this->_hp);	//destroy
 				}
 			}
 		}

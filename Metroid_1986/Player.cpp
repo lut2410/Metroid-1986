@@ -249,7 +249,9 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 
 				case Bullet_ID:
 					if (object->getBulletType() == BulletType::BulletFromSkree
-						&&object->getBulletType() == BulletType::BulletFromRidley)
+						||object->getBulletType() == BulletType::BulletFromRidley
+						||object->getBulletType() == BulletType::BulletFromKraid_Boomerang
+						||object->getBulletType() == BulletType::BulletFromKraid_Rocket)
 						//except the bullet player shoot out
 					{
 						if (object->getObjectStatus()!=ObjectStatus::BeFreezing_OS)

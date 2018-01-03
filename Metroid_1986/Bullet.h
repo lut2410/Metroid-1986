@@ -6,12 +6,12 @@
 #include "GameObject.h"
 #include "Collision.h"
 
-#define BULLET_VEL 0.2f
+//#define BULLET_VEL 0.2f
 #define BULLET_ACCELERATION -0.01f
 
 class Bullet: public GameObject{
 	BulletType _bulletType;
-	//int _remainingTime;		// time survival
+	float BULLET_VEL;
 
 public:
 	Bullet();
@@ -21,6 +21,7 @@ public:
 	BulletType getBulletType();
 	void UpdateActionAndVelocity(int deltaTime);
 	void UpdateAnimationBaseOnStatus();
+	void Draw(Camera* camera);
 	void handleCollision(map<int, GameObject*> objectList, float dt);
 };
 

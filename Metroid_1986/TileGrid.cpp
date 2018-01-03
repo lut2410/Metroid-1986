@@ -430,6 +430,100 @@ void TileGrid::Update(Camera* camera, int time){
 				
 			}
 		}
+		if (object->getObjectID() == ObjectID::Kraid_ID)
+		{
+			if (object->getRemainingTimeToShoot2() <= 0)
+				//ready
+			{
+				map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+				int key = 10200;
+				while (currentObjects->count(key) && key<10203) // limit 3 boomerang
+					key++;
+				if (key<10203)
+				{
+					Direction d;
+					if (object->getDirectionOfFace() == DirectionOfFace::Right)
+						//boomerang -> top right
+						d = Direction::TopRight_Direction;
+					else
+						//boomerang -> top left
+						d = Direction::TopLeft_Direction;
+
+					Bullet* kraidBoomerang = new Bullet(BulletType::BulletFromKraid_Boomerang, (int)object->getPositionOfGun2().x,
+						(int)object->getPositionOfGun2().y, d, 1000);
+					//insert object with the key
+					currentObjects->insert(pair<int, GameObject*>(key, kraidBoomerang));
+					object->SetRemainingTimeToShoot(KRAID_TIME_TO_THROW_BOOMERANG);
+				}
+			}
+
+			if (object->getRemainingTimeToShoot() <= 2 * KRAID_TIME_TO_SHOOT)
+				//ready
+			{
+				map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+				int key = 10210;
+				if (!currentObjects->count(key))
+				{
+					Direction d;
+					if (object->getDirectionOfFace() == DirectionOfFace::Right)
+						//boomerang -> top right
+						d = Direction::Right_Direction;
+					else
+						//boomerang -> top left
+						d = Direction::Left_Direction;
+
+					Bullet* kraidRocket = new Bullet(BulletType::BulletFromKraid_Rocket, (int)object->getPositionOfGun().x,
+						(int)object->getPositionOfGun().y + 10, d, 1000);
+					//insert object with the key
+					currentObjects->insert(pair<int, GameObject*>(key, kraidRocket));
+					object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
+				}
+			}
+			if (object->getRemainingTimeToShoot() <= KRAID_TIME_TO_SHOOT)
+			{
+				//
+				map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+				int key = 10211;
+				if (!currentObjects->count(key))
+				{
+					Direction d;
+					if (object->getDirectionOfFace() == DirectionOfFace::Right)
+						//boomerang -> top right
+						d = Direction::Right_Direction;
+					else
+						//boomerang -> top left
+						d = Direction::Left_Direction;
+
+					Bullet* kraidRocket = new Bullet(BulletType::BulletFromKraid_Rocket, (int)object->getPositionOfGun().x,
+						(int)object->getPositionOfGun().y, d, 1000);
+					//insert object with the key
+					currentObjects->insert(pair<int, GameObject*>(key, kraidRocket));
+					object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
+				}
+			}
+			if (object->getRemainingTimeToShoot() <= 0)
+			{
+				//
+				map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+				int key = 10212;
+				if (!currentObjects->count(key))
+				{
+					Direction d;
+					if (object->getDirectionOfFace() == DirectionOfFace::Right)
+						//boomerang -> top right
+						d = Direction::Right_Direction;
+					else
+						//boomerang -> top left
+						d = Direction::Left_Direction;
+
+					Bullet* kraidRocket = new Bullet(BulletType::BulletFromKraid_Rocket, (int)object->getPositionOfGun().x,
+						(int)object->getPositionOfGun().y - 10, d, 1000);
+					//insert object with the key
+					currentObjects->insert(pair<int, GameObject*>(key, kraidRocket));
+					object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
+				}
+			}
+		}
 
 	}
 }

@@ -80,7 +80,7 @@ Boomerang:Fly
 6	9	30
 Boomerang:Befreezing
 10	13	30
-Bullet:Fly
+Rocket:Fly
 14	14	-1
-Bullet:Freezing
+Rocket:Freezing
 15	15	-1

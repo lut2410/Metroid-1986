@@ -87,6 +87,10 @@ ObjectType GameObject::getObjectType()
 
 	}
 }
+DirectionOfFace GameObject::getDirectionOfFace()
+{
+	return _directionOfFace;
+}
 int GameObject::getAttackDame()
 {
 	return _attack;
@@ -106,6 +110,14 @@ int GameObject::getRemainingTimeToShoot()
 void GameObject::SetRemainingTimeToShoot(int time)
 {
 	_remainingTimeToShoot = time;
+}
+int GameObject::getRemainingTimeToShoot2()
+{
+	return _remainingTimeToShoot2;
+}
+void GameObject::SetRemainingTimeToShoot2(int time)
+{
+	_remainingTimeToShoot2 = time;
 }
 BulletType GameObject::getBulletType()
 {
@@ -226,6 +238,7 @@ void GameObject::Draw(Camera* camera){
 
 	switch (_directionOfFace)
 	{
+	case DirectionOfFace::Neutral:
 	case DirectionOfFace::Right:
 		_currentAnimation->Draw(center.x, center.y);
 		break;
@@ -234,7 +247,7 @@ void GameObject::Draw(Camera* camera){
 		break;
 	}
 
-	_currentAnimation->Draw(center.x, center.y);
+	//_currentAnimation->Draw(center.x, center.y);
 }
 void GameObject::handleCollision(map<int, GameObject*> objectList, float dt)
 {
@@ -263,7 +276,7 @@ void GameObject::BeFreezed(int lossHP)
 	
 	if (getBulletType() != BulletType::IsntBullet)
 	{
-		_remainingFreezingTime = 3 * FREEZED_FRAMES;
+		_remainingFreezingTime = 5 * FREEZED_FRAMES;
 		//update survival time
 		_remainingTime += 30* _remainingFreezingTime;
 	}

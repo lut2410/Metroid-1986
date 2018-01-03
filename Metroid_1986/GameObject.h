@@ -39,7 +39,9 @@ enum BulletType
 	BulletFromPlayer_Wave,
 	BulletFromPlayer_Rocket,
 	BulletFromSkree,
-	BulletFromRidley
+	BulletFromRidley,
+	BulletFromKraid_Boomerang,
+	BulletFromKraid_Rocket
 };
 
 
@@ -55,6 +57,7 @@ protected:
 	int _remainingExplodeTime;		//time to die status
 	bool _activeEnemy;				//some enemy need
 	int _remainingTimeToShoot;
+	int _remainingTimeToShoot2;
 	int _remainingTime;				// time survival
 
 	DirectionOfFace _directionOfFace;	//transform of position X : left or right?
@@ -84,11 +87,14 @@ public:
 	D3DXVECTOR2 getVelocity();
 	ObjectID getObjectID();
 	ObjectType getObjectType();	//use to check collision
+	DirectionOfFace getDirectionOfFace();
 	int getAttackDame();
 	int getHP();
 	bool getActiveEnemy();
 	int getRemainingTimeToShoot();
 	void SetRemainingTimeToShoot(int time);
+	int getRemainingTimeToShoot2();
+	void SetRemainingTimeToShoot2(int time);
 	virtual BulletType getBulletType();
 	ObjectStatus getObjectStatus();
 	void SetObjectStatus(ObjectStatus);
