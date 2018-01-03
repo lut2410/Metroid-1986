@@ -47,9 +47,20 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		_remainingTime = 800;// independent in player has longbeam yet
 		bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
 		//flying
-		_actionAnimation.push_back(new Animation(bulletTexture, "Wave"));
+		if (direction == Direction::Top_Direction)
+			_actionAnimation.push_back(new Animation(bulletTexture, "Rocket:Top"));
+		else
+		{
+			if (direction == Direction::Right_Direction)
+				_directionOfFace = DirectionOfFace::Right;
+			else //left
+				_directionOfFace = DirectionOfFace::Left;
+			_actionAnimation.push_back(new Animation(bulletTexture, "Rocket:Right"));
+		}
+			
+		
 		//broken
-		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Wave"));
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Rocket:Broken"));
 		break;
 	case BulletType::BulletFromSkree:
 		_hp = 1;
@@ -220,21 +231,21 @@ void Bullet::UpdateAnimationBaseOnStatus()
 		break;
 	}
 }
-void Bullet::Draw(Camera* camera)
-{
-	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
-
-	switch (_directionOfFace)
-	{
-	case DirectionOfFace::Right:
-		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
-		break;
-	case DirectionOfFace::Neutral:
-	case DirectionOfFace::Left:
-		_currentAnimation->Draw(center.x, center.y);
-		break;
-	}
-}
+//void Bullet::Draw(Camera* camera)
+//{
+//	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
+//
+//	switch (_directionOfFace)
+//	{
+//	case DirectionOfFace::Right:
+//		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
+//		break;
+//	case DirectionOfFace::Neutral:
+//	case DirectionOfFace::Left:
+//		_currentAnimation->Draw(center.x, center.y);
+//		break;
+//	}
+//}
 void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 {
 	switch (_bulletType)

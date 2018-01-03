@@ -1,0 +1,152 @@
+Is All Frames are has a same size?
+0
+Count
+29
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			9				8				16				32
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			27				8				16				32
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			45				8				16				32
+
+Index		Animation Info
+3			LocationX		LocationY		FrameWidth		FrameHeight
+			63				8				16				32
+
+Index		Animation Info
+4			LocationX		LocationY		FrameWidth		FrameHeight
+			81				8				20				32
+
+Index		Animation Info
+5			LocationX		LocationY		FrameWidth		FrameHeight
+			103				2				14				38
+
+Index		Animation Info
+6			LocationX		LocationY		FrameWidth		FrameHeight
+			119				9				15				31
+
+Index		Animation Info
+7			LocationX		LocationY		FrameWidth		FrameHeight
+			136				8				17				32
+
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			155				8				20				32
+
+Index		Animation Info
+9			LocationX		LocationY		FrameWidth		FrameHeight
+			177				15				18				25
+
+Index		Animation Info
+10			LocationX		LocationY		FrameWidth		FrameHeight
+			197				17				14				23
+
+Index		Animation Info
+11			LocationX		LocationY		FrameWidth		FrameHeight
+			213				25				19				15
+
+Index		Animation Info
+12			LocationX		LocationY		FrameWidth		FrameHeight
+			234				17				14				23
+
+Index		Animation Info
+13			LocationX		LocationY		FrameWidth		FrameHeight
+			250				25				19				15
+
+Index		Animation Info
+14			LocationX		LocationY		FrameWidth		FrameHeight
+			271				26				12				14
+
+Index		Animation Info
+15			LocationX		LocationY		FrameWidth		FrameHeight
+			285				26				12				14
+
+Index		Animation Info
+16			LocationX		LocationY		FrameWidth		FrameHeight
+			299				26				12				14
+
+Index		Animation Info
+17			LocationX		LocationY		FrameWidth		FrameHeight
+			313				26				12				14
+
+Index		Animation Info
+18			LocationX		LocationY		FrameWidth		FrameHeight
+			327				8				18				32
+
+Index		Animation Info
+19			LocationX		LocationY		FrameWidth		FrameHeight
+			349				9				20				31
+
+Index		Animation Info
+20			LocationX		LocationY		FrameWidth		FrameHeight
+			371				9				22				31
+
+Index		Animation Info
+21			LocationX		LocationY		FrameWidth		FrameHeight
+			395				9				25				31
+
+Index		Animation Info
+22			LocationX		LocationY		FrameWidth		FrameHeight
+			422				15				23				25
+
+Index		Animation Info
+23			LocationX		LocationY		FrameWidth		FrameHeight
+			447				4				14				36
+
+Index		Animation Info
+24			LocationX		LocationY		FrameWidth		FrameHeight
+			463				2				12				38
+
+Index		Animation Info
+25			LocationX		LocationY		FrameWidth		FrameHeight
+			480				2				17				38
+
+Index		Animation Info
+26			LocationX		LocationY		FrameWidth		FrameHeight
+			499				2				19				38
+
+Index		Animation Info
+27			LocationX		LocationY		FrameWidth		FrameHeight
+			520				8				18				32
+
+Index		Animation Info
+28			LocationX		LocationY		FrameWidth		FrameHeight
+			540				10				18				30
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+StandIntro
+0	3	600
+Stand
+4	4	-1
+StandPutHandUp
+5	5	-1
+Run
+6	8	30
+Jump
+9	9	-1
+RollingJump
+9	13	30
+Grovel
+14	17	30
+StandShoot
+18	18	-1
+RunShoot
+19	21	30
+JumpShoot
+22	22	-1
+StandPutHandUp
+23	23	-1
+RunPutHandUp
+24	26	30
+JumpPutHandUp
+27	27	-1
+JumpPutHandUpShoot
+28	28	-1

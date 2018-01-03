@@ -4,8 +4,9 @@ Player::Player():GameObject(){
 Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_hp = 30;
 	_attack = 0;//attack by bullet, isn't by body
-	_remainingTimeToShoot2 = 300;	
 	_currentBulletType = BulletType::BulletFromPlayer_Nomal;
+	//_rocketNumbers = 5;
+
 	//Load all action-animation
 	Texture2* playerTexture = NULL;
 	playerTexture = TextureCollection::getInstance()->getTexture2(Player_ID);
@@ -13,7 +14,7 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	//import all actionAnimation:
 	_actionAnimation.resize(Jump_PutHandUp_Shoot_Ani+1);	//set size as biggest element value 
 	_actionAnimation[StandIntro_Ani]			= new Animation(playerTexture, "StandIntro");
-	_actionAnimation[Stand_Ani]					= new Animation(playerTexture,"Stand");
+	_actionAnimation[Stand_Ani]					= new Animation(playerTexture, "Stand");
 	_actionAnimation[Stand_PutHandUp_Ani]		= new Animation(playerTexture, "StandPutHandUp");
 	_actionAnimation[Run_Ani]					= new Animation(playerTexture, "Run");
 	_actionAnimation[Jump_Ani]					= new Animation(playerTexture, "Jump");
@@ -22,7 +23,7 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_actionAnimation[Stand_Shoot_Ani]			= new Animation(playerTexture, "StandShoot");
 	_actionAnimation[Run_Shoot_Ani]				= new Animation(playerTexture, "RunShoot");
 	_actionAnimation[Jump_Shoot_Ani]			= new Animation(playerTexture, "JumpShoot");
-	_actionAnimation[Stand_PutHandUp_Shoot_Ani] = new Animation(playerTexture, "StandPutHandUp");
+	_actionAnimation[Stand_PutHandUp_Shoot_Ani] = new Animation(playerTexture, "StandPutHandUpShoot");
 	_actionAnimation[Run_PutHandUp_Ani]			= new Animation(playerTexture, "RunPutHandUp");
 	_actionAnimation[Run_PutHandUp_Shoot_Ani]	= _actionAnimation[Run_PutHandUp_Ani];
 	_actionAnimation[Jump_PutHandUp_Ani]		= new Animation(playerTexture, "JumpPutHandUp");
@@ -118,9 +119,17 @@ RECT Player::getCollisionBound(){
 		if (isHasAction(Action::Stand) && !isHasAction(Shoot))							//stand : 14
 		{
 			if (_directionOfFace == DirectionOfFace::Right)
-				playerBound.right -= 6;
+			{
+				playerBound.right -= 5;
+				playerBound.left = playerBound.right - 12;
+			}
+
 			else if (_directionOfFace == DirectionOfFace::Left)
+			{
 				playerBound.left += 6;
+				playerBound.right = playerBound.left + 12;
+			}
+				
 			else //neutral
 			{
 				playerBound.right -= 6;
@@ -132,10 +141,63 @@ RECT Player::getCollisionBound(){
 			|| isHasAction(Action::Jump) && isHasAction(Shoot))		//jump + shoot)
 		{
 			if (_directionOfFace == DirectionOfFace::Right)
+			{
 				playerBound.right -= 5;
+				playerBound.left = playerBound.right - 12;
+			}
+
 			else //if (_DirectionOfFace == DirectionOfFace::Left)
+			{
 				playerBound.left += 5;
+				playerBound.right = playerBound.left + 12;
+			}
+
 		}
+		else if (isHasAction(Action::Grovel))
+			;
+		else
+		{
+			if (_directionOfFace == DirectionOfFace::Right)
+			{
+				playerBound.right -= 2;
+				playerBound.left = playerBound.right - 12;
+			}
+
+			else //if (_DirectionOfFace == DirectionOfFace::Left)
+			{
+				playerBound.left += 2;
+				playerBound.right = playerBound.left + 12;
+			}
+		}
+		//switch (_action)
+		//{
+		//case Action::Stand:
+		//	//12x31
+		//	if (_directionOfFace == DirectionOfFace::Right)
+		//		playerBound = { playerBound.right - 21,			//left
+		//			playerBound.bottom + 31,						//top
+		//			playerBound.right - 9,						//right
+		//			playerBound.bottom };						//bottom
+		//	else 
+		//		playerBound = { playerBound.left +9,			//left
+		//		playerBound.bottom + 31,						//top
+		//		playerBound.left +21,						//right
+		//		playerBound.bottom };						//bottom
+		//	break;
+		//case Action::Run:
+		//	//12x31
+		//	if (_directionOfFace == DirectionOfFace::Right)
+		//		playerBound = { playerBound.right - 18,			//left
+		//			playerBound.bottom +31,						//top
+		//			playerBound.right - 6 ,						//right
+		//			playerBound.bottom };						//bottom
+		//	else
+		//		playerBound = { playerBound.left + 2 ,			//left
+		//			playerBound.bottom + 31,						//top
+		//			playerBound.left + 14,						//right
+		//			playerBound.bottom };						//bottom
+		//	break;
+		//}
 	}
 	playerBound.top--;
 	return playerBound;
@@ -445,7 +507,7 @@ void Player::Update2(int deltaTime){
 	//update sprite to next frame
 	if (isHasAction(Action::Stand) && _directionOfFace == DirectionOfFace::Neutral)
 	{//Intro
-		if (_currentAnimation->getCurrentFrameIndex() != 3)	//but if current frame is ending frame of Intro 
+		if (_currentAnimation->getCurrentFrameIndex() != 4)	//but if current frame is ending frame of Intro 
 			_currentAnimation->Update(deltaTime);
 		return;
 	}
@@ -814,9 +876,27 @@ void Player::CreateBullet()
 
 		Bullet* bullet = NULL;
 		//bullet is appear at hand of player
-		bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, _remainingTimeToShoot2);
-		//add to currentObjectList
-		TileGrid::AddObjectToCurrentObjectList(bullet);
+		if (_currentBulletType == BulletType::BulletFromPlayer_Rocket)
+		{
+			if (_rocketNumbers > 0)
+			{
+				bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 800);
+				//add to currentObjectList
+				TileGrid::AddObjectToCurrentObjectList(bullet);
+				_rocketNumbers--;
+			}
+		}
+		else
+		{
+			if (isHasSpecialAbility(ShootLonger_PSA))
+				bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 800);
+			else
+				bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 300);
+			//add to currentObjectList
+			TileGrid::AddObjectToCurrentObjectList(bullet);
+		}
+		
+		
 		
 			
 }

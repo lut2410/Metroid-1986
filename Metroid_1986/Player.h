@@ -74,6 +74,7 @@ class Player :public GameObject {
 	Block _block;
 	bool flicker;							//player is flicker? use for draw
 	BulletType _currentBulletType;
+	int _rocketNumbers;
 public:
 	//Current Key
 	ActionKey _currentKeys;

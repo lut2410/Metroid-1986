@@ -1,48 +1,68 @@
 Is All Frames are has a same size?
 0
 Count
-10
+15
 Sprite Info
 
 Index		Animation Info
 0			LocationX		LocationY		FrameWidth		FrameHeight
-			97				64				4				5
+			100				821				4				5
 
 Index		Animation Info
 1			LocationX		LocationY		FrameWidth		FrameHeight
-			103				62				7				8
+			106				819				7				8
 
 Index		Animation Info
 2			LocationX		LocationY		FrameWidth		FrameHeight
-			112				62				8				8
+			115				819				8				8
 
 Index		Animation Info
 3			LocationX		LocationY		FrameWidth		FrameHeight
-			122				62				7				8
+			125				819				7				8
 
 Index		Animation Info
 4			LocationX		LocationY		FrameWidth		FrameHeight
-			131				64				4				5
+			134				821				4				5
 
 Index		Animation Info
 5			LocationX		LocationY		FrameWidth		FrameHeight
-			137				62				7				8
+			140				819				7				8
 
 Index		Animation Info
 6			LocationX		LocationY		FrameWidth		FrameHeight
-			146				62				8				8
+			149				819				8				8
 
 Index		Animation Info
 7			LocationX		LocationY		FrameWidth		FrameHeight
-			156				62				7				8
+			159				819				7				8
 
 Index		Animation Info
 8			LocationX		LocationY		FrameWidth		FrameHeight
-			165				62				8				8
+			168				819				8				8
 
 Index		Animation Info
 9			LocationX		LocationY		FrameWidth		FrameHeight
-			175				62				8				8
+			178				819				8				8
+
+Index		Animation Info
+10			LocationX		LocationY		FrameWidth		FrameHeight
+			87				854				11				8
+
+Index		Animation Info
+11			LocationX		LocationY		FrameWidth		FrameHeight
+			100				850				8				12
+
+Index		Animation Info
+12			LocationX		LocationY		FrameWidth		FrameHeight
+			139				854				7				8
+
+Index		Animation Info
+13			LocationX		LocationY		FrameWidth		FrameHeight
+			188				852				10				10
+
+Index		Animation Info
+14			LocationX		LocationY		FrameWidth		FrameHeight
+			200				849				16				16
 
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
@@ -56,3 +76,9 @@ Freeze:Broken
 5	7	30
 Wave
 8	9	30
+Rocket:Right
+10	10	-1
+Rocket:Top
+11	11	-1
+Rocket:Broken
+12	14	30

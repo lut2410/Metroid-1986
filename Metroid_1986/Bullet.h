@@ -25,7 +25,7 @@ public:
 	BulletType getBulletType();
 	void UpdateActionAndVelocity(int deltaTime);
 	void UpdateAnimationBaseOnStatus();
-	void Draw(Camera* camera);
+	//void Draw(Camera* camera);
 	void handleCollision(map<int, GameObject*> objectList, float dt);
 };
 
