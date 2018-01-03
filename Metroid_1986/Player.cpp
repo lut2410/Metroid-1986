@@ -4,6 +4,7 @@ Player::Player():GameObject(){
 Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_hp = 30;
 	_attack = 0;//attack by bullet, isn't by body
+	_remainingTimeToShoot2 = 300;	
 	_currentBulletType = BulletType::BulletFromPlayer_Nomal;
 	//Load all action-animation
 	Texture2* playerTexture = NULL;
@@ -45,6 +46,8 @@ bool Player::isHasSpecialAbility(PlayerSpecialAbility specialAbility)
 void Player::addSpecialAbility(PlayerSpecialAbility specialAbility)
 {
 	_specialAbility = PlayerSpecialAbility (_specialAbility | specialAbility);
+	if (specialAbility == PlayerSpecialAbility::ShootLonger_PSA)
+		_remainingTimeToShoot2 = 800;	//borrow
 }
 void Player::setAction(Action action){
 	if (_action != action)
@@ -300,6 +303,28 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 					}
 					break;
 				case WaveBeam_ID:
+					if (this->isHasSpecialAbility(ShootWaveBeam_PSA) == false)
+						//first time
+						this->addSpecialAbility(ShootWaveBeam_PSA);
+					else
+						//2nd time(meaning player has "eaten" this item)
+						//pause game 2s and delete MaruMari
+					{
+						Sleep(2000);
+						object->SetObjectStatus(ObjectStatus::Died_OS);
+					}
+					break;
+				case MissibleRocket_ID:
+					if (this->isHasSpecialAbility(ShootRocket_PSA) == false)
+						//first time
+						this->addSpecialAbility(ShootRocket_PSA);
+					else
+						//2nd time(meaning player has "eaten" this item)
+						//pause game 2s and delete MaruMari
+					{
+						Sleep(2000);
+						object->SetObjectStatus(ObjectStatus::Died_OS);
+					}
 					break;
 				}
 
@@ -788,19 +813,11 @@ void Player::CreateBullet()
 		}
 
 		Bullet* bullet = NULL;
-		//	//bullet is appear at hand of player
-		//if (isHasSpecialAbility(PlayerSpecialAbility::ShootLonger_PSA))
-		//	bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 800);
-		//else
-		//	bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet);
-		//	//add to currentObjectList
-		//	TileGrid::AddObjectToCurrentObjectList(bullet);
-		
-		
-			bullet = new Bullet(BulletType::BulletFromPlayer_Wave, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 1000);
-		
+		//bullet is appear at hand of player
+		bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, _remainingTimeToShoot2);
 		//add to currentObjectList
 		TileGrid::AddObjectToCurrentObjectList(bullet);
+		
 			
 }
 bool Player::checkToStandUpInThisLocation()

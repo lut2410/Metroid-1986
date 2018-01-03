@@ -41,6 +41,16 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		//broken
 		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Wave"));
 		break;
+	case BulletType::BulletFromPlayer_Rocket:
+		_hp = 1;
+		_attack = 5;
+		_remainingTime = 800;// independent in player has longbeam yet
+		bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
+		//flying
+		_actionAnimation.push_back(new Animation(bulletTexture, "Wave"));
+		//broken
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Wave"));
+		break;
 	case BulletType::BulletFromSkree:
 		_hp = 1;
 		_attack = 3;
@@ -230,6 +240,7 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 	switch (_bulletType)
 	{
 	case BulletType::BulletFromPlayer_Nomal:	// -HP enemy
+	case BulletType::BulletFromPlayer_Rocket:
 		for (auto it = objectList.begin(); it != objectList.end(); it++)
 		{
 			GameObject* otherObject = it->second;
@@ -247,7 +258,7 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 						break;
 					case ObjectID::BubbleDoor_ID:
 						this->BeWounded();
-						otherObject->BeWounded();
+						otherObject->BeWounded(_attack);
 						break;
 
 						//enemy
@@ -257,7 +268,7 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					case ObjectID::Ripper_ID:
 					case ObjectID::Rio_ID:
 						this->BeWounded();
-						otherObject->BeWounded();
+						otherObject->BeWounded(_attack);
 						break;
 					case ObjectID::Waver_ID:
 						this->BeWounded();
@@ -265,7 +276,7 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 						//boss
 					case ObjectID::Ridley_ID:
 						this->BeWounded();
-						otherObject->BeWounded();
+						otherObject->BeWounded(_attack);
 						break;
 					}
 				}
@@ -359,8 +370,6 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 		}
 		break;
 
-	case BulletType::BulletFromPlayer_Rocket:
-		break;
 	case BulletType::BulletFromSkree:			//will check collision in handleCollision function of Player
 		break;
 	case BulletType::BulletFromRidley:	//collision with wall

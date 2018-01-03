@@ -1,7 +1,7 @@
 Is All Frames are has a same size?
 0
 Count
-8
+9
 Sprite Info
 
 Index		Animation Info
@@ -36,6 +36,10 @@ Index		Animation Info
 7			LocationX		LocationY		FrameWidth		FrameHeight
 			8				15				16				16
 
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			80				33				14				16
+
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
 MaruMari
@@ -48,7 +52,9 @@ IceBeam
 4	4	-1
 Bomb
 5	5	-1
-Rocket
+MissibleRocket
 6	6	-1
 EnergyTank
 7	7	-1
+WaveBeam
+8	8	-1

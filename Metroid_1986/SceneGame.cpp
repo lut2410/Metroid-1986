@@ -151,11 +151,14 @@ void SceneGame::RenderFrame(int time){
 	//	currentObjects->insert(pair<int, GameObject*>(1009, longbeam));
 	//}
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1010))
-	{
-		IceBeam* icebeam = new IceBeam(784, 2400);
-		currentObjects->insert(pair<int, GameObject*>(1010, icebeam));
-	}
+	IceBeam* icebeam = new IceBeam(784, 2400);
+	currentObjects->insert(pair<int, GameObject*>(1010, icebeam));
+
+	WaveBeam* waveBeam = new WaveBeam(800, 2400);
+	currentObjects->insert(pair<int, GameObject*>(1011, waveBeam));
+
+	MissibleRocket* missibleRocket = new MissibleRocket(820, 2400);
+	currentObjects->insert(pair<int, GameObject*>(1012, missibleRocket));
 
 	_player->Update(time);
 

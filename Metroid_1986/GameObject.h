@@ -56,8 +56,8 @@ protected:
 	int _remainingFreezingTime;		//time to back to normal status
 	int _remainingExplodeTime;		//time to die status
 	bool _activeEnemy;				//some enemy need
-	int _remainingTimeToShoot;
-	int _remainingTimeToShoot2;
+	int _remainingTimeToShoot;		//time between 2 shot
+	int _remainingTimeToShoot2;		//time between 2 boomerang(kraid) / survival time of bullet(player)
 	int _remainingTime;				// time survival
 
 	DirectionOfFace _directionOfFace;	//transform of position X : left or right?

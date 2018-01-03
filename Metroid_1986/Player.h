@@ -14,7 +14,7 @@
 #define MAX_HEIGHT_JUMP 70.0f
 #define MAX_VEL_JUMP 0.5f
 #define ACCELERATION -0.0015f
-#define TIMETOCREATNEWBULLET 5 //frames
+#define TIMETOCREATNEWBULLET 6 //frames
 enum Action{
 	None,
 	Stand=1 << 0,

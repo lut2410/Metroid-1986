@@ -97,6 +97,7 @@
     <ClCompile Include="Rio.cpp" />
     <ClCompile Include="Ripper.cpp" />
     <ClCompile Include="Skree.cpp" />
+    <ClCompile Include="WaveBeam.cpp" />
     <ClCompile Include="Waver.cpp" />
     <ClCompile Include="Zeb.cpp" />
     <ClCompile Include="ZebProductionPipe.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Rio.h" />
     <ClInclude Include="Ripper.h" />
     <ClInclude Include="Skree.h" />
+    <ClInclude Include="WaveBeam.h" />
     <ClInclude Include="Waver.h" />
     <ClInclude Include="Zeb.h" />
     <ClInclude Include="ZebProductionPipe.h" />

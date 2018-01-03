@@ -171,6 +171,9 @@
     <ClCompile Include="IceBeam.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="WaveBeam.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -291,6 +294,9 @@
       <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="IceBeam.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveBeam.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>

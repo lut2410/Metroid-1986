@@ -73,6 +73,7 @@ Texture2* TextureCollection::getTexture2(ObjectID id){
 	case MaruMari_ID:
 	case LongBeam_ID:
 	case IceBeam_ID:
+	case WaveBeam_ID:
 	case MissibleRocket_ID:
 	case Bomb_ID:
 	case EnergyTank_ID:
