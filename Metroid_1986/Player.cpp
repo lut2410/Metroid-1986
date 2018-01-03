@@ -788,13 +788,19 @@ void Player::CreateBullet()
 		}
 
 		Bullet* bullet = NULL;
-			//bullet is appear at hand of player
-		if (isHasSpecialAbility(PlayerSpecialAbility::ShootLonger_PSA))
-			bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 800);
-		else
-			bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet);
-			//add to currentObjectList
-			TileGrid::AddObjectToCurrentObjectList(bullet);
+		//	//bullet is appear at hand of player
+		//if (isHasSpecialAbility(PlayerSpecialAbility::ShootLonger_PSA))
+		//	bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 800);
+		//else
+		//	bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet);
+		//	//add to currentObjectList
+		//	TileGrid::AddObjectToCurrentObjectList(bullet);
+		
+		
+			bullet = new Bullet(BulletType::BulletFromPlayer_Wave, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 1000);
+		
+		//add to currentObjectList
+		TileGrid::AddObjectToCurrentObjectList(bullet);
 			
 }
 bool Player::checkToStandUpInThisLocation()

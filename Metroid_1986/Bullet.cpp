@@ -27,6 +27,20 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		//broken
 		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Freeze:Broken"));
 		break;
+	case BulletType::BulletFromPlayer_Wave:
+		_hp = 1;
+		_attack = 1;
+		if (direction == Direction::Top_Direction)
+			_originpos = _posX;
+		else
+			_originpos = _posY;
+
+		bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
+		//flying
+		_actionAnimation.push_back(new Animation(bulletTexture, "Wave"));
+		//broken
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Wave"));
+		break;
 	case BulletType::BulletFromSkree:
 		_hp = 1;
 		_attack = 3;
@@ -149,8 +163,24 @@ void Bullet::UpdateActionAndVelocity(int deltaTime)
 	if (_hp <= 0)
 		_objectStatus = ObjectStatus::Died_OS;
 
+	float angle;
 	switch (_bulletType)
 	{
+	case BulletType::BulletFromPlayer_Nomal:
+	case BulletType::BulletFromPlayer_Freeze:
+	case BulletType::BulletFromPlayer_Rocket:
+		//vel = const
+		break;
+	case BulletType::BulletFromPlayer_Wave:
+		_localTime += deltaTime;
+		if (_localTime >= WAVEBULLET_TIME_A_CYCLE)
+			_localTime -= WAVEBULLET_TIME_A_CYCLE;
+		angle = ((float)_localTime / WAVEBULLET_TIME_A_CYCLE - (float)1 / 4)* PI;
+		if (_velX==0)// direct to top
+			_posX = _originpos + 10 * sin(angle);
+		else
+			_posY = _originpos + 10* sin(angle);
+		break;
 	case BulletType::BulletFromRidley:
 	case BulletType::BulletFromKraid_Boomerang:
 		_velY += BULLET_ACCELERATION;
@@ -212,12 +242,56 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					{
 					case ObjectID::Ground_ID:	//bullet collide vs wall
 						//bullet will be broken
-						this->BeWounded();
+							this->BeWounded();
+						//wave beam don't collsiion
 						break;
 					case ObjectID::BubbleDoor_ID:
 						this->BeWounded();
 						otherObject->BeWounded();
 						break;
+
+						//enemy
+					case ObjectID::Zoomer_ID:
+					case ObjectID::Skree_ID:
+					case ObjectID::Zeb_ID:
+					case ObjectID::Ripper_ID:
+					case ObjectID::Rio_ID:
+						this->BeWounded();
+						otherObject->BeWounded();
+						break;
+					case ObjectID::Waver_ID:
+						this->BeWounded();
+						break;
+						//boss
+					case ObjectID::Ridley_ID:
+						this->BeWounded();
+						otherObject->BeWounded();
+						break;
+					}
+				}
+			}
+		}
+		break;
+	case BulletType::BulletFromPlayer_Wave:	// -HP enemy
+		for (auto it = objectList.begin(); it != objectList.end(); it++)
+		{
+			GameObject* otherObject = it->second;
+			if (otherObject->getObjectID() != ObjectID::Bullet_ID&&otherObject->getObjectType()!=ObjectType::RelativesWithWall_OT)
+			{
+				Direction direction;
+				if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
+				{
+					switch (otherObject->getObjectID())
+					{
+					//case ObjectID::Ground_ID:	//bullet collide vs wall
+					//	//bullet will be broken
+					//	this->BeWounded();
+					//	//wave beam don't collsiion
+					//	break;
+					//case ObjectID::BubbleDoor_ID:
+					//	this->BeWounded();
+					//	otherObject->BeWounded();
+					//	break;
 
 						//enemy
 					case ObjectID::Zoomer_ID:
@@ -284,6 +358,7 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 			}
 		}
 		break;
+
 	case BulletType::BulletFromPlayer_Rocket:
 		break;
 	case BulletType::BulletFromSkree:			//will check collision in handleCollision function of Player

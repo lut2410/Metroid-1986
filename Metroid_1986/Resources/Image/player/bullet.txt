@@ -1,7 +1,7 @@
 Is All Frames are has a same size?
 0
 Count
-8
+10
 Sprite Info
 
 Index		Animation Info
@@ -36,6 +36,14 @@ Index		Animation Info
 7			LocationX		LocationY		FrameWidth		FrameHeight
 			156				62				7				8
 
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			165				62				8				8
+
+Index		Animation Info
+9			LocationX		LocationY		FrameWidth		FrameHeight
+			175				62				8				8
+
 Animation Detail:
 FrameFrom	FrameTo		TimeAnimation
 Normal:Flying
@@ -46,3 +54,5 @@ Freeze:Flying
 4	4	-1
 Freeze:Broken
 5	7	30
+Wave
+8	9	30

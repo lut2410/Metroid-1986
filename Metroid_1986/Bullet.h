@@ -2,17 +2,21 @@
 #define BULLET_H
 
 #pragma once
-//#include "Player.h"
 #include "GameObject.h"
 #include "Collision.h"
 
-//#define BULLET_VEL 0.2f
 #define BULLET_ACCELERATION -0.01f
 
+#define PI 3.14159265
+#define WAVEBULLET_TIME_A_CYCLE 100//0.1
 class Bullet: public GameObject{
 	BulletType _bulletType;
 	float BULLET_VEL;
 
+	//use for wavebullet
+	int _originpos;		//the origin coordinates
+	DWORD _localTime;
+	//int AMPLITUDE;	32
 public:
 	Bullet();
 	Bullet(BulletType bulletType, int x, int y, Direction directionFly, DWORD survivalTime = 300);
