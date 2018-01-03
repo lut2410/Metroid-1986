@@ -4,28 +4,28 @@ Player::Player():GameObject(){
 Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_hp = 30;
 	_attack = 0;//attack by bullet, isn't by body
-	_bulletTime = 250;
+	_currentBulletType = BulletType::BulletFromPlayer_Nomal;
 	//Load all action-animation
 	Texture2* playerTexture = NULL;
 	playerTexture = TextureCollection::getInstance()->getTexture2(Player_ID);
 
 	//import all actionAnimation:
 	_actionAnimation.resize(Jump_PutHandUp_Shoot_Ani+1);	//set size as biggest element value 
-	_actionAnimation[StandIntro_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(0));
-	_actionAnimation[Stand_Ani]					= new Animation(playerTexture, playerTexture->_animationNames.at(1));
-	_actionAnimation[Stand_PutHandUp_Ani]		= new Animation(playerTexture, playerTexture->_animationNames.at(2));
-	_actionAnimation[Run_Ani]					= new Animation(playerTexture, playerTexture->_animationNames.at(3));
-	_actionAnimation[Jump_Ani]					= new Animation(playerTexture, playerTexture->_animationNames.at(4));
-	_actionAnimation[RollingJump_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(5));
-	_actionAnimation[Grovel_Ani]				= new Animation(playerTexture, playerTexture->_animationNames.at(6));
-	_actionAnimation[Stand_Shoot_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(7));
-	_actionAnimation[Run_Shoot_Ani]				= new Animation(playerTexture, playerTexture->_animationNames.at(8));
-	_actionAnimation[Jump_Shoot_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(9));
-	_actionAnimation[Stand_PutHandUp_Shoot_Ani] = new Animation(playerTexture, playerTexture->_animationNames.at(10));
-	_actionAnimation[Run_PutHandUp_Ani]			= new Animation(playerTexture, playerTexture->_animationNames.at(11));
+	_actionAnimation[StandIntro_Ani]			= new Animation(playerTexture, "StandIntro");
+	_actionAnimation[Stand_Ani]					= new Animation(playerTexture,"Stand");
+	_actionAnimation[Stand_PutHandUp_Ani]		= new Animation(playerTexture, "StandPutHandUp");
+	_actionAnimation[Run_Ani]					= new Animation(playerTexture, "Run");
+	_actionAnimation[Jump_Ani]					= new Animation(playerTexture, "Jump");
+	_actionAnimation[RollingJump_Ani]			= new Animation(playerTexture, "RollingJump");
+	_actionAnimation[Grovel_Ani]				= new Animation(playerTexture, "Grovel");
+	_actionAnimation[Stand_Shoot_Ani]			= new Animation(playerTexture, "StandShoot");
+	_actionAnimation[Run_Shoot_Ani]				= new Animation(playerTexture, "RunShoot");
+	_actionAnimation[Jump_Shoot_Ani]			= new Animation(playerTexture, "JumpShoot");
+	_actionAnimation[Stand_PutHandUp_Shoot_Ani] = new Animation(playerTexture, "StandPutHandUp");
+	_actionAnimation[Run_PutHandUp_Ani]			= new Animation(playerTexture, "RunPutHandUp");
 	_actionAnimation[Run_PutHandUp_Shoot_Ani]	= _actionAnimation[Run_PutHandUp_Ani];
-	_actionAnimation[Jump_PutHandUp_Ani]		= new Animation(playerTexture, playerTexture->_animationNames.at(12));
-	_actionAnimation[Jump_PutHandUp_Shoot_Ani]	= new Animation(playerTexture, playerTexture->_animationNames.at(13));
+	_actionAnimation[Jump_PutHandUp_Ani]		= new Animation(playerTexture, "JumpPutHandUp");
+	_actionAnimation[Jump_PutHandUp_Shoot_Ani]	= new Animation(playerTexture, "JumpPutHandUpShoot");
 
 
 	//set up parameters
@@ -33,13 +33,19 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_directionOfFace = DirectionOfFace::Neutral;
 	this->_currentAnimation = _actionAnimation[StandIntro_Ani];
 }
-
 Player::~Player(){
 }
 DirectionOfFace Player::getDirectionOfFace(){
 	return _directionOfFace;
 }
-
+bool Player::isHasSpecialAbility(PlayerSpecialAbility specialAbility)
+{
+	return (_specialAbility & specialAbility) == specialAbility;
+}
+void Player::addSpecialAbility(PlayerSpecialAbility specialAbility)
+{
+	_specialAbility = PlayerSpecialAbility (_specialAbility | specialAbility);
+}
 void Player::setAction(Action action){
 	if (_action != action)
 		_action = action;
@@ -52,7 +58,7 @@ void Player::addOrChangeAction(Action action){
 	case Action::RollingJump:
 	case Action::Grovel:
 		//check ability to grovel
-		if (action == Action::Grovel&&isAbilityToGrovel() == false)
+		if (action == Action::Grovel&&isHasSpecialAbility(PlayerSpecialAbility::Grovel_PSA) == false)
 			return;
 
 		//remove all foot action because only 1 foot action is performed
@@ -88,22 +94,7 @@ bool Player::isHasAction(Action action){
 bool Player::isHasKey(ActionKey actionKey){
 	return (_currentKeys & actionKey) == actionKey;
 };
-bool Player::isAbilityToGrovel()
-{
-	return _isAbilityToGrovel;
-}
-void Player::AddAbilityToGrovel()
-{
-	_isAbilityToGrovel = true;
-}
-bool Player::isAbilityToShootLong()
-{
-	return (_bulletTime >= 500);
-}
-void Player::AddAbilityToShootLong()
-{
-	_bulletTime = 1000;
-}
+
 int Player::getHP()
 {
 	return _hp;
@@ -269,9 +260,9 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 					break;
 					//item
 				case MaruMari_ID:
-					if (this->isAbilityToGrovel() == false)
+					if (this->isHasSpecialAbility(Grovel_PSA) == false)
 						//first time
-						this->AddAbilityToGrovel();
+						this->addSpecialAbility(Grovel_PSA);
 					else
 						//2nd time(meaning player has "eaten" this item)
 						//pause game 2s and delete MaruMari
@@ -285,9 +276,9 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 					object->SetObjectStatus(ObjectStatus::Died_OS);
 					break;
 				case LongBeam_ID:
-					if (this->isAbilityToShootLong() == false)
+					if (this->isHasSpecialAbility(ShootLonger_PSA) == false)
 						//first time
-						this->AddAbilityToShootLong();
+						this->addSpecialAbility(ShootLonger_PSA);
 					else
 						//2nd time(meaning player has "eaten" this item)
 						//pause game 2s and delete MaruMari
@@ -295,6 +286,20 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 						Sleep(2000);
 						object->SetObjectStatus(ObjectStatus::Died_OS);
 					}
+					break;
+				case IceBeam_ID:
+					if (this->isHasSpecialAbility(ShootIceBeam_PSA) == false)
+						//first time
+						this->addSpecialAbility(ShootIceBeam_PSA);
+					else
+						//2nd time(meaning player has "eaten" this item)
+						//pause game 2s and delete MaruMari
+					{
+						Sleep(2000);
+						object->SetObjectStatus(ObjectStatus::Died_OS);
+					}
+					break;
+				case WaveBeam_ID:
 					break;
 				}
 
@@ -373,8 +378,7 @@ void Player::UpdatePosition(int deltaTime){
 		
 };
 void Player::Update(int deltaTime){
-	//if (beWounded_remainningTime>0)
-	//	beWounded_remainningTime -= deltaTime;
+
 
 	UpdateStatus();
 	//UPDATE ACTION AND VELOCITY
@@ -423,18 +427,18 @@ void Player::Update2(int deltaTime){
 	_currentAnimation->Update(deltaTime);
 
 	//bullets are shooted between 1/3s
-	if (_remainningTimeToShoot)
-		_remainningTimeToShoot--;		//countdown to create new bullet
+	if (_remainingTimeToShoot)
+		_remainingTimeToShoot--;		//countdown to create new bullet
 	else	//allow to shoot
 		;	//==0
 
 	if (isHasAction(Action::Shoot))
 	{
-		if (_remainningTimeToShoot == 0)
+		if (_remainingTimeToShoot == 0)
 		{
 			CreateBullet();
 			//reset time : 5 frames later don't allow to create bullet
-			_remainningTimeToShoot = TIMETOCREATNEWBULLET;
+			_remainingTimeToShoot = TIMETOCREATNEWBULLET;
 		}
 	}
 }
@@ -735,6 +739,39 @@ void Player::SpecifyHavingShoot(){
 			;
 	}
 }
+void Player::SwitchToOtherBulletType()
+{
+	switch (_currentBulletType)
+	{
+	case BulletType::BulletFromPlayer_Nomal:
+		if (isHasSpecialAbility(PlayerSpecialAbility::ShootIceBeam_PSA))
+			_currentBulletType = BulletType::BulletFromPlayer_Freeze;
+		else if (isHasSpecialAbility(PlayerSpecialAbility::ShootWaveBeam_PSA))
+			_currentBulletType = BulletType::BulletFromPlayer_Wave;
+		else if (isHasSpecialAbility(PlayerSpecialAbility::ShootRocket_PSA))
+			_currentBulletType = BulletType::BulletFromPlayer_Rocket;
+		//else : Normal Bullet
+		break;
+	case BulletType::BulletFromPlayer_Freeze:
+
+		if (isHasSpecialAbility(PlayerSpecialAbility::ShootWaveBeam_PSA))
+			_currentBulletType = BulletType::BulletFromPlayer_Wave;
+		else if (isHasSpecialAbility(PlayerSpecialAbility::ShootRocket_PSA))
+			_currentBulletType = BulletType::BulletFromPlayer_Rocket;
+		else /*if (!isHasSpecialAbility(PlayerSpecialAbility::ShootIceBeam_PSA))*/
+			_currentBulletType = BulletType::BulletFromPlayer_Nomal;
+		break;
+	case BulletType::BulletFromPlayer_Wave:
+		if (isHasSpecialAbility(PlayerSpecialAbility::ShootRocket_PSA))
+			_currentBulletType = BulletType::BulletFromPlayer_Rocket;
+		else 
+			_currentBulletType = BulletType::BulletFromPlayer_Nomal;
+		break;
+	case BulletType::BulletFromPlayer_Rocket:
+		_currentBulletType = BulletType::BulletFromPlayer_Nomal;
+		break;
+	}
+}
 void Player::CreateBullet()
 {
 
@@ -750,8 +787,12 @@ void Player::CreateBullet()
 				directionOfBullet = Direction::Right_Direction;
 		}
 
+		Bullet* bullet = NULL;
 			//bullet is appear at hand of player
-		Bullet* bullet = new Bullet(BulletType::BulletFromPlayer_Freeze, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet,_bulletTime);
+		if (isHasSpecialAbility(PlayerSpecialAbility::ShootLonger_PSA))
+			bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet, 800);
+		else
+			bullet = new Bullet(_currentBulletType, getPositionOfGun().x, getPositionOfGun().y, directionOfBullet);
 			//add to currentObjectList
 			TileGrid::AddObjectToCurrentObjectList(bullet);
 			

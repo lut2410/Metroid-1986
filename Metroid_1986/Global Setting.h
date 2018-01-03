@@ -82,8 +82,9 @@ enum ObjectID{
 	MaruMari_ID,
 	LongBeam_ID,
 	IceBeam_ID,
-	Bomb_ID,
+	WaveBeam_ID,
 	MissibleRocket_ID,
+	Bomb_ID,
 	EnergyTank_ID
 };
 

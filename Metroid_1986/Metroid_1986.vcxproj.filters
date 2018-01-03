@@ -165,6 +165,12 @@
     <ClCompile Include="LongBeam.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="MissibleRocket.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="IceBeam.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -279,6 +285,12 @@
       <Filter>Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="LongBeam.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MissibleRocket.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="IceBeam.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>

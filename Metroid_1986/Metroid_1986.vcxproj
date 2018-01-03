@@ -89,8 +89,10 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="HPTonic.cpp" />
+    <ClCompile Include="IceBeam.cpp" />
     <ClCompile Include="Kraid.cpp" />
     <ClCompile Include="LongBeam.cpp" />
+    <ClCompile Include="MissibleRocket.cpp" />
     <ClCompile Include="Ridley.cpp" />
     <ClCompile Include="Rio.cpp" />
     <ClCompile Include="Ripper.cpp" />
@@ -129,9 +131,11 @@
     <ClInclude Include="Global Setting.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="HPTonic.h" />
+    <ClInclude Include="IceBeam.h" />
     <ClInclude Include="Kraid.h" />
     <ClInclude Include="LongBeam.h" />
     <ClInclude Include="MaruMari.h" />
+    <ClInclude Include="MissibleRocket.h" />
     <ClInclude Include="Ridley.h" />
     <ClInclude Include="Rio.h" />
     <ClInclude Include="Ripper.h" />

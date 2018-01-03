@@ -47,7 +47,15 @@ enum ActionAnimation{
 	Jump_PutHandUp_Ani=Jump+PutHandUp,
 	Jump_PutHandUp_Shoot_Ani=Jump+PutHandUp+Shoot
 };
-
+enum PlayerSpecialAbility{
+	None_PSA,
+	Grovel_PSA = 1 << 0,
+	ShootLonger_PSA = 1 << 1,
+	ShootIceBeam_PSA = 1 << 2,
+	ShootWaveBeam_PSA = 1 << 3,
+	ShootRocket_PSA = 1 << 4,
+	PutBomb_PSA = 1 << 5
+};
 enum ActionKey{
 	None_Key,
 	Up_Key = 1 << 0,
@@ -62,21 +70,20 @@ enum ActionKey{
 class Player :public GameObject {
 
 	Action _action;
-	bool flicker;						//player is flicker? use for draw
-	int beWounded_remainningTime;
+	PlayerSpecialAbility _specialAbility;
 	Block _block;
-	int _remainningTimeToShoot;
-	bool _isAbilityToGrovel;
-	int _bulletTime;
-	
+	bool flicker;							//player is flicker? use for draw
+	BulletType _currentBulletType;
 public:
-	//bool _isMotionless;	//unactive
 	//Current Key
 	ActionKey _currentKeys;
 	Player();
 	Player(int x, int y);
 	~Player();
 	DirectionOfFace getDirectionOfFace();
+
+	bool isHasSpecialAbility(PlayerSpecialAbility );
+	void addSpecialAbility(PlayerSpecialAbility );
 
 	void setAction(Action action);
 	void addOrChangeAction(Action action);		//add if action is hand action, otherwise change action if action is foot action
@@ -85,10 +92,6 @@ public:
 	bool isHasKey(ActionKey);
 
 	//void PauseGame(int time);
-	bool isAbilityToGrovel();
-	void AddAbilityToGrovel();
-	bool isAbilityToShootLong();
-	void AddAbilityToShootLong();
 	int getHP();
 	RECT getCollisionBound();					//use for check collision
 	D3DXVECTOR2 getPositionOfGun();			//bullet fly-out from hand
@@ -109,6 +112,7 @@ public:
 	void SpecifyFootAction();
 	void SpecifyHavingPutHandUp();
 	void SpecifyHavingShoot();
+	void SwitchToOtherBulletType();
 	void CreateBullet();
 	bool checkToStandUpInThisLocation();
 };

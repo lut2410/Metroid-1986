@@ -46,9 +46,9 @@ LongBeam
 3	3	-1
 IceBeam
 4	4	-1
-Bomp
+Bomb
 5	5	-1
 Rocket
 6	6	-1
-EnegyTank
+EnergyTank
 7	7	-1

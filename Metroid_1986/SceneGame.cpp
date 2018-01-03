@@ -144,11 +144,17 @@ void SceneGame::RenderFrame(int time){
 		Kraid* kraid = new Kraid(784, 2450);
 		currentObjects->insert(pair<int, GameObject*>(1008, kraid));
 	}*/
+	//map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	//if (!currentObjects->count(1009))
+	//{
+	//	LongBeam* longbeam = new LongBeam(784, 2450);
+	//	currentObjects->insert(pair<int, GameObject*>(1009, longbeam));
+	//}
 	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
-	if (!currentObjects->count(1009))
+	if (!currentObjects->count(1010))
 	{
-		LongBeam* longbeam = new LongBeam(784, 2450);
-		currentObjects->insert(pair<int, GameObject*>(1009, longbeam));
+		IceBeam* icebeam = new IceBeam(784, 2400);
+		currentObjects->insert(pair<int, GameObject*>(1010, icebeam));
 	}
 
 	_player->Update(time);
@@ -204,6 +210,9 @@ void SceneGame::KeyPress(int KeyCode){
 	case DIK_D:
 		actionKey = Shoot_Key;
 		break;
+	case DIK_SPACE:
+		//switch bullet type
+		_player->SwitchToOtherBulletType();
 	default:
 		return;
 	}

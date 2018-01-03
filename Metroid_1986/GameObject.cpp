@@ -28,13 +28,9 @@ D3DXVECTOR2 GameObject::getPositionOfGun2()
 }
 RECT GameObject::getCollisionBound(){
 	Box  objectBox = _currentAnimation->getCurrentSpriteSize();
-	//objectBox.width -= 2;
-	//objectBox.height -= 2;
 
 	if (_objectID == ObjectID::Zoomer_ID)
 		objectBox = { 0, 0, 14, 14 };
-	if (_objectID == ObjectID::BubbleDoor_ID)
-		int i = 0;
 	RECT objectBound = { _posX - objectBox.width / 2,		//left
 		_posY + objectBox.height / 2,						//top
 		_posX + objectBox.width / 2,						//right

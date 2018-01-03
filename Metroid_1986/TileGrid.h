@@ -36,6 +36,7 @@
 #include "HPTonic.h"
 #include "MaruMari.h"
 #include "LongBeam.h"
+#include "IceBeam.h"
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
 	Ground_IDFF=0,
