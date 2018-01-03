@@ -36,14 +36,14 @@ void Infor::draw(int hp, int rocketnumber)
 {
 	Font font =  Font(10);
 	font.onLost();
-	font.render("EN", 20, 20);
-	font.render("--", 50, 20);
-	font.render(hp, 70, 20);
+	font.render("EN", 20, 10);
+	font.render("--", 50, 10);
+	font.render(hp, 70, 10);
 
 	//draw rocket number
-	_rocketAnimation->Draw(20,50);
-	font.render(rocketnumber, 70, 50);
-	_currentArmedAnimation->Draw(20, 80);
+	_rocketAnimation->Draw(20,30);
+	font.render(rocketnumber, 70, 30);
+	_currentArmedAnimation->Draw(20, 45);
 
 
 }

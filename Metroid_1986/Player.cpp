@@ -55,6 +55,9 @@ void Player::setAction(Action action){
 		_action = action;
 };
 void Player::addOrChangeAction(Action action){
+	//if (action == Action::PutHandUp&&isHasAction(action))
+	//	_posY += 3;
+
 	switch (action){
 	case Action::Stand:
 	case Action::Run:
@@ -88,6 +91,10 @@ void Player::addOrChangeAction(Action action){
 	
 };
 void Player::removeAction(Action action){
+	if (action == Action::PutHandUp&&isHasAction(action))
+		_posY -= 3;
+	if (action == Action::Grovel&&isHasAction(action))
+		_posY += 12;
 	if (isHasAction(action))
 		setAction(Action(_action & ~action));
 };
@@ -489,6 +496,8 @@ void Player::Update(int deltaTime){
 	UpdateActionAndVelocity(deltaTime);
 	//update Postion
 	UpdatePosition(deltaTime);
+	//update sprite before handle collision
+	UpdateAnimationBaseOnStatus();
 }
 void Player::UpdateAnimationBaseOnStatus()
 {
@@ -797,10 +806,12 @@ void Player::SpecifyHavingPutHandUp(){
 	}
 	else //isn't have Up_Key
 	{
-		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))	
+		if (isHasAction(Action::Stand) || isHasAction(Action::Run) || isHasAction(Action::Jump))
 			//standing/running +put hand up => standing/running, don't put hand up
 			//if (isHasKey(ActionKey::Down_Key))		// meaning the down key is pressing
 			removeAction(Action::PutHandUp);
+
+			
 			//else										//standing/running=>grovel
 
 		if (isHasAction(Action::RollingJump))			//the case can't be exist
