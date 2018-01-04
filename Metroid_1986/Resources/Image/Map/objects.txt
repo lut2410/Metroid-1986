@@ -1,5 +1,5 @@
 Objects Number
-736
+785
 Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 0		1296		3344		16		16		0			Ground
 0		1312		3344		16		16		0			Ground
@@ -566,8 +566,6 @@ Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 0		1488		4416		16		16		0			Ground
 0		1472		4416		16		16		0			Ground
 0		1520		4416		16		16		0			Ground
-0		1344		4448		16		16		0			Ground
-0		1360		4448		16		16		0			Ground
 0		1440		4448		16		16		0			Ground
 0		1456		4448		16		16		0			Ground
 0		1504		3472		16		16		0			Ground
@@ -737,3 +735,55 @@ Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 -1		1168		4320		16		16		0			Ground
 0		1264		4336		16		16		0			Ground
 0		1280		4336		16		16		0			Ground
+-1		928		4320		16		16		0			Ground
+-1		688		4320		16		16		0			Ground
+-1		448		4320		16		16		0			Ground
+0		1248		4384		16		16		0			Ground
+0		1248		4368		16		16		0			Ground
+0		1248		4352		16		16		0			Ground
+1		1256		4432		48		48		0			Ground
+1		1512		4432		48		48		0			Ground
+1		2530		4432		48		48		0			Ground
+1		3304		5152		48		48		0			Ground
+1		5352		5152		48		48		0			Ground
+1		5352		5632		48		48		0			Ground
+1		2536		5744		48		48		0			Ground
+1		2792		6112		48		48		0			Ground
+1		3048		6112		48		48		0			Ground
+1		3304		6112		48		48		0			Ground
+1		4328		6112		48		48		0			Ground
+1		4584		6112		48		48		0			Ground
+1		5352		6112		48		48		0			Ground
+1		5608		6112		48		48		0			Ground
+1		7400		6112		48		48		0			Ground
+1		2536		6592		48		48		0			Ground
+1		7400		6592		48		48		0			Ground
+1		3304		7072		48		48		0			Ground
+1		4840		7072		48		48		0			Ground
+1		5096		7072		48		48		0			Ground
+1		7400		7072		48		48		0			Ground
+1		744		7312		48		48		0			Ground
+1		2536		7312		48		48		0			Ground
+1		4840		7312		48		48		0			Ground
+2		2536		5024		48		48		0			Ground
+2		4840		5632		48		48		0			Ground
+2		1768		6592		48		48		0			Ground
+2		6376		6592		48		48		0			Ground
+2		1000		7312		48		48		0			Ground
+2		3816		7312		48		48		0			Ground
+0		1392		4416		16		16		0			Ground
+0		1408		4416		16		16		0			Ground
+0		1424		4416		16		16		0			Ground
+0		1440		4416		16		16		0			Ground
+0		1456		4416		16		16		0			Ground
+0		1424		4448		16		16		0			Ground
+0		1408		4448		16		16		0			Ground
+0		1392		4448		16		16		0			Ground
+0		1376		4448		16		16		0			Ground
+-2		0		3120		16		16		0			Ground
+-2		1280		3328		16		16		0			Ground
+-2		1280		3472		16		16		0			Ground
+-2		1280		3696		16		16		0			Ground
+-2		1280		4000		16		16		0			Ground
+-2		1280		4240		16		16		0			Ground
+

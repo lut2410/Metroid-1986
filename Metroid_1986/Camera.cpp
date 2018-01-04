@@ -21,7 +21,7 @@ RECT Camera::getRECT()
 	RECT cameraRECT = { _viewport.x,			//left
 		_viewport.y,							//top
 		_viewport.x + 256,						//right
-		_viewport.x - 240};						//bottom
+		_viewport.y - 240};						//bottom
 	return cameraRECT;
 }
 void Camera::UpdateCamera(int x, int y)
@@ -90,16 +90,16 @@ void Camera::passTheGate()
 		
 	else					//finish
 	{
-		if (_directionOfTheGate == Direction::Right_Direction)	//the gate is on the right
-		{
-			_bound.left = _bound.right;							//set leftBound = old rightBound
-			_bound.right = MAXMAP;
-		}
-		else
-		{
-			_bound.right = _bound.left;							//set leftBound = old rightBound
-			_bound.left = MINMAP;
-		}
+		//if (_directionOfTheGate == Direction::Right_Direction)	//the gate is on the right
+		//{
+		//	_bound.left = _bound.right;							//set leftBound = old rightBound
+		//	_bound.right = MAXMAP;
+		//}
+		//else
+		//{
+		//	_bound.right = _bound.left;							//set leftBound = old rightBound
+		//	_bound.left = MINMAP;
+		//}
 			//reset to default
 		_directionOfTheGate = Direction::None_Direction;
 	}

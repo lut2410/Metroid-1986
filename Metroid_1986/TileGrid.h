@@ -46,8 +46,8 @@ enum ObjectIDFromFile{
 	BlockX_IDFF=-2,
 	BlockY_IDFF=-1,
 	Ground_IDFF=0,
-	Gate_IDFF=1,
-	BubbleDoor_IDFF = 2,
+	BubbleDoorBlue_IDFF = 1,
+	BubbleDoorRed_IDFF = 2,
 	BlueZebPipe_IDFF=3,
 	RedZebPipe_IDFF=4,
 	//enemy

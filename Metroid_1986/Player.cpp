@@ -288,11 +288,16 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	{
 		GameObject* object = it->second;
 		Direction direction;
-		if (object->getObjectType()==ObjectType::RelativesWithWall_OT||object->getObjectStatus()==ObjectStatus::BeFreezing_OS)
+		if (object->getObjectType() == ObjectType::RelativesWithWall_OT || object->getObjectStatus() == ObjectStatus::BeFreezing_OS)
+		{
 			if (handleObjectCollision(this, object, direction, dt)) //is collison
 			{
 				directionVsWall = Direction(directionVsWall | direction);
 			}
+
+			
+		}
+			
 	}
 	//check collision with enemy
 	//if player isn't be wounded
@@ -310,10 +315,16 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 				switch (object->getObjectID())
 				{
 					//nelative of ground
-				case Gate_ID:	//pass the gate
-					Camera::getInstance()->setTheGate(direction);
+				case BubbleDoor_ID:
+					if (object->getCollisionBound().right - object->getCollisionBound().left ==32)
+						// is open
+						Camera::getInstance()->setTheGate(direction);
 					//reset time to open the gate
 					break;
+				//case Gate_ID:	//pass the gate
+				//	Camera::getInstance()->setTheGate(direction);
+				//	//reset time to open the gate
+				//	break;
 
 					//enemy
 				case Zoomer_ID:

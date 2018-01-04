@@ -405,7 +405,7 @@ void TileGrid::Update(Camera* camera, int time){
 		GameObject* object = it->second;
 		object->Update(time);
 		
-
+		
 		//
 		if (object->getObjectID() == ObjectID::ZebProductionPipe_ID)
 		{
@@ -534,20 +534,7 @@ void TileGrid::Update(Camera* camera, int time){
 				}
 			}
 		}
-		if (object->getObjectID() == ObjectID::Ground_ID)
-		{
-
-			if (object->getHP() == -2)//blockX
-			{
-				int leftBoundCamera = object->_posX - 8;
-				camera->SetBoundX(leftBoundCamera, leftBoundCamera + _screenWidth);
-			}
-			if (object->getHP() == -1)//blockY
-			{
-				int bottomBoundCamera = object->_posY - 8;
-				camera->SetBoundY(bottomBoundCamera + _screenHeight, bottomBoundCamera);
-			}
-		}
+		
 
 	}
 }
@@ -623,12 +610,16 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new Ground(x, y);
 		return object;
 		break;
-	case ObjectIDFromFile::Gate_IDFF:
-		object = new Gate(x, y);
+	//case ObjectIDFromFile::Gate_IDFF:
+	//	object = new Gate(x, y);
+	//	return object;
+	//	break;
+	case ObjectIDFromFile::BubbleDoorBlue_IDFF:
+		object = new BubbleDoor(x, y, 1);
 		return object;
 		break;
-	case ObjectIDFromFile::BubbleDoor_IDFF:
-		object = new BubbleDoor(x, y);
+	case ObjectIDFromFile::BubbleDoorRed_IDFF:
+		object = new BubbleDoor(x, y, 2);
 		return object;
 		break;
 	case ObjectIDFromFile::Zoomer1_IDFF:

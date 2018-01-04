@@ -50,7 +50,6 @@ ObjectType GameObject::getObjectType()
 	{
 		//nelative of wall
 	case Ground_ID:
-	case Gate_ID:
 	case BubbleDoor_ID:
 	case ZebProductionPipe_ID:
 		return ObjectType::RelativesWithWall_OT;

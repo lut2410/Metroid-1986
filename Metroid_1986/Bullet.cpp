@@ -269,7 +269,13 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 						break;
 					case ObjectID::BubbleDoor_ID:
 						this->BeWounded();
-						otherObject->BeWounded(_attack);
+						if (otherObject->getHP() > 1)//type 2:red
+						{
+							if (_bulletType == BulletType::BulletFromPlayer_Rocket)
+								otherObject->BeWounded(1);
+						}
+						else //type 1
+							otherObject->BeWounded(_attack);
 						break;
 
 						//enemy
