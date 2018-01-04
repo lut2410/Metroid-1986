@@ -536,6 +536,7 @@ void TileGrid::Update(Camera* camera, int time){
 		}
 		if (object->getObjectID() == ObjectID::Ground_ID)
 		{
+
 			if (object->getHP() == -2)//blockX
 			{
 				int leftBoundCamera = object->_posX - 8;
@@ -630,7 +631,7 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new BubbleDoor(x, y);
 		return object;
 		break;
-	case ObjectIDFromFile::Zoomer_IDFF:
+	case ObjectIDFromFile::Zoomer1_IDFF:
 		object = new Zoomer(x, y);
 		return object;
 		break;
@@ -638,7 +639,7 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new Zoomer(x, y, 2);
 		return object;
 		break;
-	case ObjectIDFromFile::Skree_IDFF:
+	case ObjectIDFromFile::Skree1_IDFF:
 		object = new Skree(x, y);
 		return object;
 		break;
@@ -676,9 +677,12 @@ void TileGrid::GetTileIDInQuadTree(int x, int y, QuadTree* quadTree){
 		GetTileIDInQuadTree(x, y, quadTree->LeftBottom);
 		GetTileIDInQuadTree(x, y, quadTree->RightBottom);
 	}
-	Box cameraBox = Box(x, y, _screenWidth, -_screenHeight);
-	Box quadTreeBox = Box(quadTree->XNode, quadTree->YNode, quadTree->WidthNode, quadTree->HeightNode);
-	if (isCollide(cameraBox, quadTreeBox))			//has overlap together			
+	RECT cameraRect = Camera::getInstance()->getRECT();
+	RECT quadTreeRect = RECT{ quadTree->XNode,				//left
+		quadTree->YNode + quadTree->HeightNode,				//top
+		quadTree->XNode + quadTree->WidthNode,				//right
+		quadTree->YNode };									//bottom
+	if (isCollideR(cameraRect, quadTreeRect))			//has overlap together			
 		//import tile
 		for (vector<int>::iterator index = quadTree->ChildIndexs.begin(); index != quadTree->ChildIndexs.end(); index++)
 		{
@@ -695,9 +699,14 @@ void TileGrid::GetCurrentQuadTrees(int x, int y, QuadTree* quadTree){
 	}
 	else	//child QuadTree
 	{
-		Box cameraBox = Box(x, y, _screenWidth, -_screenHeight);
-		Box quadTreeBox = Box(quadTree->XNode, quadTree->YNode, quadTree->WidthNode, quadTree->HeightNode);
-		if (isCollide(cameraBox, quadTreeBox))			//has overlap together		
+		//Box cameraBox = Box(x, y, _screenWidth, -_screenHeight);
+		RECT cameraRect = Camera::getInstance()->getRECT();
+		RECT quadTreeRect = RECT{ quadTree->XNode,				//left
+			quadTree->YNode + quadTree->HeightNode,				//top
+			quadTree->XNode + quadTree->WidthNode,				//right
+			quadTree->YNode };									//bottom
+		/*Box quadTreeBox = Box(quadTree->XNode, quadTree->YNode, quadTree->WidthNode, quadTree->HeightNode);*/
+		if (isCollideR(cameraRect, quadTreeRect))			//has overlap together		
 			CurrentQuadTrees.push_back(quadTree);
 	}
 	

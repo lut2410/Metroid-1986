@@ -5,8 +5,8 @@
 #include "Sprite.h"
 
 #define FRAMESTOPASSTHEGATE 32
-#define MAX 10000
-#define MIN 0
+#define MAXMAP 7680
+#define MINMAP 0
 class Camera
 {
 protected:

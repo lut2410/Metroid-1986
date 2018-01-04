@@ -327,6 +327,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 					break;
 					//boss
 				case Ridley_ID:
+				case Kraid_ID:
 					this->BeWounded(direction, object->getAttackDame());
 					break;
 

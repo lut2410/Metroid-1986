@@ -26,7 +26,6 @@ struct Box{
 	
 };
 
-bool isCollide(Box, Box);
 bool isCollideR(RECT, RECT);
 void setDirection(Direction& _direction, Direction direction);
 void addDirection(Direction& _direction, Direction direction);

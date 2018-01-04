@@ -48,19 +48,44 @@ enum ObjectIDFromFile{
 	Ground_IDFF=0,
 	Gate_IDFF=1,
 	BubbleDoor_IDFF = 2,
-	Zoomer_IDFF=20,
+	BlueZebPipe_IDFF=3,
+	RedZebPipe_IDFF=4,
+	//enemy
+	Zoomer1_IDFF=20,
 	Zoomer2_IDFF=21,
-	Skree_IDFF=22,
+	Skree1_IDFF=22,
 	Skree2_IDFF=23,
-	MaruMari_IDFF=41
+	Ripper1_IDFF=24,
+	Ripper2_IDFF=25,
+	Ripper3_IDFF=26,
+	Zeb1_IDFF=27,
+	Zeb2_IDFF=28,
+	Waver1_IDFF=29,
+	Waver2_IDFF=30,
+	Rio1_IDFF=31,
+	Rio2_IDFF=32,
+	//boss
+	Ridley_IDFF=50,
+	Kraid1_IDFF=51,
+	Kraid2_IDFF=52,
+	//item
+
+	MaruMari_IDFF=60,
+	LongBeam_IDFF=61,
+	IceBeam_IDFF=62,
+	WaveBeam_IDFF=63,
+	MissibleRocket_IDFF=64,
+	Bomb_IDFF=65,
+	EnergyTank_IDFF=66,
+	//Rocket and HpTonic is appear when enemy die
 };
 
 //contain all object on screeen
 class TileGrid{
 	static TileGrid* _tileGridInstance;
-	vector<Tile>* ObjectTiles;				//all object
+	vector<Tile>* ObjectTiles;						//all object
 	//static vector<GameObject*> _allObject;		//all object in map  
-	QuadTree* RootQuadTree;					//root QuadTree
+	QuadTree* RootQuadTree;							//root QuadTree
 	vector<int>* CurrentTileNumbers;				//TileNumber = number what of element of_objecTiles
 	vector<QuadTree*> CurrentQuadTrees;	
 	vector<QuadTree*> CurrentOutsideQuadTrees;

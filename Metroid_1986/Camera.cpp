@@ -11,7 +11,7 @@ Camera::Camera()
 	_directionOfTheGate = Direction::None_Direction ;
 	_viewport.x = 1;
 	_viewport.y = _screenHeight;
-	_bound = { MIN, MAX, MAX, MIN };
+	_bound = { MINMAP, MAXMAP, MAXMAP, MINMAP };
 }
 
 RECT Camera::getRECT()
@@ -66,7 +66,7 @@ void Camera::SetBoundY(int topBound, int bottomBound)
 }
 void Camera::ResetBound()
 {
-	_bound = { MIN, MAX, MAX, MIN };
+	_bound = { MINMAP, MAXMAP, MAXMAP, MINMAP };
 }
 void Camera::setTheGate(Direction directionOfTheGate)
 {
@@ -93,12 +93,12 @@ void Camera::passTheGate()
 		if (_directionOfTheGate == Direction::Right_Direction)	//the gate is on the right
 		{
 			_bound.left = _bound.right;							//set leftBound = old rightBound
-			_bound.right = MAX;
+			_bound.right = MAXMAP;
 		}
 		else
 		{
 			_bound.right = _bound.left;							//set leftBound = old rightBound
-			_bound.left = MIN;
+			_bound.left = MINMAP;
 		}
 			//reset to default
 		_directionOfTheGate = Direction::None_Direction;
