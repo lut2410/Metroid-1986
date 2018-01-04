@@ -24,7 +24,7 @@ public:
 	static Camera* getInstance();
 	Camera();
 	RECT getRECT();
-	void UpdateCamera(int x);								//place position of player on screen base on posX of Player
+	void UpdateCamera(int x, int y);								//place position of player on screen base on posX of Player
 	D3DXVECTOR2 Transform(int x, int y);					//transform world-coordinates to viewport-coordinates
 	void SetSizeMap(int leftBound, int rightBound);			//
 	void setTheGate(Direction diretionOfTheGate);					//true/fase if to right/left

@@ -33,7 +33,7 @@ void SceneGame::LoadObject(){
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfFace()==DirectionOfFace::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
-	_camera->_viewport.y = 2560;
+	//_camera->_viewport.y = 2560;
 
 
 	//other object
@@ -77,7 +77,7 @@ void SceneGame::RenderFrame(int time){
 		return;
 	}
 	_player->UpdatePostionToInsideCamera();
-	_camera->UpdateCamera(_player->_posX);
+	_camera->UpdateCamera(_player->_posX, _player->_posY);
 
 	
 	//Infor::draw(_player->getHP());

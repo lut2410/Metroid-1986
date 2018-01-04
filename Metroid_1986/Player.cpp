@@ -55,8 +55,8 @@ void Player::setAction(Action action){
 		_action = action;
 };
 void Player::addOrChangeAction(Action action){
-	//if (action == Action::PutHandUp&&isHasAction(action))
-	//	_posY += 3;
+	if (action == Action::Shoot&&isHasAction(PutHandUp))
+		_posY -= 1;
 
 	switch (action){
 	case Action::Stand:

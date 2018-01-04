@@ -24,7 +24,7 @@ RECT Camera::getRECT()
 		_viewport.x - 240};						//bottom
 	return cameraRECT;
 }
-void Camera::UpdateCamera(int x)
+void Camera::UpdateCamera(int x, int y)
 {
 
 	//place player on 4-6 part of 10 center of screen
@@ -41,6 +41,18 @@ void Camera::UpdateCamera(int x)
 		
 
 	//posite Y
+	//place player on 4-6 part of 10 center of screen
+	if (y + _screenHeight * 4 / 10 > _viewport.y)
+		_viewport.y = y + _screenHeight * 4 / 10;
+	else if (y + _screenHeight * 6 / 10 < _viewport.y)
+		_viewport.y = y + _screenHeight * 6 / 10;
+
+	//but viewport camera has limit
+	if (_viewport.y > _bound.top)
+		_viewport.y = _bound.top;
+	else if (_viewport.y < _bound.bottom + _screenHeight)
+		_viewport.y = _bound.bottom + _screenHeight;
+
 }
 void Camera::setTheGate(Direction directionOfTheGate)
 {
