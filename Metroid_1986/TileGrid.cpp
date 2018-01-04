@@ -387,6 +387,9 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 	
 }
 void TileGrid::Update(Camera* camera, int time){
+	//Reset Camera Bound
+	//Will specify when see Object"BlockCamera"
+	camera->ResetBound();
 	//Update object to match quadtree it is being on
 	UpdateObjectInQuadTreeBaseOnPosition(camera);
 
@@ -531,6 +534,19 @@ void TileGrid::Update(Camera* camera, int time){
 				}
 			}
 		}
+		if (object->getObjectID() == ObjectID::Ground_ID)
+		{
+			if (object->getHP() == -2)//blockX
+			{
+				int leftBoundCamera = object->_posX - 8;
+				camera->SetBoundX(leftBoundCamera, leftBoundCamera + _screenWidth);
+			}
+			if (object->getHP() == -1)//blockY
+			{
+				int bottomBoundCamera = object->_posY - 8;
+				camera->SetBoundY(bottomBoundCamera + _screenHeight, bottomBoundCamera);
+			}
+		}
 
 	}
 }
@@ -596,6 +612,12 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 	ObjectIDFromFile obID = ObjectIDFromFile(id);
 	GameObject* object;
 	switch (obID){
+	case ObjectIDFromFile::BlockX_IDFF:
+		object = new Ground(x, y,-2);
+		break;
+	case ObjectIDFromFile::BlockY_IDFF:
+		object = new Ground(x, y,-1);
+		break;
 	case ObjectIDFromFile::Ground_IDFF:
 		object = new Ground(x, y);
 		return object;

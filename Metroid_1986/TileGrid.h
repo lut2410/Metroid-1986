@@ -43,6 +43,8 @@
 
 //ID of Game Object (has divided by type)
 enum ObjectIDFromFile{
+	BlockX_IDFF=-2,
+	BlockY_IDFF=-1,
 	Ground_IDFF=0,
 	Gate_IDFF=1,
 	BubbleDoor_IDFF = 2,

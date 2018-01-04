@@ -3,7 +3,12 @@
 Ground::Ground(){
 
 }
-Ground::Ground( int x, int y) :GameObject(Ground_ID, x, y, 0, 0){
+Ground::Ground( int x, int y, int type) :GameObject(Ground_ID, x, y, 0, 0){
+
+	_hp = type;	//borrow
+	//_hp=0: normal
+	//_hp=-1: blockY
+	//_hp=-2: blockX
 	_currentAnimation = NULL;	//have drawn by backroundmap
 }
 void Ground::Update2(int time)

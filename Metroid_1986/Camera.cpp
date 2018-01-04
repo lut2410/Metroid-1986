@@ -54,6 +54,20 @@ void Camera::UpdateCamera(int x, int y)
 		_viewport.y = _bound.bottom + _screenHeight;
 
 }
+void Camera::SetBoundX(int leftBound, int rightBound)
+{
+	_bound.left = leftBound;
+	_bound.right = rightBound;
+}
+void Camera::SetBoundY(int topBound, int bottomBound)
+{
+	_bound.top = topBound;
+	_bound.bottom = bottomBound;
+}
+void Camera::ResetBound()
+{
+	_bound = { MIN, MAX, MAX, MIN };
+}
 void Camera::setTheGate(Direction directionOfTheGate)
 {
 

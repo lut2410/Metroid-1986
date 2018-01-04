@@ -635,6 +635,12 @@ void Player::UpdatePostionToInsideCamera()
 		_posX = camera->_bound.left + 27;
 	if (_posX > camera->_bound.right)
 		_posX = camera->_bound.right - 27;
+
+	////update
+	//if (_posY > camera->_bound.top)
+	//	_posY = camera->_bound.top - 27;
+	//if (_posY < camera->_bound.bottom)
+	//	_posY = camera->_bound.bottom + 27;
 }
 
 void Player::UpdateActionAndVelocity(int deltaTime){
