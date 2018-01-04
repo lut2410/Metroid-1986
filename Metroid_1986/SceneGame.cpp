@@ -28,8 +28,8 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	_player = new Player(650,2390);
-	//_player = new Player(1917, 1293);
+	//_player = new Player(650,2390);
+	_player = new Player(2700, 7200);
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfFace()==DirectionOfFace::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
