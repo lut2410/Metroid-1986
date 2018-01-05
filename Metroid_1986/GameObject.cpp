@@ -57,8 +57,10 @@ ObjectType GameObject::getObjectType()
 		break;
 		//player
 	case Player_ID:
-	case Bullet_ID:
 		return ObjectType::Player_OT;
+		break;
+	case Bullet_ID:
+		return ObjectType::Bullet_OT;
 		break;
 		//enemy
 	case Fire_ID:
@@ -145,6 +147,16 @@ void GameObject::SpecifyStatusWhenHP0()
 		{
 			_objectStatus = ObjectStatus::Exploding_OS;
 			_remainingExplodeTime = EXPLODE_FRAMES;
+			if (getObjectType() == Enemy_OT)
+			{
+				GameSound* s = GameSound::getInstance();
+				s->play(SOUND_EXPLODE, false);
+			}
+			else if (getObjectType() == Player_OT)
+			{
+				GameSound* s = GameSound::getInstance();
+				s->play(SOUND_DIE, false);
+			}
 		}
 	}
 }
@@ -270,6 +282,19 @@ void GameObject::BeWounded(int lossHP)
 		//boss: wounding isn't stop
 		_remainingWoundingTime = WOUNDED_FRAMES;
 	_hp -= lossHP;
+
+	if (_objectID == Ripper_ID)
+	{
+		GameSound* s = GameSound::getInstance();
+		s->play(SOUND_HIT_RIPPER);
+	}
+	else
+	{
+		GameSound* s = GameSound::getInstance();
+		s->play(SOUND_HIT_ENEMY);
+	}
+
+	
 }
 void GameObject::BeFreezed(int lossHP)
 {

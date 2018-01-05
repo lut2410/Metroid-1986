@@ -54,8 +54,9 @@ void SceneMenu::LoadResources()
 
 	_font = new Font(10);
 
-	/*Sound::GetInst()->RemoveAllBGM();
-	Sound::GetInst()->PlayBGSound(EBGSound::EMenuSound);*/
+	GameSound::initialize(G_hWnd);
+	GameSound* s = GameSound::getInstance();
+	s->play(SOUND_INTRO_SCENE,true);
 }
 
 void SceneMenu::KeyPress(int KeyCode){

@@ -6,13 +6,15 @@
 #include "Animation.h"
 #include "Camera.h"
 #include <math.h>
+#include "GameSound.h"
 #include <stdlib.h>		//support to random
 #define WOUNDED_FRAMES 8
-#define FREEZED_FRAMES 30
+#define FREEZED_FRAMES 60
 #define EXPLODE_FRAMES 2
 enum ObjectType{
 	RelativesWithWall_OT,	//can't move, is in background: ground,wall,gate,door,..
 	Player_OT,				//Samus
+	Bullet_OT,
 	Enemy_OT,
 	Boss_OT,
 	Item_OT

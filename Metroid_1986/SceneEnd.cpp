@@ -5,7 +5,7 @@ SceneEnd::SceneEnd() :Scene(Scene_End){
 	_localTime = 0;
 	_currentChoice = 0;
 	_menuChoice = (char**)malloc(2 * sizeof(char*));
-	_menuChoice[0] = "CONTINUE";
+	_menuChoice[0] = "NEW GAME";
 	_menuChoice[1] = "EXIT";
 
 }
@@ -19,7 +19,7 @@ void SceneEnd::_openChoice(){
 		_sceneState = Scene_Game;
 		break;
 	case 1:
-		_sceneState = Scene_Menu;
+		PostMessage(G_hWnd, WM_QUIT, 0, 0);
 		break;
 	}
 	
@@ -63,8 +63,9 @@ void SceneEnd::LoadResources()
 
 	_font = new Font(10);
 
-	/*Sound::GetInst()->RemoveAllBGM();
-	Sound::GetInst()->PlayBGSound(EBGSound::EMenuSound);*/
+	GameSound* s = GameSound::getInstance();
+	s->stop(SOUND_PLAY_SCENE);
+	s->play(SOUND_END_SCENE, true);
 }
 
 void SceneEnd::KeyPress(int KeyCode){

@@ -25,7 +25,9 @@ void SceneGame::LoadResources() {
 	//Time in Stage
 	_stageStartTime = GetTickCount();
 
-
+	GameSound* s = GameSound::getInstance();
+	s->stop(SOUND_INTRO_SCENE);
+	s->play(SOUND_PLAY_SCENE,true);
 }
 void SceneGame::LoadObject(){
 	//_player = new Player(650, 4450);
@@ -37,7 +39,8 @@ void SceneGame::LoadObject(){
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfFace()==DirectionOfFace::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
-	//_camera->_viewport.y = 2560;
+	//if (_player->getDirectionOfFace() == DirectionOfFace::Neutral)//begin, player has direction = neutral
+	//	_camera->_viewport.y = _player->_posY - _screenHeight / 2;
 
 
 	//other object
@@ -51,14 +54,7 @@ void SceneGame::RenderFrame(int time){
 	if (timeNow - _stageStartTime <= 0000) //4000
 	{
 		_player->BeWounded(Direction::None_Direction, 0);
-		//_player->_isMotionless = true;
 	}
-		
-	//else if (timeNow - _stageStartTime <= 4100)
-	//{
-	//	_player->removeAction(BeWounded);
-	//	_player->_isMotionless = false;
-	//}
 
 
 	//draw black background

@@ -52,6 +52,22 @@ void Player::addSpecialAbility(PlayerSpecialAbility specialAbility)
 
 	if (specialAbility == PlayerSpecialAbility::ShootRocket_PSA)
 		BuffRocket(5);
+	GameSound* s = GameSound::getInstance();
+	switch (specialAbility)
+	{
+	case PlayerSpecialAbility::Grovel_PSA:
+		s->play(SOUND_EAT_MARUMARI);
+		break;
+	case PlayerSpecialAbility::ShootIceBeam_PSA:
+	case PlayerSpecialAbility::ShootLonger_PSA:
+	case PlayerSpecialAbility::ShootWaveBeam_PSA:
+		s->play(SOUND_EAT_BEAM);
+		break;
+	case PlayerSpecialAbility::ShootRocket_PSA:
+	case PlayerSpecialAbility::PutBomb_PSA:
+		s->play(SOUND_EAT_MISSIBLEROCKET_BOMB);
+		break;
+	}
 }
 void Player::setAction(Action action){
 	if (_action != action)
@@ -92,6 +108,16 @@ void Player::addOrChangeAction(Action action){
 		
 	}
 	
+	//switch (action){
+	//case Action::Jump:
+	//case Action::RollingJump:
+	//	if (isHasKey(ActionKey::Jump_Key))
+	//	{
+	//		
+	//	}
+	//	
+	//	break;
+	//}
 };
 void Player::removeAction(Action action){
 	if (action == Action::PutHandUp&&isHasAction(action))
@@ -116,6 +142,8 @@ int Player::getHP()
 void Player::BuffHP(int buffHP)
 {
 	_hp += buffHP;
+	GameSound* s = GameSound::getInstance();
+	s->play(SOUND_EAT_HP_TONIC,false);
 }
 int Player::getRocketNumber()
 {
@@ -490,10 +518,13 @@ void Player::handleVsWall(Direction directionVsWall, int deltaTime)
 					_velX = _velY = 0;
 				}
 				if (isHasAction(Action::Jump) || isHasAction(Action::RollingJump))
+				{
 					if (_velX == 0)
 						addOrChangeAction(Action::Stand);
 					else
 						addOrChangeAction(Action::Run);
+				}
+					
 			}
 			
 		}
@@ -521,6 +552,8 @@ void Player::handleVsFire(int lossHP)
 	{
 		SpeedDown();
 		BeFallIntoFire(lossHP);
+		GameSound* s = GameSound::getInstance();
+		s->play(SOUND_FALL_INTO_FIRE);
 	}
 }
 void Player::UpdatePosition(int deltaTime){
@@ -621,6 +654,10 @@ void Player::BeWounded(Direction direction, int lossHP)
 	case Direction::Bottom_Direction:
 		_velY = SPEED_WOUND;
 	}
+	
+	GameSound* s = GameSound::getInstance();
+	s->play(SOUND_BE_WOUNDED);
+
 }
 
 void Player::Draw(Camera* camera)
@@ -734,7 +771,7 @@ void Player::UpdateActionAndVelocity(int deltaTime){
 	case ObjectStatus::Died_OS:
 		break;
 	}
-	
+
 };
 
 
@@ -784,11 +821,15 @@ void Player::SpecifyFootAction(){
 		{
 			_velY = MAX_VEL_JUMP;
 			addOrChangeAction(Action::Jump);				// jump key
+			GameSound* s = GameSound::getInstance();
+			s->play(SOUND_JUMP);
 		}
 		if (isHasAction(Action::Run))
 		{
 			_velY = MAX_VEL_JUMP;
 			addOrChangeAction(Action::RollingJump);			// left/right key + jump key
+			GameSound* s = GameSound::getInstance();
+			s->play(SOUND_JUMP);
 		}
 		if (isHasAction(Action::Jump) || isHasAction(Action::RollingJump))
 			;
@@ -802,7 +843,10 @@ void Player::SpecifyFootAction(){
 				if(checkToStandUpInThisLocation())		//check posible of the case player is jump/ stand in location
 					addOrChangeAction(Action::Grovel);
 				else
+				{
 					_velY = MAX_VEL_JUMP / 10;					//light jump 
+				}
+					
 			}
 			//else has Down_Key: unchange
 
@@ -985,6 +1029,8 @@ void Player::CreateBullet()
 				//add to currentObjectList
 				TileGrid::AddObjectToCurrentObjectList(bullet);
 				_rocketNumber--;
+				GameSound* s = GameSound::getInstance();
+				s->play(SOUND_SHOOT_ROCKET, false);
 			}
 		}
 		else

@@ -46,6 +46,9 @@
     <Filter Include="Object\Boss">
       <UniqueIdentifier>{71b6d8ef-c3de-4548-86e8-0247771234ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Control\Sounds">
+      <UniqueIdentifier>{cc09710f-177d-470e-a570-9be358d9844c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -183,6 +186,15 @@
     <ClCompile Include="Fire.cpp">
       <Filter>Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="CWaveFile.cpp">
+      <Filter>Control\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSound.cpp">
+      <Filter>Control\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Control\Sounds</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -316,6 +328,15 @@
     </ClInclude>
     <ClInclude Include="Fire.h">
       <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CWaveFile.h">
+      <Filter>Control\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSound.h">
+      <Filter>Control\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Control\Sounds</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include "Font.h"
 #include "Texture2.h"
 #include "TileGrid.h"
+#include "GameSound.h"
 #define BACKGROUND_FILE "Resources/Image/black.png"
 static enum ESceneState
 {

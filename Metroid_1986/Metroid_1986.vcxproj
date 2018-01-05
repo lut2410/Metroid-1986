@@ -82,9 +82,11 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="CWaveFile.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameSound.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="Global Setting.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -99,6 +101,7 @@
     <ClCompile Include="Ripper.cpp" />
     <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="Skree.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="WaveBeam.cpp" />
     <ClCompile Include="Waver.cpp" />
     <ClCompile Include="WeakGround.cpp" />
@@ -129,9 +132,11 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="CWaveFile.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameSound.h" />
     <ClInclude Include="Gate.h" />
     <ClInclude Include="Global Setting.h" />
     <ClInclude Include="Ground.h" />
@@ -146,6 +151,7 @@
     <ClInclude Include="Ripper.h" />
     <ClInclude Include="Rocket.h" />
     <ClInclude Include="Skree.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="WaveBeam.h" />
     <ClInclude Include="Waver.h" />
     <ClInclude Include="WeakGround.h" />

@@ -5,6 +5,7 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 	_bulletType = bulletType;
 	_remainingTime = survivalTime;
 	Texture2* bulletTexture = NULL;
+	GameSound* s = GameSound::getInstance();
 	switch (bulletType)
 	{
 	case BulletType::BulletFromPlayer_Nomal:
@@ -16,6 +17,7 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		_actionAnimation.push_back(new Animation(bulletTexture, "Normal:Flying"));
 		//broken
 		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Normal:Broken"));
+		s->play(SOUND_SHOOT_NORMAL, false);
 		break;
 	case BulletType::BulletFromPlayer_Freeze:
 		_hp = 1;
@@ -26,6 +28,7 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		_actionAnimation.push_back(new Animation(bulletTexture, "Freeze:Flying"));
 		//broken
 		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Freeze:Broken"));
+		s->play(SOUND_SHOOT_ICE, false);
 		break;
 	case BulletType::BulletFromPlayer_Wave:
 		_hp = 1;
@@ -40,6 +43,8 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		_actionAnimation.push_back(new Animation(bulletTexture, "Wave"));
 		//broken
 		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Wave"));
+
+		s->play(SOUND_SHOOT_WAVE, false);
 		break;
 	case BulletType::BulletFromPlayer_Rocket:
 		_hp = 1;
@@ -61,6 +66,8 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 		
 		//broken
 		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Rocket:Broken"));
+
+		s->play(SOUND_SHOOT_ROCKET, false);
 		break;
 	case BulletType::BulletFromSkree:
 		_hp = 1;
@@ -315,15 +322,6 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 				{
 					switch (otherObject->getObjectID())
 					{
-					//case ObjectID::Ground_ID:	//bullet collide vs wall
-					//	//bullet will be broken
-					//	this->BeWounded();
-					//	//wave beam don't collsiion
-					//	break;
-					//case ObjectID::BubbleDoor_ID:
-					//	this->BeWounded();
-					//	otherObject->BeWounded();
-					//	break;
 
 						//enemy
 					case ObjectID::Zoomer_ID:
