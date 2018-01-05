@@ -3,14 +3,16 @@
 #include "Scene.h"
 #include "SceneMenu.h"
 #include "SceneGame.h"
+#include "SceneEnd.h"
 class SceneMain
 {
 protected:
 	static SceneMain* _instance;
 	Scene* _currentScene;
-	ESceneState _currentStateScene;
+
 
 public:
+	ESceneState _currentStateScene;
 	static SceneMain* getInstance();
 	Scene* getCurrentScene();
 	SceneMain();

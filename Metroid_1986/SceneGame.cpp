@@ -45,6 +45,7 @@ void SceneGame::LoadObject(){
 }
 
 void SceneGame::RenderFrame(int time){
+	CheckEndGame();
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
 	if (timeNow - _stageStartTime <= 0000) //4000
@@ -197,7 +198,11 @@ void SceneGame::handleCollision(int dt){
 
 	_player->handleCollision(*_tileGrid->getCurrentObjects(),dt);
 };
-
+void SceneGame::CheckEndGame()
+{
+	if (_player->getObjectStatus()==ObjectStatus::Died_OS)
+		_sceneState = Scene_End;
+}
 void SceneGame::KeyPress(int KeyCode){
 	
 	//if (_player->_isMotionless)		//don't allow press or release keys

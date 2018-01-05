@@ -40,10 +40,10 @@ void SceneMain::RenderFrame(int t){
 			_currentScene = new SceneGame();
 			_currentScene->LoadResources();
 			break;
-		/*case ESceneState::Scene_End:
-			_currentScene = new SceneEndGame();
+		case ESceneState::Scene_End:
+			_currentScene = new SceneEnd();
 			_currentScene->LoadResources();
-			break;*/
+			break;
 
 		}
 		//change flag to match with _currentScene
