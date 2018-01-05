@@ -688,6 +688,16 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new Rio(x, y, 2);
 		return object;
 		break;
+	case ObjectIDFromFile::Fire1_IDFF:
+		object = new Fire(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::Fire2_IDFF:
+		object = new Fire(x, y, 2);
+		return object;
+		break;
+
+
 		//boss
 	case ObjectIDFromFile::Ridley_IDFF:
 		object = new Ridley(x, y);

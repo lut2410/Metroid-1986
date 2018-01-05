@@ -61,6 +61,7 @@ ObjectType GameObject::getObjectType()
 		return ObjectType::Player_OT;
 		break;
 		//enemy
+	case Fire_ID:
 	case Zoomer_ID:
 	case Skree_ID:
 	case Ripper_ID:
@@ -134,6 +135,7 @@ void GameObject::SetObjectStatus(ObjectStatus objectStatus)
 {
 	_objectStatus = objectStatus;
 }
+
 void GameObject::SpecifyStatusWhenHP0()
 {
 	if (_hp <= 0)

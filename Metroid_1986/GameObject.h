@@ -59,6 +59,7 @@ protected:
 	int _remainingTimeToShoot;		//time between 2 shot
 	int _remainingTimeToShoot2;		//time between 2 boomerang(kraid)
 	int _remainingTime;				// time survival
+	
 
 	DirectionOfFace _directionOfFace;	//transform of position X : left or right?
 	Animation* _currentAnimation;
@@ -110,6 +111,7 @@ public:
 	virtual void handleCollision(int playerX, int playerY, float dt);			//motion base on player
 	virtual void BeWounded(int lossHP=1);		//be wounded 'lossHP' HP
 	virtual void BeFreezed(int lossHP = 1);
+
 	void SpecifyStatusWhenHP0();
 
 	//bool enemyCheckExplode(int deltaTime);	//be destroying

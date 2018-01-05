@@ -5,8 +5,8 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_hp = 30;
 	_attack = 0;//attack by bullet, isn't by body
 	_currentBulletType = BulletType::BulletFromPlayer_Nomal;
-	//_rocketNumber = 5;
-
+	//SPEED_X = 0.16f;
+	//ACCELERATION = -0.0015f;
 	//Load all action-animation
 	Texture2* playerTexture = NULL;
 	playerTexture = TextureCollection::getInstance()->getTexture2(Player_ID);
@@ -285,6 +285,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 
 	RECT playerBound = getCollisionBound();
 	Direction directionVsWall = Direction::None_Direction;
+	int lossHPVsFire = 0;
 	// check each element in list maybe make collision with player
 	//check collision with ground, wall
 	for (auto it = objectList.begin(); it != objectList.end(); it++)
@@ -300,8 +301,16 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 
 			
 		}
+		if (object->getObjectID() == Fire_ID)
+		{
+			if (handleObjectCollision(this, object, direction, dt, false))	//player is collide with fire
+				//through
+				if(object->getAttackDame()>lossHPVsFire)
+					lossHPVsFire = object->getAttackDame();
+		}
 			
 	}
+
 	//check collision with enemy
 	//if player isn't be wounded
 	// otherwise, wounded, explode, die => immortal : don't check collision with enemy
@@ -311,6 +320,13 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 		{
 			GameObject* object = it->second;
 			Direction direction;
+			if (object->getObjectID() == Fire_ID)
+			{
+				//if (handleObjectCollision(this, object, direction, dt, false))	//player is collide with fire
+				//	//through
+				//	this->BeFallIntoFire(object->getAttackDame());	//loss HP
+			}
+			else
 			if (handleObjectCollision(this, object, direction, dt))
 			{
 				
@@ -435,7 +451,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 	
 	//handle collision vs wall, after check collision between player with all walls
 	handleVsWall(directionVsWall,dt);
-
+	handleVsFire(lossHPVsFire);
 	return;
 }
 void Player::handleVsWall(Direction directionVsWall, int deltaTime)
@@ -493,6 +509,18 @@ void Player::handleVsWall(Direction directionVsWall, int deltaTime)
 			addOrChangeAction(Action::Jump);
 
 			_velY += ACCELERATION*deltaTime;
+	}
+}
+void Player::handleVsFire(int lossHP)
+{
+	if (lossHP == 0)
+	{
+		ResetSpeed();
+	}
+	else//collide
+	{
+		SpeedDown();
+		BeFallIntoFire(lossHP);
 	}
 }
 void Player::UpdatePosition(int deltaTime){
@@ -641,7 +669,33 @@ void Player::Draw(Camera* camera)
 	}
 
 }
-
+void Player::BeFallIntoFire(int lossHP)
+{
+	if (_remainingToCheckFire>0)
+	{
+		_remainingToCheckFire--;
+	}
+	else //ready check
+	{
+		_hp -= lossHP;
+		_remainingToCheckFire = 10;//10 frames -> loss HP 1 time
+	}
+}
+void Player::ResetSpeed()
+{
+	SPEED_X = ORI_SPEED_X;
+	ACCELERATION = ORI_ACCELERATION;
+	MAX_VEL_JUMP = ORI_MAX_VEL_JUMP;
+}
+void Player::SpeedDown()
+{
+	SPEED_X = ORI_SPEED_X;
+	SPEED_X /=2;
+	ACCELERATION = ORI_ACCELERATION;
+	ACCELERATION /= 2;
+	MAX_VEL_JUMP = ORI_MAX_VEL_JUMP;
+	MAX_VEL_JUMP /= 2;
+}
 void Player::UpdatePostionToInsideCamera()
 {
 	Camera* camera = Camera::getInstance();

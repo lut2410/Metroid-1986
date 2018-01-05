@@ -28,7 +28,7 @@
 #include "Zeb.h"
 #include "Waver.h"
 #include "Rio.h"
-
+#include "Fire.h"
 //boss
 #include "Ridley.h"
 #include "Kraid.h"
@@ -67,6 +67,9 @@ enum ObjectIDFromFile{
 	Waver2_IDFF=30,
 	Rio1_IDFF=31,
 	Rio2_IDFF=32,
+	Fire1_IDFF=33,//yellow
+	Fire2_IDFF=34,//red
+
 	//boss
 	Ridley_IDFF=50,
 	Kraid1_IDFF=51,

@@ -180,6 +180,9 @@
     <ClCompile Include="WeakGround.cpp">
       <Filter>Object\RelativeOfGround</Filter>
     </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -310,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="WeakGround.h">
       <Filter>Object\RelativeOfGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

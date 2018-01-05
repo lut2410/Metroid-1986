@@ -68,6 +68,7 @@ enum ObjectID{
 	Player_ID,
 	Bullet_ID,
 	//enemy
+	Fire_ID,
 	Zoomer_ID,
 	Skree_ID,
 	Ripper_ID,

@@ -10,11 +10,11 @@
 #include "Infor.h"
 #define SPEED_WOUND 0.2f
 #define TIMEIMMORTAL_WOUNDED 1000
-#define SPEED_X 0.16f
 #define SPEED_Y -0.01f
 #define MAX_HEIGHT_JUMP 70.0f
-#define MAX_VEL_JUMP 0.5f
-#define ACCELERATION -0.0015f
+#define	ORI_SPEED_X 0.16f;
+#define ORI_ACCELERATION -0.0015f;
+#define ORI_MAX_VEL_JUMP 0.5f;
 #define TIMETOCREATNEWBULLET 6 //frames
 enum Action{
 	None,
@@ -77,7 +77,11 @@ class Player :public GameObject {
 	BulletType _currentBulletType;
 	int _rocketNumber;
 public:
+	float SPEED_X ;
+	float ACCELERATION ;
+	float MAX_VEL_JUMP;
 	//Current Key
+	int _remainingToCheckFire;
 	ActionKey _currentKeys;
 	Player();
 	Player(int x, int y);
@@ -101,13 +105,17 @@ public:
 	RECT getCollisionBound();					//use for check collision
 	D3DXVECTOR2 getPositionOfGun();			//bullet fly-out from hand
 	void handleCollision(map<int, GameObject*> objectList,float dt);
-	void handleVsWall(Direction d, int dt);				
+	void handleVsWall(Direction d, int dt);		
+	void handleVsFire(int lossHP);
 	void UpdatePosition(int );
 	void Update(int time);	//update action and position after press key
 	void UpdateAnimationBaseOnStatus();
 	void Update2(int time);	//update frame of sprite and position of sprite
 	void Draw(Camera* camera);
 	void BeWounded(Direction direction,int lossHP);
+	void BeFallIntoFire(int lossHP = 1);
+	void ResetSpeed();
+	void SpeedDown();
 	void UpdatePostionToInsideCamera();
 	//int checkCollision();
 	//Action
