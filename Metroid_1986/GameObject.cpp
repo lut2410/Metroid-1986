@@ -207,7 +207,7 @@ void GameObject::Update(int deltaTime)
 	UpdateActionAndVelocity(deltaTime);
 	//update position
 	if (_objectStatus == Survival_OS
-		|| getObjectType() == ObjectType::Boss_OT)
+		|| getObjectType() == ObjectType::Boss_OT )
 	{
 		_posX += _velX * deltaTime;
 		_posY += _velY * deltaTime;

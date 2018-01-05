@@ -78,6 +78,7 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BackgroundMap.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BubbleDoor.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="Global Setting.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Guard.cpp" />
     <ClCompile Include="HPTonic.cpp" />
     <ClCompile Include="IceBeam.cpp" />
     <ClCompile Include="Kraid.cpp" />
@@ -128,6 +130,7 @@
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BackgroundMap.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="BubbleDoor.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
@@ -140,6 +143,7 @@
     <ClInclude Include="Gate.h" />
     <ClInclude Include="Global Setting.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="Guard.h" />
     <ClInclude Include="HPTonic.h" />
     <ClInclude Include="IceBeam.h" />
     <ClInclude Include="Kraid.h" />

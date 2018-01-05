@@ -11,13 +11,13 @@ Ripper::Ripper(int x, int y, int type) :GameObject(Ripper_ID, x, y, 0, 0){
 	{
 	case 1:
 		_attack = 8;
-		OBJECT_VEL = 0.08f;
+		OBJECT_VEL = 0.0625f;
 		//take animation of its type( type1 in here)
 		_actionAnimation.push_back(new Animation(ripperTexture, "Type1"));
 		break;
 	case 2:
 		_attack = 10;
-		OBJECT_VEL = 0.1f;
+		OBJECT_VEL = 0.0625f;
 		//take animation of its type( type2 in here)
 		_actionAnimation.push_back(new Animation(ripperTexture, "Type2"));
 		break;
@@ -48,6 +48,21 @@ void Ripper::UpdateActionAndVelocity(int deltaTime)
 		_velY = 0;
 		break;
 	}
+}
+void Ripper::Update(int deltaTime)
+{
+	//update status
+	UpdateStatus();
+	//Update action and velocity
+	UpdateActionAndVelocity(deltaTime);
+	//update position
+	if (_objectStatus == Survival_OS
+		|| _objectStatus == BeWounding_OS)
+	{
+		_posX += _velX * deltaTime;
+		_posY += _velY * deltaTime;
+	}
+
 }
 void Ripper::UpdateAnimationBaseOnStatus()
 {

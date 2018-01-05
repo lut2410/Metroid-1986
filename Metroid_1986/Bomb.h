@@ -1,15 +1,15 @@
-#ifndef BULLET_H
-#define BULLET_H
+#ifndef BOMB_H
+#define BOMB_H
 
 #pragma once
 #include "GameObject.h"
 #include "Collision.h"
 
-#define BULLET_ACCELERATION -0.01f
+#define BOMB_ACCELERATION -0.01f
 
 #define PI 3.14159265
 #define WAVEBULLET_TIME_A_CYCLE 100//0.1
-class Bullet: public GameObject{
+class Bullet : public GameObject{
 	BulletType _bulletType;
 	float BULLET_VEL;
 

@@ -69,6 +69,18 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 
 		s->play(SOUND_SHOOT_ROCKET, false);
 		break;
+	case BulletType::Bomb:
+		_hp = 1;
+		_attack = 5;
+		_remainingTime = 800;// independent in player has longbeam yet
+		bulletTexture = TextureCollection::getInstance()->getTexture2(Bullet_ID);
+		_actionAnimation.push_back(new Animation(bulletTexture, "Bomb"));
+
+		////broken
+		_beWoundingAnimation.push_back(new Animation(bulletTexture, "Bomb"));
+
+		s->play(SOUND_SET_BOMB);
+		break;
 	case BulletType::BulletFromSkree:
 		_hp = 1;
 		_attack = 3;
@@ -186,10 +198,23 @@ void Bullet::UpdateActionAndVelocity(int deltaTime)
 	//update remaining-time
 	_remainingTime -= deltaTime;
 	if (_remainingTime <= 0)
-		SetObjectStatus(ObjectStatus::Died_OS);
+	{
+		if (_bulletType == BulletType::Bomb) //has explode
+			_hp = 0;
+		else
+			SetObjectStatus(ObjectStatus::Died_OS);
+	}
+		
+
 	// specify object when HP = 0. Bewounding was defined before
-	if (_hp <= 0)
-		_objectStatus = ObjectStatus::Died_OS;
+	if (_bulletType==BulletType::Bomb) //has explode
+		UpdateStatus();
+	else
+	{
+		if (_hp <= 0)
+			_objectStatus = ObjectStatus::Died_OS;
+	}
+	
 
 	float angle;
 	switch (_bulletType)
@@ -209,6 +234,7 @@ void Bullet::UpdateActionAndVelocity(int deltaTime)
 		else
 			_posY = _originpos + 10* sin(angle);
 		break;
+	case BulletType::Bomb:
 	case BulletType::BulletFromRidley:
 	case BulletType::BulletFromKraid_Boomerang:
 		_velY += BULLET_ACCELERATION;
@@ -233,26 +259,13 @@ void Bullet::UpdateAnimationBaseOnStatus()
 		_currentAnimation = _beFreezingAnimation[0];
 		_currentAnimation->SetIndex(_currentIndexOfAnimation);
 	case ObjectStatus::Exploding_OS:
+		if (_bulletType == BulletType::Bomb)
+			_currentAnimation = explodingAnimation;
 		break;
 	case ObjectStatus::Died_OS:
 		break;
 	}
 }
-//void Bullet::Draw(Camera* camera)
-//{
-//	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
-//
-//	switch (_directionOfFace)
-//	{
-//	case DirectionOfFace::Right:
-//		_currentAnimation->DrawFlipHorizontal(center.x, center.y);
-//		break;
-//	case DirectionOfFace::Neutral:
-//	case DirectionOfFace::Left:
-//		_currentAnimation->Draw(center.x, center.y);
-//		break;
-//	}
-//}
 void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 {
 	switch (_bulletType)
@@ -295,11 +308,9 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					case ObjectID::Zeb_ID:
 					case ObjectID::Ripper_ID:
 					case ObjectID::Rio_ID:
-						this->BeWounded();
-						otherObject->BeWounded(_attack);
-						break;
 					case ObjectID::Waver_ID:
 						this->BeWounded();
+						otherObject->BeWounded(_attack);
 						break;
 						//boss
 					case ObjectID::Ridley_ID:
@@ -326,14 +337,12 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 						//enemy
 					case ObjectID::Zoomer_ID:
 					case ObjectID::Skree_ID:
-					case ObjectID::Zeb_ID:
 					case ObjectID::Ripper_ID:
+					case ObjectID::Zeb_ID:
+					case ObjectID::Waver_ID:
 					case ObjectID::Rio_ID:
 						this->BeWounded();
 						otherObject->BeWounded();
-						break;
-					case ObjectID::Waver_ID:
-						this->BeWounded();
 						break;
 						//boss
 					case ObjectID::Ridley_ID:
@@ -371,9 +380,10 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 						//enemy
 					case ObjectID::Zoomer_ID:
 					case ObjectID::Skree_ID:
-					case ObjectID::Zeb_ID:
 					case ObjectID::Ripper_ID:
+					case ObjectID::Zeb_ID:
 					case ObjectID::Waver_ID:
+					case ObjectID::Rio_ID:
 						this->BeWounded();
 						otherObject->BeFreezed();
 						break;
@@ -429,6 +439,57 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 				if (handleObjectCollision(this, otherObject, direction, deltaTime))
 				{
 					this->BeWounded(this->_hp);	//destroy
+				}
+			}
+		}
+		break;
+	case BulletType::Bomb:
+		for (auto it = objectList.begin(); it != objectList.end(); it++)
+		{
+			GameObject* otherObject = it->second;
+			if (_objectStatus == Survival_OS)
+			{
+				if (otherObject->getObjectType() == ObjectType::RelativesWithWall_OT)
+				{
+					Direction direction;
+
+					if (handleObjectCollision(this, otherObject, direction, deltaTime))
+					{
+						if (direction == Direction::Bottom_Direction)
+						{
+							_velY = 0;
+						}
+					}
+				}
+			}
+			else if(_objectStatus == Exploding_OS)
+			{
+				Direction direction;
+				if (handleObjectCollision(this, otherObject, direction, deltaTime,false))
+				switch (otherObject->getObjectID())
+				{
+				case ObjectID::WeakGround_ID:	//bullet collide vs wall
+					otherObject->BeWounded(_attack);
+					break;
+				case ObjectID::BubbleDoor_ID:
+					otherObject->BeWounded(_attack);
+					break;
+				case ObjectID::Bullet_ID:
+					break;
+					//enemy
+				case ObjectID::Zoomer_ID:
+				case ObjectID::Skree_ID:
+				case ObjectID::Ripper_ID:
+				case ObjectID::Zeb_ID:
+				case ObjectID::Waver_ID:
+				case ObjectID::Rio_ID:
+					//boss
+				case ObjectID::Ridley_ID:
+				case ObjectID::Kraid_ID:
+					otherObject->BeWounded(_attack);
+					break;
+
+
 				}
 			}
 		}

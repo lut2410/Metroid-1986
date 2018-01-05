@@ -6938,4 +6938,3 @@ Id		X		Y		Width		Height		CollisionClassIndex	Collision Name
 34		2496		5648		16		16		1			Enemy
 34		2512		5648		16		16		1			Enemy
 34		2528		5648		16		16		1			Enemy
-

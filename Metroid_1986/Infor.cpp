@@ -26,6 +26,9 @@ void Infor::switchToOtherBulletType(BulletType bulletType)
 	case BulletType::BulletFromPlayer_Rocket:
 		_currentArmedAnimation = new Animation(bulletTexture, "Rocket:Right");
 		break;
+	case BulletType::Bomb:
+		_currentArmedAnimation = new Animation(bulletTexture, "Bomb");
+		break;
 	}
 
 	

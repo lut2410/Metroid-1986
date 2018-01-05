@@ -195,6 +195,12 @@
     <ClCompile Include="Sound.cpp">
       <Filter>Control\Sounds</Filter>
     </ClCompile>
+    <ClCompile Include="Guard.cpp">
+      <Filter>Object\RelativeOfGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -337,6 +343,12 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Control\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Guard.h">
+      <Filter>Object\RelativeOfGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -16,6 +16,7 @@ public:
 	Ripper(int x, int y, int type = 1);
 	~Ripper();
 	void UpdateActionAndVelocity(int deltaTime);
+	void Update(int deltaTime);
 	void UpdateAnimationBaseOnStatus();
 	void Draw(Camera* camera);
 	void handleCollision(map<int, GameObject*> objectList, float dt);

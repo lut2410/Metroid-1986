@@ -18,8 +18,9 @@ Font::Font(int size)
 		false,
 		DEFAULT_CHARSET,
 		OUT_TT_PRECIS,
-		CLIP_DEFAULT_PRECIS,
-		DEFAULT_PITCH, "Arial" };
+		ANTIALIASED_QUALITY,
+		FF_DONTCARE, "Arial"
+};
 
 	//create font
 	D3DXCreateFontIndirect(G_d3ddv, &FontDesc, &_font);

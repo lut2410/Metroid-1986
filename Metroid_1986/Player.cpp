@@ -5,6 +5,7 @@ Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
 	_hp = 30;
 	_attack = 0;//attack by bullet, isn't by body
 	_currentBulletType = BulletType::BulletFromPlayer_Nomal;
+	_specialAbility = PlayerSpecialAbility::PutBomb_PSA;
 	//SPEED_X = 0.16f;
 	//ACCELERATION = -0.0015f;
 	//Load all action-animation
@@ -348,7 +349,7 @@ void Player::handleCollision(map<int, GameObject*> objectList, float dt){
 		{
 			GameObject* object = it->second;
 			Direction direction;
-			if (object->getObjectID() == Fire_ID)
+			if (object->getObjectID() == Fire_ID||object->getBulletType()==Bomb_ID)
 			{
 				//if (handleObjectCollision(this, object, direction, dt, false))	//player is collide with fire
 				//	//through
@@ -980,6 +981,8 @@ void Player::SwitchToOtherBulletType()
 			_currentBulletType = BulletType::BulletFromPlayer_Wave;
 		else if (isHasSpecialAbility(PlayerSpecialAbility::ShootRocket_PSA))
 			_currentBulletType = BulletType::BulletFromPlayer_Rocket;
+		else if (isHasSpecialAbility(PlayerSpecialAbility::PutBomb_PSA))
+			_currentBulletType = BulletType::Bomb;
 		//else : Normal Bullet
 		break;
 	case BulletType::BulletFromPlayer_Freeze:
@@ -988,16 +991,25 @@ void Player::SwitchToOtherBulletType()
 			_currentBulletType = BulletType::BulletFromPlayer_Wave;
 		else if (isHasSpecialAbility(PlayerSpecialAbility::ShootRocket_PSA))
 			_currentBulletType = BulletType::BulletFromPlayer_Rocket;
+		else if (isHasSpecialAbility(PlayerSpecialAbility::PutBomb_PSA))
+			_currentBulletType = BulletType::Bomb;
 		else /*if (!isHasSpecialAbility(PlayerSpecialAbility::ShootIceBeam_PSA))*/
 			_currentBulletType = BulletType::BulletFromPlayer_Nomal;
 		break;
 	case BulletType::BulletFromPlayer_Wave:
 		if (isHasSpecialAbility(PlayerSpecialAbility::ShootRocket_PSA))
 			_currentBulletType = BulletType::BulletFromPlayer_Rocket;
+		else if (isHasSpecialAbility(PlayerSpecialAbility::PutBomb_PSA))
+			_currentBulletType = BulletType::Bomb;
 		else 
 			_currentBulletType = BulletType::BulletFromPlayer_Nomal;
 		break;
 	case BulletType::BulletFromPlayer_Rocket:
+		if (isHasSpecialAbility(PlayerSpecialAbility::PutBomb_PSA))
+			_currentBulletType = BulletType::Bomb;
+		_currentBulletType = BulletType::BulletFromPlayer_Nomal;
+		break;
+	case BulletType::Bomb:
 		_currentBulletType = BulletType::BulletFromPlayer_Nomal;
 		break;
 	}
@@ -1029,9 +1041,13 @@ void Player::CreateBullet()
 				//add to currentObjectList
 				TileGrid::AddObjectToCurrentObjectList(bullet);
 				_rocketNumber--;
-				GameSound* s = GameSound::getInstance();
-				s->play(SOUND_SHOOT_ROCKET, false);
 			}
+		}
+		else if (_currentBulletType == BulletType::Bomb)
+		{
+			bullet = new Bullet(_currentBulletType, _posX, _posY, None_Direction, 800);
+			//add to currentObjectList
+			TileGrid::AddObjectToCurrentObjectList(bullet);
 		}
 		else
 		{

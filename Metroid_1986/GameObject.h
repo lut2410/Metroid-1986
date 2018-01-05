@@ -40,6 +40,7 @@ enum BulletType
 	BulletFromPlayer_Freeze,
 	BulletFromPlayer_Wave,
 	BulletFromPlayer_Rocket,
+	Bomb,
 	BulletFromSkree,
 	BulletFromRidley,
 	BulletFromKraid_Boomerang,

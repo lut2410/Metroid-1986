@@ -76,6 +76,8 @@ Freeze:Broken
 5	7	30
 Wave
 8	9	30
+Bomb
+8	9	30
 Rocket:Right
 10	10	-1
 Rocket:Top
