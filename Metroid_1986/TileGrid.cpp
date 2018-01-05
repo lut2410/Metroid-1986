@@ -387,9 +387,9 @@ void TileGrid::UpdateCurrentObjects(Camera* camera){
 	
 }
 void TileGrid::Update(Camera* camera, int time){
-	//Reset Camera Bound
-	//Will specify when see Object"BlockCamera"
-	camera->ResetBound();
+	////Reset Camera Bound
+	////Will specify when see Object"BlockCamera"
+	//camera->ResetBound();
 	//Update object to match quadtree it is being on
 	UpdateObjectInQuadTreeBaseOnPosition(camera);
 
@@ -548,6 +548,10 @@ void TileGrid::Update2(int time)
 }
 void TileGrid::Draw(Camera* camera)
 {
+	//Reset Camera Bound
+	//Will specify when see Object"BlockCamera"
+	camera->ResetBound();
+
 	for (auto it = CurrentObjects->begin(); it != CurrentObjects->end(); it++)
 	{
 		GameObject* object = it->second;
@@ -622,6 +626,24 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new BubbleDoor(x, y, 2);
 		return object;
 		break;
+	case ObjectIDFromFile::BlueZebPipe_IDFF:
+		object = new ZebProductionPipe(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::RedZebPipe_IDFF:
+		object = new ZebProductionPipe(x, y, 2);
+		return object;
+		break;
+
+	case ObjectIDFromFile::WeakGroundOrange_IDFF:
+		object = new WeakGround(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::WeakGroundBlue_IDFF:
+		object = new WeakGround(x, y, 2);
+		return object;
+		break;
+
 	case ObjectIDFromFile::Zoomer1_IDFF:
 		object = new Zoomer(x, y);
 		return object;
@@ -638,10 +660,72 @@ GameObject* TileGrid::CreateObject(int id, int x, int y){
 		object = new Skree(x, y, 2);
 		return object;
 		break;
+	case ObjectIDFromFile::Ripper1_IDFF:
+		object = new Ripper(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::Ripper2_IDFF:
+		object = new Ripper(x, y, 2);
+		return object;
+		break;
+	case ObjectIDFromFile::Ripper3_IDFF:
+		object = new Skree(x, y, 3);
+		return object;
+		break;
+	case ObjectIDFromFile::Waver1_IDFF:
+		object = new Waver(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::Waver2_IDFF:
+		object = new Waver(x, y, 2);
+		return object;
+		break;
+	case ObjectIDFromFile::Rio1_IDFF:
+		object = new Rio(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::Rio2_IDFF:
+		object = new Rio(x, y, 2);
+		return object;
+		break;
+		//boss
+	case ObjectIDFromFile::Ridley_IDFF:
+		object = new Ridley(x, y);
+		return object;
+		break;
+	case ObjectIDFromFile::Kraid1_IDFF:
+		object = new Kraid(x, y, 1);
+		return object;
+		break;
+	case ObjectIDFromFile::Kraid2_IDFF:
+		object = new Kraid(x, y, 2);
+		return object;
+		break;
+		//item
 	case ObjectIDFromFile::MaruMari_IDFF:
 		object = new MaruMari(x, y);
 		return object;
 		break;
+	case ObjectIDFromFile::LongBeam_IDFF:
+		object = new LongBeam(x, y);
+		return object;
+		break;
+	case ObjectIDFromFile::IceBeam_IDFF:
+		object = new IceBeam(x, y);
+		return object;
+		break;
+	case ObjectIDFromFile::WaveBeam_IDFF:
+		object = new WaveBeam(x, y);
+		return object;
+		break;
+	case ObjectIDFromFile::MissibleRocket_IDFF:
+		object = new MissibleRocket(x, y);
+		return object;
+		break;
+	//case ObjectIDFromFile::Bomb_IDFF:
+	//	object = new (x, y);
+	//	return object;
+	//	break;
 	}
 };
 

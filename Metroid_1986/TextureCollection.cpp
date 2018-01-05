@@ -1,6 +1,7 @@
 #include "TextureCollection.h"
 TextureCollection* TextureCollection::textureCollection = NULL;
 TextureCollection::TextureCollection(){
+	weakGroundTexture2	= new Texture2("Resources/Image/Map/sprite.png", "Resources/Image/Map/weakground.txt");
 	doorTexture2		= new Texture2("Resources/Image/Other Object/image.png", "Resources/Image/Other Object/door.txt");
 	zebpipeTexture2		= new Texture2("Resources/Image/Other Object/image.png", "Resources/Image/Other Object/Zeb Production Pipe.txt");
 	playerTexture2		= new Texture2("Resources/Image/player/image.png", "Resources/Image/player/player.txt");
@@ -27,6 +28,9 @@ TextureCollection* TextureCollection::getInstance(){
 Texture2* TextureCollection::getTexture2(ObjectID id){
 	switch (id)
 	{
+	case WeakGround_ID:
+		return weakGroundTexture2;
+		break;
 	case BubbleDoor_ID:
 		return doorTexture2;
 		break;

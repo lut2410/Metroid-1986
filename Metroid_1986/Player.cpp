@@ -49,6 +49,9 @@ void Player::addSpecialAbility(PlayerSpecialAbility specialAbility)
 	_specialAbility = PlayerSpecialAbility (_specialAbility | specialAbility);
 	if (specialAbility == PlayerSpecialAbility::ShootLonger_PSA)
 		_remainingTimeToShoot2 = 800;	//borrow
+
+	if (specialAbility == PlayerSpecialAbility::ShootRocket_PSA)
+		BuffRocket(5);
 }
 void Player::setAction(Action action){
 	if (_action != action)

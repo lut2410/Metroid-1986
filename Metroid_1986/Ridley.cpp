@@ -119,13 +119,13 @@ void Ridley::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 	if (_activeEnemy == false)
 		return;
 	RECT a = getCollisionBound();
+	Direction direction;
 	for (auto it = objectList.begin(); it != objectList.end(); it++)
 	{
 		GameObject* otherObject = it->second;
 
 		if (otherObject->getObjectType() == ObjectType::RelativesWithWall_OT)
 		{
-			Direction direction;
 			if (handleObjectCollision(this, otherObject, direction, deltaTime)) //collision 
 			{
 				switch (direction)
@@ -165,4 +165,6 @@ void Ridley::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 			}
 		}
 	}
+	if(direction != Direction::Bottom_Direction)
+		_action = RidleyAction::Jump_RidleyA;
 }

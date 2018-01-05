@@ -100,6 +100,7 @@
     <ClCompile Include="Skree.cpp" />
     <ClCompile Include="WaveBeam.cpp" />
     <ClCompile Include="Waver.cpp" />
+    <ClCompile Include="WeakGround.cpp" />
     <ClCompile Include="Zeb.cpp" />
     <ClCompile Include="ZebProductionPipe.cpp" />
     <ClCompile Include="Zoomer.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Skree.h" />
     <ClInclude Include="WaveBeam.h" />
     <ClInclude Include="Waver.h" />
+    <ClInclude Include="WeakGround.h" />
     <ClInclude Include="Zeb.h" />
     <ClInclude Include="ZebProductionPipe.h" />
     <ClInclude Include="Zoomer.h" />

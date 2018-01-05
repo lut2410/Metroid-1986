@@ -4,10 +4,10 @@
 #pragma once
 #include "GameObject.h"
 #include "Collision.h"
-#define RIDLEY_MAX_VEL_JUMP 0.3f
-#define RIDLEY_ACCELERATION -0.01f
+#define RIDLEY_MAX_VEL_JUMP 0.2f
+#define RIDLEY_ACCELERATION -0.012f
 #define RIDLEY_TIME_TO_JUMP 1000//1s
-#define RIDLEY_TIME_TO_SHOOT 500//0.5s
+#define RIDLEY_TIME_TO_SHOOT 300//0.5s
 enum RidleyAction{
 	Stand_RidleyA,
 	Jump_RidleyA

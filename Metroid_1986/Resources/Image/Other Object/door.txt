@@ -1,7 +1,7 @@
 Is All Frames are has a same size?
 0
 Count
-5
+10
 Sprite Info
 
 Index		Animation Info

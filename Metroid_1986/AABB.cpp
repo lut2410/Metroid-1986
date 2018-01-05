@@ -16,10 +16,10 @@ RECT Box::ToRect(){
 };
 
 bool isCollideR(RECT a, RECT b){
-	return !(b.left > a.right
-		|| b.right < a.left
-		|| b.top < a.bottom
-		|| b.bottom > a.top);
+	return !(b.left >= a.right
+		|| b.right <= a.left
+		|| b.top <= a.bottom
+		|| b.bottom >= a.top);
 };
 void setDirection(Direction& _direction, Direction direction){
 	if (_direction != direction)

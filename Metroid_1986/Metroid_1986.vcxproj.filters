@@ -177,6 +177,9 @@
     <ClCompile Include="Rocket.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="WeakGround.cpp">
+      <Filter>Object\RelativeOfGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -304,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="Rocket.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="WeakGround.h">
+      <Filter>Object\RelativeOfGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

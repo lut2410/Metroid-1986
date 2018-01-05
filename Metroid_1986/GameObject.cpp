@@ -52,6 +52,7 @@ ObjectType GameObject::getObjectType()
 	case Ground_ID:
 	case BubbleDoor_ID:
 	case ZebProductionPipe_ID:
+	case WeakGround_ID:
 		return ObjectType::RelativesWithWall_OT;
 		break;
 		//player

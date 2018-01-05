@@ -17,4 +17,4 @@ FrameFrom	FrameTo		TimeAnimation
 BluePipe
 0	0	-1
 RedPipe
-0	0	-1
+1	1	-1

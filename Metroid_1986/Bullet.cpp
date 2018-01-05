@@ -162,7 +162,7 @@ Bullet::Bullet(BulletType bulletType, int x, int y, Direction direction, DWORD s
 	if (_bulletType == BulletType::BulletFromRidley || _bulletType == BulletType::BulletFromKraid_Boomerang)
 	{
 		//_velX /= 2;
-		_velY = _velY * 3;
+		_velY = _velY * 5/2;
 	}
 		
 }
@@ -265,7 +265,11 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					case ObjectID::Ground_ID:	//bullet collide vs wall
 						//bullet will be broken
 							this->BeWounded();
-						//wave beam don't collsiion
+						break;
+					case ObjectID::WeakGround_ID:	//bullet collide vs wall
+						//bullet will be broken
+						this->BeWounded();
+						otherObject->BeWounded(_attack);
 						break;
 					case ObjectID::BubbleDoor_ID:
 						this->BeWounded();
@@ -390,6 +394,7 @@ void Bullet::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 	case BulletType::BulletFromSkree:			//will check collision in handleCollision function of Player
 		break;
 	case BulletType::BulletFromRidley:	//collision with wall
+		break;
 	case BulletType::BulletFromKraid_Boomerang:
 		for (auto it = objectList.begin(); it != objectList.end(); it++)
 		{

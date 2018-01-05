@@ -28,8 +28,12 @@ void SceneGame::LoadResources() {
 
 }
 void SceneGame::LoadObject(){
-	//_player = new Player(650,2390);
-	_player = new Player(650, 4450);
+	//_player = new Player(650, 4450);
+	//_player = new Player(2609, 4460);	//icebeam
+	//_player = new Player(3900, 7050);	//pipe
+	//_player = new Player(2683, 6586);	//rio
+	//_player = new Player(2691, 5780);	//boss:ridley
+	_player = new Player(2635, 4956);	//boss:kraid
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfFace()==DirectionOfFace::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
@@ -71,7 +75,7 @@ void SceneGame::RenderFrame(int time){
 		_camera->passTheGate();
 		_backgroundMap->Draw(_camera);
 
-		_tileGrid->Update(_camera, time);
+	/*	_tileGrid->Update(_camera, time);*/
 		_tileGrid->Draw(_camera);
 		G_SpriteHandler->End();
 		return;
@@ -161,13 +165,12 @@ void SceneGame::RenderFrame(int time){
 	//MissibleRocket* missibleRocket = new MissibleRocket(820, 2400);
 	//currentObjects->insert(pair<int, GameObject*>(1012, missibleRocket));
 
-
-	map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
+	/*map<int, GameObject*>* currentObjects = TileGrid::getInstance()->getCurrentObjects();
 	if (!currentObjects->count(1013))
 	{
 		Rocket* rocket = new Rocket(784, 2450);
 		currentObjects->insert(pair<int, GameObject*>(1013, rocket));
-	}
+	}*/
 
 	_player->Update(time);
 

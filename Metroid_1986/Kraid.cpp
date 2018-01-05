@@ -231,7 +231,7 @@ void Kraid::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 					_action = KraidAction::RunToRight_KraidA;
 					break;
 				case Direction::Right_Direction:
-					_action = KraidAction::RunToRight_KraidA;
+					_action = KraidAction::RunToLeft_KraidA;
 					break;
 				case Direction::Bottom_Direction:
 					_directionOfFace = DirectionOfFace::Right;

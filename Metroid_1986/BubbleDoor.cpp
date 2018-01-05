@@ -35,23 +35,63 @@ BubbleDoor::BubbleDoor(int x, int y, int type) :GameObject(BubbleDoor_ID, x, y, 
 }
 void BubbleDoor::Update(int deltaTime)
 {
+	////SET BOUND MAP
+	////just check with camera
+	//
+	//RECT cameraRECT = Camera::getInstance()->getRECT();
+	//RECT gateRECT = getCollisionBound();
+	//if (isColliding(cameraRECT, gateRECT))
+	//{
+	//	D3DXVECTOR2 cameraCenter = { (float)(cameraRECT.left + cameraRECT.right) / 2, (float) (cameraRECT.top + cameraRECT.bottom) / 2 };
+	//	D3DXVECTOR2 gateCenter = { (float)(gateRECT.left + gateRECT.right) / 2, (float)(gateRECT.top + gateRECT.bottom) / 2 };
+	//
+	//	if (gateCenter.x > cameraCenter.x)//gate is on the right of the camera
+	//		//set rightbound of camera = rightbound of the gate
+	//		Camera::getInstance()->_bound.right = gateCenter.x;
+	//	else //if (gateCenter.x < cameraCenter.x)//gate is on the right of the camera
+	//		Camera::getInstance()->_bound.left = gateCenter.x;
+	//}
+	//	//this time, the camera is limited by the gate
+
+
+	////check this time is in PassTheGate?
+	//if (Camera::getInstance()->_directionOfTheGate)
+	//{
+	//	//alway open
+	//	_action = BubbleDoorAction::Open_BDA;
+	//	_countdownFrames = 3;
+	//	return;
+	//}
+	////the current action is time up then change to next action
+	//if (_countdownFrames)
+	//	_countdownFrames--;
+	//else //the action is time up 
+	//	ChangeAction();
+}
+void BubbleDoor::Update2(int deltaTime)
+{
+	_currentAnimation = _actionAnimation[_action];
+	_currentAnimation->Update(deltaTime);
+}
+void BubbleDoor::Draw(Camera* camera)
+{
 	//SET BOUND MAP
 	//just check with camera
-	
+
 	RECT cameraRECT = Camera::getInstance()->getRECT();
 	RECT gateRECT = getCollisionBound();
 	if (isColliding(cameraRECT, gateRECT))
 	{
-		D3DXVECTOR2 cameraCenter = { (float)(cameraRECT.left + cameraRECT.right) / 2, (float) (cameraRECT.top + cameraRECT.bottom) / 2 };
+		D3DXVECTOR2 cameraCenter = { (float)(cameraRECT.left + cameraRECT.right) / 2, (float)(cameraRECT.top + cameraRECT.bottom) / 2 };
 		D3DXVECTOR2 gateCenter = { (float)(gateRECT.left + gateRECT.right) / 2, (float)(gateRECT.top + gateRECT.bottom) / 2 };
-	
+
 		if (gateCenter.x > cameraCenter.x)//gate is on the right of the camera
 			//set rightbound of camera = rightbound of the gate
 			Camera::getInstance()->_bound.right = gateCenter.x;
 		else //if (gateCenter.x < cameraCenter.x)//gate is on the right of the camera
 			Camera::getInstance()->_bound.left = gateCenter.x;
 	}
-		//this time, the camera is limited by the gate
+	//this time, the camera is limited by the gate
 
 
 	//check this time is in PassTheGate?
@@ -67,14 +107,7 @@ void BubbleDoor::Update(int deltaTime)
 		_countdownFrames--;
 	else //the action is time up 
 		ChangeAction();
-}
-void BubbleDoor::Update2(int deltaTime)
-{
-	_currentAnimation = _actionAnimation[_action];
-	_currentAnimation->Update(deltaTime);
-}
-void BubbleDoor::Draw(Camera* camera)
-{
+
 	D3DXVECTOR2 center = camera->Transform(_posX, _posY);
 	_currentAnimation->Draw(center.x, center.y);
 }
@@ -109,7 +142,7 @@ void BubbleDoor::BeWounded(int hp)
 void BubbleDoor::Open()
 {
 	_action = BubbleDoorAction::Open_BDA;
-	_countdownFrames = 30;
+	_countdownFrames = 60;
 }
 void BubbleDoor::Close()
 {

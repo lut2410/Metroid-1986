@@ -9,7 +9,7 @@ Zoomer::Zoomer(int x, int y, int type) :GameObject(Zoomer_ID, x, y, 0, 0){
 	{
 		_hp = 3;
 		_attack = 8;
-		OBJECT_VEL = 0.1f;
+		OBJECT_VEL = 0.0625f;
 		_actionAnimation.push_back( new Animation(ZoomerTexture,"Type1:Top"));
 		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type1:Right"));
 		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type1:Bottom"));
@@ -19,7 +19,7 @@ Zoomer::Zoomer(int x, int y, int type) :GameObject(Zoomer_ID, x, y, 0, 0){
 	{
 		_hp = 5;
 		_attack = 8;
-		OBJECT_VEL = 0.125f;
+		OBJECT_VEL = 0.0625f;
 		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Top"));
 		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Right"));
 		_actionAnimation.push_back(new Animation(ZoomerTexture, "Type2:Bottom"));

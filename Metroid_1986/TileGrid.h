@@ -16,6 +16,7 @@
 //OBJECT
 //nelative of ground
 #include "Ground.h"
+#include "WeakGround.h"
 #include "Gate.h"
 #include "BubbleDoor.h"
 #include "ZebProductionPipe.h"
@@ -50,6 +51,8 @@ enum ObjectIDFromFile{
 	BubbleDoorRed_IDFF = 2,
 	BlueZebPipe_IDFF=3,
 	RedZebPipe_IDFF=4,
+	WeakGroundOrange_IDFF=5,
+	WeakGroundBlue_IDFF = 6,
 	//enemy
 	Zoomer1_IDFF=20,
 	Zoomer2_IDFF=21,
