@@ -569,8 +569,12 @@ void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 		GameObject* object = it->second;
 
 	
-		if (object->getObjectStatus() != ObjectStatus::Survival_OS)	// then don't check collision
-			continue;
+		if (object->getObjectStatus() != ObjectStatus::Survival_OS&&object->getBulletType() != BulletType::Bomb)	// then don't check collision
+		{
+			//if(object->getBulletType() != BulletType::Bomb)
+				continue;
+		}
+			
 		//else, check and handle
 		switch (object->getObjectID())
 			//check collision vs enemy and ground

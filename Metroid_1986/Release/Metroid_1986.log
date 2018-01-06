@@ -1,4 +1,4 @@
-﻿Build started 1/6/2018 2:16:39 AM.
+﻿Build started 1/6/2018 12:32:06 PM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /D _MBCS /D _CRT_SECURE_NO_WARNINGS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
@@ -12,24 +12,24 @@
      1>Player.cpp(482): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
      1>Player.cpp(562): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
      1>Player.cpp(563): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>Player.cpp(672): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(674): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(688): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(690): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(703): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(705): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(837): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(893): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(939): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(941): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(963): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(969): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(971): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(1040): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(1055): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(1057): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(1086): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>Player.cpp(1076): warning C4101: 'direction' : unreferenced local variable
+     1>Player.cpp(675): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(677): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(691): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(693): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(706): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(708): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(840): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>Player.cpp(896): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>Player.cpp(942): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>Player.cpp(944): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>Player.cpp(966): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>Player.cpp(972): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>Player.cpp(974): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>Player.cpp(1043): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(1058): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(1060): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
+     1>Player.cpp(1089): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
+     1>Player.cpp(1079): warning C4101: 'direction' : unreferenced local variable
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.exe" /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.lib" /MACHINE:X86 /SAFESEH Release\AABB.obj
          Release\Animation.obj
@@ -69,7 +69,7 @@
          Release\Player.obj
          Release\QuadTree.obj
          Release\Scene.obj
-         Release\SceneEnd.obj
+         Release\SceneGameOver.obj
          Release\SceneGame.obj
          Release\SceneMain.obj
          Release\SceneMenu.obj
@@ -84,11 +84,11 @@
          Generating code
      1>d:\lt\game\metroid-1986\metroid_1986\texturecollection.cpp(89): warning C4715: 'TextureCollection::getTexture2' : not all control paths return a value
      1>d:\lt\game\metroid-1986\metroid_1986\gameobject.cpp(95): warning C4715: 'GameObject::getObjectType' : not all control paths return a value
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(740): warning C4715: 'TileGrid::CreateObject' : not all control paths return a value
+     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(744): warning C4715: 'TileGrid::CreateObject' : not all control paths return a value
          Finished generating code
          Metroid_1986.vcxproj -> D:\LT\Game\Metroid-1986\Release\Metroid_1986.exe
      1>Done Building Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.42
+Time Elapsed 00:00:03.87

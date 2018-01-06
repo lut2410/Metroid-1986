@@ -12,7 +12,7 @@ static enum ESceneState
 {
 	Scene_Menu,
 	Scene_Game,
-	Scene_End
+	Scene_GameOver
 } EnumSceneState; 
 
 //load Surface from file

@@ -1,266 +1,27 @@
-﻿Build started 1/5/2018 11:19:03 PM.
-     1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 1/6/2018 12:23:41 PM.
+     1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AABB.cpp Animation.cpp BackgroundMap.cpp BubbleDoor.cpp Bullet.cpp Camera.cpp Collision.cpp CWaveFile.cpp Fire.cpp Font.cpp Game.cpp GameSound.cpp Gate.cpp "Global Setting.cpp" GameObject.cpp Ground.cpp HPTonic.cpp IceBeam.cpp Kraid.cpp LongBeam.cpp MissibleRocket.cpp Ridley.cpp Rio.cpp Ripper.cpp Rocket.cpp Skree.cpp Sound.cpp WaveBeam.cpp Waver.cpp WeakGround.cpp Zeb.cpp ZebProductionPipe.cpp Zoomer.cpp Player.cpp QuadTree.cpp Scene.cpp SceneEnd.cpp SceneGame.cpp SceneMain.cpp SceneMenu.cpp MaruMari.cpp Sprite.cpp TextureCollection.cpp Texture2.cpp Tile.cpp TileGrid.cpp Infor.cpp WinMain.cpp
-         WinMain.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-         Infor.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         TileGrid.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(97): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(123): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(142): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(147): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(178): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(191): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(241): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(251): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(278): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(294): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(298): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(309): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(313): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(580): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(587): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(594): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(596): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         Tile.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Texture2.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         TextureCollection.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Sprite.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\sprite.cpp(69): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         MaruMari.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         SceneMenu.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.cpp(27): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.cpp(28): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SceneGame.cpp SceneMain.cpp
          SceneMain.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
+     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
                  c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
+     1>d:\lt\game\metroid-1986\metroid_1986\scenegameover.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
+                 d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(9) : see previous definition of 'COLOR_MENU'
          SceneGame.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
+     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
                  c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-     1>d:\lt\game\metroid-1986\metroid_1986\scenegame.cpp(41): warning C4244: '=' : conversion from 'int' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\scenegame.cpp(111): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         SceneEnd.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\sceneend.h(7): warning C4005: 'COLOR_MENU' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-     1>d:\lt\game\metroid-1986\metroid_1986\sceneend.cpp(36): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\sceneend.cpp(37): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         Scene.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         QuadTree.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Player.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(161): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(261): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(325): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(334): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(358): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(481): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(561): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(562): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(671): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(673): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(687): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(689): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(702): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(704): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(836): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(892): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(938): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(940): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(962): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(968): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(970): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(1028): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(1039): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(1041): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(1070): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\player.cpp(1060): warning C4101: 'direction' : unreferenced local variable
-         Zoomer.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\zoomer.cpp(109): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\zoomer.cpp(172): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\zoomer.cpp(177): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\zoomer.cpp(182): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\zoomer.cpp(187): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-         ZebProductionPipe.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\zebproductionpipe.cpp(51): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-         Zeb.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\zeb.cpp(48): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\zeb.cpp(102): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\zeb.cpp(105): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\zeb.cpp(119): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         WeakGround.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Waver.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\waver.cpp(40): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\waver.cpp(58): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\waver.cpp(72): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\waver.cpp(75): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\waver.cpp(109): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\waver.cpp(112): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\waver.cpp(125): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         Generating Code...
-     1>d:\lt\game\metroid-1986\metroid_1986\texturecollection.cpp(89): warning C4715: 'TextureCollection::getTexture2' : not all control paths return a value
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(740): warning C4715: 'TileGrid::CreateObject' : not all control paths return a value
-         Compiling...
-         WaveBeam.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Sound.cpp
-         Skree.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\skree.cpp(14): warning C4305: '=' : truncation from 'double' to 'float'
-     1>d:\lt\game\metroid-1986\metroid_1986\skree.cpp(97): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         Rocket.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Ripper.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\ripper.cpp(82): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\ripper.cpp(85): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\ripper.cpp(98): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         Rio.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\rio.cpp(63): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\rio.cpp(64): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\rio.cpp(124): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         Ridley.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\ridley.cpp(51): warning C4244: 'initializing' : conversion from 'FLOAT' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\ridley.cpp(60): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\ridley.cpp(129): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\ridley.cpp(151): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-         MissibleRocket.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         LongBeam.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Kraid.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\kraid.cpp(73): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\kraid.cpp(85): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\kraid.cpp(164): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\kraid.cpp(202): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\kraid.cpp(206): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\kraid.cpp(225): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         IceBeam.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         HPTonic.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Ground.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         GameObject.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\gameobject.cpp(37): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\gameobject.cpp(212): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\gameobject.cpp(213): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\gameobject.cpp(261): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\gameobject.cpp(264): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-         Global Setting.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Gate.cpp
-         GameSound.cpp
-         Game.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(8): warning C4005: 'COLOR_MENU' : macro redefinition
-                 c:\program files (x86)\windows kits\8.1\include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
-         Font.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(40): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(41): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(59): warning C4018: '>=' : signed/unsigned mismatch
-     1>d:\lt\game\metroid-1986\metroid_1986\font.cpp(73): warning C4018: '>=' : signed/unsigned mismatch
-         Fire.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-         Generating Code...
-     1>d:\lt\game\metroid-1986\metroid_1986\gameobject.cpp(95): warning C4715: 'GameObject::getObjectType' : not all control paths return a value
-         Compiling...
-         CWaveFile.cpp
-         Collision.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(17): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(18): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(22): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(27): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(28): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(65): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(66): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(70): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(71): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(76): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(77): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(81): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(82): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(160): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(161): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(162): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(163): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(170): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(171): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(172): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(173): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(223): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(224): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(225): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\collision.cpp(226): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-         Camera.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(13): warning C4244: '=' : conversion from 'int' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(24): warning C4244: 'initializing' : conversion from 'FLOAT' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(32): warning C4244: '=' : conversion from 'int' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(34): warning C4244: '=' : conversion from 'int' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(38): warning C4244: '=' : conversion from 'LONG' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(40): warning C4244: '=' : conversion from 'LONG' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(46): warning C4244: '=' : conversion from 'int' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(48): warning C4244: '=' : conversion from 'int' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(52): warning C4244: '=' : conversion from 'LONG' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(54): warning C4244: '=' : conversion from 'LONG' to 'FLOAT', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\camera.cpp(116): warning C4244: 'argument' : conversion from 'int' to 'FLOAT', possible loss of data
-         Bullet.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(206): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(208): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(210): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(268): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(321): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(355): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(404): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bullet.cpp(429): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         BubbleDoor.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\bubbledoor.cpp(90): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bubbledoor.cpp(92): warning C4244: '=' : conversion from 'FLOAT' to 'LONG', possible loss of data
-     1>d:\lt\game\metroid-1986\metroid_1986\bubbledoor.cpp(112): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-         BackgroundMap.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\backgroundmap.cpp(55): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-         Animation.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>d:\lt\game\metroid-1986\metroid_1986\animation.cpp(41): warning C4018: '<' : signed/unsigned mismatch
-         AABB.cpp
-     1>d:\lt\game\metroid-1986\metroid_1986\aabb.cpp(15): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\scenegameover.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
+                 d:\lt\game\metroid-1986\metroid_1986\scenemenu.h(9) : see previous definition of 'COLOR_MENU'
+     1>d:\lt\game\metroid-1986\metroid_1986\scenegame.cpp(42): warning C4244: '=' : conversion from 'int' to 'FLOAT', possible loss of data
+     1>d:\lt\game\metroid-1986\metroid_1986\scenegame.cpp(112): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
          Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Debug\Metroid_1986.lib" /MACHINE:X86 Debug\AABB.obj
          Debug\Animation.obj
          Debug\BackgroundMap.obj
+         Debug\Bomb.obj
          Debug\BubbleDoor.obj
          Debug\Bullet.obj
          Debug\Camera.obj
@@ -274,6 +35,7 @@
          "Debug\Global Setting.obj"
          Debug\GameObject.obj
          Debug\Ground.obj
+         Debug\Guard.obj
          Debug\HPTonic.obj
          Debug\IceBeam.obj
          Debug\Kraid.obj
@@ -294,7 +56,7 @@
          Debug\Player.obj
          Debug\QuadTree.obj
          Debug\Scene.obj
-         Debug\SceneEnd.obj
+         Debug\SceneGameOver.obj
          Debug\SceneGame.obj
          Debug\SceneMain.obj
          Debug\SceneMenu.obj
@@ -307,8 +69,8 @@
          Debug\Infor.obj
          Debug\WinMain.obj
          Metroid_1986.vcxproj -> D:\LT\Game\Metroid-1986\Debug\Metroid_1986.exe
-     1>Done Building Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:31.18
+Time Elapsed 00:00:04.79

@@ -2,7 +2,7 @@
 Player::Player():GameObject(){
 }
 Player::Player(int x, int y) : GameObject(Player_ID, x, y, 0, 0) {
-	_hp = 30;
+	_hp = 1000;
 	_attack = 0;//attack by bullet, isn't by body
 	_currentBulletType = BulletType::BulletFromPlayer_Nomal;
 	_specialAbility = PlayerSpecialAbility::PutBomb_PSA;
@@ -655,9 +655,12 @@ void Player::BeWounded(Direction direction, int lossHP)
 	case Direction::Bottom_Direction:
 		_velY = SPEED_WOUND;
 	}
-	
-	GameSound* s = GameSound::getInstance();
-	s->play(SOUND_BE_WOUNDED);
+	if (_directionOfFace != DirectionOfFace::Neutral)
+	{
+		GameSound* s = GameSound::getInstance();
+		s->play(SOUND_BE_WOUNDED);
+	}
+
 
 }
 

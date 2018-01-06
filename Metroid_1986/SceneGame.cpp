@@ -27,15 +27,16 @@ void SceneGame::LoadResources() {
 
 	GameSound* s = GameSound::getInstance();
 	s->stop(SOUND_INTRO_SCENE);
+	s->stop(SOUND_END_SCENE);
 	s->play(SOUND_PLAY_SCENE,true);
 }
 void SceneGame::LoadObject(){
-	//_player = new Player(650, 4450);
+	_player = new Player(650, 4450);
 	//_player = new Player(2609, 4460);	//icebeam
 	//_player = new Player(3900, 7050);	//pipe
 	//_player = new Player(2683, 6586);	//rio
 	//_player = new Player(2691, 5780);	//boss:ridley
-	_player = new Player(2635, 4956);	//boss:kraid
+	//_player = new Player(2635, 4956);	//boss:kraid
 	//// player in begin is centered on screen
 	if (_player->getDirectionOfFace()==DirectionOfFace::Neutral)//begin, player has direction = neutral
 		_camera->_viewport.x = _player->_posX - _screenWidth / 2;
@@ -51,7 +52,7 @@ void SceneGame::RenderFrame(int time){
 	CheckEndGame();
 	//after 1 time = 4s then allow player control by keyboard
 	DWORD timeNow = GetTickCount();
-	if (timeNow - _stageStartTime <= 0000) //4000
+	if (timeNow - _stageStartTime <= 4000) //4000
 	{
 		_player->BeWounded(Direction::None_Direction, 0);
 	}
@@ -113,14 +114,10 @@ void SceneGame::handleCollision(int dt){
 void SceneGame::CheckEndGame()
 {
 	if (_player->getObjectStatus()==ObjectStatus::Died_OS)
-		_sceneState = Scene_End;
+		_sceneState = Scene_GameOver;
 }
 void SceneGame::KeyPress(int KeyCode){
 	
-	//if (_player->_isMotionless)		//don't allow press or release keys
-	//	return;
-
-
 	ActionKey actionKey;
 	switch (KeyCode)
 	{

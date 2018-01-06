@@ -10,7 +10,7 @@
 #include <stdlib.h>		//support to random
 #define WOUNDED_FRAMES 8
 #define FREEZED_FRAMES 60
-#define EXPLODE_FRAMES 2
+#define EXPLODE_FRAMES 3
 enum ObjectType{
 	RelativesWithWall_OT,	//can't move, is in background: ground,wall,gate,door,..
 	Player_OT,				//Samus

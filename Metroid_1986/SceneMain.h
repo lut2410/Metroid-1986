@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "SceneMenu.h"
 #include "SceneGame.h"
-#include "SceneEnd.h"
+#include "SceneGameOver.h"
 class SceneMain
 {
 protected:

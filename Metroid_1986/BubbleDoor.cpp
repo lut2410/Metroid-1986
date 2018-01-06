@@ -135,9 +135,10 @@ void BubbleDoor::BeWounded(int hp)
 	if (_action == BubbleDoorAction::Close_BDA)
 	{
 		_hp -= hp;
+		if (_hp <= 0)
+			Openning();
 	}
-	if(_hp<=0)
-		Openning();
+	
 }
 void BubbleDoor::Open()
 {

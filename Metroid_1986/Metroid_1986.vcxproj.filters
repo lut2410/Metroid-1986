@@ -63,9 +63,6 @@
     <ClCompile Include="SceneMain.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SceneEnd.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGame.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -201,6 +198,9 @@
     <ClCompile Include="Bomb.cpp">
       <Filter>Object\Player</Filter>
     </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneMenu.h">
@@ -213,9 +213,6 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="SceneGame.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneEnd.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Global Setting.h">
@@ -349,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

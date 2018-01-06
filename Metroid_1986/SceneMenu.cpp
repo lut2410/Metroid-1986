@@ -48,7 +48,7 @@ void SceneMenu::LoadResources()
 {
 	srand((unsigned)time(NULL));
 
-	_background = CreateSurfaceFromFile(G_d3ddv, BACKGROUND_FILE);
+	_background = CreateSurfaceFromFile(G_d3ddv, INTRO_BACKGROUND_FILE);
 
 	_chooseIcon = new Texture2(CHOOSEICON_FILE);
 

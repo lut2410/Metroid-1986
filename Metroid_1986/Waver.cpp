@@ -128,11 +128,6 @@ void Waver::handleCollision(map<int, GameObject*> objectList, float deltaTime)
 			{
 			case Direction::Top_Direction:
 			case Direction::Bottom_Direction:
-				//if (_action == WaverAction::WaveToRight_WaverA)
-				//	_action = WaverAction::SuftToRight_WaverA;
-				//	
-				//if (_action == WaverAction::WaveToLeft_WaverA)
-				//	_action = WaverAction::SuftToLeft_WaverA;
 				break;
 			case Direction::Left_Direction:
 				_action = WaverAction::WaveToRight_WaverA;

@@ -5,6 +5,7 @@
 #include "Scene.h"
 
 #define CHOOSEICON_FILE "Resources/Image/ChooseIcon.png"
+#define INTRO_BACKGROUND_FILE	"Resources/Image/Scene Background/intro_background.jpg"
 #define COLOR_MENU D3DCOLOR_ARGB(255, 172, 231, 255)
 
 class SceneMenu : public Scene{

@@ -40,8 +40,8 @@ void SceneMain::RenderFrame(int t){
 			_currentScene = new SceneGame();
 			_currentScene->LoadResources();
 			break;
-		case ESceneState::Scene_End:
-			_currentScene = new SceneEnd();
+		case ESceneState::Scene_GameOver:
+			_currentScene = new SceneGameOver();
 			_currentScene->LoadResources();
 			break;
 
