@@ -1,35 +1,15 @@
-﻿Build started 1/6/2018 12:32:06 PM.
+﻿Build started 1/6/2018 2:31:39 PM.
      1>Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /D _MBCS /D _CRT_SECURE_NO_WARNINGS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
-         Player.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /D _MBCS /D _CRT_SECURE_NO_WARNINGS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SceneGame.cpp
+         SceneGame.cpp
          C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>Player.cpp(162): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>Player.cpp(262): warning C4244: 'initializing' : conversion from 'float' to 'LONG', possible loss of data
-     1>Player.cpp(326): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>Player.cpp(335): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>Player.cpp(359): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>Player.cpp(482): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>Player.cpp(562): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>Player.cpp(563): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>Player.cpp(675): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(677): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(691): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(693): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(706): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(708): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(840): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(896): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(942): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(944): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(966): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(972): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(974): warning C4390: ';' : empty controlled statement found; is this the intent?
-     1>Player.cpp(1043): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(1058): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(1060): warning C4244: 'argument' : conversion from 'FLOAT' to 'int', possible loss of data
-     1>Player.cpp(1089): warning C4244: 'initializing' : conversion from 'LONG' to 'float', possible loss of data
-     1>Player.cpp(1079): warning C4101: 'direction' : unreferenced local variable
+     1>d:\lt\game\metroid-1986\metroid_1986\SceneMenu.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
+                 C:\Program Files (x86)\Windows Kits\8.1\Include\um\winuser.h(9068) : see previous definition of 'COLOR_MENU'
+     1>d:\lt\game\metroid-1986\metroid_1986\SceneGameOver.h(9): warning C4005: 'COLOR_MENU' : macro redefinition
+                 d:\lt\game\metroid-1986\metroid_1986\SceneMenu.h(9) : see previous definition of 'COLOR_MENU'
+     1>SceneGame.cpp(42): warning C4244: '=' : conversion from 'int' to 'FLOAT', possible loss of data
+     1>SceneGame.cpp(112): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.exe" /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\LT\Game\Metroid-1986\Release\Metroid_1986.lib" /MACHINE:X86 /SAFESEH Release\AABB.obj
          Release\Animation.obj
@@ -84,11 +64,11 @@
          Generating code
      1>d:\lt\game\metroid-1986\metroid_1986\texturecollection.cpp(89): warning C4715: 'TextureCollection::getTexture2' : not all control paths return a value
      1>d:\lt\game\metroid-1986\metroid_1986\gameobject.cpp(95): warning C4715: 'GameObject::getObjectType' : not all control paths return a value
-     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(744): warning C4715: 'TileGrid::CreateObject' : not all control paths return a value
+     1>d:\lt\game\metroid-1986\metroid_1986\tilegrid.cpp(746): warning C4715: 'TileGrid::CreateObject' : not all control paths return a value
          Finished generating code
          Metroid_1986.vcxproj -> D:\LT\Game\Metroid-1986\Release\Metroid_1986.exe
      1>Done Building Project "D:\LT\Game\Metroid-1986\Metroid_1986\Metroid_1986.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.87
+Time Elapsed 00:00:03.52

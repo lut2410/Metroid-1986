@@ -93,6 +93,8 @@ void Kraid::UpdateActionAndVelocity(int deltaTime)
 {
 	if (_remainingTimeToShoot > 0)
 		_remainingTimeToShoot -= deltaTime;
+	else
+		SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
 	if (_remainingTimeToShoot2 >= 0)
 		_remainingTimeToShoot2 -= deltaTime;
 

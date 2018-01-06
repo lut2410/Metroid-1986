@@ -30,7 +30,7 @@ RECT GameObject::getCollisionBound(){
 	Box  objectBox = _currentAnimation->getCurrentSpriteSize();
 
 	if (_objectID == ObjectID::Zoomer_ID)
-		objectBox = { 0, 0, 14, 14 };
+		objectBox = { 0, 0, 12, 12 };
 	RECT objectBound = { _posX - objectBox.width / 2,		//left
 		_posY + objectBox.height / 2,						//top
 		_posX + objectBox.width / 2,						//right

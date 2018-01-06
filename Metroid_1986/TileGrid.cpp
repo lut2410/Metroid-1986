@@ -486,7 +486,7 @@ void TileGrid::Update(Camera* camera, int time){
 						(int)object->getPositionOfGun().y + 10, d, 1000);
 					//insert object with the key
 					currentObjects->insert(pair<int, GameObject*>(key, kraidRocket));
-					object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
+					//object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
 				}
 			}
 			if (object->getRemainingTimeToShoot() <= KRAID_TIME_TO_SHOOT)
@@ -508,7 +508,7 @@ void TileGrid::Update(Camera* camera, int time){
 						(int)object->getPositionOfGun().y, d, 1000);
 					//insert object with the key
 					currentObjects->insert(pair<int, GameObject*>(key, kraidRocket));
-					object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
+					//object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
 				}
 			}
 			if (object->getRemainingTimeToShoot() <= 0)
@@ -530,7 +530,7 @@ void TileGrid::Update(Camera* camera, int time){
 						(int)object->getPositionOfGun().y - 10, d, 1000);
 					//insert object with the key
 					currentObjects->insert(pair<int, GameObject*>(key, kraidRocket));
-					object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
+					//object->SetRemainingTimeToShoot(3 * KRAID_TIME_TO_SHOOT);
 				}
 			}
 		}
@@ -569,9 +569,11 @@ void TileGrid::handleCollision(int playerX, int playerY, int deltaTime)
 		GameObject* object = it->second;
 
 	
-		if (object->getObjectStatus() != ObjectStatus::Survival_OS&&object->getBulletType() != BulletType::Bomb)	// then don't check collision
+		if (object->getObjectStatus() != ObjectStatus::Survival_OS
+			&&object->getBulletType() != BulletType::Bomb
+			&&object->getObjectID() !=ObjectID::Ripper_ID)	//Riper when be wounded->check
+			// then don't check collision
 		{
-			//if(object->getBulletType() != BulletType::Bomb)
 				continue;
 		}
 			

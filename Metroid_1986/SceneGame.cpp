@@ -32,7 +32,7 @@ void SceneGame::LoadResources() {
 }
 void SceneGame::LoadObject(){
 	_player = new Player(650, 4450);
-	//_player = new Player(2609, 4460);	//icebeam
+	_player = new Player(2609, 4475);	//icebeam
 	//_player = new Player(3900, 7050);	//pipe
 	//_player = new Player(2683, 6586);	//rio
 	//_player = new Player(2691, 5780);	//boss:ridley

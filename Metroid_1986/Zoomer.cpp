@@ -108,7 +108,7 @@ void Zoomer::handleCollision(map<int, GameObject*> objectList, float dt)
 			//if (int i = IsCollideVsWall(this, object, direction, dt))
 			if (int i = handleObjectCollision(this, object, direction, dt,false))
 			{
-				if (i == 2)
+				if (i == 2) //stab into wall
 				{
 					//change action
 					switch (_action)
@@ -140,7 +140,7 @@ void Zoomer::handleCollision(map<int, GameObject*> objectList, float dt)
 			}
 		}
 	}
-	if (OK == false)
+	if (OK == false) //don't collide with wall
 	{
 		//change action
 		switch (_action)
@@ -168,24 +168,24 @@ void Zoomer::FixPosition()
 	switch (_action)
 	{
 	case ZoomerAction::Crawl_Top:		//foot touch wall => bottom always divisibility 16	
-		_posY -= 7;
+		_posY -= 6;
 		_posY = round((double)_posY / 8) * 8;
-		_posY += 7;
+		_posY += 6;
 		break;
 	case ZoomerAction::Crawl_Right:	
-		_posX -= 7;
+		_posX -= 6;
 		_posX = round((double)_posX / 8) * 8;
-		_posX += 7;
+		_posX += 6;
 		break;
 	case ZoomerAction::Crawl_Bottom:
-		_posY += 7;
+		_posY += 6;
 		_posY = round((double)_posY / 8) * 8;
-		_posY -= 7;
+		_posY -= 6;
 		break;
 	case ZoomerAction::Crawl_Left:
-		_posX += 7;
+		_posX += 6;
 		_posX = round((double)_posX / 8) * 8;
-		_posX -= 7;
+		_posX -= 6;
 		break;
 	}
 }
