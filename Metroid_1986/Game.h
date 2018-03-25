@@ -1,73 +1,52 @@
 #ifndef _GAME_H_
 #define _GAME_H_
-#include <windows.h>
-#include <d3d9.h>
 
-#define GAME_SCREEN_RESOLUTION_640_480_24   0
-#define GAME_SCREEN_RESOLUTION_800_600_24   1
-#define GAME_SCREEN_RESOLUTION_1024_768_24  2
-
-#define GAME_SCREEN_RESOLUTION_640_480_32   10
-#define GAME_SCREEN_RESOLUTION_800_600_32   11
-#define GAME_SCREEN_RESOLUTION_1024_768_32  12
-
+#include "Global Setting.h"
+#include "SceneMain.h"
+#define KEYBOARD_BUFFER_SIZE	1024
+#define KEY_DOWN(vk_code) ( (_Keys[vk_code] & 0x80)? 1 : 0 )
 class  Game
 {
 protected:
-	LPDIRECT3D9 _d3d = NULL;    // the pointer to our Direct3D interface
-	LPDIRECT3DDEVICE9 _d3ddv = NULL;    // the pointer to the device class
-	LPDIRECT3DSURFACE9 _backBuffer = NULL;
-	D3DFORMAT _backBufferFormat = D3DFMT_X8R8G8B8;
-
-	int _mode;				// Screen mode 
-	int _isFullScreen;		// Is running in fullscreen mode?
+	
+	int _mode;				// Screen mode
 	int _frameRate;
+	bool _isFullScreen;		// Is running in fullscreen mode?
+	bool _backgroundSound;
+	bool _effectSound;
 
-	int _screenWidth;
-	int _screenHeight;
-	int _depth;
-
-	HINSTANCE _hInstance;	// Handle of the game instance
-	HWND _hWnd;				// Handle of the Game Window
-	LPWSTR _name;			// Name of game will be used as Window Class Name
-
-
-
-	void _SetScreenDimension(int mode);
+	//set mode Screen -> pecific screen width+height 
+	void _SetScreenDimension();
 
 	static LRESULT CALLBACK _WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
-	void _Init();
+	//SceneMain* _scene;
 	void _InitWindow();
+	void _InitKeyboard();
 	void _InitDirectX();
 
 	// Render a single frame
-	void _RenderFrame(DWORD deltaTime);
+	void _RenderFrame(int deltaTime);
 
 	// Place holder for sub classes
-	virtual void RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int Delta);
-	virtual void LoadResources(LPDIRECT3DDEVICE9 d3ddv);
-
+	virtual void RenderFrame(int Delta);
+	virtual void LoadResources();
+	void KeyboardHandling(); //process base Keyboard event
+	virtual void KeyPress(int KeyCode);
+	virtual void KeyRelease(int KeyCode);
 public:
-	Game(HINSTANCE hInstance, LPWSTR name, int mode, int isFullscreen, int frameRate);
+	Game(HINSTANCE hInstance, char* name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
+	Game(HINSTANCE hInstance, LPCWSTR name, int mode, int frameRate, bool isFullscreen, bool backgroundSound, bool effectSound);
 	~Game();
 
-	int getMode();
-
-	int getScreenWidth();
-	int getScreenHeight();
-	int getDepth();
-
 	int frameRate;			// Desired frame rate of game
-
 	// Initialize the game with set parameters
 	void Init();
-
 	// Run game
 	void Run();
+	
 
-
-
+	BYTE  _Keys[256];
+	DIDEVICEOBJECTDATA _KeyEvents[KEYBOARD_BUFFER_SIZE]; // Buffered keyboard data
 };
 
 #endif _GAME_H

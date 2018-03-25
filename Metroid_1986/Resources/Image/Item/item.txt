@@ -1,0 +1,70 @@
+Is All Frames are has a same size?
+0
+Count
+11
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			8				36				12				13
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			81				121				8				8
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			91				121				8				8
+
+Index		Animation Info
+3			LocationX		LocationY		FrameWidth		FrameHeight
+			45				56				16				16
+
+Index		Animation Info
+4			LocationX		LocationY		FrameWidth		FrameHeight
+			81				56				16				16
+
+Index		Animation Info
+5			LocationX		LocationY		FrameWidth		FrameHeight
+			80				33				14				16
+
+Index		Animation Info
+6			LocationX		LocationY		FrameWidth		FrameHeight
+			134				15				16				16
+
+Index		Animation Info
+7			LocationX		LocationY		FrameWidth		FrameHeight
+			8				15				16				16
+
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			9				95				16				16
+
+Index		Animation Info
+9			LocationX		LocationY		FrameWidth		FrameHeight
+			101				117				8				12
+
+Index		Animation Info
+10			LocationX		LocationY		FrameWidth		FrameHeight
+			111				117				8				12
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+MaruMari
+0	0	-1
+HPTonic
+1	2	60
+LongBeam
+3	3	-1
+IceBeam
+4	4	-1
+Bomb
+5	5	-1
+MissibleRocket
+6	6	-1
+EnergyTank
+7	7	-1
+WaveBeam
+8	8	-1
+Rocket
+9	10	60

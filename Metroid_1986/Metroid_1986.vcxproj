@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -13,18 +13,19 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9AA0DA16-E7DE-4039-9559-DB9FC788EA54}</ProjectGuid>
     <RootNamespace>Metroid_1986</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -42,15 +43,20 @@
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -60,24 +66,117 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BackgroundMap.cpp" />
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="BubbleDoor.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="CWaveFile.cpp" />
+    <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="hihi.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="GameSound.cpp" />
+    <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="Global Setting.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Guard.cpp" />
+    <ClCompile Include="HPTonic.cpp" />
+    <ClCompile Include="IceBeam.cpp" />
+    <ClCompile Include="Kraid.cpp" />
+    <ClCompile Include="LongBeam.cpp" />
+    <ClCompile Include="MissibleRocket.cpp" />
+    <ClCompile Include="Ridley.cpp" />
+    <ClCompile Include="Rio.cpp" />
+    <ClCompile Include="Ripper.cpp" />
+    <ClCompile Include="Rocket.cpp" />
+    <ClCompile Include="Skree.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="WaveBeam.cpp" />
+    <ClCompile Include="Waver.cpp" />
+    <ClCompile Include="WeakGround.cpp" />
+    <ClCompile Include="Zeb.cpp" />
+    <ClCompile Include="ZebProductionPipe.cpp" />
+    <ClCompile Include="Zoomer.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneGameOver.cpp" />
+    <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="SceneMenu.cpp" />
+    <ClCompile Include="MaruMari.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TextureCollection.cpp" />
+    <ClCompile Include="Texture2.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileGrid.cpp" />
+    <ClCompile Include="Infor.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="BackgroundMap.h" />
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BubbleDoor.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="CWaveFile.h" />
+    <ClInclude Include="Fire.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="GameSound.h" />
+    <ClInclude Include="Gate.h" />
+    <ClInclude Include="Global Setting.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Guard.h" />
+    <ClInclude Include="HPTonic.h" />
+    <ClInclude Include="IceBeam.h" />
+    <ClInclude Include="Kraid.h" />
+    <ClInclude Include="LongBeam.h" />
+    <ClInclude Include="MaruMari.h" />
+    <ClInclude Include="MissibleRocket.h" />
+    <ClInclude Include="Ridley.h" />
+    <ClInclude Include="Rio.h" />
+    <ClInclude Include="Ripper.h" />
+    <ClInclude Include="Rocket.h" />
+    <ClInclude Include="Skree.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="WaveBeam.h" />
+    <ClInclude Include="Waver.h" />
+    <ClInclude Include="WeakGround.h" />
+    <ClInclude Include="Zeb.h" />
+    <ClInclude Include="ZebProductionPipe.h" />
+    <ClInclude Include="Zoomer.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="SceneGameOver.h" />
+    <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="TextureCollection.h" />
+    <ClInclude Include="Texture2.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileGrid.h" />
+    <ClInclude Include="Infor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

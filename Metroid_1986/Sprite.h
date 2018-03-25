@@ -1,25 +1,22 @@
 #ifndef SPRITE_H
 #define SPRITE_H
-#include <windows.h>
-#include <windowsx.h>
-#include <d3d9.h>
-#include <d3dx9.h>
 
+#pragma once
+#include "Texture2.h"
 class Sprite {
+
 protected:
-	LPDIRECT3DTEXTURE9 _Image;
-	LPD3DXSPRITE _SpriteHandler;
-	int _Index; //current sprite index
-	int _Width; //sprite width
-	int _Height; //sprite height
-	int _Count; // Number of sprites in the container
-	int _SpritePerRow; // Number of sprites per row
+	Texture2* _texture2;
+	int _index;
+	
 public:
-	Sprite(LPD3DXSPRITE SpriteHandler, char* Path, int Width, int Height, int Count, int SpritePerRow);
-	//next sprite in list
-	void Next();
+	Sprite();
+	Sprite(Texture2* texture, int index);
+	
 	//Render current sprite in location(x,y) at the target surface
-	void Render(int x, int y);
+	void Draw(int x, int y);						//Draw sprite
+	void DrawFlipHorizontal(int x, int y);			//Draw sprite flip horizontal
+	Box	getSpriteSize();						//size of sprite
 	~Sprite();
 };
-#endif /*SPRITE_H*/
+#endif SPRITE_H

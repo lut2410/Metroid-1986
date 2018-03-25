@@ -1,0 +1,86 @@
+Is All Frames are has a same size?
+0
+Count
+15
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			100				821				4				5
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			106				819				7				8
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			115				819				8				8
+
+Index		Animation Info
+3			LocationX		LocationY		FrameWidth		FrameHeight
+			125				819				7				8
+
+Index		Animation Info
+4			LocationX		LocationY		FrameWidth		FrameHeight
+			134				821				4				5
+
+Index		Animation Info
+5			LocationX		LocationY		FrameWidth		FrameHeight
+			140				819				7				8
+
+Index		Animation Info
+6			LocationX		LocationY		FrameWidth		FrameHeight
+			149				819				8				8
+
+Index		Animation Info
+7			LocationX		LocationY		FrameWidth		FrameHeight
+			159				819				7				8
+
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			168				819				8				8
+
+Index		Animation Info
+9			LocationX		LocationY		FrameWidth		FrameHeight
+			178				819				8				8
+
+Index		Animation Info
+10			LocationX		LocationY		FrameWidth		FrameHeight
+			87				854				11				8
+
+Index		Animation Info
+11			LocationX		LocationY		FrameWidth		FrameHeight
+			100				850				8				12
+
+Index		Animation Info
+12			LocationX		LocationY		FrameWidth		FrameHeight
+			139				854				7				8
+
+Index		Animation Info
+13			LocationX		LocationY		FrameWidth		FrameHeight
+			188				852				10				10
+
+Index		Animation Info
+14			LocationX		LocationY		FrameWidth		FrameHeight
+			200				849				16				16
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+Normal:Flying
+0	0	-1
+Normal:Broken
+1	3	30
+Freeze:Flying
+4	4	-1
+Freeze:Broken
+5	7	30
+Wave
+8	9	30
+Bomb
+8	9	30
+Rocket:Right
+10	10	-1
+Rocket:Top
+11	11	-1
+Rocket:Broken
+12	14	30

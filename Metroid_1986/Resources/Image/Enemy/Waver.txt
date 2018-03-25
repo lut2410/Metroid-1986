@@ -1,0 +1,50 @@
+Is All Frames are has a same size?
+0
+Count
+9
+Sprite Info
+
+Index		Animation Info
+0			LocationX		LocationY		FrameWidth		FrameHeight
+			42				60				16				16
+
+Index		Animation Info
+1			LocationX		LocationY		FrameWidth		FrameHeight
+			60				62				16				12
+
+Index		Animation Info
+2			LocationX		LocationY		FrameWidth		FrameHeight
+			78				64				16				8
+
+Index		Animation Info
+3			LocationX		LocationY		FrameWidth		FrameHeight
+			96				60				16				16
+
+Index		Animation Info
+4			LocationX		LocationY		FrameWidth		FrameHeight
+			114				62				16				12
+
+Index		Animation Info
+5			LocationX		LocationY		FrameWidth		FrameHeight
+			132				64				16				8
+
+Index		AAnimation Info
+6			LocationX		LocationY		FrameWidth		FrameHeight
+			150				60				16				16
+
+Index		Animation Info
+7			LocationX		LocationY		FrameWidth		FrameHeight
+			168				62				16				12
+
+Index		Animation Info
+8			LocationX		LocationY		FrameWidth		FrameHeight
+			186				64				16				8
+
+Animation Detail:
+FrameFrom	FrameTo		TimeAnimation
+Type1
+0	2	200
+Type2
+3	5	300
+BeFreezing
+6	8	30
